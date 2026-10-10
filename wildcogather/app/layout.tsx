@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Libre_Caslon_Display, Libre_Caslon_Text, Libre_Franklin, Courier_Prime, Homemade_Apple } from "next/font/google";
 import "./globals.css";
+import "leaflet/dist/leaflet.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
