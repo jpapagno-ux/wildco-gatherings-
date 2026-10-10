@@ -1,0 +1,194 @@
+import type { Residence } from "./types";
+
+// ——— Gatherings VIP · Ted Turner Reserves (New Mexico). J.W. has the contact; visit planned Aug 2027. ———
+// Facts from tedturnerreserves.com, Virtuoso, Travel Market Report and Explore Ranches (Oct 2026). Rates are third-party guides — confirm.
+// Images are hot-linked from the reserves' own site for the sample; confirm permission and move into Cloudinary before launch.
+const T = "https://symphony.cdn.tambourine.com/ted-turner-reserves/media/";
+const credit = "Images courtesy of Ted Turner Reserves";
+const vip = (why: string, fit: string) => ({ collection: "Ted Turner Reserves", collectionSlug: "ted-turner-reserves", visit: "Visit · Aug 2027", why, fit });
+const formulaOpen = (notes: [string, boolean][]) =>
+  ["Room to gather", "A day for every age", "Water within reach", "Country at the door", "A resort behind you", "Worth returning to"].map((test, i) => ({ test, note: notes[i][0], pass: notes[i][1] }));
+const ttrTerms = {
+  deposit: "50% of the total, with taxes, at booking; balance due and non-refundable 61 days before arrival [confirm]",
+  cancellation: "Cancel 61+ days before arrival for a refund less a 10% fee; no changes credited inside 60 days [confirm]",
+};
+
+export const ttrResidences: Residence[] = [
+  {
+    slug: "vermejo-ted-turner-reserve", entryNo: "G-005", name: "Vermejo, a Ted Turner Reserve", place: "Raton", region: "New Mexico", country: "United States",
+    lat: 36.9, lng: -105.0, status: "Prospect", stamp: "Under observation",
+    vip: vip("The scale is the point. A family can spread across a whole mountain range — fishing, riding, climbing the Via Ferrata — and still meet at one long table for supper.", "Big families. Casa Grande for the elders, a cottage for each branch."),
+    line: "558,000 acres of mountain, meadow and alpine tundra, restored for bison and elk — with a 1900s stone mansion, cottages and cabins for the family.",
+    verdict: ["[J.W. to write after the August 2027 visit.]"],
+    bestFor: "Large families and milestone gatherings who want lakes, horses and wildlife on one vast private landscape.",
+    notFor: "Not for anyone wanting a beach or a town at the gate. It is remote: three to four hours from the nearest major airports.",
+    bedrooms: "About 26 rooms across Casa Grande, cottages and cabins; whole houses can be taken",
+    kidsProgram: "Turner Trailblazers", water: "19 fishable lakes and about 30 miles of streams", seasons: ["Year-round"],
+    airport: "Colorado Springs (~3 h), Denver or Albuquerque (~4 h)", address: "40 Miles West Hwy 555, Raton, NM 87740", officialUrl: "https://vermejo.tedturnerreserves.com",
+    formula: formulaOpen([["Casa Grande and the cottages can be taken whole.", true], ["Trailblazers for the young; Via Ferrata, riding and fishing for the rest. [J.W. to confirm]", true], ["Nineteen lakes and the Vermejo and Costilla streams.", true], ["Bison, elk and pronghorn on 558,000 acres.", true], ["Three meals and two guided activities a day.", true], ["[J.W. to judge, Aug 2027]", false]]),
+    fieldNotes: ["[J.W. notes from the August 2027 visit.]"], manifest: [],
+    experiences: [
+      { name: "Fly fishing the lakes", category: "On the water", ages: ["All ages"], seasons: ["Spring", "Summer", "Fall"], description: "Nineteen lakes and miles of streams, with boats and guides.", image: { publicId: T + "tedturnerreserves-homepage-gallery-15-67db3a6b46b46.jpg", alt: "Fishing boats on a lake at Vermejo, New Mexico" } },
+      { name: "Bison safari", category: "On the land", ages: ["All ages"], seasons: ["Year-round"], description: "Out among more than 1,200 bison with a guide.", image: { publicId: T + "tedturnerreserves-homepage-gallery-9-67db3a5dd8f48.jpg", alt: "Bison herd below Castle Rock at Vermejo" } },
+      { name: "Via Ferrata", category: "Adventure", ages: ["Teens", "Adults"], seasons: ["Summer"], description: "A climbing park of fixed cables and rungs on the rock." },
+      { name: "Mountain biking & e-bikes", category: "On the land", ages: ["Teens", "Adults"], seasons: ["Summer", "Fall"], description: "Ranch roads and singletrack through the meadows.", image: { publicId: T + "tedturnerreserves-homepage-gallery-11-67db3a627218a.jpg", alt: "Mountain biking at Vermejo" } },
+      { name: "Archery & sporting clays", category: "Adventure", ages: ["Teens", "Adults"], seasons: ["Year-round"], description: "3D archery, rifle and shotgun with an instructor.", image: { publicId: T + "tedturnerreserves-homepage-gallery-6-67db3a57b32a0.jpg", alt: "Archery at Vermejo" } },
+    ],
+    faqs: [
+      { question: "Is Vermejo good for a multigenerational family trip?", answer: "Yes, for families who want space and the outdoors. Casa Grande and the guest cottages can be taken whole, meals and two guided activities a day are included, and the Turner Trailblazers program gives children their own wildlife activities." },
+      { question: "What is included at Vermejo?", answer: "Three chef-prepared meals, snacks and soft drinks, and two half-day guided activities each day. Alcohol, transfers, spa, private guides and special excursions are extra." },
+      { question: "How do you get to Vermejo?", answer: "Fly into Colorado Springs, about three hours away, or Denver or Albuquerque, about four. The reserve is west of Raton in northern New Mexico." },
+    ],
+    images: [
+      { publicId: T + "ted-turner-map-vermejo-img-68b1ebe7ba737.jpg", alt: "Stone walls and courtyard of Casa Grande at Vermejo, New Mexico", caption: "Casa Grande", role: "Hero" },
+      { publicId: T + "tedturnerreserves-homepage-gallery-1-67db3a4d0432f.jpg", alt: "Great room inside Casa Grande at Vermejo", caption: "The great room", role: "Gallery strip" },
+      { publicId: T + "tedturnerreserves-homepage-gallery-10-67db3a6033cd8.jpg", alt: "Main lodge at Vermejo, New Mexico", caption: "The main lodge", role: "Gallery strip" },
+    ],
+    booking: {
+      plan: "All-inclusive: meals, soft drinks and two guided activities a day", bookVia: "Wild & Co Gatherings — James plans the stay with the reserve",
+      wholeHouse: "Casa Grande and the guest cottages can be bought out", checkIn: "3 pm", checkOut: "11 am", ...ttrTerms,
+      children: "Family friendly; Turner Trailblazers activities for children", rateBasis: "Guide: from about $1,500 a night [confirm]",
+      fees: [{ label: "Service fee", value: "15%, covers gratuities [confirm]" }, { label: "Taxes", value: "[confirm]" }],
+      included: ["Three chef-prepared meals a day", "Snacks and non-alcoholic drinks", "Two half-day guided activities each day"],
+      excluded: ["Alcohol", "Airport transfers", "Spa and wellness", "Private guides, culinary and elevated excursions"], checked: "Oct 2026",
+    },
+    rooms: [
+      { name: "Casa Grande", count: "1", bedrooms: "7–8", sleeps: "About 14", inside: "The 1900s stone mansion — great room, dining room, verandas", fit: "The elders' house, and the dinner table." },
+      { name: "Guest cottages", count: "Several", bedrooms: "4", sleeps: "8 each", inside: "Historic cottages near the lodge", fit: "One branch of the family per cottage." },
+      { name: "Mountain cabins", count: "Several", bedrooms: "1–2", sleeps: "2–4", inside: "Cabins by the lakes, e.g. Bernal Lake Cabin", fit: "Couples who want a lake at the door." },
+    ],
+    videos: [],
+    seoTitle: "Vermejo, a Ted Turner Reserve — Family Stays in New Mexico | Wild & Co Gatherings",
+    metaDescription: "558,000 acres, 19 lakes and 1,200 bison: what's included, where families stay and how to get to Vermejo, a Ted Turner Reserve. A Gatherings VIP — Vetted in Purpose.",
+    credit,
+  },
+  {
+    slug: "ladder-ted-turner-reserve", entryNo: "G-006", name: "Ladder, a Ted Turner Reserve", place: "Caballo", region: "New Mexico", country: "United States",
+    status: "Prospect", stamp: "Under observation",
+    vip: vip("One house, four bedrooms, a chef and a guide of your own. The smallest gathering in the Ledger — and very likely the most private.", "Three generations of one family, up to eight."),
+    line: "156,000 acres along four Rio Grande tributaries, home to the world's only private Mexican wolf breeding facility — and one Country House, taken whole.",
+    verdict: ["[J.W. to write after the August 2027 visit.]"],
+    notFor: "Not for large reunions — the Country House sleeps eight. Pair it with Sierra Grande for more.",
+    bedrooms: "The Country House: 4 bedrooms, 4 baths", sleeps: 8, units: 1,
+    kidsProgram: "Turner Trailblazers", water: "Four Rio Grande tributaries; tubing and kayaking on the Rio Grande", seasons: ["Year-round"],
+    airport: "El Paso (~2 h) or Albuquerque (~2.5 h)", address: "792 Ladder Road, Caballo, NM 87931", officialUrl: "https://ladder.tedturnerreserves.com",
+    formula: formulaOpen([["One house for up to eight, taken whole.", true], ["Canyon hikes, e-bikes, wildlife and river days. [J.W. to confirm]", true], ["The Rio Grande and Las Animas Creek.", true], ["Wolves, bison and elk on 156,000 acres.", true], ["Private chef, server and guide.", true], ["[J.W. to judge, Aug 2027]", false]]),
+    fieldNotes: ["[J.W. notes from the August 2027 visit.]"], manifest: [],
+    experiences: [
+      { name: "Slot canyon hike", category: "On the land", ages: ["Teens", "Adults"], seasons: ["Fall", "Winter", "Spring"], description: "Into the narrows with your guide.", image: { publicId: T + "tedturnerreserves-homepage-gallery-ladder-2-681a1548995bf.jpg", alt: "Slot canyon at Ladder Ranch, New Mexico" } },
+      { name: "The Mexican wolf program", category: "Conservation", ages: ["All ages"], seasons: ["Year-round"], description: "Learn how wolves are bred here for release into the wild." },
+      { name: "Bison & wildlife tour", category: "On the land", ages: ["All ages"], seasons: ["Year-round"], description: "Bison, elk and hundreds of bird species.", image: { publicId: T + "tedturnerreserves-homepage-gallery-ladder-4-681a154d45ec1.jpg", alt: "Bison at Ladder Ranch" } },
+      { name: "Rio Grande tubing & kayaking", category: "On the water", ages: ["All ages"], seasons: ["Summer"], description: "A lazy afternoon on the river." },
+    ],
+    faqs: [
+      { question: "How many people does Ladder sleep?", answer: "The Country House has four bedrooms and four baths and sleeps up to eight. It is taken whole, with a private chef, server and guide." },
+      { question: "What is special about Ladder Ranch?", answer: "It runs the only private breeding and pre-release facility for Mexican wolves in the world, and works to restore the Bolson tortoise, Chiricahua leopard frog and native Rio Grande fish." },
+    ],
+    images: [
+      { publicId: T + "ted-turner-map-ladder-01-img-68b1ec36b3eb0.jpg", alt: "The Country House at Ladder Ranch, New Mexico", caption: "The Country House", role: "Hero" },
+      { publicId: T + "tedturnerreserves-homepage-gallery-13-67db3a6710476.jpg", alt: "Ladder Country House exterior", caption: "Country House", role: "Gallery strip" },
+      { publicId: T + "tedturnerreserves-homepage-gallery-ladder-1-681a15468493c.jpg", alt: "Vista over Ladder Ranch", caption: "Ladder vista", role: "Gallery strip" },
+    ],
+    booking: {
+      plan: "Whole house with private chef, server and guide", bookVia: "Wild & Co Gatherings — James plans the stay with the reserve",
+      wholeHouse: "The Country House is booked whole", ...ttrTerms, children: "Family friendly; Turner Trailblazers activities",
+      rateBasis: "Guide: about $3,000 a night for 4 guests, up to 8 [confirm]",
+      fees: [{ label: "Service fee", value: "15%, covers gratuities [confirm]" }, { label: "Taxes", value: "Added [confirm]" }],
+      included: ["All meals and non-alcoholic drinks", "Private chef and server", "Private guide and activity transport on the ranch"],
+      excluded: ["Alcohol", "Balloon, pedal-boat, paddleboard and kayak tours", "Elephant Butte fishing charter"], checked: "Oct 2026",
+    },
+    rooms: [
+      { name: "Primary bedroom", count: "1", bedrooms: "1", sleeps: "2", inside: "First floor, ensuite", fit: "The grandparents." },
+      { name: "Ensuite rooms", count: "2", bedrooms: "1 each", sleeps: "2 each", inside: "First floor", fit: "Each young family." },
+      { name: "Upstairs suite", count: "1", bedrooms: "1", sleeps: "2", inside: "Breakfast porch and bath", fit: "The teenagers, away from everyone." },
+      { name: "The whole house", count: "1", bedrooms: "4", sleeps: "8", inside: "Chef, server and guide included", fit: "Your own ranch, for eight.", whole: true },
+    ],
+    videos: [],
+    seoTitle: "Ladder, a Ted Turner Reserve — Private Family Ranch House, New Mexico | Wild & Co Gatherings",
+    metaDescription: "A four-bedroom Country House for up to eight with chef and guide, on the reserve that breeds Mexican wolves. Inclusions, rates and booking. A Gatherings VIP.",
+    credit,
+  },
+  {
+    slug: "armendaris-ted-turner-reserve", entryNo: "G-007", name: "Armendaris, a Ted Turner Reserve", place: "Engle", region: "New Mexico", country: "United States",
+    status: "Prospect", stamp: "Under observation",
+    vip: vip("In August a million bats pour out of the cave at dusk. I've timed my visit for it — and I'd time your family's the same way.", "Curious children and the grandparent who loves a story."),
+    line: "360,000 acres of Chihuahuan Desert and the Fra Cristobal range, where bighorn came back — and a Hacienda for up to eight.",
+    verdict: ["[J.W. to write after the August 2027 visit.]"],
+    notFor: "Not for summer heat-avoiders — the bat flight is June to August, when the desert is hot.",
+    bedrooms: "The Hacienda: 4 bedrooms, 4.5 baths, about 6,000 sq ft", sleeps: 8, units: 1,
+    kidsProgram: "Turner Trailblazers", water: "The Rio Grande runs past; a desert reserve", seasons: ["Year-round"],
+    airport: "El Paso (~2 h) or Albuquerque (~2.5 h)", address: "8 Upham Rd, Engle, NM 87901", officialUrl: "https://armendaris.tedturnerreserves.com",
+    formula: formulaOpen([["One Hacienda for up to eight, taken whole.", true], ["Bat flight, fossils, UTV tours. [J.W. to confirm]", true], ["Desert — the Rio Grande is near, not at the door.", false], ["Bighorn, oryx, Bolson tortoise.", true], ["Private chef and guides.", true], ["[J.W. to judge, Aug 2027]", false]]),
+    fieldNotes: ["Time it for the Bat Flight, June to August.", "[J.W. notes from the August 2027 visit.]"], manifest: [],
+    experiences: [
+      { name: "The Bat Flight", category: "Wildlife", ages: ["All ages"], seasons: ["Summer"], description: "A million Mexican free-tailed bats leave the cave at dusk, June to August." },
+      { name: "UTV tour of the range", category: "On the land", ages: ["All ages"], seasons: ["Year-round"], description: "Across the desert to the Fra Cristobal.", image: { publicId: T + "tedturnerreserves-homepage-gallery-4-67db3a53af5ee.jpg", alt: "UTV tour at Armendaris, New Mexico" } },
+      { name: "Bighorn & oryx", category: "Wildlife", ages: ["All ages"], seasons: ["Year-round"], description: "Desert bighorn on the ridges; oryx on the flats.", image: { publicId: T + "tedturnerreserves-homepage-gallery-armendaris-4-681a152f8c58e.jpg", alt: "Oryx at Armendaris" } },
+      { name: "Fossils & heritage trails", category: "Culture", ages: ["All ages"], seasons: ["Year-round"], description: "Dinosaur fossils, adobe homesites and historic trails." },
+    ],
+    faqs: [
+      { question: "When can you see the bat flight at Armendaris?", answer: "From June to August, more than a million Mexican free-tailed bats leave a cave on the reserve at dusk. Guests go out with a guide on the Bat Flight Expedition." },
+      { question: "How many does the Hacienda at Armendaris sleep?", answer: "About 6,000 square feet with four bedrooms, sleeping up to eight, with a private chef and guides." },
+    ],
+    images: [
+      { publicId: T + "tedturnerreserves-homepage-locationmap-armendaris-682f88c8d723b.jpg", alt: "The Hacienda at Armendaris, New Mexico", caption: "The Hacienda", role: "Hero" },
+      { publicId: T + "tedturnerreserves-homepage-gallery-armendaris-1-681a1528bcc41.jpg", alt: "Desert sunset at Armendaris", caption: "Armendaris sunset", role: "Gallery strip" },
+      { publicId: T + "tedturnerreserves-homepage-gallery-armendaris-3-681a152d11917.jpg", alt: "The Fra Cristobal range at Armendaris", caption: "Fra Cristobal", role: "Gallery strip" },
+    ],
+    booking: {
+      plan: "Whole house with private chef and guides", bookVia: "Wild & Co Gatherings — James plans the stay with the reserve",
+      wholeHouse: "The Hacienda is booked whole", minStay: "2 nights [confirm]", ...ttrTerms, children: "Family friendly; Turner Trailblazers activities",
+      rateBasis: "Guide: about $4,000 a night for 4; $500 per extra guest, up to 8 [confirm]",
+      fees: [{ label: "Service fee", value: "[confirm]" }, { label: "Taxes", value: "[confirm]" }],
+      included: ["Meals by a private chef", "Private guide"], excluded: ["Alcohol", "Trips to area attractions", "Gratuities [confirm]"], checked: "Oct 2026",
+    },
+    rooms: [
+      { name: "King primary suite", count: "1", bedrooms: "1", sleeps: "2", inside: "Jetted tub", fit: "The head of the family." },
+      { name: "King bedrooms", count: "2", bedrooms: "1 each", sleeps: "2 each", inside: "Ensuite", fit: "The parents." },
+      { name: "Double-queen room", count: "1", bedrooms: "1", sleeps: "4", inside: "Two queens", fit: "The cousins." },
+      { name: "The whole Hacienda", count: "1", bedrooms: "4", sleeps: "8", inside: "Courtyard, fire pit, game room, fitness and massage rooms", fit: "A desert house for one family.", whole: true },
+    ],
+    videos: [],
+    seoTitle: "Armendaris, a Ted Turner Reserve — Bat Flight & Family Hacienda | Wild & Co Gatherings",
+    metaDescription: "A four-bedroom Hacienda for up to eight in New Mexico's Chihuahuan Desert, and a million bats at dusk June–August. Inclusions, rates and booking. A Gatherings VIP.",
+    credit,
+  },
+  {
+    slug: "sierra-grande-ted-turner-reserve", entryNo: "G-008", name: "Sierra Grande Lodge & Spa", place: "Truth or Consequences", region: "New Mexico", country: "United States",
+    status: "Prospect", stamp: "Under observation",
+    vip: vip("The soak at the end of a desert day — and the easy base for the grandparents who'd rather not sleep out on the range.", "The start and finish of the southern loop."),
+    line: "A 17-room lodge on natural hot springs, the base for day tours to Ladder and Armendaris.",
+    verdict: ["[J.W. to write after the August 2027 visit.]"],
+    notFor: "A small hotel in a village, not a private ranch — book it as the base, not the whole trip.",
+    bedrooms: "17 rooms, including the Ted Turner Suite and the Casita", units: 17,
+    water: "104°F mineral hot springs; Elephant Butte Lake 16 miles away", seasons: ["Year-round"],
+    airport: "El Paso or Albuquerque (~2–2.5 h)", address: "501 McAdoo St, Truth or Consequences, NM 87901", officialUrl: "https://sierragrande.tedturnerreserves.com",
+    formula: formulaOpen([["Rooms and a Casita; not a whole-house stay.", false], ["Hot springs for the elders; ranch tours for the rest.", true], ["Hot springs; Elephant Butte Lake nearby.", true], ["Day tours to Ladder and Armendaris.", true], ["Spa, breakfast and tours arranged.", true], ["[J.W. to judge, Aug 2027]", false]]),
+    fieldNotes: ["[J.W. notes from the August 2027 visit.]"], manifest: [],
+    experiences: [
+      { name: "Private hot-springs soak", category: "Wellness", ages: ["All ages"], seasons: ["Year-round"], description: "A 30-minute soak in a private 104°F tub, included daily." },
+      { name: "Day tour to Ladder or Armendaris", category: "On the land", ages: ["All ages"], seasons: ["Year-round"], description: "Half or full day by UTV or enclosed vehicle." },
+    ],
+    faqs: [
+      { question: "What is included at Sierra Grande Lodge?", answer: "A daily 30-minute private soak in the 104°F hot springs, continental breakfast and the fitness room. Spa treatments and ranch tours are extra." },
+    ],
+    images: [
+      { publicId: T + "ted-turner-map-sierra-grande-img-68b1c5413ed0b.jpg", alt: "Sierra Grande Lodge at night, Truth or Consequences, New Mexico", caption: "Sierra Grande", role: "Hero" },
+      { publicId: T + "tedturnerreserves-homepage-gallery-sierragrande-4-681a157c325fe.jpg", alt: "The Casita at Sierra Grande", caption: "The Casita", role: "Gallery strip" },
+    ],
+    booking: {
+      plan: "Rooms and suites with breakfast and a daily soak", bookVia: "Wild & Co Gatherings — as the base for Ladder and Armendaris",
+      ...ttrTerms, rateBasis: "Per room, per night [confirm]", fees: [{ label: "Taxes", value: "[confirm]" }],
+      included: ["A 30-minute private hot-springs soak each day", "Continental breakfast", "Fitness room"], excluded: ["Spa treatments", "Ranch day tours"], checked: "Oct 2026",
+    },
+    rooms: [
+      { name: "Lodge guest rooms", count: "Most of 17", bedrooms: "1", sleeps: "2", inside: "King or twin; some with balconies or oversize tubs", fit: "Each couple." },
+      { name: "Ted Turner Suite", count: "1", bedrooms: "1", sleeps: "2", inside: "Suite with sitting room", fit: "The guest of honour." },
+      { name: "The Casita", count: "1", bedrooms: "1", sleeps: "2–4", inside: "Separate cottage with living room", fit: "Grandparents who want quiet." },
+    ],
+    videos: [],
+    seoTitle: "Sierra Grande Lodge & Spa — Hot Springs Base for Ted Turner Reserves | Wild & Co Gatherings",
+    metaDescription: "A 17-room hot-springs lodge in Truth or Consequences, New Mexico, with a daily private soak — the base for Ladder and Armendaris. A Gatherings VIP.",
+    credit,
+  },
+];
