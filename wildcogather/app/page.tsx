@@ -1,27 +1,9 @@
 import Link from "next/link";
 import Photo from "@/components/Photo";
-import Strip from "@/components/Strip";
-import LedgerTable from "@/components/LedgerTable";
-import JsonLd from "@/components/JsonLd";
-import { JwcoSeal } from "@/components/Marks";
-import { getResidences, dms } from "@/lib/data";
+import { getResidences } from "@/lib/data";
+import type { Residence } from "@/lib/types";
 
-export const revalidate = 3600;
-
-const FORMULA: [string, string][] = [
-  ["Room to gather", "One table for all of you, a door to close for each branch."],
-  ["A day for every age", "Programs for children, real adventure for teens, an easy pace for elders."],
-  ["Water within reach", "A river, a lake or a harbour — boat days belong in the plan."],
-  ["Country at the door", "Land to step straight into, with guides who live there."],
-  ["A resort behind you", "Kitchens, housekeeping and a safety net. Nobody spends the week as host."],
-  ["Worth returning to", "The start of a family tradition, not a single trip."],
-];
-
-const FAQS = [
-  { q: "What is a resort residence?", a: "A private, multi-bedroom home inside or beside a resort: your own space and kitchen, with the resort's dining, housekeeping, children's programs and activities close at hand." },
-  { q: "Is a resort residence better than a villa for a family reunion?", a: "For three generations, usually. You keep a villa's privacy, nobody has to run the house, and every age has something waiting." },
-  { q: "How does James vet each house?", a: "Against the six tests of the Gathering Formula, drawing on forty-four years of travel. Houses he has not yet visited are marked Under observation." },
-];
+const propertyImage = (r: Residence) => r.images.find((i) => i.role === "Card") || r.images[0];
 
 export default async function Home() {
   const all = await getResidences();
@@ -33,14 +15,12 @@ export default async function Home() {
 
   return (
     <>
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: FAQS.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
-
       <section style={{ position: "relative" }}>
         <Photo img={hero} priority style={{ height: "min(78vh, 760px)" }} />
         <div className="hero-caption" style={{ color: "var(--paper)", textShadow: "0 1px 6px rgba(0,0,0,.35)" }}>
           <p className="cp" style={{ margin: "0 0 8px", borderBottom: "1px solid rgba(242,238,230,.6)", paddingBottom: 6 }}>Coordinates</p>
-          <p className="cp" style={{ margin: 0, fontSize: 14, whiteSpace: "pre-line" }}>{dms(lead.lat, lead.lng).replace("   ", "\n")}</p>
-          <p className="hand" style={{ margin: "22px 0 0", fontSize: 17, lineHeight: 1.7, borderLeft: "1px solid rgba(242,238,230,.6)", paddingLeft: 14 }}>Three generations.<br />One long table.<br />The horses run at five.</p>
+          <p className="cp" style={{ margin: 0, fontSize: 14, whiteSpace: "pre-line" }}>{lead.place} · {lead.country}</p>
+          <p className="hand" style={{ margin: "22px 0 0", fontSize: 17, lineHeight: 1.7, borderLeft: "1px solid rgba(242,238,230,.6)", paddingLeft: 14 }}>Three generations.<br />One long table.</p>
         </div>
       </section>
 
@@ -48,11 +28,10 @@ export default async function Home() {
         <div style={{ flex: "999 1 560px", minWidth: 0 }}>
           <h1 className="disp hero-heading" style={{ margin: 0, letterSpacing: ".03em", textTransform: "uppercase" }}>One House.<br />Every Generation.</h1>
           <p className="cas ox editorial-lead" style={{ fontStyle: "italic", margin: "34px 0 30px" }}>The house is where you gather.<br />What lies beyond it is the reason.</p>
-          <p className="body" style={{ maxWidth: 560, margin: "0 0 34px" }}>Resort residences for families travelling across generations — a room for every branch, a table for all of you, and days planned so the youngest and the eldest both come home with a story. Each house is chosen by James Wild after forty-four years on the road.</p>
+          <p className="body" style={{ maxWidth: 560, margin: "0 0 34px" }}>Resort residences for families travelling across generations — a room for every branch, a table for all of you, and days designed for the pace of real life.</p>
           <hr className="rule" style={{ maxWidth: 560, borderColor: "var(--oxblood)" }} />
           <p className="cp ox" style={{ margin: "16px 0 6px", fontSize: 13 }}>Discovered by James Wild. Chosen for your family.</p>
           <p className="cp" style={{ margin: 0, fontSize: 13 }}>Still going since 1982.</p>
-          <div style={{ marginTop: 40 }}><JwcoSeal size={200} rotate={-4} /></div>
         </div>
         <div style={{ flex: "1 1 340px", maxWidth: 400, display: "flex", flexDirection: "column", alignItems: "center", gap: 56, paddingTop: 120 }}>
           <figure className="polaroid" style={{ margin: 0, transform: "rotate(1.5deg)", width: "100%" }}>
@@ -64,18 +43,57 @@ export default async function Home() {
         </div>
       </section>
 
+      <section className="wrap" style={{ paddingBottom: 48 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "end", gap: "1rem", flexWrap: "wrap", marginBottom: "1rem" }}>
+          <div>
+            <p className="cp ox" style={{ margin: "0 0 10px" }}>Stay collection</p>
+            <h2 className="cas section-heading" style={{ margin: 0 }}>Choose your region and start with the right place.</h2>
+          </div>
+          <Link href="/destinations/usa-mexico" className="cp" style={{ textDecoration: "none" }}>View all regions →</Link>
+        </div>
+
+        <div className="property-scroll" aria-label="Curated stays list">
+          {all.slice(0, 6).map((r) => {
+            const img = propertyImage(r);
+            return (
+              <article key={r.slug} className="property-card">
+                <Link href={`/houses/${r.slug}`} style={{ textDecoration: "none" }}>
+                  <Photo img={img} sizes="(max-width: 900px) 86vw, 380px" style={{ height: 260 }} />
+                  <div className="property-card-copy">
+                    <div className="property-card-meta cp">
+                      <span>{r.place}</span>
+                      <span>{r.country}</span>
+                    </div>
+                    <h3 className="cas">{r.name}</h3>
+                    <p className="body" style={{ margin: "0.25rem 0 0" }}>{r.line}</p>
+                  </div>
+                </Link>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
       <section aria-label="Archive" style={{ borderTop: "1px solid var(--sand)", borderBottom: "1px solid var(--sand)", padding: "70px 0 40px", background: "var(--paper-2)" }}>
-        <Strip label="From the archive" title="The days together">
-          {strip.map((img, i) => (
-            <figure key={img.publicId} style={{ margin: i % 2 ? "50px 0 0" : 0 }}>
-              <div className="polaroid" style={{ padding: 14, transform: `rotate(${i % 2 ? 1 : -1.2}deg)` }}>
-                <Photo img={img} sizes={i % 3 === 2 ? "(max-width: 540px) 78vw, 420px" : "(max-width: 425px) 78vw, 330px"} style={{ width: i % 3 === 2 ? 420 : 330, height: i % 3 === 2 ? 300 : 400, maxWidth: "78vw" }} />
-                <figcaption className="hand">{img.caption}</figcaption>
-              </div>
-              <p className="cp" style={{ margin: "14px 0 0" }}>Fig. {String(i + 1).padStart(2, "0")} — {img.house}</p>
-            </figure>
-          ))}
-        </Strip>
+        <div className="wrap">
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16, flexWrap: "wrap", marginBottom: 26 }}>
+            <h2 className="cas section-heading" style={{ margin: 0 }}>From the archive</h2>
+            <p className="cp">The days together</p>
+          </div>
+          <div className="strip-wrap">
+            <div className="strip">
+              {strip.map((img, i) => (
+                <figure key={`${img.publicId}-${i}`} style={{ margin: 0 }}>
+                  <div className="polaroid" style={{ padding: 12, transform: `rotate(${i % 2 ? 1 : -1.2}deg)` }}>
+                    <Photo img={img} sizes="(max-width: 425px) 78vw, 330px" style={{ width: 320, height: 250, objectFit: "cover" }} />
+                    <figcaption className="hand">{img.caption}</figcaption>
+                  </div>
+                  <p className="cp" style={{ margin: "12px 0 0" }}>{img.house}</p>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="wrap" style={{ paddingTop: 110, paddingBottom: 110, display: "flex", flexWrap: "wrap", gap: 64 }}>
@@ -85,7 +103,14 @@ export default async function Home() {
           <p className="body" style={{ margin: 0 }}>The James Wild &amp; Co way, written for families. A house that fails one is not entered in the Ledger.</p>
         </div>
         <ol style={{ flex: "2 1 560px", listStyle: "none", margin: 0, padding: 0, borderTop: "1.5px solid var(--charcoal)" }}>
-          {FORMULA.map(([t, n], i) => (
+          {[
+            ["Room to gather", "One table for all of you, a door to close for each branch."],
+            ["A day for every age", "Programs for children, real adventure for teens, an easy pace for elders."],
+            ["Water within reach", "A river, a lake or a harbour — boat days belong in the plan."],
+            ["Country at the door", "Land to step straight into, with guides who live there."],
+            ["A resort behind you", "Kitchens, housekeeping and a safety net. Nobody spends the week as host."],
+            ["Worth returning to", "The start of a family tradition, not a single trip."],
+          ].map(([t, n], i) => (
             <li key={t} style={{ display: "grid", gridTemplateColumns: "70px 1fr", gap: 16, padding: "20px 0", borderBottom: "1px solid var(--stone)" }}>
               <span className="cp ox" style={{ fontSize: 14 }}>No. {String(i + 1).padStart(2, "0")}</span>
               <div><h3 className="cas card-heading" style={{ margin: "0 0 4px" }}>{t}</h3><p className="body" style={{ margin: 0 }}>{n}</p></div>
@@ -97,11 +122,9 @@ export default async function Home() {
       <section style={{ background: "var(--card)", borderTop: "1px solid var(--sand)", borderBottom: "1px solid var(--sand)" }}>
         <div className="wrap" style={{ paddingTop: 90, paddingBottom: 90 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 16, marginBottom: 26 }}>
-            <div><h2 className="cas section-heading" style={{ margin: 0, letterSpacing: ".04em", textTransform: "uppercase" }}>The Gatherings Ledger</h2><p className="cp" style={{ margin: "8px 0 0" }}>A personal archive of houses worth gathering in</p></div>
-            <p className="cp" style={{ margin: 0 }}>Entries {String(all.length).padStart(3, "0")}</p>
+            <div><h2 className="cas section-heading" style={{ margin: 0, letterSpacing: ".04em", textTransform: "uppercase" }}>The Gatherings Ledger</h2><p className="cp" style={{ margin: "8px 0 0" }}>Entries {String(all.length).padStart(3, "0")}</p></div>
+            <Link href="/ledger" className="cp" style={{ textDecoration: "none" }}>Open the ledger →</Link>
           </div>
-          <LedgerTable rows={all} />
-          <p className="cp muted" style={{ margin: "22px 0 0" }}>New entries added when earned.</p>
         </div>
       </section>
 
@@ -111,25 +134,12 @@ export default async function Home() {
             <p className="cp" style={{ margin: "0 0 14px", color: "var(--stone)" }}>Land &amp; Water</p>
             <h2 className="cas section-heading" style={{ margin: "0 0 26px" }}>Days arranged by age, not by brochure.</h2>
             <ul style={{ listStyle: "none", margin: 0, padding: 0, borderTop: "1px solid #5A5752" }}>
-              {[["On the water", "Skippered boat days, offshore fishing, paddling"], ["On the land", "Riding, wildlife, trails set to the slowest walker"], ["The young ones", "Programs of their own, so evenings are yours"], ["Together", "The photograph, the long supper, the friendly rivalry"]].map(([k, v]) => (
+              {[["On the water", "Skippered boat days, offshore fishing, paddling"], ["On the land", "Riding, wildlife, trails set to the slowest walker"], ["The young ones", "Programs of their own with old-world confidence"]].map(([k, v]) => (
                 <li key={k} className="land-row" style={{ padding: "16px 0", borderBottom: "1px solid #5A5752" }}><span className="cp" style={{ color: "var(--stone)" }}>{k}</span><span>{v}</span></li>
               ))}
             </ul>
           </div>
           <Photo img={feature} sizes="(max-width: 900px) 100vw, 560px" style={{ flex: "1 1 420px", height: 480 }} />
-        </div>
-      </section>
-
-      <section id="chapters" className="wrap" style={{ paddingTop: 110, paddingBottom: 110, maxWidth: 980 }}>
-        <p className="cp ox" style={{ margin: "0 0 14px" }}>Questions families ask</p>
-        <h2 className="cas section-heading" style={{ margin: "0 0 26px" }}>Planning a multigenerational gathering</h2>
-        <div style={{ borderTop: "1.5px solid var(--charcoal)" }}>
-          {FAQS.map((f) => (
-            <div key={f.q} style={{ borderBottom: "1px solid var(--stone)", padding: "22px 0" }}>
-              <h3 className="cas card-heading" style={{ margin: "0 0 8px" }}>{f.q}</h3>
-              <p className="body" style={{ margin: 0 }}>{f.a}</p>
-            </div>
-          ))}
         </div>
       </section>
     </>
