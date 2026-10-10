@@ -82,9 +82,9 @@ export default async function House({ params }: { params: Promise<{ slug: string
 
       <section className="wrap" style={{ paddingTop: 56, paddingBottom: 40, display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: 32, alignItems: "flex-start" }}>
         <div style={{ flex: "3 1 600px" }}>
-          <nav aria-label="Breadcrumb" className="cp muted" style={{ fontSize: 11, marginBottom: 28 }}><Link href="/ledger" style={{ textDecoration: "none" }}>The Ledger</Link> / {r.region} / Entry {r.entryNo}</nav>
+          <nav aria-label="Breadcrumb" className="cp muted" style={{ marginBottom: 28 }}><Link href="/ledger" style={{ textDecoration: "none" }}>The Ledger</Link> / {r.region} / Entry {r.entryNo}</nav>
           <p className="cp" style={{ margin: "0 0 12px" }}>Entry No. {r.entryNo}</p>
-          <h1 className="disp" style={{ margin: 0, fontSize: "clamp(48px, 6.6vw, 92px)", lineHeight: 1, letterSpacing: ".03em", textTransform: "uppercase" }}>{r.name}</h1>
+          <h1 className="disp hero-heading" style={{ margin: 0, letterSpacing: ".03em", textTransform: "uppercase" }}>{r.name}</h1>
           <p className="cp" style={{ margin: "18px 0 4px", fontSize: 14 }}>{r.place}, {r.region} · {r.country}</p>
           {coords && <p className="cp muted" style={{ margin: 0, fontSize: 14 }}>{coords}</p>}
           <p className="cp" style={{ margin: "22px 0 0" }}>
@@ -106,8 +106,8 @@ export default async function House({ params }: { params: Promise<{ slug: string
               <p className="hand ox" style={{ margin: 0, fontSize: 14 }}>— J. W.</p>
             </div>
             <div style={{ flex: "0 1 280px" }}>
-              {r.vip.fit && <p className="cp" style={{ margin: "0 0 10px", fontSize: 11 }}>Family fit · <span className="hand ox" style={{ textTransform: "none", letterSpacing: 0, fontSize: 13 }}>{r.vip.fit}</span></p>}
-              <Link href={`/vip/${r.vip.collectionSlug}`} className="cp" style={{ fontSize: 11 }}>See all of {r.vip.collection} →</Link>
+              {r.vip.fit && <p className="cp" style={{ margin: "0 0 10px" }}>Family fit · <span className="cas ox" style={{ textTransform: "none", letterSpacing: 0, fontSize: "1rem" }}>{r.vip.fit}</span></p>}
+              <Link href={`/vip/${r.vip.collectionSlug}`} className="cp">See all of {r.vip.collection} →</Link>
             </div>
           </div>
         </section>
@@ -126,7 +126,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
             <p className="lbl">The Facts</p>
             <div style={{ borderTop: "1px solid var(--charcoal)" }}>
               {facts.filter(([, v]) => v).map(([k, v]) => (
-                <div key={k} className="fact"><span className="cp muted" style={{ fontSize: 11 }}>{k}</span><span className="cpn">{v}</span></div>
+                <div key={k} className="fact"><span className="cp muted">{k}</span><span className="cpn">{v}</span></div>
               ))}
             </div>
           </div>
@@ -140,11 +140,11 @@ export default async function House({ params }: { params: Promise<{ slug: string
       {film && (
         <section className="wrap" style={{ paddingBottom: 56 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 12, marginBottom: 18 }}>
-            <div><p className="cp ox" style={{ margin: "0 0 10px" }}>The Film</p><h2 className="cas" style={{ margin: 0, fontSize: 36 }}>See {r.name} before you book</h2></div>
+            <div><p className="cp ox" style={{ margin: "0 0 10px" }}>The Film</p><h2 className="cas section-heading" style={{ margin: 0 }}>See {r.name} before you book</h2></div>
           </div>
           <Film video={film} />
           {more.length > 0 && (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 420px))", gap: 24, marginTop: 24 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 280px), 420px))", gap: 24, marginTop: 24 }}>
               {more.map((v) => <Film key={v.id} video={v} />)}
             </div>
           )}
@@ -155,7 +155,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
         <section className="wrap" style={{ paddingBottom: 56 }} aria-label="Booking facts and pricing">
           <div className="box">
             <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12, padding: "22px 40px", borderBottom: "1.5px solid var(--charcoal)" }}>
-              <h2 className="cp" style={{ margin: 0, fontSize: 13, fontWeight: 400 }}>Booking Facts &amp; Pricing</h2>
+              <h2 className="cas section-heading" style={{ margin: 0 }}>Booking Facts &amp; Pricing</h2>
               {b.checked && <p className="cp muted" style={{ margin: 0, fontSize: 13 }}>Checked with the house · {b.checked}</p>}
             </div>
             <div style={{ display: "flex", flexWrap: "wrap" }}>
@@ -163,16 +163,16 @@ export default async function House({ params }: { params: Promise<{ slug: string
                 <p className="lbl">How the stay works</p>
                 <dl style={{ margin: 0, borderTop: "1px solid var(--charcoal)" }}>
                   {bookingFacts.filter(([, v]) => v).map(([k, v]) => (
-                    <div key={k} className="fact"><dt className="cp muted" style={{ fontSize: 11 }}>{k}</dt><dd className="cpn" style={{ margin: 0 }}>{v}</dd></div>
+                    <div key={k} className="fact"><dt className="cp muted">{k}</dt><dd className="cpn" style={{ margin: 0 }}>{v}</dd></div>
                   ))}
                 </dl>
               </div>
               <div style={{ flex: "1 1 380px", padding: "34px 40px" }}>
                 <p className="lbl">Pricing</p>
-                <p className="cas ox" style={{ margin: "0 0 4px", fontSize: 40 }}>{r.rateFrom ? `From $${r.rateFrom.toLocaleString()}` : "Rates on request"}</p>
-                {b.rateBasis && <p className="cp muted" style={{ margin: "0 0 22px", fontSize: 11 }}>{b.rateBasis}</p>}
+                <p className="cas ox editorial-lead" style={{ margin: "0 0 4px" }}>{r.rateFrom ? `From $${r.rateFrom.toLocaleString()}` : "Rates on request"}</p>
+                {b.rateBasis && <p className="cp muted" style={{ margin: "0 0 22px" }}>{b.rateBasis}</p>}
                 <dl style={{ margin: 0, borderTop: "1px solid var(--charcoal)" }}>
-                  {b.fees.map((f) => <div key={f.label} className="fact"><dt className="cp muted" style={{ fontSize: 11 }}>{f.label}</dt><dd className="cpn" style={{ margin: 0 }}>{f.value}</dd></div>)}
+                  {b.fees.map((f) => <div key={f.label} className="fact"><dt className="cp muted">{f.label}</dt><dd className="cpn" style={{ margin: 0 }}>{f.value}</dd></div>)}
                 </dl>
               </div>
             </div>
@@ -193,11 +193,11 @@ export default async function House({ params }: { params: Promise<{ slug: string
       {r.rooms.length > 0 && (
         <section className="wrap" style={{ paddingBottom: 56 }} aria-label="Room categories">
           <p className="cp ox" style={{ margin: "0 0 10px" }}>Room Categories</p>
-          <h2 className="cas" style={{ margin: "0 0 18px", fontSize: 36 }}>Where everyone sleeps</h2>
-          <div className="box" style={{ padding: "10px 40px 30px", overflowX: "auto" }}>
+          <h2 className="cas section-heading" style={{ margin: "0 0 18px" }}>Where everyone sleeps</h2>
+          <div className="box scroll-region" tabIndex={0} role="region" aria-label="Room categories, scroll for all columns" style={{ padding: "10px var(--gutter) 30px" }}>
             <table style={{ width: "100%", minWidth: 860, borderCollapse: "collapse" }}>
               <thead>
-                <tr className="cp muted" style={{ fontSize: 11, textAlign: "left", borderBottom: "1.5px solid var(--charcoal)" }}>
+                <tr className="cp muted" style={{ textAlign: "left", borderBottom: "1.5px solid var(--charcoal)" }}>
                   {["Category", "Count", "Bedrooms", "Sleeps", "What's inside", "Family fit · J.W."].map((h) => <th key={h} scope="col" style={{ padding: "16px 12px 12px 0", fontWeight: 400 }}>{h}</th>)}
                 </tr>
               </thead>
@@ -208,8 +208,8 @@ export default async function House({ params }: { params: Promise<{ slug: string
                     <td className="cpn" style={{ padding: "16px 12px 16px 0" }}>{m.count}</td>
                     <td className="cpn" style={{ padding: "16px 12px 16px 0" }}>{m.bedrooms}</td>
                     <td className="cpn" style={{ padding: "16px 12px 16px 0" }}>{m.sleeps}</td>
-                    <td className="body" style={{ padding: "16px 12px 16px 0", fontSize: 15 }}>{m.inside}</td>
-                    <td className="hand ox" style={{ padding: "16px 0", fontSize: 12, lineHeight: 1.8 }}>{m.fit}</td>
+                    <td className="body" style={{ padding: "16px 12px 16px 0" }}>{m.inside}</td>
+                    <td className="cas ox" style={{ padding: "16px 0", fontSize: "1rem", lineHeight: 1.6 }}>{m.fit}</td>
                   </tr>
                 ))}
               </tbody>
@@ -222,7 +222,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
         <section className="wrap" style={{ paddingBottom: 50 }}>
           <div className="box" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 48, padding: 40 }}>
             <div style={{ position: "relative", flex: "none" }}>
-              <figure className="polaroid" style={{ margin: 0, padding: "12px 12px 40px", width: 210, transform: "rotate(-2deg)" }}>
+              <figure className="polaroid" style={{ margin: 0, padding: 12, width: 210, transform: "rotate(-2deg)" }}>
                 <Photo img={r.host.headshot} sizes="200px" style={{ height: 220 }} />
                 <figcaption className="hand" style={{ fontSize: 12 }}>Met {r.host.how ? r.host.how.toLowerCase() : ""}</figcaption>
               </figure>
@@ -233,7 +233,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
               <p className="cas" style={{ margin: "0 0 6px", fontSize: 32 }}>{r.host.name}</p>
               <p className="cp muted" style={{ margin: "0 0 20px" }}>{r.host.title}</p>
               <p className="cpn" style={{ margin: "0 0 16px" }}>{r.host.note}</p>
-              <p className="cp" style={{ margin: "0 0 24px", fontSize: 11 }}>Met by James Wild · {r.host.metOn} · {r.host.how}</p>
+              <p className="cp" style={{ margin: "0 0 24px" }}>Met by James Wild · {r.host.metOn} · {r.host.how}</p>
               <Link href={`/plan?house=${r.slug}&host=1`} className="btn">A conversation with the host</Link>
             </div>
           </div>
@@ -243,12 +243,12 @@ export default async function House({ params }: { params: Promise<{ slug: string
       <section className="wrap" style={{ paddingTop: 30, paddingBottom: 80, display: "flex", flexWrap: "wrap", gap: 56 }}>
         <div style={{ flex: "1 1 300px", maxWidth: 380 }}>
           <p className="cp ox" style={{ margin: "0 0 14px" }}>The Gathering Formula</p>
-          <h2 className="cas" style={{ margin: "0 0 18px", fontSize: 40, lineHeight: 1.15 }}>How it measures up.</h2>
+          <h2 className="cas section-heading" style={{ margin: "0 0 18px" }}>How it measures up.</h2>
           <p className="body" style={{ margin: 0 }}>{r.formula.filter((f) => f.pass).length} of 6 tests passed.</p>
         </div>
         <ol style={{ flex: "2 1 560px", listStyle: "none", margin: 0, padding: 0, borderTop: "1.5px solid var(--charcoal)" }}>
           {r.formula.map((f, i) => (
-            <li key={f.test} style={{ display: "grid", gridTemplateColumns: "90px minmax(0,220px) 1fr", gap: 16, padding: "16px 0", borderBottom: "1px solid var(--stone)", alignItems: "baseline" }}>
+            <li key={f.test} className="formula-row" style={{ padding: "16px 0", borderBottom: "1px solid var(--stone)", alignItems: "baseline" }}>
               <span className="cp ox">{f.pass ? "✓" : "○"} No. {String(i + 1).padStart(2, "0")}</span>
               <span className="cas" style={{ fontSize: 20 }}>{f.test}</span>
               <span className="body" style={{ fontSize: 16 }}>{f.note}</span>
@@ -264,9 +264,9 @@ export default async function House({ params }: { params: Promise<{ slug: string
               <article key={e.name} style={{ width: 320, maxWidth: "80vw", background: "var(--card)", border: "1px solid var(--sand)" }}>
                 <Photo img={e.image} sizes="320px" style={{ height: 220 }} />
                 <div style={{ padding: 20 }}>
-                  <p className="cp ox" style={{ margin: "0 0 8px", fontSize: 11 }}>{[...e.ages, ...e.seasons].join(" · ")}</p>
-                  <h3 className="cas" style={{ margin: "0 0 8px", fontSize: 22 }}>{e.name}</h3>
-                  <p className="body" style={{ margin: 0, fontSize: 15 }}>{e.description}</p>
+                  <p className="cp ox" style={{ margin: "0 0 8px" }}>{[...e.ages, ...e.seasons].join(" · ")}</p>
+                  <h3 className="cas card-heading" style={{ margin: "0 0 8px" }}>{e.name}</h3>
+                  <p className="body" style={{ margin: 0 }}>{e.description}</p>
                 </div>
               </article>
             ))}
@@ -276,17 +276,17 @@ export default async function House({ params }: { params: Promise<{ slug: string
 
       {r.manifest.length > 0 && (
         <section className="wrap" style={{ paddingTop: 80, paddingBottom: 40 }}>
-          <div className="box" style={{ padding: "34px 40px", overflowX: "auto" }}>
+          <div className="box scroll-region" tabIndex={0} role="region" aria-label="Family chapter manifest, scroll for all columns" style={{ padding: "34px var(--gutter)" }}>
             <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12, borderBottom: "1.5px solid var(--charcoal)", paddingBottom: 14, minWidth: 720 }}>
               <p className="cp" style={{ margin: 0, fontSize: 13 }}>Family Chapter Manifest · Sample</p>
               <p className="cp" style={{ margin: 0, fontSize: 13 }}>Sheet No. 01 · {r.manifest.length} days</p>
             </div>
             {[{ day: "Day", morning: "Morning", afternoon: "Afternoon", evening: "Evening" }, ...r.manifest].map((m, i) => (
-              <div key={i} className={i === 0 ? "cp muted" : "cpn"} style={{ display: "grid", gridTemplateColumns: "90px repeat(3, minmax(0,1fr))", gap: 16, padding: "14px 0", borderBottom: "1px solid var(--stone)", minWidth: 720, fontSize: i === 0 ? 11 : undefined }}>
+              <div key={i} className={i === 0 ? "cp muted" : "cpn"} style={{ display: "grid", gridTemplateColumns: "90px repeat(3, minmax(0,1fr))", gap: 16, padding: "14px 0", borderBottom: "1px solid var(--stone)", minWidth: 720 }}>
                 <span className="cp">{m.day}</span><span>{m.morning}</span><span>{m.afternoon}</span><span>{m.evening}</span>
               </div>
             ))}
-            <p className="cp" style={{ margin: "18px 0 0", fontSize: 11 }}>Recorded by <span className="hand" style={{ textTransform: "none", letterSpacing: 0, fontSize: 14 }}>J. Wild</span></p>
+            <p className="cp" style={{ margin: "18px 0 0" }}>Recorded by <span className="hand" style={{ textTransform: "none", letterSpacing: 0, fontSize: 14 }}>J. Wild</span></p>
           </div>
         </section>
       )}
@@ -297,9 +297,9 @@ export default async function House({ params }: { params: Promise<{ slug: string
             <div style={{ flex: "1 1 380px", minHeight: 280 }}><Photo img={post.hero} sizes="(max-width: 800px) 100vw, 50vw" style={{ height: "100%", minHeight: 280 }} /></div>
             <div style={{ flex: "1 1 420px", padding: 40 }}>
               <p className="cp ox" style={{ margin: "0 0 12px" }}>From the Journal · No. {post.number}</p>
-              <h2 className="cas" style={{ margin: "0 0 16px", fontSize: 32, lineHeight: 1.2 }}>{post.title}</h2>
+              <h2 className="cas card-heading" style={{ margin: "0 0 16px" }}>{post.title}</h2>
               {quotesOf(post.body)[1] && <p className="cas" style={{ margin: "0 0 18px", fontSize: 19, fontStyle: "italic", lineHeight: 1.5 }}>&ldquo;{quotesOf(post.body)[1]}&rdquo;</p>}
-              <p className="cp" style={{ margin: 0, fontSize: 11 }}>{post.author} · {post.readMinutes} min read → Read the entry</p>
+              <p className="cp" style={{ margin: 0 }}>{post.author} · {post.readMinutes} min read → Read the entry</p>
             </div>
           </Link>
         </section>
@@ -308,18 +308,18 @@ export default async function House({ params }: { params: Promise<{ slug: string
       {r.faqs.length > 0 && (
         <section className="wrap" style={{ paddingTop: 70, paddingBottom: 90, maxWidth: 980 }}>
           <p className="cp ox" style={{ margin: "0 0 14px" }}>Before you book</p>
-          <h2 className="cas" style={{ margin: "0 0 26px", fontSize: 36 }}>Questions about {r.name}</h2>
+          <h2 className="cas section-heading" style={{ margin: "0 0 26px" }}>Questions about {r.name}</h2>
           <div style={{ borderTop: "1.5px solid var(--charcoal)" }}>
             {r.faqs.map((f) => (
               <div key={f.question} style={{ borderBottom: "1px solid var(--stone)", padding: "22px 0" }}>
-                <h3 className="cas" style={{ margin: "0 0 8px", fontSize: 21 }}>{f.question}</h3>
+                <h3 className="cas card-heading" style={{ margin: "0 0 8px" }}>{f.question}</h3>
                 <p className="body" style={{ margin: 0, fontSize: 16 }}>{f.answer}</p>
               </div>
             ))}
           </div>
         </section>
       )}
-      {r.credit && <p className="wrap cp muted" style={{ fontSize: 11, paddingBottom: 30 }}>{r.credit}</p>}
+      {r.credit && <p className="wrap cp caption muted" style={{ paddingBottom: 30 }}>{r.credit}</p>}
     </>
   );
 }

@@ -37,17 +37,17 @@ export default async function Home() {
 
       <section style={{ position: "relative" }}>
         <Photo img={hero} priority style={{ height: "min(78vh, 760px)" }} />
-        <div style={{ position: "absolute", left: 40, bottom: 44, color: "var(--paper)", maxWidth: 320, textShadow: "0 1px 6px rgba(0,0,0,.35)" }}>
+        <div className="hero-caption" style={{ color: "var(--paper)", textShadow: "0 1px 6px rgba(0,0,0,.35)" }}>
           <p className="cp" style={{ margin: "0 0 8px", borderBottom: "1px solid rgba(242,238,230,.6)", paddingBottom: 6 }}>Coordinates</p>
-          <p className="cp" style={{ margin: 0, fontSize: 14, fontStyle: "italic", whiteSpace: "pre-line" }}>{dms(lead.lat, lead.lng).replace("   ", "\n")}</p>
+          <p className="cp" style={{ margin: 0, fontSize: 14, whiteSpace: "pre-line" }}>{dms(lead.lat, lead.lng).replace("   ", "\n")}</p>
           <p className="hand" style={{ margin: "22px 0 0", fontSize: 17, lineHeight: 1.7, borderLeft: "1px solid rgba(242,238,230,.6)", paddingLeft: 14 }}>Three generations.<br />One long table.<br />The horses run at five.</p>
         </div>
       </section>
 
       <section className="wrap" style={{ paddingTop: 96, paddingBottom: 110, display: "flex", flexWrap: "wrap", gap: 64, alignItems: "flex-start" }}>
         <div style={{ flex: "999 1 560px", minWidth: 0 }}>
-          <h1 className="disp" style={{ margin: 0, fontSize: "clamp(52px, 7vw, 96px)", lineHeight: 1.02, letterSpacing: ".03em", textTransform: "uppercase" }}>One House.<br />Every Generation.</h1>
-          <p className="cas ox" style={{ fontStyle: "italic", fontSize: 30, lineHeight: 1.3, margin: "34px 0 30px" }}>The house is where you gather.<br />What lies beyond it is the reason.</p>
+          <h1 className="disp hero-heading" style={{ margin: 0, letterSpacing: ".03em", textTransform: "uppercase" }}>One House.<br />Every Generation.</h1>
+          <p className="cas ox editorial-lead" style={{ fontStyle: "italic", margin: "34px 0 30px" }}>The house is where you gather.<br />What lies beyond it is the reason.</p>
           <p className="body" style={{ maxWidth: 560, margin: "0 0 34px" }}>Resort residences for families travelling across generations — a room for every branch, a table for all of you, and days planned so the youngest and the eldest both come home with a story. Each house is chosen by James Wild after forty-four years on the road.</p>
           <hr className="rule" style={{ maxWidth: 560, borderColor: "var(--oxblood)" }} />
           <p className="cp ox" style={{ margin: "16px 0 6px", fontSize: 13 }}>Discovered by James Wild. Chosen for your family.</p>
@@ -68,11 +68,11 @@ export default async function Home() {
         <Strip label="From the archive" title="The days together">
           {strip.map((img, i) => (
             <figure key={img.publicId} style={{ margin: i % 2 ? "50px 0 0" : 0 }}>
-              <div className="polaroid" style={{ padding: "14px 14px 46px", transform: `rotate(${i % 2 ? 1 : -1.2}deg)` }}>
-                <Photo img={img} sizes="360px" style={{ width: i % 3 === 2 ? 420 : 330, height: i % 3 === 2 ? 300 : 400, maxWidth: "78vw" }} />
-                <figcaption className="hand" style={{ position: "absolute", bottom: 12, left: 18, fontSize: 13 }}>{img.caption}</figcaption>
+              <div className="polaroid" style={{ padding: 14, transform: `rotate(${i % 2 ? 1 : -1.2}deg)` }}>
+                <Photo img={img} sizes={i % 3 === 2 ? "(max-width: 540px) 78vw, 420px" : "(max-width: 425px) 78vw, 330px"} style={{ width: i % 3 === 2 ? 420 : 330, height: i % 3 === 2 ? 300 : 400, maxWidth: "78vw" }} />
+                <figcaption className="hand">{img.caption}</figcaption>
               </div>
-              <p className="cp" style={{ margin: "14px 0 0", fontSize: 11 }}>Fig. {String(i + 1).padStart(2, "0")} — {img.house}</p>
+              <p className="cp" style={{ margin: "14px 0 0" }}>Fig. {String(i + 1).padStart(2, "0")} — {img.house}</p>
             </figure>
           ))}
         </Strip>
@@ -81,14 +81,14 @@ export default async function Home() {
       <section className="wrap" style={{ paddingTop: 110, paddingBottom: 110, display: "flex", flexWrap: "wrap", gap: 64 }}>
         <div style={{ flex: "1 1 320px", maxWidth: 400 }}>
           <p className="cp ox" style={{ margin: "0 0 14px" }}>The Gathering Formula</p>
-          <h2 className="cas" style={{ margin: "0 0 22px", fontSize: 44, lineHeight: 1.15 }}>Six tests. Every house passes all of them.</h2>
+          <h2 className="cas section-heading" style={{ margin: "0 0 22px" }}>Six tests. Every house passes all of them.</h2>
           <p className="body" style={{ margin: 0 }}>The James Wild &amp; Co way, written for families. A house that fails one is not entered in the Ledger.</p>
         </div>
         <ol style={{ flex: "2 1 560px", listStyle: "none", margin: 0, padding: 0, borderTop: "1.5px solid var(--charcoal)" }}>
           {FORMULA.map(([t, n], i) => (
             <li key={t} style={{ display: "grid", gridTemplateColumns: "70px 1fr", gap: 16, padding: "20px 0", borderBottom: "1px solid var(--stone)" }}>
               <span className="cp ox" style={{ fontSize: 14 }}>No. {String(i + 1).padStart(2, "0")}</span>
-              <div><p className="cas" style={{ margin: "0 0 4px", fontSize: 24 }}>{t}</p><p className="body" style={{ margin: 0, fontSize: 16 }}>{n}</p></div>
+              <div><h3 className="cas card-heading" style={{ margin: "0 0 4px" }}>{t}</h3><p className="body" style={{ margin: 0 }}>{n}</p></div>
             </li>
           ))}
         </ol>
@@ -97,11 +97,11 @@ export default async function Home() {
       <section style={{ background: "var(--card)", borderTop: "1px solid var(--sand)", borderBottom: "1px solid var(--sand)" }}>
         <div className="wrap" style={{ paddingTop: 90, paddingBottom: 90 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 16, marginBottom: 26 }}>
-            <div><h2 className="cas" style={{ margin: 0, fontSize: 34, letterSpacing: ".08em", textTransform: "uppercase" }}>The Gatherings Ledger</h2><p className="cp" style={{ margin: "8px 0 0" }}>A personal archive of houses worth gathering in</p></div>
+            <div><h2 className="cas section-heading" style={{ margin: 0, letterSpacing: ".04em", textTransform: "uppercase" }}>The Gatherings Ledger</h2><p className="cp" style={{ margin: "8px 0 0" }}>A personal archive of houses worth gathering in</p></div>
             <p className="cp" style={{ margin: 0 }}>Entries {String(all.length).padStart(3, "0")}</p>
           </div>
           <LedgerTable rows={all} />
-          <p className="cp muted" style={{ margin: "22px 0 0", fontSize: 11 }}>New entries added when earned.</p>
+          <p className="cp muted" style={{ margin: "22px 0 0" }}>New entries added when earned.</p>
         </div>
       </section>
 
@@ -109,10 +109,10 @@ export default async function Home() {
         <div className="wrap" style={{ paddingTop: 100, paddingBottom: 100, display: "flex", flexWrap: "wrap", gap: 64, alignItems: "center" }}>
           <div style={{ flex: "1 1 380px" }}>
             <p className="cp" style={{ margin: "0 0 14px", color: "var(--stone)" }}>Land &amp; Water</p>
-            <h2 className="cas" style={{ margin: "0 0 26px", fontSize: 44, lineHeight: 1.15 }}>Days arranged by age, not by brochure.</h2>
+            <h2 className="cas section-heading" style={{ margin: "0 0 26px" }}>Days arranged by age, not by brochure.</h2>
             <ul style={{ listStyle: "none", margin: 0, padding: 0, borderTop: "1px solid #5A5752" }}>
               {[["On the water", "Skippered boat days, offshore fishing, paddling"], ["On the land", "Riding, wildlife, trails set to the slowest walker"], ["The young ones", "Programs of their own, so evenings are yours"], ["Together", "The photograph, the long supper, the friendly rivalry"]].map(([k, v]) => (
-                <li key={k} style={{ display: "grid", gridTemplateColumns: "150px 1fr", gap: 16, padding: "16px 0", borderBottom: "1px solid #5A5752" }}><span className="cp" style={{ color: "var(--stone)" }}>{k}</span><span style={{ fontSize: 16 }}>{v}</span></li>
+                <li key={k} className="land-row" style={{ padding: "16px 0", borderBottom: "1px solid #5A5752" }}><span className="cp" style={{ color: "var(--stone)" }}>{k}</span><span>{v}</span></li>
               ))}
             </ul>
           </div>
@@ -122,12 +122,12 @@ export default async function Home() {
 
       <section id="chapters" className="wrap" style={{ paddingTop: 110, paddingBottom: 110, maxWidth: 980 }}>
         <p className="cp ox" style={{ margin: "0 0 14px" }}>Questions families ask</p>
-        <h2 className="cas" style={{ margin: "0 0 26px", fontSize: 36 }}>Planning a multigenerational gathering</h2>
+        <h2 className="cas section-heading" style={{ margin: "0 0 26px" }}>Planning a multigenerational gathering</h2>
         <div style={{ borderTop: "1.5px solid var(--charcoal)" }}>
           {FAQS.map((f) => (
             <div key={f.q} style={{ borderBottom: "1px solid var(--stone)", padding: "22px 0" }}>
-              <h3 className="cas" style={{ margin: "0 0 8px", fontSize: 21 }}>{f.q}</h3>
-              <p className="body" style={{ margin: 0, fontSize: 16 }}>{f.a}</p>
+              <h3 className="cas card-heading" style={{ margin: "0 0 8px" }}>{f.q}</h3>
+              <p className="body" style={{ margin: 0 }}>{f.a}</p>
             </div>
           ))}
         </div>

@@ -55,48 +55,48 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
       {p.draft && <div className="cp" style={{ background: "var(--oxblood)", color: "var(--paper)", textAlign: "center", padding: "10px 20px" }}>Sample entry · quotes drafted in James&apos;s voice for his approval</div>}
 
       <header className="wrap" style={{ maxWidth: 900, paddingTop: 70, paddingBottom: 40, textAlign: "center" }}>
-        <nav aria-label="Breadcrumb" className="cp muted" style={{ fontSize: 11, marginBottom: 26 }}><Link href="/journal" style={{ textDecoration: "none" }}>The Journal</Link> / No. {p.number}{house ? ` / Ledger Entry ${house.entryNo}` : ""}</nav>
+        <nav aria-label="Breadcrumb" className="cp muted" style={{ marginBottom: 26 }}><Link href="/journal" style={{ textDecoration: "none" }}>The Journal</Link> / No. {p.number}{house ? ` / Ledger Entry ${house.entryNo}` : ""}</nav>
         <p className="cp ox" style={{ margin: "0 0 18px" }}>{p.kicker}</p>
-        <h1 className="disp" style={{ margin: 0, fontSize: "clamp(40px, 5.4vw, 72px)", lineHeight: 1.05, letterSpacing: ".02em" }}>{p.title}</h1>
-        <p className="cas dek" style={{ margin: "26px auto 0", maxWidth: 680, fontSize: 22, lineHeight: 1.5, fontStyle: "italic" }}>{p.dek}</p>
-        <p className="cp" style={{ margin: "30px 0 0", fontSize: 11 }}><span className="cas" style={{ fontSize: 16, textTransform: "none", letterSpacing: 0 }}>{p.author}</span> · {p.authorTitle} · {date(p.date)} · {p.readMinutes} min read</p>
+        <h1 className="disp hero-heading" style={{ margin: 0, letterSpacing: ".02em" }}>{p.title}</h1>
+        <p className="cas dek editorial-lead" style={{ margin: "26px auto 0", maxWidth: 680, fontStyle: "italic" }}>{p.dek}</p>
+        <p className="cp" style={{ margin: "30px 0 0" }}><span className="cas" style={{ fontSize: 16, textTransform: "none", letterSpacing: 0 }}>{p.author}</span> · {p.authorTitle} · {date(p.date)} · {p.readMinutes} min read</p>
       </header>
 
-      {p.hero && <figure className="wrap" style={{ margin: "0 auto 50px" }}><Photo img={p.hero} priority style={{ height: "min(70vh, 600px)" }} />{p.hero.caption && <figcaption className="cp muted" style={{ marginTop: 10, fontSize: 11 }}>{p.hero.caption}</figcaption>}</figure>}
+      {p.hero && <figure className="wrap" style={{ margin: "0 auto 50px" }}><Photo img={p.hero} priority style={{ height: "min(70vh, 600px)" }} />{p.hero.caption && <figcaption className="cp caption muted" style={{ marginTop: 10 }}>{p.hero.caption}</figcaption>}</figure>}
 
       <div className="wrap" style={{ maxWidth: 1100, display: "flex", flexWrap: "wrap", gap: 56, paddingBottom: 60 }}>
         {house && (
           <aside style={{ flex: "1 1 260px", maxWidth: 300 }}>
-            <div className="box" style={{ padding: "26px 28px", position: "sticky", top: 120 }}>
+            <div className="box journal-sidebar" style={{ padding: "26px 28px" }}>
               <p className="lbl ox">At a glance</p>
               <dl style={{ margin: 0, borderTop: "1px solid var(--charcoal)" }}>
                 {([["Where", `${house.place}, ${house.region}`], ["Sleeps", house.bedrooms || (house.sleeps ? `Up to ${house.sleeps}` : undefined)], ["Children", house.kidsProgram ? `${house.kidsProgram}${house.kidsAges ? `, ${house.kidsAges}` : ""}` : undefined], ["Fly into", house.airport], ["Status", house.stamp]] as [string, string | undefined][])
-                  .filter(([, v]) => v).map(([k, v]) => <div key={k} className="fact" style={{ gridTemplateColumns: "90px 1fr" }}><dt className="cp muted" style={{ fontSize: 10 }}>{k}</dt><dd className="cpn" style={{ margin: 0, fontSize: 14 }}>{v}</dd></div>)}
+                  .filter(([, v]) => v).map(([k, v]) => <div key={k} className="fact"><dt className="cp muted">{k}</dt><dd className="cpn" style={{ margin: 0 }}>{v}</dd></div>)}
               </dl>
               <Link href={`/houses/${house.slug}`} className="btn" style={{ marginTop: 22, width: "100%", boxSizing: "border-box", padding: "0 14px", fontSize: 12 }}>Ledger Entry {house.entryNo}</Link>
             </div>
           </aside>
         )}
-        <div style={{ flex: "3 1 560px", minWidth: 0 }}>
+        <div className="reading-column" style={{ flex: "3 1 560px", minWidth: 0 }}>
           {blocks(p.body).map((b, i) => {
-            if (b.kind === "h2") return <h2 key={i} className="cas" style={{ margin: "44px 0 16px", fontSize: 30 }}>{b.text}</h2>;
+            if (b.kind === "h2") return <h2 key={i} className="cas section-heading" style={{ margin: "44px 0 16px" }}>{b.text}</h2>;
             if (b.kind === "quote") return (
               <figure key={i} style={{ margin: "40px 0", padding: "30px 0 30px 34px", borderLeft: "3px solid var(--oxblood)" }}>
-                <blockquote className="cas" style={{ margin: 0, fontSize: 28, lineHeight: 1.4, fontStyle: "italic" }}>&ldquo;{b.text}&rdquo;</blockquote>
+                <blockquote className="cas editorial-lead" style={{ margin: 0, fontStyle: "italic" }}>&ldquo;{b.text}&rdquo;</blockquote>
                 <figcaption className="hand ox" style={{ marginTop: 16, fontSize: 15 }}>— {p.author === "James Wild" ? "J. W." : p.author}</figcaption>
               </figure>
             );
             if (b.kind === "list") return <ul key={i} className="body" style={{ margin: "0 0 22px", paddingLeft: 22 }}>{b.items.map((x) => <li key={x} style={{ marginBottom: 10 }}>{x}</li>)}</ul>;
             if (b.kind === "figure") { fig++; return (
-              <figure key={i} style={{ margin: "40px 0" }}><Photo img={{ publicId: b.publicId, alt: b.caption.replace(/^Fig\. \d+ — /, "") }} sizes="(max-width: 800px) 100vw, 700px" style={{ height: 420 }} /><figcaption className="cp muted" style={{ marginTop: 10, fontSize: 11 }}>{b.caption || `Fig. ${fig}`}</figcaption></figure>
+              <figure key={i} style={{ margin: "40px 0" }}><Photo img={{ publicId: b.publicId, alt: b.caption.replace(/^Fig\. \d+ — /, "") }} sizes="(max-width: 800px) 100vw, 700px" style={{ height: 420 }} /><figcaption className="cp caption muted" style={{ marginTop: 10 }}>{b.caption || `Fig. ${fig}`}</figcaption></figure>
             ); }
-            return <p key={i} className="body" style={{ margin: "0 0 22px", fontSize: i === 0 ? 19 : undefined }}>{b.text}</p>;
+            return <p key={i} className="body" style={{ margin: "0 0 22px" }}>{b.text}</p>;
           })}
           <div style={{ display: "flex", alignItems: "center", gap: 18, marginTop: 40 }}>
             <JwcoSeal size={92} rotate={-6} />
             <p className="hand ox" style={{ margin: 0, fontSize: 22 }}>{p.author}</p>
           </div>
-          <p className="cp muted" style={{ margin: "8px 0 0", fontSize: 11 }}>{p.authorTitle} · Recorded {date(p.date)}</p>
+          <p className="cp muted" style={{ margin: "8px 0 0" }}>{p.authorTitle} · Recorded {date(p.date)}</p>
         </div>
       </div>
 
