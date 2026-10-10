@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const field: React.CSSProperties = { width: "100%", minHeight: 48, padding: "10px 12px", border: "1px solid var(--sand)", background: "var(--card)", fontFamily: "var(--f-courier), monospace", fontSize: 15, color: "var(--charcoal)" };
+const field: React.CSSProperties = { width: "100%", minHeight: 48, padding: "10px 12px", border: "1px solid var(--sand)", background: "var(--card)", fontFamily: "var(--f-courier), monospace", fontSize: "1rem", color: "var(--charcoal)" };
 const AGES = ["Under 6", "6–12", "Teens", "Adults", "70+"];
 
 export default function PlanForm() {
@@ -16,16 +16,16 @@ export default function PlanForm() {
   if (state === "sent") return <p className="cas" style={{ fontSize: 26 }}>Thank you. James will write back personally.</p>;
   return (
     <form onSubmit={submit} style={{ display: "grid", gap: 22 }}>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 18 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))", gap: 18 }}>
         <label className="lbl">Your name<input name="name" required style={field} /></label>
         <label className="lbl">Email<input name="email" type="email" required style={field} /></label>
         <label className="lbl">Dates (or month)<input name="dates" style={field} /></label>
         <label className="lbl">Occasion<input name="occasion" placeholder="80th birthday, reunion…" style={field} /></label>
       </div>
-      <fieldset style={{ border: "1px solid var(--sand)", padding: "18px 20px" }}>
+      <fieldset style={{ minWidth: 0, margin: 0, border: "1px solid var(--sand)", padding: "18px 20px" }}>
         <legend className="lbl" style={{ padding: "0 8px" }}>Guests by age</legend>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: 14 }}>
-          {AGES.map((a) => <label key={a} className="cp" style={{ fontSize: 11 }}>{a}<input name={`age_${a}`} type="number" min={0} defaultValue={0} style={field} /></label>)}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 120px), 1fr))", gap: 14 }}>
+          {AGES.map((a) => <label key={a} className="cp">{a}<input name={`age_${a}`} type="number" min={0} defaultValue={0} style={field} /></label>)}
         </div>
       </fieldset>
       <label className="lbl">Must-haves<textarea name="musts" rows={3} placeholder="Water, kids' program, accessibility…" style={{ ...field, minHeight: 96 }} /></label>

@@ -126,5 +126,5 @@ export function VipStamp({ size = 190, note = "J.W.", rotate = -8, tone = "ink" 
 // James Wild & Co founder seal (transparent PNG). Oxblood on paper; cream ("light") on photos and charcoal.
 export function JwcoSeal({ size = 96, tone = "ink", rotate = 0 }: { size?: number; tone?: Tone; rotate?: number }) {
   const src = `/brand/jwco-seal${tone === "light" ? "-cream" : ""}-${size > 200 ? 600 : 240}.png`;
-  return <img src={src} width={size} height={size} alt="James Wild & Co — Journey design since 1982, vetted & recorded" style={{ display: "block", flex: "none", transform: rotate ? `rotate(${rotate}deg)` : undefined }} />;
+  return <img src={src} srcSet={`/brand/jwco-seal${tone === "light" ? "-cream" : ""}-240.png 240w, /brand/jwco-seal${tone === "light" ? "-cream" : ""}-600.png 600w`} sizes={`${size}px`} width={size} height={size} alt="James Wild & Co — Journey design since 1982, vetted & recorded" style={{ display: "block", flex: "none", transform: rotate ? `rotate(${rotate}deg)` : undefined }} />;
 }

@@ -20,7 +20,7 @@ export default async function Journal() {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Blog", name: "The Wild & Co Gatherings Journal", url: `${SITE}/journal`, author: { "@type": "Person", name: "James Wild" },
         blogPost: posts.map((p) => ({ "@type": "BlogPosting", headline: p.title, url: `${SITE}/journal/${p.slug}`, datePublished: p.date })) }} />
       <p className="cp ox" style={{ margin: "0 0 12px" }}>The Journal</p>
-      <h1 className="cas" style={{ margin: "0 0 12px", fontSize: 48, letterSpacing: ".06em", textTransform: "uppercase" }}>Why it&apos;s in the Ledger</h1>
+      <h1 className="cas hero-heading page-heading" style={{ margin: "0 0 12px", letterSpacing: ".04em", textTransform: "uppercase" }}>Why it&apos;s in the Ledger</h1>
       <p className="body" style={{ margin: "0 0 50px", maxWidth: 640 }}>James Wild on each house he chose — and the ones he hasn&apos;t seen yet.</p>
       <div style={{ display: "grid", gap: 40 }}>
         {posts.map((p) => (
@@ -28,9 +28,9 @@ export default async function Journal() {
             <div style={{ flex: "1 1 380px", minHeight: 280 }}><Photo img={p.hero} sizes="(max-width: 800px) 100vw, 50vw" style={{ height: "100%", minHeight: 280 }} /></div>
             <div style={{ flex: "1 1 420px", padding: 40 }}>
               <p className="cp ox" style={{ margin: "0 0 12px" }}>No. {p.number} · {p.kicker}</p>
-              <h2 className="cas" style={{ margin: "0 0 16px", fontSize: 32, lineHeight: 1.2 }}>{p.title}</h2>
+              <h2 className="cas card-heading" style={{ margin: "0 0 16px" }}>{p.title}</h2>
               {quotesOf(p.body)[1] && <p className="cas" style={{ margin: "0 0 18px", fontSize: 19, fontStyle: "italic", lineHeight: 1.5 }}>&ldquo;{quotesOf(p.body)[1]}&rdquo;</p>}
-              <p className="cp" style={{ margin: 0, fontSize: 11 }}>{p.author} · {p.readMinutes} min read →</p>
+              <p className="cp" style={{ margin: 0 }}>{p.author} · {p.readMinutes} min read →</p>
             </div>
           </Link>
         ))}

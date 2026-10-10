@@ -59,3 +59,16 @@ Blank line = new paragraph · `## ` heading · `> ` James quote · `- ` bullet �
 
 ## Images
 Cloudinary public IDs follow `gatherings/[house-slug]/[what-it-shows]-[place]`. Put the public ID in the Images table; alt text and credit come from the same row.
+
+## Typography and scrolling
+- Reuse the responsive tokens in `app/globals.css`: `.hero-heading` (36–64px), `.page-heading` (36–48px), `.section-heading` (28–40px), `.card-heading` / `.editorial-lead` (22–28px), `.body` (16–18px), and `.caption` (13px). Keep prose within 68ch and handwriting for decorative accents.
+- The desktop header stays a stable height; on narrow screens it scrolls with the document. `--header-offset` reserves anchor/focus clearance. Keep navigation targets at least 44px tall.
+- Strips use native horizontal scrolling with optional proximity snapping, keyboard focus, named arrows and end states. Arrow animation respects reduced motion; document scrolling is not intercepted.
+- Contain wide tabular layouts in named, focusable `.scroll-region` elements. Do not hide page overflow to mask layout problems.
+- Match each `Photo`'s `sizes` to its rendered width. Cloudinary sources request resized images; partner-hosted sources are returned unchanged and need an intrinsic-resolution check. Founder seals have 240px/600px responsive sources. Intentional stamp texture and artwork rotations are retained.
+- YouTube film stills request the high-resolution thumbnail, falling back to the standard thumbnail if unavailable. Supplied Vimeo/custom thumbnail URLs are preserved; check their source resolution before using them full-width.
+
+### Visual verification
+Run `npm run build` and `npx tsc --noEmit` from `wildcogather/` (the build needs access to Google Fonts). There is no configured lint or test suite.
+
+Check the home, ledger, plan, journal/listing and article, VIP/listing and collection, and house pages at 375px, 768px and 1440px, plus 200% zoom/reflow. Verify heading order, nav/footer, form validation and states, keyboard scrolling/focus, reduced motion, anchor clearance, font loading and image resolution. Compare a supplied preview URL with the live site in the same browser/device before attributing softness to deployment. Browser zoom/display scaling, hard refresh and incognito checks remain manual.

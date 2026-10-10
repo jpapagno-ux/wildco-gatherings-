@@ -7,7 +7,7 @@ import JsonLd from "@/components/JsonLd";
 
 const caslonDisplay = Libre_Caslon_Display({ weight: "400", subsets: ["latin"], variable: "--f-caslon-display" });
 const caslon = Libre_Caslon_Text({ weight: ["400", "700"], style: ["normal", "italic"], subsets: ["latin"], variable: "--f-caslon" });
-const franklin = Libre_Franklin({ weight: ["400", "500"], subsets: ["latin"], variable: "--f-franklin" });
+const franklin = Libre_Franklin({ weight: "400", subsets: ["latin"], variable: "--f-franklin" });
 const courier = Courier_Prime({ weight: ["400", "700"], subsets: ["latin"], variable: "--f-courier" });
 const hand = Homemade_Apple({ weight: "400", subsets: ["latin"], variable: "--f-hand" });
 
