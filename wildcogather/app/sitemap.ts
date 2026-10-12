@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getResidences } from "@/lib/data";
 import { getPosts } from "@/lib/journal";
+import { destinations } from "@/lib/destinations";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
@@ -10,6 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     { url: `${SITE}/`, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE}/ledger`, changeFrequency: "weekly", priority: 0.9 },
+    ...destinations.map((d) => ({ url: `${SITE}/destinations/${d.slug}`, changeFrequency: "weekly" as const, priority: 0.9 })),
     { url: `${SITE}/plan`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE}/vip`, changeFrequency: "monthly", priority: 0.8 },
     ...[...new Set(houses.filter((h) => h.vip).map((h) => h.vip!.collectionSlug))].map((c) => ({ url: `${SITE}/vip/${c}`, changeFrequency: "monthly" as const, priority: 0.8 })),

@@ -1,5 +1,6 @@
 import type { Residence, Img, Stamp, Video, Booking, RoomCategory } from "./types";
 import { sampleResidences } from "./sample-data";
+import { destinationRegion, regionForResidence } from "./destinations";
 
 // Pages refresh from Airtable at most once an hour (set per page with `export const revalidate`).
 const TOKEN = process.env.AIRTABLE_TOKEN;
@@ -81,6 +82,7 @@ async function fromAirtable(): Promise<Residence[]> {
         name: f["Residence"],
         place: d?.fields["Destination"] || "",
         region: d?.fields["Destination"] || "",
+        destinationRegion: destinationRegion(f["Destination region"] || d?.fields["Region"]),
         country: d?.fields["Country"] || "",
         lat: f["Latitude"], lng: f["Longitude"],
         status: f["Status"],
@@ -125,14 +127,19 @@ async function fromAirtable(): Promise<Residence[]> {
 }
 
 export async function getResidences(): Promise<Residence[]> {
-  if (!TOKEN) return sampleResidences;
+  let residences = sampleResidences;
   try {
-    const rows = await fromAirtable();
-    return rows.length ? rows : sampleResidences;
+    if (TOKEN) {
+      const rows = await fromAirtable();
+      if (rows.length) residences = rows;
+    }
   } catch (e) {
     console.error(e);
-    return sampleResidences;
   }
+  for (const residence of residences) {
+    if (!regionForResidence(residence)) console.warn(`Residence "${residence.slug}" needs a supported Destination region assignment.`);
+  }
+  return residences;
 }
 
 export async function getResidence(slug: string) {

@@ -1,13 +1,7 @@
-import Link from "next/link";
+"use client";
 
-const stays = [
-  { label: "USA & Mexico", href: "/destinations/usa-mexico" },
-  { label: "Caribbean", href: "/destinations/caribbean" },
-  { label: "Latin America", href: "/destinations/latin-america" },
-  { label: "Europe", href: "/destinations/europe" },
-  { label: "Asia", href: "/destinations/asia" },
-  { label: "Oceania", href: "/destinations/oceania" },
-];
+import Link from "next/link";
+import { destinations } from "@/lib/destinations";
 
 export default function Header() {
   return (
@@ -15,18 +9,23 @@ export default function Header() {
       <div className="header-inner">
         <nav aria-label="Main navigation" className="site-nav site-nav-left cp">
           <Link href="/ledger">The Ledger</Link>
-          <div className="nav-dropdown">
-            <button type="button" aria-expanded="false" className="nav-dropdown-trigger cp">
+          <details className="nav-dropdown" onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              event.currentTarget.open = false;
+              event.currentTarget.querySelector("summary")?.focus();
+            }
+          }}>
+            <summary className="nav-dropdown-trigger cp">
               Stays
-            </button>
+            </summary>
             <div className="nav-dropdown-menu">
-              {stays.map((item) => (
-                <Link key={item.href} href={item.href}>
+              {destinations.map((item) => (
+                <Link key={item.slug} href={`/destinations/${item.slug}`} onClick={(event) => event.currentTarget.closest("details")?.removeAttribute("open")}>
                   {item.label}
                 </Link>
               ))}
             </div>
-          </div>
+          </details>
         </nav>
 
         <Link href="/" className="brand-lockup" aria-label="Wild & Co Gatherings home">

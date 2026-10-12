@@ -2,6 +2,7 @@ import Link from "next/link";
 import Photo from "@/components/Photo";
 import { getResidences } from "@/lib/data";
 import type { Residence } from "@/lib/types";
+import { destinations } from "@/lib/destinations";
 
 const propertyImage = (r: Residence) => r.images.find((i) => i.role === "Card") || r.images[0];
 
@@ -49,11 +50,14 @@ export default async function Home() {
             <p className="cp ox" style={{ margin: "0 0 10px" }}>Stay collection</p>
             <h2 className="cas section-heading" style={{ margin: 0 }}>Choose your region and start with the right place.</h2>
           </div>
-          <Link href="/destinations/usa-mexico" className="cp" style={{ textDecoration: "none" }}>View all regions →</Link>
+          <Link href="#destinations" className="cp" style={{ textDecoration: "none" }}>View all regions →</Link>
         </div>
 
+        <nav id="destinations" aria-label="Destination regions" className="destination-links cp">
+          {destinations.map((d) => <Link key={d.slug} href={`/destinations/${d.slug}`}>{d.label}</Link>)}
+        </nav>
         <div className="property-scroll" aria-label="Curated stays list">
-          {all.slice(0, 6).map((r) => {
+          {all.map((r) => {
             const img = propertyImage(r);
             return (
               <article key={r.slug} className="property-card">

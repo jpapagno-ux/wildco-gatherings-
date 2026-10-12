@@ -1,3 +1,5 @@
+import type { DestinationRegion } from "./destinations";
+
 export type Status = "Prospect" | "Vetting" | "Approved" | "Live" | "Paused";
 // Under observation = on the list · Host met = J.W. vetted it in conversation with the host
 // Field verified = J.W. toured and stayed · Gathering verified = visited and passes all six tests
@@ -67,6 +69,7 @@ export type Residence = {
   name: string;
   place: string;
   region: string;
+  destinationRegion?: DestinationRegion;
   country: string;
   lat?: number;
   lng?: number;
