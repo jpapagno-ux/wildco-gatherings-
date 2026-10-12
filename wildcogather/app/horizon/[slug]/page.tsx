@@ -10,6 +10,9 @@ import { getHorizon, getHorizonItem } from "@/lib/horizon";
 import { getResidence } from "@/lib/data";
 import { blocks, quotesOf } from "@/lib/journal";
 import { SETTINGS } from "@/lib/settings";
+import Strip from "@/components/Strip";
+import TableCards from "@/components/TableCards";
+import { getTable, tableAnswer } from "@/lib/table";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -40,6 +43,11 @@ export default async function HorizonPost({ params }: { params: Promise<{ slug: 
   const all = await getHorizon();
   const pair = h.pairsWith ? all.find((x) => x.slug === h.pairsWith) : undefined;
   const pairHouse = h.pairsWith && !pair ? await getResidence(h.pairsWith) : undefined;
+  const table = await getTable(h.slug);
+  const shortName = h.short.split(",")[0];
+  const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5";
+  const imgUrl = (id: string) => `https://res.cloudinary.com/${CLOUD}/image/upload/f_auto,q_auto,w_1600/${id}`;
+  const photos = [h.hero, ...(h.gallery || [])].filter(Boolean) as { publicId: string; alt: string }[];
   // Open questions are kept off the site, so drop any "still to confirm" section from the body.
   const raw = blocks(h.body);
   const cut = raw.findIndex((b) => b.kind === "h2" && /still want to know|still to confirm/i.test(b.text));
@@ -53,11 +61,12 @@ export default async function HorizonPost({ params }: { params: Promise<{ slug: 
         dateModified: h.updated, datePublished: h.updated, mainEntityOfPage: url,
         author: { "@type": "Person", name: "James Wild", jobTitle: "Founder, James Wild & Co" },
         publisher: { "@type": "Organization", name: "Wild & Co Gatherings" },
+        ...(photos.length ? { image: photos.slice(0, 8).map((p) => ({ "@type": "ImageObject", url: imgUrl(p.publicId), description: p.alt, creditText: `Courtesy of ${shortName}` })) } : {}),
         about: { "@type": "Resort", name: h.name.split(" — ")[0], address: { "@type": "PostalAddress", addressLocality: h.place, addressCountry: h.country } },
         hasPart: quotesOf(h.body).map((q) => ({ "@type": "Quotation", text: q.replace(/\s*\[Draft[^\]]*\]/, ""), creator: { "@type": "Person", name: "James Wild" } })),
         speakable: { "@type": "SpeakableSpecification", cssSelector: [".dek", ".hz-answer"] },
       }} />
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: h.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [...h.faqs, ...(table.length ? [{ q: `Where does the family eat at ${shortName}?`, a: tableAnswer(shortName, h.slug, table) }] : [])].map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "On the Horizon", item: `${SITE}/horizon` }, { "@type": "ListItem", position: 2, name: h.short, item: url }] }} />
       {h.draft && <div className="cp" style={{ background: "var(--oxblood)", color: "var(--paper)", textAlign: "center", padding: "10px 20px" }}>First look · not yet vetted · James&apos;s lines drafted for his approval</div>}
 
@@ -127,6 +136,50 @@ export default async function HorizonPost({ params }: { params: Promise<{ slug: 
         </div>
       </div>
 
+      {h.gallery && h.gallery.length > 0 && (
+        <section className="band" style={{ padding: "80px 0 50px" }} aria-label={`Photographs of ${shortName}`}>
+          <Strip label="In pictures" title={`Inside ${shortName}`}>
+            {h.gallery.map((g) => (
+              <figure key={g.publicId} style={{ margin: 0, width: 420, maxWidth: "82vw" }}>
+                <Photo img={g} sizes="420px" aspect="4:3" style={{ height: 315 }} />
+                <figcaption className="cp muted" style={{ marginTop: 10, fontSize: 10.5 }}>{g.alt}</figcaption>
+              </figure>
+            ))}
+          </Strip>
+          <p className="wrap cp muted" style={{ margin: "14px auto 0", fontSize: 10 }}>Photographs courtesy of {shortName}</p>
+        </section>
+      )}
+
+      {h.experiences && h.experiences.length > 0 && (
+        <section className="wrap" style={{ paddingTop: 90, paddingBottom: 20 }} aria-label={`Things to do at ${shortName}`}>
+          <p className="eb">What the family does here</p>
+          <hr className="eb-rule" />
+          <h2 className="dsp" style={{ margin: "26px 0 30px", fontSize: "clamp(32px, 3.8vw, 46px)" }}>What is there to do at {shortName}?</h2>
+          <div className="hz-exp-grid">
+            {h.experiences.map((e) => (
+              <article key={e.name} className="hz-exp">
+                {e.image && <Photo img={e.image} sizes="(max-width: 700px) 100vw, 360px" aspect="4:3" style={{ height: 220 }} />}
+                <div className="hz-exp-body">
+                  <h3 className="tbl-name" style={{ fontSize: 24 }}>{e.name}</h3>
+                  <p className="tbl-why" style={{ marginTop: 8 }}>{e.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {table.length > 0 && (
+        <section className="wrap tbl-section" aria-label={`Dining at ${shortName}`}>
+          <p className="eb">At the table</p>
+          <hr className="eb-rule" />
+          <h2 className="dsp tbl-q">Where does the family eat at {shortName}?</h2>
+          <p className="body tbl-answer">{tableAnswer(shortName, h.slug, table)}</p>
+          <TableCards cards={table} house={h.slug} ink={st.ink} />
+        </section>
+      )}
+
+      <div style={{ height: 90 }} />
       <section className="navy" aria-label={`Be the first to hear about ${h.short}`}>
         <div className="wrap" style={{ paddingTop: 70, paddingBottom: 70, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 400px), 1fr))", gap: 44, alignItems: "center" }}>
           <div>

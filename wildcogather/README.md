@@ -218,3 +218,10 @@ A stay's page can carry an **At the table** section: a question heading ("Where 
 **Photos (Cloudinary)** — upload to `gatherings/<house-slug>/table/<card-slug>` (e.g. `gatherings/lone-mountain-ranch/table/sleigh-ride-dinner`), then put that ID in **Image (Cloudinary ID)** with alt text. Only upload photos we own or have permission to use. Cards are designed to stand on their own without a photo.
 
 **Search** — each card adds an amenity to the house's LodgingBusiness schema; restaurants and bars are also listed as places inside the house (Restaurant / BarOrPub), and "Where do families eat at …?" is added to the page's FAQ schema.
+
+## .Here Maldives — photos and partner approval (Oct 12, 2026)
+.Here approved us, as a wholesale tour operator, for all image use (logged in Airtable › Partners). 39 photos are in Cloudinary under `gatherings/here-maldives/` with search-friendly names, alt text and the credit "Courtesy of .Here Maldives".
+- **Horizon post** (/horizon/here-somewhere-nowhere-maldives): aerial hero, an "Inside .Here" photo strip, "What is there to do at .Here?" experience cards (mantas, diving, ASMAS, sandbank, watersports, Finolhu, spa, yoga) and "At the table" dining cards (SAFAR, dinner at the residence, sandbank lunch, sunset on ASMAS).
+- **Airtable › Horizon** has two new fields any Horizon post can use: **Gallery (Cloudinary IDs)** — one photo per line `id | alt text`; **Experiences** — one per line `Name | sentence | image id`.
+- **Horizon cards** (home page and /horizon) now lead with the hero photo whenever one is set.
+- **The Ledger** shows a photo thumbnail for every house (its Card photo, else its Hero).

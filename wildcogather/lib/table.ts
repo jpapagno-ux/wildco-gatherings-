@@ -30,11 +30,57 @@ export type TableCard = {
 
 /** Optional one-paragraph answer for "Where do families eat at …?" — falls back to an automatic one. */
 export const TABLE_INTRO: Record<string, string> = {
+  "here-somewhere-nowhere-maldives":
+    "At .Here the family eats at SAFAR, the overwater restaurant, whose seasonal menus take their name from the Dhivehi word for journey — or stays in, at the residence's own long table. On the best days lunch is on a private sandbank and the evening ends with a golden-hour sail and a barbecue aboard ASMAS.",
   "lone-mountain-ranch":
     "At Lone Mountain Ranch the table moves with the season. In winter, families ride a horse-drawn sleigh to a lamp-lit cabin for prime rib and huckleberry cobbler; in summer, Sunday nights mean a barbecue in Ranch Hall with s'mores at the fire pit. Horn & Cantle, the ranch's restaurant, cooks with local and Montana produce.",
 };
 
 export const sampleTable: TableCard[] = [
+  {
+    slug: "safar", house: "here-somewhere-nowhere-maldives", order: 1,
+    name: "SAFAR", kind: "Restaurant",
+    where: "Overwater, at .Here",
+    when: "Ask us for the season's hours",
+    who: "Residence guests",
+    gathering: "The island's restaurant, built over the water, with seasonal menus named for SAFAR — the Dhivehi word for journey. Long, unhurried dinners for the whole family above the lagoon.",
+    menu: ["Seasonal menus", "Refined overwater dining", "Drinks at the SAFAR bar"],
+    booking: "Booked with your stay",
+    image: { publicId: "gatherings/here-maldives/safar-restaurant-overwater", alt: "SAFAR, the overwater restaurant at .Here Maldives" },
+  },
+  {
+    slug: "dinner-at-the-residence", house: "here-somewhere-nowhere-maldives", order: 2,
+    name: "Dinner at the residence", kind: "Private dinner",
+    where: "Your residence's table, terrace or beach",
+    when: "Any evening",
+    who: "The whole family",
+    gathering: "When nobody wants to move: dinner in one of .Here's intimate private settings — the residence's own long table, its terrace or its beach — arranged by your Roohu.",
+    menu: ["Private dining, set where you choose"],
+    booking: "Ask us to arrange it",
+    image: { publicId: "gatherings/here-maldives/somewhere-residence-family-dinner-table", alt: "Dinner table for the whole family in a four-bedroom residence, .Here" },
+  },
+  {
+    slug: "sandbank-lunch", house: "here-somewhere-nowhere-maldives", order: 3,
+    name: "Lunch on a sandbank", kind: "Lunch experience",
+    where: "A secluded sandbank in Baa Atoll",
+    when: "On a curated day, after the mantas",
+    who: "The whole family",
+    gathering: "A private lunch on a sandbank of your own after a morning with the manta rays — the day your Roohu plans when the season and the tides line up.",
+    menu: ["Private lunch on the sandbank"],
+    booking: "Ask us to arrange it",
+    image: { publicId: "gatherings/here-maldives/private-sandbank-lunch", alt: "A private sandbank in Baa Atoll, .Here Maldives" },
+  },
+  {
+    slug: "asmas-sunset-barbecue", house: "here-somewhere-nowhere-maldives", order: 4,
+    name: "Sunset on ASMAS", kind: "Dinner experience",
+    where: "Aboard ASMAS, the private boat",
+    when: "Golden hour",
+    who: "The whole family",
+    gathering: "A golden-hour sail on the island's private boat with its own crew, ending with a bespoke barbecue — or dinner on board — as the light goes.",
+    menu: ["Bespoke barbecue", "Private dining on board"],
+    booking: "Ask us to arrange it",
+    image: { publicId: "gatherings/here-maldives/thila-residence-barbecue", alt: "Beach barbecue at the Thila residence, Nowhere island" },
+  },
   {
     slug: "sleigh-ride-dinner", house: "lone-mountain-ranch", order: 1,
     name: "Sleigh Ride Dinner", kind: "Dinner experience",

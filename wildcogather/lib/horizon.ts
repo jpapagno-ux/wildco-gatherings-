@@ -31,6 +31,8 @@ export type Horizon = {
   sources: Source[];
   official?: string;
   hero?: { publicId: string; alt: string };
+  gallery?: { publicId: string; alt: string }[];
+  experiences?: { name: string; text: string; image?: { publicId: string; alt: string } }[];
   pairsWith?: string; // another horizon slug or a house slug
   draft: boolean;
   updated: string; // YYYY-MM-DD facts checked
@@ -60,6 +62,8 @@ export const sampleHorizon: Horizon[] = [
       ["Sleeps", "Up to 8 adults (3-bed), 11 (4-bed), 24 (Presidential)"],
       ["Next door", "Finolhu, a Seaside Collection resort: kids' club for under-12s, a teens' club with music studio, a 1 km sandbank"],
       ["Opened", "Somewhere welcomed first guests 15 Dec 2025; Nowhere was scheduled for Q1 2026"],
+      ["Dining", "SAFAR, overwater, with seasonal menus — safar is Dhivehi for journey"],
+      ["Service", "A dedicated Roohu for every guest; buy out one island or both"],
     ],
     body: `## What is .Here?
 
@@ -69,21 +73,19 @@ export const sampleHorizon: Horizon[] = [
 
 Yes — that is the point. Somewhere's seven residences have three or four bedrooms each, with up to eight or eleven adults under one roof, private jetties and long sky infinity pools. Nowhere's Presidential Residence has five bedrooms and room for up to 24.
 
+![Fig. 2 — A sky pool on Somewhere, long enough for proper lengths.](gatherings/here-maldives/somewhere-residence-sky-pool)
+
 > For years I've told families the Maldives means splitting up into separate villas. This is the first place I've seen that fixes that. ${D}
 
 ## What is there for children?
 
-The kids' clubs are next door at Finolhu: a club for under-12s and a new teens' club with consoles, a movie lounge and a music studio, plus a kilometre-long sandbank with a beach shack at the end. We are confirming with .Here how children book into those clubs from Somewhere and Nowhere.
+The kids' clubs are next door at Finolhu: a club for under-12s and a new teens' club with consoles, a movie lounge and a music studio, plus a kilometre-long sandbank with a beach shack at the end. Ask us to arrange the children's time at Finolhu with your stay.
+
+![Fig. 3 — The boat to Finolhu, the sister island next door.](gatherings/here-maldives/finolhu-boat)
 
 ## How do you get there?
 
-International flight to Malé (MLE), then a 30-minute seaplane over Baa Atoll.
-
-## What we still want to know
-
-- Whether there is a minimum age at .Here and how Finolhu's clubs are booked
-- Nowhere's opening and buyout terms
-- Rates per residence and what is included`,
+International flight to Malé (MLE), then a 30-minute seaplane over Baa Atoll.`,
     faqs: [
       { q: "Is .Here in the Maldives good for families?", a: "It is built for groups: seven three- and four-bedroom residences on Somewhere and a five-bedroom Presidential island on Nowhere. Children's clubs are next door at Finolhu, a Seaside Collection resort; confirm how they are booked from .Here." },
       { q: "How big are the villas at .Here Maldives?", a: "Somewhere has five three-bedroom and two four-bedroom residences, sleeping up to 8 or 11 adults. Nowhere's Presidential Residence has five bedrooms and sleeps up to 24, with a 28-metre pool and private beach." },
@@ -96,6 +98,33 @@ International flight to Malé (MLE), then a 30-minute seaplane over Baa Atoll.
       { title: "Country & Town House — Finolhu review", url: "https://www.countryandtownhouse.com/travel/seaside-finolhu-baa-atoll-maldives-review/" },
     ],
     official: "https://www.here-maldives.com",
+    hero: { publicId: "gatherings/here-maldives/here-islands-aerial-baa-atoll", alt: "Aerial view of .Here's two private islands in Baa Atoll, Maldives" },
+    gallery: [
+      { publicId: "gatherings/here-maldives/nowhere-private-island-aerial", alt: "Nowhere, the private island at .Here, from the air" },
+      { publicId: "gatherings/here-maldives/somewhere-island-beach-residence", alt: "Two-storey beach residence on Somewhere island, .Here Maldives" },
+      { publicId: "gatherings/here-maldives/somewhere-residence-sky-pool", alt: "Sky pool of a four-bedroom residence on Somewhere, .Here" },
+      { publicId: "gatherings/here-maldives/thila-residence-terrace-nowhere", alt: "Terrace of the Thila residence on Nowhere, .Here Maldives" },
+      { publicId: "gatherings/here-maldives/thila-residence-living-room", alt: "Living room of the Thila residence, Nowhere island, .Here" },
+      { publicId: "gatherings/here-maldives/somewhere-residence-family-dinner-table", alt: "Dinner table for the whole family in a four-bedroom residence, .Here" },
+      { publicId: "gatherings/here-maldives/thila-residence-cinema", alt: "Private cinema in the Thila residence, .Here Maldives" },
+      { publicId: "gatherings/here-maldives/nowhere-master-bedroom", alt: "Master bedroom on Nowhere private island, .Here Maldives" },
+      { publicId: "gatherings/here-maldives/faru-residence-terrace", alt: "Terrace of the Faru residence on Nowhere, .Here Maldives" },
+      { publicId: "gatherings/here-maldives/somewhere-residence-private-jetty", alt: "Private jetty of a residence at .Here Maldives" },
+      { publicId: "gatherings/here-maldives/safar-restaurant-overwater", alt: "SAFAR, the overwater restaurant at .Here Maldives" },
+      { publicId: "gatherings/here-maldives/here-beach-walk", alt: "Beach walk around the island at .Here Maldives" },
+      { publicId: "gatherings/here-maldives/nowhere-island-morning", alt: "Morning light over Nowhere private island, .Here Maldives" },
+      { publicId: "gatherings/here-maldives/palms-and-milky-way", alt: "Palms under the Milky Way at .Here, Baa Atoll" },
+    ],
+    experiences: [
+      { name: "Hanifaru Bay mantas", text: "Manta rays in Hanifaru Bay, a protected bay in Baa Atoll — timed to when the mantas gather, and led by marine guides.", image: { publicId: "gatherings/here-maldives/hanifaru-bay-manta-ray", alt: "Manta ray at Hanifaru Bay, Baa Atoll" } },
+      { name: "Reef diving & snorkelling", text: "Guided dives and snorkels over Baa Atoll's coral gardens with instructors and marine specialists, from easy drifts over the reef to deeper descents.", image: { publicId: "gatherings/here-maldives/baa-atoll-reef-diving", alt: "Reef diving in Baa Atoll from .Here" } },
+      { name: "ASMAS, the private boat", text: "A private boat with its own crew: slow lagoon drifts, sandbank escapes, sunset sails, dolphin trips and dinner on board.", image: { publicId: "gatherings/here-maldives/asmas-private-yacht", alt: "ASMAS, .Here's private boat for sunset sails and sandbank days" } },
+      { name: "A sandbank of your own", text: "Lunch for the whole family on a secluded sandbank — the kind of day your Roohu plans around the mantas and the season.", image: { publicId: "gatherings/here-maldives/private-sandbank-lunch", alt: "A private sandbank in Baa Atoll, .Here Maldives" } },
+      { name: "Lagoon & watersports", text: "From paddleboards on the calm lagoon to faster rides over open water, each one guided with safety first.", image: { publicId: "gatherings/here-maldives/paddleboard-lagoon", alt: "Paddleboarding on the lagoon at .Here" } },
+      { name: "Finolhu next door", text: "The sister island has spaces made for children, for teens and for adults — from high-energy days to evening events.", image: { publicId: "gatherings/here-maldives/finolhu-boat", alt: "Boat to Finolhu, .Here's sister island" } },
+      { name: "Fehi Wellness", text: "Holistic, intuition-led massage and spa treatments for whoever needs the afternoon off.", image: { publicId: "gatherings/here-maldives/fehi-wellness-spa", alt: "Fehi Wellness spa treatment at .Here Maldives" } },
+      { name: "Sunrise yoga", text: "Private yoga at sunrise and personal training, in the residence or in dedicated spaces.", image: { publicId: "gatherings/here-maldives/sunrise-yoga", alt: "Sunrise yoga at .Here Maldives" } },
+    ],
     draft: false,
     updated: "2026-10-11",
   },
@@ -334,6 +363,8 @@ async function fromAirtable(): Promise<Horizon[]> {
       sources: lines(f["Sources"]).map((l) => { const [title, url] = l.split(" | "); return { title: title?.trim(), url: url?.trim() }; }).filter((s) => s.url),
       official: f["Official URL"] || undefined,
       hero: f["Hero (Cloudinary ID)"] ? { publicId: f["Hero (Cloudinary ID)"], alt: f["Hero alt text"] || f["Name"] } : undefined,
+      gallery: lines(f["Gallery (Cloudinary IDs)"]).map((l) => { const [id, alt] = l.split("|").map((x) => x.trim()); return { publicId: id, alt: alt || f["Name"] }; }).filter((g) => g.publicId),
+      experiences: lines(f["Experiences"]).map((l) => { const [name, text, img] = l.split("|").map((x) => x.trim()); return { name, text: text || "", image: img ? { publicId: img, alt: `${name} — ${f["Card title"] || f["Name"]}` } : undefined }; }).filter((e) => e.name),
       pairsWith: f["Pairs with (slug)"] || undefined,
       draft: f["Status"] !== "Live",
       updated: f["Facts checked"] || new Date().toISOString().slice(0, 10),
