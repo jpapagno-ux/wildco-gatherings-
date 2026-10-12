@@ -7,6 +7,7 @@ import { VipStamp } from "@/components/Marks";
 import { collections, getCollection, VIP_MEANING } from "@/lib/collections";
 import { getResidences } from "@/lib/data";
 import { getPost } from "@/lib/journal";
+import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -16,7 +17,12 @@ export async function generateStaticParams() { return collections.map((c) => ({ 
 export async function generateMetadata({ params }: { params: Promise<{ collection: string }> }): Promise<Metadata> {
   const c = getCollection((await params).collection);
   if (!c) return {};
-  return { title: c.seoTitle, description: c.metaDescription, alternates: { canonical: `/vip/${c.slug}` }, openGraph: { title: c.seoTitle, description: c.metaDescription, images: [c.hero.publicId] } };
+  return {
+    title: c.seoTitle,
+    description: c.metaDescription,
+    alternates: { canonical: `/vip/${c.slug}` },
+    openGraph: { title: c.seoTitle, description: c.metaDescription, images: c.hero ? [getOgImageUrl(c.hero)] : [] },
+  };
 }
 
 export default async function CollectionPage({ params }: { params: Promise<{ collection: string }> }) {
@@ -28,7 +34,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
   return (
     <>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: `${c.name} — Gatherings VIP`, url: `${SITE}/vip/${c.slug}`,
-        itemListElement: houses.map((h, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "LodgingBusiness", name: h.name, url: `${SITE}/houses/${h.slug}`, address: { "@type": "PostalAddress", addressLocality: h.place, addressRegion: h.region, addressCountry: h.country }, image: h.images[0]?.publicId } })) }} />
+        itemListElement: houses.map((h, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "LodgingBusiness", name: h.name, url: `${SITE}/houses/${h.slug}`, address: { "@type": "PostalAddress", addressLocality: h.place, addressRegion: h.region, addressCountry: h.country }, image: h.images[0] ? buildCloudinaryUrl({ src: h.images[0].publicId, width: 1200, quality: "auto" }) : undefined } })) }} />
 
       <section style={{ position: "relative" }}>
         <Photo img={c.hero} priority style={{ height: "min(78vh, 720px)" }} />

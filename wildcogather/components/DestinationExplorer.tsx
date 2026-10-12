@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Residence } from "@/lib/types";
+import { buildCloudinaryUrl } from "@/lib/cloudinary-loader";
 
 const InteractiveMap = dynamic(() => import("./InteractiveMap"), {
   ssr: false,
@@ -62,8 +63,19 @@ export default function DestinationExplorer({ residences }: { residences: Reside
               <Link href={`/houses/${residence.slug}`} className="destination-card-image" aria-label={`Explore ${residence.name}`}>
                 {image ? (
                   <img
-                    src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5"}/image/upload/${image.publicId}`}
+                    src={buildCloudinaryUrl({
+                      src: image.publicId,
+                      width: 800,
+                      aspect: "4:3",
+                      crop: "fill",
+                      gravity: image.gravity || "auto",
+                      quality: "auto",
+                      format: "auto",
+                    })}
                     alt={image.alt || residence.name}
+                    loading="lazy"
+                    decoding="async"
+                    style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
                   />
                 ) : <span className="cp">A place to gather</span>}
                 <span className="destination-card-number cp">{String(index + 1).padStart(2, "0")}</span>

@@ -2,28 +2,84 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { Img } from "@/lib/types";
+import { applyCropToSrc } from "@/lib/cloudinary-loader";
+
+export interface PhotoProps {
+  img?: Img;
+  sizes?: string;
+  priority?: boolean;
+  aspect?: string;
+  contain?: boolean;
+  style?: React.CSSProperties;
+  className?: string;
+  alt?: string;
+}
 
 // Cloudinary image that fades in once loaded (250ms), with a Sand placeholder behind it.
-// aspect (e.g. "5:4") asks Cloudinary for a subject-aware crop in that shape, so a portrait
-// leopard or a wide pool still lands well in a landscape frame. Leave it off for full-bleed heroes.
-// If no public ID is set yet, the Sand panel shows with a small "photo to come" label.
-export default function Photo({ img, sizes = "100vw", priority = false, aspect, contain = false, style }: { img?: Img; sizes?: string; priority?: boolean; aspect?: string; contain?: boolean; style?: React.CSSProperties }) {
-  const [loaded, setLoaded] = useState(false);
+// aspect (e.g. "5:4") asks Cloudinary for a subject-aware crop in that shape (g_auto),
+// so a portrait leopard or a wide pool still lands well in a landscape frame.
+// Supports bare public IDs and full Cloudinary URLs, focal points/object positions,
+// and resets fade/error state when the source changes.
+// If no public ID is set, the Sand panel shows with a "photo to come" label.
+export default function Photo({
+  img,
+  sizes = "100vw",
+  priority = false,
+  aspect,
+  contain = false,
+  style,
+  className,
+  alt: altOverride,
+}: PhotoProps) {
+  const [loadedSrc, setLoadedSrc] = useState<string | null>(null);
+  const [errorSrc, setErrorSrc] = useState<string | null>(null);
+
+  const rawSrc = img?.publicId?.trim();
+  if (!rawSrc) {
+    return (
+      <div style={{ position: "relative", background: "var(--sand)", overflow: "hidden", ...style }}>
+        <span className="cp" style={{ position: "absolute", left: 12, bottom: 10, fontSize: 11 }}>
+          Photo to come
+        </span>
+      </div>
+    );
+  }
+
+  const effectiveAspect = !contain ? (aspect || img?.aspect) : undefined;
+  const gravity = img?.gravity || "auto";
+  const effectiveSrc = effectiveAspect ? applyCropToSrc(rawSrc, effectiveAspect, gravity) : rawSrc;
+
+  const isLoaded = loadedSrc === effectiveSrc;
+  const hasError = errorSrc === effectiveSrc;
+
+  const objectPosition = img?.objectPosition || img?.focalPoint || style?.objectPosition;
+  const altText = altOverride !== undefined ? altOverride : (img?.alt ?? "");
+
+  if (process.env.NODE_ENV === "development" && !altText && !altOverride) {
+    console.warn(`[Photo] Missing alt text for image: "${rawSrc}"`);
+  }
+
   return (
     <div style={{ position: "relative", background: "var(--sand)", overflow: "hidden", ...style }}>
-      {img?.publicId ? (
+      {hasError ? (
+        <span className="cp" style={{ position: "absolute", left: 12, bottom: 10, fontSize: 11 }}>
+          {altText || "Photo unavailable"}
+        </span>
+      ) : (
         <Image
-          src={aspect && !img.publicId.startsWith("http") ? `ar_${aspect},c_fill,g_auto/${img.publicId}` : img.publicId}
-          alt={img.alt}
+          src={effectiveSrc}
+          alt={altText}
           fill
           sizes={sizes}
           priority={priority}
-          className={`fade${loaded ? " in" : ""}`}
-          style={{ objectFit: contain ? "contain" : "cover" }}
-          onLoad={() => setLoaded(true)}
+          className={`fade${isLoaded ? " in" : ""}${className ? ` ${className}` : ""}`}
+          style={{
+            objectFit: contain ? "contain" : "cover",
+            ...(objectPosition ? { objectPosition } : {}),
+          }}
+          onLoad={() => setLoadedSrc(effectiveSrc)}
+          onError={() => setErrorSrc(effectiveSrc)}
         />
-      ) : (
-        <span className="cp" style={{ position: "absolute", left: 12, bottom: 10, fontSize: 11 }}>Photo to come</span>
       )}
     </div>
   );

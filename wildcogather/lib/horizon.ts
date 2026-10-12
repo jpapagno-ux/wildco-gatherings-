@@ -332,7 +332,7 @@ async function fromAirtable(): Promise<Horizon[]> {
       confirm: lines(f["To confirm"]),
       sources: lines(f["Sources"]).map((l) => { const [title, url] = l.split(" | "); return { title: title?.trim(), url: url?.trim() }; }).filter((s) => s.url),
       official: f["Official URL"] || undefined,
-      hero: f["Hero (Cloudinary ID)"] ? { publicId: f["Hero (Cloudinary ID)"], alt: f["Hero alt text"] || f["Name"] } : undefined,
+      hero: f["Hero (Cloudinary ID)"] ? { publicId: f["Hero (Cloudinary ID)"], alt: f["Hero alt text"] || (f["Name"] ? `${f["Name"]} landscape and grounds` : "Property landscape and grounds") } : undefined,
       pairsWith: f["Pairs with (slug)"] || undefined,
       draft: f["Status"] !== "Live",
       updated: f["Facts checked"] || new Date().toISOString().slice(0, 10),

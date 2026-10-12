@@ -8,7 +8,23 @@ export type Stamp = "Under observation" | "Host met" | "Field verified" | "Gathe
 
 export type Host = { name: string; title: string; headshot?: Img; metOn?: string; how?: string; note: string };
 
-export type Img = { publicId: string; alt: string; caption?: string; credit?: string; role?: string; order?: number };
+export type Img = {
+  publicId: string;
+  alt: string;
+  caption?: string;
+  credit?: string;
+  role?: string;
+  order?: number;
+  aspect?: string;
+  gravity?: string;
+  focalPoint?: string;
+  objectPosition?: string;
+  permission?: "confirmed" | "pending" | "declined" | "unknown";
+  altStatus?: "reviewed" | "draft" | "needs_review";
+  width?: number;
+  height?: number;
+  subjectDescription?: string;
+};
 
 export type Experience = {
   name: string;

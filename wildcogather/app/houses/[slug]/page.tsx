@@ -14,6 +14,7 @@ import { getResidence, getResidences, dms } from "@/lib/data";
 import { getPostForHouse, quotesOf } from "@/lib/journal";
 import OfferCard from "@/components/OfferCard";
 import { getOffersForHouse, getItinerariesForHouse } from "@/lib/extras";
+import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
 
 export const revalidate = 3600;
 
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: r.seoTitle,
     description: r.metaDescription,
     alternates: { canonical: `/houses/${r.slug}` },
-    openGraph: { title: r.seoTitle, description: r.metaDescription, images: hero ? [`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5"}/image/upload/f_jpg,q_auto,w_1200,h_630,c_fill/${hero.publicId}`] : [] },
+    openGraph: { title: r.seoTitle, description: r.metaDescription, images: hero ? [getOgImageUrl(hero)] : [] },
   };
 }
 
@@ -88,7 +89,13 @@ export default async function House({ params }: { params: Promise<{ slug: string
         ...(r.lat ? { geo: { "@type": "GeoCoordinates", latitude: r.lat, longitude: r.lng } } : {}),
         ...(r.sleeps ? { occupancy: { "@type": "QuantitativeValue", maxValue: r.sleeps } } : {}),
         amenityFeature: [r.kidsProgram, r.water].filter(Boolean).map((v) => ({ "@type": "LocationFeatureSpecification", name: v, value: true })),
-        image: r.images.map((i) => ({ "@type": "ImageObject", contentUrl: `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5"}/image/upload/${i.publicId}`, caption: i.alt, creditText: r.credit || undefined })),
+        image: r.images.map((i) => ({
+          "@type": "ImageObject",
+          contentUrl: buildCloudinaryUrl({ src: i.publicId, width: 1600, quality: "auto", format: "auto" }),
+          caption: i.caption || i.alt,
+          description: i.alt,
+          creditText: i.credit || r.credit || undefined,
+        })),
         sameAs: r.officialUrl,
         priceRange: "$$$$",
         ...(toTime(b?.checkIn) ? { checkinTime: toTime(b?.checkIn) } : {}),
