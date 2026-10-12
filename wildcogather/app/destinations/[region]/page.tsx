@@ -1,79 +1,65 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import JsonLd from "@/components/JsonLd";
 import MapEmbed from "@/components/MapEmbed";
+import Photo from "@/components/Photo";
 import { getResidences } from "@/lib/data";
+import { REGIONS, regionFor, regionMeta } from "@/lib/regions";
+import { SETTINGS } from "@/lib/settings";
 
-const regionMeta: Record<string, { label: string; intro: string; description: string }> = {
-  "usa-mexico": { label: "USA & Mexico", intro: "Big sky, desert light, mountain air and warm-water escapes for large family groups.", description: "A blend of western ranches, desert hideaways and coastal stays for long gatherings across generations." },
-  caribbean: { label: "Caribbean", intro: "Soft shorelines, reef blues and private island ease for beach-centric chapters.", description: "Island homes, beachfront villas and private hideaways for relaxed family weeks by the sea." },
-  "latin-america": { label: "Latin America", intro: "Cloud forests, coastlines and mountain homes shaped for slow and generous travel.", description: "A mix of cultural stays and oceanfront homes designed for beautifully paced family weeks." },
-  europe: { label: "Europe", intro: "Historic homes, alpine stillness and warm coastal classics for elegant family reunion travel.", description: "Timeless houses in coastal, alpine and countryside settings for unforgettable gatherings." },
-  asia: { label: "Asia", intro: "Rice terraces, jungle views and glowing water villas shaped for immersive family escapes.", description: "Wellness-forward, nature-rich residences for families seeking cultural depth and quiet luxury." },
-  oceania: { label: "Oceania", intro: "Wide horizons, remote beaches and landscape-led stays shaped for long, spacious family chapters.", description: "Beachfront, vineyard and bush-country residences that feel as expansive as the view." },
-};
+export const revalidate = 3600;
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
-function regionForResidence(property: { place: string; region: string; country: string }) {
-  const value = `${property.region} ${property.country}`.toLowerCase();
-  if (value.includes("montana") || value.includes("mexico") || value.includes("california") || value.includes("arizona")) return "usa-mexico";
-  if (value.includes("turks") || value.includes("caicos") || value.includes("bahamas") || value.includes("caribbean")) return "caribbean";
-  if (value.includes("bali") || value.includes("indonesia") || value.includes("thailand") || value.includes("japan") || value.includes("vietnam") || value.includes("asia")) return "asia";
-  if (value.includes("australia") || value.includes("new zealand") || value.includes("fiji") || value.includes("oceania")) return "oceania";
-  if (value.includes("france") || value.includes("italy") || value.includes("spain") || value.includes("greece") || value.includes("portugal") || value.includes("croatia") || value.includes("europe")) return "europe";
-  if (value.includes("mexico") || value.includes("brazil") || value.includes("argentina") || value.includes("chile") || value.includes("peru") || value.includes("colombia") || value.includes("latin")) return "latin-america";
-  return "usa-mexico";
+export function generateStaticParams() { return REGIONS.map((r) => ({ region: r.key })); }
+
+export async function generateMetadata({ params }: { params: Promise<{ region: string }> }): Promise<Metadata> {
+  const m = regionMeta((await params).region);
+  if (!m) return {};
+  return { title: `Family Villas & Generational Residences in ${m.label} | Wild & Co Gatherings`, description: `${m.description} Vetted by James Wild for multigenerational families and family reunions.`.slice(0, 158), alternates: { canonical: `/destinations/${m.key}` } };
 }
 
-export function generateStaticParams() {
-  return Object.keys(regionMeta).map((region) => ({ region }));
-}
-
-export default async function DestinationPage({ params }: { params: Promise<{ region: string }> }) {
-  const region = (await params).region;
-  const residences = (await getResidences()).filter((property) => regionForResidence(property) === region);
-  const meta = regionMeta[region] ?? { label: region.replace(/-/g, " "), intro: "A restful collection of homes for memorable family gatherings.", description: "A curated selection of family-friendly stays chosen for their scale, ease and sense of place." };
-
+export default async function Destination({ params }: { params: Promise<{ region: string }> }) {
+  const key = (await params).region;
+  const m = regionMeta(key);
+  if (!m) notFound();
+  const houses = (await getResidences()).filter((h) => regionFor(h) === key);
   return (
     <>
-      <section className="wrap region-page-hero">
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: `${m.label} — Wild & Co Gatherings`, url: `${SITE}/destinations/${key}`, description: m.description, mainEntity: { "@type": "ItemList", itemListElement: houses.map((h, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/houses/${h.slug}`, name: h.name })) } }} />
+      <section className="wrap" style={{ paddingTop: 80, paddingBottom: 60, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 420px), 1fr))", gap: 50, alignItems: "center" }}>
         <div>
-          <p className="cp ox region-tag">Region</p>
-          <h1 className="disp page-heading" style={{ margin: "0.5rem 0 1rem" }}>{meta.label}</h1>
-          <p className="cas editorial-lead" style={{ margin: "0 0 1rem", fontStyle: "italic" }}>{meta.intro}</p>
-          <p className="body" style={{ margin: 0 }}>{meta.description}</p>
+          <nav aria-label="Breadcrumb" className="cp muted" style={{ fontSize: 11, marginBottom: 22 }}><Link href="/houses" style={{ textDecoration: "none" }}>Stays</Link> / {m.label}</nav>
+          <p className="eb">Region · {houses.length} {houses.length === 1 ? "house" : "houses"}</p>
+          <hr className="eb-rule" />
+          <h1 className="dsp" style={{ margin: "24px 0 0", fontSize: "clamp(44px, 5.6vw, 76px)" }}>{m.label}</h1>
+          <p className="it" style={{ margin: "18px 0 0", fontSize: 25, lineHeight: 1.35 }}>{m.intro}</p>
+          <p className="body" style={{ margin: "16px 0 0" }}>{m.description}</p>
         </div>
-
-        <div className="map-panel">
-          <MapEmbed items={residences.map((res) => ({ name: res.name, lat: res.lat, lng: res.lng }))} label={`${meta.label} map`} height={420} />
-        </div>
+        <MapEmbed items={houses.map((h) => ({ name: h.name, lat: h.lat, lng: h.lng }))} label={`Map of ${m.label} houses`} height={420} />
       </section>
-
-      <section className="wrap region-page-content">
-        {residences.length ? (
-          <div className="region-card-grid">
-            {residences.map((res) => {
-              const hero = res.images.find((image) => image.role === "Card") || res.images[0];
+      <section className="wrap" style={{ paddingBottom: 100 }}>
+        {houses.length ? (
+          <div className="stay-rail" role="list" aria-label={`${m.label} houses`}>
+            {houses.map((h) => {
+              const img = h.images.find((i) => i.role === "Hero") || h.images[0];
               return (
-                <article key={res.slug} className="property-card">
-                  <Link href={`/houses/${res.slug}`} style={{ textDecoration: "none" }}>
-                    <img src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5"}/image/upload/${hero.publicId}`} alt={hero.alt || res.name} style={{ width: "100%", height: 260, objectFit: "cover" }} />
-                    <div className="property-card-copy">
-                      <div className="property-card-meta cp">
-                        <span>{res.place}</span>
-                        <span>{res.country}</span>
-                      </div>
-                      <h2 className="cas" style={{ margin: "0.5rem 0" }}>{res.name}</h2>
-                      <p className="body" style={{ margin: 0 }}>{res.line}</p>
-                    </div>
-                  </Link>
-                </article>
+                <Link key={h.slug} href={`/houses/${h.slug}`} className="house-card" role="listitem">
+                  <Photo img={img} sizes="380px" aspect="5:4" style={{ height: 300 }} />
+                  <p className="cp muted" style={{ margin: "18px 0 0" }}>{h.place} · {h.country} · Entry {h.entryNo}</p>
+                  <h2 className="ser" style={{ margin: "8px 0 0", fontSize: 26, fontWeight: 500 }}>{h.name}</h2>
+                  <hr style={{ width: 30, height: 1, border: 0, background: SETTINGS[h.setting].ink, margin: "12px auto" }} />
+                  <p className="body" style={{ margin: 0, fontSize: 15 }}>{h.line}</p>
+                </Link>
               );
             })}
           </div>
         ) : (
-          <div className="region-empty">
-            <p className="cp ox" style={{ margin: "0 0 10px" }}>Coming soon</p>
-            <h2 className="cas section-heading" style={{ margin: "0 0 12px" }}>This region is being curated.</h2>
-            <p className="body" style={{ margin: "0 0 18px" }}>We’re preparing a new set of homes for this destination with family-friendly stays, private villas and the right pacing for a gathering.</p>
-            <Link href="/plan" className="btn">Enquire about this region</Link>
+          <div className="card" style={{ padding: "40px 36px", maxWidth: 720 }}>
+            <p className="eb">Being curated</p>
+            <h2 className="dsp" style={{ margin: "14px 0 12px", fontSize: 36 }}>This region is on James's list</h2>
+            <p className="body" style={{ margin: "0 0 22px" }}>We're vetting family houses here now. Tell us who's coming and we'll plan around the right one.</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 18, alignItems: "center" }}><Link href="/plan" className="btn">Plan a gathering here</Link><Link href="/horizon" className="lnk">On the Horizon <span>→</span></Link></div>
           </div>
         )}
       </section>

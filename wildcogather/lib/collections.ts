@@ -1,5 +1,4 @@
 // Gatherings VIP collections — groups of houses that carry the VIP stamp (Vetted in Purpose).
-const T = "https://symphony.cdn.tambourine.com/ted-turner-reserves/media/";
 
 export const VIP_MEANING = [
   { letter: "V", word: "Vetted", text: "James has walked it, questioned it and written down what he found — no brochure, no algorithm. A place is seen before it is sold." },
@@ -24,7 +23,7 @@ export const collections: Collection[] = [
       "Ted Turner spent decades buying land to give it back to the animals that belonged on it — bison, wolves, bighorn, a tortoise most people have never heard of. Four of those places now take guests, and every stay helps pay for the work.",
       "I have the contact, and I'm going to see all four in August 2027 — timed for the bat flight at Armendaris. Until I've been, every entry is marked Under observation. Here is what I know, why each one made my list, and how I would take a family through them.",
     ],
-    hero: { publicId: T + "tedturnerreserves-homepage-gallery-9-67db3a5dd8f48.jpg", alt: "Bison herd grazing below Castle Rock at Vermejo, a Ted Turner Reserve in New Mexico" },
+    hero: { publicId: "gatherings/vermejo-ted-turner-reserve/castle-rock-bison-vermejo", alt: "Bison herd grazing below Castle Rock at Vermejo, a Ted Turner Reserve in New Mexico" },
     facts: [["Land", "1 million+ acres stewarded"], ["Stays", "Vermejo, Ladder, Armendaris, Sierra Grande"], ["Children", "Turner Trailblazers program"], ["Status", "VIP · Vetted in Purpose · visit Aug 2027"]],
     route: [
       { when: "Day 1", where: "Fly into El Paso or Albuquerque", what: "Drive to Sierra Grande · first soak" },
@@ -35,10 +34,10 @@ export const collections: Collection[] = [
       { when: "Day 10", where: "Fly home", what: "Colorado Springs or Denver" },
     ],
     protects: [
-      { name: "Mexican wolf", text: "Ladder runs the only private breeding and pre-release facility for Mexican wolves in the world, since 1997.", image: { publicId: T + "tedturnerreserves-conservation-lightboximages-03-6851b06f4967d.jpg", alt: "Mexican wolf standing on rocks at Ladder Ranch" } },
-      { name: "Desert bighorn", text: "Restored to the Fra Cristobal from 1995; New Mexico took the species off its endangered list in 2011.", image: { publicId: T + "tedturnerreserves-conservation-lightboximages-02-6851a90ca0174.jpg", alt: "Desert bighorn sheep on a hill at Armendaris" } },
-      { name: "Bolson tortoise", text: "North America's largest land tortoise, bred and head-started on Ladder and Armendaris.", image: { publicId: T + "tedturnerreserves-conservation-lightboximages-01-6851b06d18920.jpg", alt: "Bolson tortoise walking at Ladder Ranch" } },
-      { name: "Chiricahua leopard frog", text: "A threatened frog kept going in the wild and in captive breeding at Ladder.", image: { publicId: T + "tedturnerreserves-conservation-lightboximages-05-6851b0718444d.jpg", alt: "Chiricahua leopard frog on sand" } },
+      { name: "Mexican wolf", text: "Ladder runs the only private breeding and pre-release facility for Mexican wolves in the world, since 1997.", image: { publicId: "gatherings/ladder-ted-turner-reserve/mexican-wolf-ladder", alt: "Mexican wolf standing on rocks at Ladder Ranch" } },
+      { name: "Desert bighorn", text: "Restored to the Fra Cristobal from 1995; New Mexico took the species off its endangered list in 2011.", image: { publicId: "gatherings/armendaris-ted-turner-reserve/desert-bighorn-armendaris", alt: "Desert bighorn sheep on a hill at Armendaris" } },
+      { name: "Bolson tortoise", text: "North America's largest land tortoise, bred and head-started on Ladder and Armendaris.", image: { publicId: "gatherings/ted-turner-reserves/bolson-tortoise-ladder", alt: "Bolson tortoise walking at Ladder Ranch" } },
+      { name: "Chiricahua leopard frog", text: "A threatened frog kept going in the wild and in captive breeding at Ladder.", image: { publicId: "gatherings/ted-turner-reserves/chiricahua-leopard-frog-ladder", alt: "Chiricahua leopard frog on sand" } },
     ],
     journal: "ted-turner-vision-guide-from-within",
     credit: "Images courtesy of Ted Turner Reserves",

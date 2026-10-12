@@ -1,10 +1,12 @@
 import type { Residence } from "./types";
+import { withSetting, type SampleResidence } from "./sample-settings";
 import { ttrResidences } from "./sample-ttr";
+import { moreResidences } from "./sample-more";
 
 // Used until AIRTABLE_TOKEN is set, and as the template for every Airtable row.
 const P = "gatherings/lone-mountain-ranch/";
 
-export const sampleResidences: Residence[] = [
+const raw: SampleResidence[] = [
   {
     slug: "lone-mountain-ranch",
     entryNo: "G-001",
@@ -340,4 +342,8 @@ export const sampleResidences: Residence[] = [
     credit: "",
   },
   ...ttrResidences,
+  ...moreResidences,
 ];
+
+// Setting and family notes are added in sample-settings.ts (mirrors the Airtable fields).
+export const sampleResidences: Residence[] = raw.map(withSetting);

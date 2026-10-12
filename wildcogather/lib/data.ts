@@ -1,5 +1,7 @@
+import { youtubeId } from "./video";
 import type { Residence, Img, Stamp, Video, Booking, RoomCategory } from "./types";
 import { sampleResidences } from "./sample-data";
+import { settingFrom } from "./settings";
 
 // Pages refresh from Airtable at most once an hour (set per page with `export const revalidate`).
 const TOKEN = process.env.AIRTABLE_TOKEN;
@@ -32,7 +34,14 @@ const pairs = (v?: string) => lines(v).map((l) => { const i = l.indexOf(":"); re
 function videosFrom(f: Record<string, any>): Video[] {
   const base = { title: f["Video title"] || `${f["Residence"]} — film`, description: f["Video description"], duration: f["Video duration (ISO)"], uploadDate: f["Video upload date"], credit: f["Video credit"] };
   const out: Video[] = [];
-  if (f["YouTube ID"]) out.push({ provider: "youtube", id: String(f["YouTube ID"]).trim(), ...base, title: f["YouTube title"] || base.title, credit: f["YouTube credit"] || base.credit });
+  const yt = youtubeId(f["YouTube link"] || f["YouTube ID"]);
+  if (yt) out.push({ provider: "youtube", id: yt, ...base, title: f["YouTube title"] || base.title, credit: f["YouTube credit"] || base.credit });
+  // "More YouTube links": one per line, optionally "Title | link"
+  for (const line of String(f["More YouTube links"] || "").split("\n")) {
+    const [a, b] = line.includes("|") ? line.split("|") : ["", line];
+    const id = youtubeId(b);
+    if (id && id !== yt) out.push({ provider: "youtube", id, title: a.trim() || `${f["Residence"]} — film`, credit: base.credit });
+  }
   if (f["Vimeo ID"]) out.push({ provider: "vimeo", id: String(f["Vimeo ID"]).trim(), ...base, thumbnail: f["Video thumbnail URL"] });
   return out;
 }
@@ -77,7 +86,8 @@ async function fromAirtable(): Promise<Residence[]> {
       ];
       return {
         slug: f["Slug"],
-        entryNo: `G-${String(i + 1).padStart(3, "0")}`,
+        // Permanent number from Airtable "Entry No."; falls back to row order only if it is blank.
+        entryNo: f["Entry No."] || `G-${String(i + 1).padStart(3, "0")}`,
         name: f["Residence"],
         place: d?.fields["Destination"] || "",
         region: d?.fields["Destination"] || "",
@@ -85,12 +95,16 @@ async function fromAirtable(): Promise<Residence[]> {
         lat: f["Latitude"], lng: f["Longitude"],
         status: f["Status"],
         stamp: (f["Ledger stamp"] as Stamp) || stampFor(f["Status"], score),
+        setting: settingFrom(f["Setting"]),
+        featured: !!f["Featured on home"],
+        partner: f["Partner name"] ? { name: f["Partner name"], logo: f["Partner logo (Cloudinary ID)"] ? { publicId: f["Partner logo (Cloudinary ID)"], alt: `${f["Partner name"]} logo` } : undefined } : undefined,
+        notes: { bestSeason: f["Best season"], power: f["Power & plugs"], timeZone: f["Time zone"] },
         firstVisited: f["First visited by J.W."] || undefined,
         host: f["Host name"] ? {
           name: f["Host name"],
-          title: `Host, ${f["Residence"]}`,
+          title: f["Host title"] || `Host, ${f["Residence"]}`,
           headshot: f["Host headshot (Cloudinary ID)"] ? { publicId: f["Host headshot (Cloudinary ID)"], alt: `${f["Host name"]}, host at ${f["Residence"]}` } : undefined,
-          note: "James sat down with the host to talk through how the house looks after three generations at once. That conversation is how it entered the Ledger.",
+          note: f["Host note"] || "James sat down with the host to talk through how the house looks after three generations at once. That conversation is how it entered the Ledger.",
         } : undefined,
         line: f["The Line"] || "",
         verdict: lines(f["James's verdict"]),
@@ -121,7 +135,8 @@ async function fromAirtable(): Promise<Residence[]> {
         metaDescription: f["Meta description"] || f["The Line"] || "",
         credit: "",
       } as Residence;
-    });
+    })
+    .sort((a, b) => a.entryNo.localeCompare(b.entryNo, undefined, { numeric: true }));
 }
 
 export async function getResidences(): Promise<Residence[]> {
@@ -142,7 +157,7 @@ export async function getResidence(slug: string) {
 export function dms(lat?: number, lng?: number) {
   if (lat == null || lng == null) return "";
   const f = (v: number, p: string, n: string) => {
-    const a = Math.abs(v), d = Math.floor(a), m = Math.floor((a - d) * 60), s = Math.round(((a - d) * 60 - m) * 60);
+    const t = Math.round(Math.abs(v) * 3600), d = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60), s = t % 60;
     return `${d}° ${String(m).padStart(2, "0")}′ ${String(s).padStart(2, "0")}″ ${v >= 0 ? p : n}`;
   };
   return `${f(lat, "N", "S")}   ${f(lng, "E", "W")}`;
