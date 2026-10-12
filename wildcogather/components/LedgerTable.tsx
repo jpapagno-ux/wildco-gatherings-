@@ -1,20 +1,23 @@
 import Link from "next/link";
 import type { Residence } from "@/lib/types";
+import { SETTINGS } from "@/lib/settings";
 
+// Setting ink appears here only as a small dot; status text stays oxblood (the ledger colour).
 export default function LedgerTable({ rows }: { rows: Residence[] }) {
   return (
-    <div className="scroll-region" tabIndex={0} role="region" aria-label="Gatherings ledger, scroll for all columns">
+    <div style={{ overflowX: "auto" }}>
       <div className="ledger">
         <div className="ledger-row cp muted">
-          <span>Entry</span><span>House / Location</span><span>Status</span><span>First visited</span><span>Sleeps</span>
+          <span>Entry</span><span>House / Location</span><span>Setting</span><span>Status</span><span>First visited</span><span>Sleeps</span>
         </div>
         {rows.map((r) => (
           <Link key={r.slug} href={`/houses/${r.slug}`} className="ledger-row">
-            <span className="cp" style={{ fontSize: 13 }}>{r.entryNo}</span>
-            <span className="cas" style={{ fontSize: 18 }}>{r.name}, {r.place}, {r.region}{r.vip && <span className="cp ox" style={{ border: "1px solid var(--oxblood)", padding: "2px 6px", marginLeft: 8 }}>VIP</span>}</span>
-            <span className="cp ox" style={{ fontSize: 12 }}>{r.stamp}{r.vip?.visit ? ` · ${r.vip.visit}` : ""}</span>
-            <span className="cp" style={{ fontSize: 13 }}>{r.firstVisited || "—"}</span>
-            <span className="cp" style={{ fontSize: 13 }}>{r.sleeps ? `Up to ${r.sleeps}` : "—"}</span>
+            <span className="mono">{r.entryNo}</span>
+            <span><span className="ser" style={{ fontSize: 20, fontWeight: 500 }}>{r.name}</span><span className="cp muted" style={{ display: "block", marginTop: 2 }}>{r.place} · {r.region}</span></span>
+            <span className="cp" style={{ color: "var(--charcoal)" }}><i className="dot" style={{ background: SETTINGS[r.setting].ink }} aria-hidden="true" />{SETTINGS[r.setting].name}</span>
+            <span className="cp oxblood">{r.stamp}{r.vip && <span style={{ border: "1px solid currentColor", padding: "1px 6px", marginLeft: 8 }}>VIP</span>}{r.vip?.visit ? <span className="muted" style={{ display: "block" }}>{r.vip.visit}</span> : null}</span>
+            <span className="mono">{r.firstVisited || "—"}</span>
+            <span className="mono">{r.sleeps ? `Up to ${r.sleeps}` : "—"}</span>
           </Link>
         ))}
       </div>

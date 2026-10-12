@@ -1,23 +1,34 @@
 "use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
-const stays = [
-  { label: "USA & Mexico", href: "/destinations/usa-mexico" },
-  { label: "Caribbean", href: "/destinations/caribbean" },
-  { label: "Latin America", href: "/destinations/latin-america" },
-  { label: "Europe", href: "/destinations/europe" },
-  { label: "Asia", href: "/destinations/asia" },
-  { label: "Oceania", href: "/destinations/oceania" },
+import { REGIONS } from "@/lib/regions";
+
+const NAV: [string, string][] = [
+  ["/houses", "Stays"],
+  ["/itineraries", "Itineraries"],
+  ["/horizon", "On the Horizon"],
+  ["/ledger", "The Ledger"],
+  ["/vip", "Gatherings VIP"],
+  ["/journal", "The Journal"],
+  ["/advisors", "Advisors"],
 ];
 
 export default function Header() {
+  const [compact, setCompact] = useState(false);
   const [staysOpen, setStaysOpen] = useState(false);
-  const staysRef = useRef<HTMLDivElement>(null);
+  const staysRef = useRef<HTMLSpanElement>(null);
   const staysButtonRef = useRef<HTMLButtonElement>(null);
-  const pathname = usePathname();
+  const path = usePathname() || "/";
+
+  useEffect(() => {
+    const on = () => setCompact(window.scrollY > 150 && window.innerWidth >= 768);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    window.addEventListener("resize", on);
+    return () => { window.removeEventListener("scroll", on); window.removeEventListener("resize", on); };
+  }, []);
 
   useEffect(() => {
     function closeOnOutsideClick(event: PointerEvent) {
@@ -30,58 +41,59 @@ export default function Header() {
     return () => document.removeEventListener("pointerdown", closeOnOutsideClick);
   }, []);
 
+  useEffect(() => {
+    setStaysOpen(false);
+  }, [path]);
+
   return (
-    <header className="site-header">
-      <div className="header-inner">
-        <nav aria-label="Main navigation" className="site-nav site-nav-left cp">
-          <Link href="/ledger" aria-current={pathname === "/ledger" ? "page" : undefined}>The Ledger</Link>
-          <div
-            className="nav-dropdown"
-            ref={staysRef}
-            onBlur={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setStaysOpen(false);
-            }}
-            onKeyDown={(event) => {
-              if (event.key === "Escape") {
-                setStaysOpen(false);
-                staysButtonRef.current?.focus();
-              }
-            }}
-          >
-            <button
-              ref={staysButtonRef}
-              type="button"
-              aria-expanded={staysOpen}
-              aria-controls="stays-menu"
-              data-current={pathname.startsWith("/destinations/")}
-              className="nav-dropdown-trigger cp"
-              onClick={() => setStaysOpen((open) => !open)}
-            >
-              Stays
-            </button>
-            <div id="stays-menu" className="nav-dropdown-menu" data-open={staysOpen}>
-              {stays.map((item) => (
-                <Link key={item.href} href={item.href} aria-current={pathname === item.href ? "page" : undefined}>
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </nav>
-
-        <Link href="/" className="brand-lockup" aria-label="Wild & Co Gatherings home" aria-current={pathname === "/" ? "page" : undefined}>
-          <span className="wordmark cas">Wild &amp; Co</span>
-          <span className="wordmark wordmark-sub cp">Gatherings</span>
+    <header className={`site-header${compact ? " compact" : ""}`}>
+      <div className="wrap bar">
+        <Link href="/" aria-label="James Wild & Co — home" style={{ justifySelf: "start" }}>
+          <img className="seal" src="/brand/jwco-hare-240.png" width={58} height={58} alt="James Wild & Co. seal — Ledgered & Vetted, journey design since 1982" style={{ width: 58, height: 58 }} />
         </Link>
-
-        <nav aria-label="Secondary navigation" className="site-nav site-nav-right cp">
-          <Link href="/vip" aria-current={pathname === "/vip" || pathname.startsWith("/vip/") ? "page" : undefined}>Gatherings VIP</Link>
-          <Link href="/journal" aria-current={pathname === "/journal" || pathname.startsWith("/journal/") ? "page" : undefined}>The Journal</Link>
-          <Link href="/plan" className="cta-link" aria-current={pathname === "/plan" ? "page" : undefined}>
-            Plan a Gathering
-          </Link>
-        </nav>
+        <Link href="/" style={{ textDecoration: "none", textAlign: "center" }}>
+          <p className="wordmark">Wild &amp; Co Gatherings</p>
+          <p className="byline">By the House of James Wild &amp; Co.</p>
+        </Link>
+        <Link href="/plan" className="lab plan-link ox" style={{ justifySelf: "end", textDecoration: "none" }}>Plan a Gathering</Link>
       </div>
+      <nav aria-label="Main" className="site-nav">
+        {NAV.map(([href, label]) => {
+          const current = path === href || (href !== "/" && path.startsWith(href)) || (href === "/houses" && path.startsWith("/destinations"));
+          return href === "/houses" ? (
+            <span
+              key={href}
+              className="nav-dropdown"
+              ref={staysRef}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setStaysOpen(false);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") {
+                  setStaysOpen(false);
+                  staysButtonRef.current?.focus();
+                }
+              }}
+            >
+              <button
+                ref={staysButtonRef}
+                type="button"
+                aria-expanded={staysOpen}
+                aria-controls="stays-menu"
+                data-current={current}
+                className="nav-dropdown-trigger cp"
+                onClick={() => setStaysOpen((open) => !open)}
+              >
+                {label}
+              </button>
+              <span id="stays-menu" className="nav-dropdown-menu" data-open={staysOpen}>
+                <Link href="/houses" aria-current={path === "/houses" ? "page" : undefined}>All houses</Link>
+                {REGIONS.map((r) => <Link key={r.key} href={`/destinations/${r.key}`} aria-current={path === `/destinations/${r.key}` ? "page" : undefined}>{r.label}</Link>)}
+              </span>
+            </span>
+          ) : <Link key={href} href={href} aria-current={current ? "page" : undefined}>{label}</Link>;
+        })}
+      </nav>
     </header>
   );
 }

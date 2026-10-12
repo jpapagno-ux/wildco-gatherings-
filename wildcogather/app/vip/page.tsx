@@ -3,6 +3,10 @@ import Link from "next/link";
 import Photo from "@/components/Photo";
 import { VipStamp } from "@/components/Marks";
 import { collections, VIP_MEANING } from "@/lib/collections";
+import { getResidences } from "@/lib/data";
+import { SETTINGS, SETTING_ORDER } from "@/lib/settings";
+
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Gatherings VIP — Vetted in Purpose | Wild & Co Gatherings",
@@ -10,15 +14,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "/vip" },
 };
 
-export default function Vip() {
+export default async function Vip() {
+  const vip = (await getResidences()).filter((r) => r.vip);
   return (
     <>
       <section className="wrap" style={{ paddingTop: 80, paddingBottom: 50 }}>
         <div className="box" style={{ display: "flex", flexWrap: "wrap" }}>
-          <div style={{ flex: "1 1 300px", padding: 40, borderRight: "1px solid var(--sand)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
-            <VipStamp size={240} rotate={-6} note="J.W." />
-            <h1 className="cas hero-heading page-heading" style={{ margin: "26px 0 8px" }}>Not Very Important People.<br />Places Vetted in Purpose.</h1>
-            <p className="cp muted" style={{ margin: 0 }}>What the Gatherings VIP stamp means</p>
+          <div style={{ flex: "1 1 300px", padding: 40, borderRight: "1px solid var(--stone)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
+            <VipStamp size={260} rotate={-6} />
+            <h1 className="ser" style={{ margin: "26px 0 8px", fontSize: 27, lineHeight: 1.3, fontWeight: 500 }}>Not Very Important People.<br />Places Vetted in Purpose.</h1>
+            <p className="cp muted" style={{ margin: 0, fontSize: 11 }}>What the Gatherings VIP stamp means</p>
           </div>
           <dl style={{ flex: "2 1 560px", padding: "34px 40px", margin: 0 }}>
             {VIP_MEANING.map((m, i) => (
@@ -30,16 +35,30 @@ export default function Vip() {
           </dl>
         </div>
       </section>
+      <section className="wrap" style={{ paddingBottom: 70 }} aria-label="VIP by natural setting">
+        <p className="eb">Six settings, six inks</p>
+        <hr className="eb-rule" />
+        <h2 className="dsp" style={{ margin: "28px 0 10px", fontSize: 42 }}>The ink tells you the land</h2>
+        <p className="body" style={{ margin: "0 0 30px", maxWidth: 640 }}>Each VIP stay is stamped in the colour of its natural setting. A setting waits until James names its first VIP house.</p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 28 }}>
+          {SETTING_ORDER.map((k) => { const n = vip.filter((r) => r.setting === k).length; return (
+            <div key={k} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, textAlign: "center", opacity: n ? 1 : 0.45 }}>
+              <VipStamp setting={k} size={220} rotate={k.length % 2 ? -7 : 6} />
+              <p className="cp" style={{ margin: 0, color: SETTINGS[k].ink }}>{SETTINGS[k].name} · {n ? `${n} ${n === 1 ? "stay" : "stays"}` : "awaiting its first"}</p>
+            </div>
+          ); })}
+        </div>
+      </section>
       <section className="wrap" style={{ paddingBottom: 100 }}>
-        <h2 className="cas section-heading ox" style={{ margin: "0 0 20px" }}>VIP collections</h2>
+        <p className="eb" style={{ margin: "0 0 20px" }}>VIP collections</p>
         {collections.map((c) => (
           <Link key={c.slug} href={`/vip/${c.slug}`} className="box" style={{ display: "flex", flexWrap: "wrap", textDecoration: "none" }}>
             <div style={{ flex: "1 1 420px", minHeight: 300 }}><Photo img={c.hero} sizes="(max-width: 800px) 100vw, 50vw" style={{ height: "100%", minHeight: 300 }} /></div>
             <div style={{ flex: "1 1 420px", padding: 40 }}>
-              <p className="cp ox" style={{ margin: "0 0 12px" }}>{c.region} · {c.status}</p>
-              <h3 className="disp card-heading" style={{ margin: "0 0 16px", textTransform: "uppercase", letterSpacing: ".03em" }}>{c.name}</h3>
-              <p className="cas" style={{ margin: "0 0 18px", fontSize: 19, fontStyle: "italic", lineHeight: 1.5 }}>{c.tagline}</p>
-              <p className="cp" style={{ margin: 0 }}>See the stays →</p>
+              <p className="eb" style={{ margin: "0 0 12px" }}>{c.region} · {c.status}</p>
+              <h3 className="dsp" style={{ margin: "0 0 16px", fontSize: 46 }}>{c.name}</h3>
+              <p className="it" style={{ margin: "0 0 22px", fontSize: 22, lineHeight: 1.4 }}>{c.tagline}</p>
+              <span className="lnk">See the stays <span>→</span></span>
             </div>
           </Link>
         ))}

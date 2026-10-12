@@ -10,8 +10,9 @@ export const metadata: Metadata = {
 export default function Plan() {
   return (
     <section className="wrap" style={{ paddingTop: 80, paddingBottom: 100, maxWidth: 900 }}>
-      <p className="cp ox" style={{ margin: "0 0 14px" }}>A conversation before you go</p>
-      <h1 className="cas hero-heading page-heading" style={{ margin: "0 0 18px" }}>Tell us who's coming.</h1>
+      <p className="eb" style={{ margin: "0 0 14px" }}>A conversation before you go</p>
+      <h1 className="dsp" style={{ margin: "14px 0 18px", fontSize: "clamp(40px, 5vw, 64px)" }}>Tell us who&apos;s coming</h1>
+      <p className="it" style={{ margin: "0 0 18px", fontSize: 26 }}>Every great family journey begins with a conversation.</p>
       <p className="body" style={{ margin: "0 0 40px" }}>Your dates, the generations travelling and the occasion. James reads every request himself. Personal reply, no automation.</p>
       <PlanForm />
     </section>

@@ -1,3 +1,4 @@
+import { youtubeId } from "./video";
 import type { Post } from "./types";
 
 const TOKEN = process.env.AIRTABLE_TOKEN;
@@ -5,6 +6,58 @@ const BASE = process.env.AIRTABLE_BASE_ID || "appnpcCxUZcapAgbo";
 
 // ——— Sample entry (used until the Airtable "Journal" table has rows). Quotes are drafts for James to approve. ———
 export const samplePosts: Post[] = [
+  {
+    slug: "wild-together-monwana-thornybush",
+    number: "03",
+    kicker: "Wild Together · the episode",
+    title: "Wild Together at Monwana: Leopards, a Waterhole and the House We'd Book Again",
+    dek: "Miriam and I filmed an episode of Wild Together at Monwana in Thornybush — and came home convinced it is the safari house for a small family.",
+    house: "monwana-villa-thornybush",
+    author: "James Wild",
+    authorTitle: "Founder, James Wild & Co · 44 years on the road",
+    date: "2026-10-11",
+    readMinutes: 6,
+    hero: { publicId: "gatherings/monwana-villa-thornybush/monwana-villa-pool-elephants", alt: "Monwana Villa pool overlooking the bush in Thornybush, with elephants nearby", caption: "Fig. 1 — The Villa, elephants at the waterhole. Courtesy of MORE Family Collection." },
+    video: { provider: "youtube", id: "YR_8uiBObZ4", title: "Wild Together: My Wife's First Safari — Monwana Lodge, Thornybush, South Africa", description: "James and Miriam Wild at Monwana Villa in the Thornybush Nature Reserve, Greater Kruger — Miriam's first safari: leopards, the waterhole and the house we'd book again.", credit: "Wild Together · James & Miriam · Wild Earth Stays on YouTube" },
+    draft: true,
+    seoTitle: "Wild Together at Monwana: A Family Safari Villa in Thornybush | Wild & Co Gatherings",
+    metaDescription: "James and Miriam Wild film Wild Together at Monwana in Thornybush: leopard country, a waterhole in view of the villa, and why it suits a family of six. Watch the episode.",
+    body: `We arrived at Monwana in May with a camera, a notebook and no plan beyond the morning drive. By the second day the plan was simply to sit by the waterhole.
+
+Monwana sits in the Thornybush Nature Reserve — 14,000 hectares on the edge of Greater Kruger, with no fence between them. The lodge was rebuilt in 2022 and runs on the sun. The Villa is its own house: two suites, each with a plunge pool, a fire deck, and a waterhole you can watch from the kitchen.
+
+> We came for the leopards. We'll go back for the waterhole.
+
+## What is it like to stay at Monwana?
+
+Quiet, first of all. The Villa has its own chef, butler, guide and tracker, and its own vehicle, so the day bends around you. Miriam took her coffee to the deck at first light; by the time I joined her, elephants were drinking forty yards away.
+
+![Fig. 2 — Leopard country. Courtesy of MORE Family Collection.](gatherings/monwana-villa-thornybush/leopard-thornybush-monwana)
+
+## Why is Thornybush good for leopard?
+
+Thornybush is known for its predators, leopard above all. There are few vehicles, the guides track off-road, and the animals don't migrate — so sightings come all year. We saw our first leopard on the second afternoon, stretched along a branch as if she owned the reserve. She did.
+
+> A good guide doesn't find you animals. He finds you the moment before they appear.
+
+## Is Monwana Villa right for a family?
+
+For a family of up to six, yes. Children of all ages are welcome in the Villa, ride in its own vehicle, and the Mosaba Rangers programme fills the hours between drives. Bush walks start at sixteen under reserve rules. For a bigger reunion, the whole lodge can be taken — six suites and the Villa, up to 24 guests.
+
+- Two suites, each with a plunge pool; three plunge pools in all
+- Meals, premium drinks, game drives, bush walks and gratuities included
+- Hoedspruit Airport about 45 minutes away, transfers included
+
+![Fig. 3 — Young rangers at the waterhole. Courtesy of MORE Family Collection.](gatherings/monwana-villa-thornybush/young-rangers-waterhole-monwana)
+
+## Why did James film Wild Together here?
+
+Because it shows what we mean by a gathering. Nobody is waiting for anybody. The young ones are with the rangers, the grown-ups are on the deck, and everyone meets at the fire after dark with a story.
+
+> Luxury on safari is time with nothing to prove. Monwana gives you that.
+
+Watch the episode above, then ask me how to pair Monwana with Lion Sands — a private villa on the Sabie River and a night in a treehouse under the stars.`,
+  },
   {
     slug: "ted-turner-vision-guide-from-within",
     number: "02",
@@ -16,7 +69,7 @@ export const samplePosts: Post[] = [
     authorTitle: "Founder, James Wild & Co · 44 years on the road",
     date: "2026-10-10",
     readMinutes: 7,
-    hero: { publicId: "https://symphony.cdn.tambourine.com/ted-turner-reserves/media/tedturnerreserves-homepage-topreasonstostayhighlights-01-steadfastconservation-67db3ec07c2b8.jpg", alt: "Bison herd in a grassland on a Ted Turner Reserve, New Mexico", caption: "Fig. 1 — Bison on the range. Courtesy of Ted Turner Reserves." },
+    hero: { publicId: "gatherings/ted-turner-reserves/bison-on-the-range-new-mexico", alt: "Bison herd in a grassland on a Ted Turner Reserve, New Mexico", caption: "Fig. 1 — Bison on the range. Courtesy of Ted Turner Reserves." },
     draft: true,
     seoTitle: "Ted Turner Reserves: Conservation, Sustainability & Family Travel | Wild & Co Journal",
     metaDescription: "James Wild on Ted Turner's vision for his New Mexico reserves — wolves, bison and bighorn restored — and why sustainable stays are the ones he guides families to.",
@@ -38,7 +91,7 @@ The reserves describe their aim as balancing "the work and wildness" of the land
 - At Ladder, the threatened Chiricahua leopard frog and native Rio Grande fish brought back to Las Animas Creek.
 - At Vermejo, 558,000 acres of mountain, meadow and alpine tundra, and more than 1,200 bison.
 
-![Fig. 2 — Mexican wolf at Ladder. Courtesy of Ted Turner Reserves.](https://symphony.cdn.tambourine.com/ted-turner-reserves/media/tedturnerreserves-conservation-lightboximages-03-6851b06f4967d.jpg)
+![Fig. 2 — Mexican wolf at Ladder. Courtesy of Ted Turner Reserves.](gatherings/ladder-ted-turner-reserve/mexican-wolf-ladder)
 
 ## Why does sustainability decide where James Wild sends families?
 
@@ -173,6 +226,8 @@ async function fromAirtable(): Promise<Post[]> {
       date: f["Date"] || new Date().toISOString().slice(0, 10), readMinutes: Number(f["Read minutes"] || 5),
       hero: f["Hero (Cloudinary ID)"] ? { publicId: f["Hero (Cloudinary ID)"], alt: f["Hero alt text"] || f["Title"], caption: f["Hero caption"] } : undefined,
       body: f["Body"] || "", draft: f["Status"] !== "Published",
+      video: youtubeId(f["YouTube ID"]) ? { provider: "youtube", id: youtubeId(f["YouTube ID"])!, title: f["YouTube title"] || f["Title"], credit: f["YouTube credit"] || "Wild Together · James & Miriam Wild" } : undefined,
+      videoPlanned: f["Film planned"] || undefined,
       seoTitle: f["SEO title"] || `${f["Title"]} | Wild & Co Journal`, metaDescription: f["Meta description"] || f["Dek"] || "",
     }));
 }
