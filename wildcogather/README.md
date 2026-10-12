@@ -187,3 +187,20 @@ See `docs/seo-aeo-playbook.md` — keyword and question clusters for families an
 - Itinerary: "Whale Season: Four Days at Lekkerwater" (Draft preview).
 - Partner: Natural Selection (Airtable › Partners, Image permission **Requested**). 20 photos in Cloudinary tagged `permission-pending`; their web images are only 1100 px wide — ask Natural Selection for the hi-res set and replace (same public IDs) so the heroes are sharp.
 - Still to confirm with Natural Selection (marked [confirm] on the pages): rate basis (per person or per suite), board/inclusions, exclusive-use terms and maximum guests, check-in/out, deposit, cancellation, GweGwe flight route.
+
+## Maps — Mapbox, in the brand style (added Oct 12, 2026)
+Maps now sit at the **bottom** of every stay feature: on region pages (/destinations/…) the stays come first and the map follows; every house page ends with a "Where is …?" section and a zoomed map of that house.
+
+**Turn Mapbox on (5 minutes, no code)**
+1. Create a free account at mapbox.com → **Tokens** → *Create a token*. Leave the public scopes as they are and add URL restrictions for your domain(s) and `*.vercel.app` previews.
+2. Vercel → wildcogather → Settings → Environment Variables:
+   - `NEXT_PUBLIC_MAPBOX_TOKEN` = the `pk.…` token
+   - `NEXT_PUBLIC_MAPBOX_THEME` = `paper` (approved look; also `coast` or `night`)
+3. Redeploy. Without a token the site keeps the plain OpenStreetMap map, so nothing breaks.
+
+**Optional: your own Mapbox Studio style (the finished "Paper Atlas")**
+In Mapbox Studio → New style → **Monochrome** (Light) template → set land `#F4F1EC`, water `#D3DFDC`, parks `#ECE7DB`, roads `#DCCFB6`, labels `#5C564D` with a `#F4F1EC` halo, country borders dashed ink at 50%. Upload the brand fonts (IBM Plex Mono for place names, Cormorant Garamond Italic for water and regions — both open licence) and hide POIs, transit and road labels. Publish, copy the style URL (`mapbox://styles/<you>/<id>`) into `NEXT_PUBLIC_MAPBOX_STYLE`. When that variable is set the site uses the Studio style exactly; when it isn't, the site recolours Mapbox Light to the same palette automatically (`lib/map-theme.ts`).
+
+**Markers** are drawn by the site in each house's setting ink with its list number; houses at the same lodge share one pin (e.g. "01·02"). The popup card links to the house page. Scroll-zoom needs ⌘/Ctrl (two fingers on phones) so the page still scrolls.
+
+Free tier: 50,000 web map loads a month (check mapbox.com/pricing for current terms).

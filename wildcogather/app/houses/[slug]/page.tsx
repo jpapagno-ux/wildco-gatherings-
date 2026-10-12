@@ -13,6 +13,7 @@ import { embedUrl, thumbUrl } from "@/lib/video";
 import { getResidence, getResidences, dms } from "@/lib/data";
 import { getPostForHouse, quotesOf } from "@/lib/journal";
 import OfferCard from "@/components/OfferCard";
+import StayMap from "@/components/StayMap";
 import { getOffersForHouse, getItinerariesForHouse } from "@/lib/extras";
 
 export const revalidate = 3600;
@@ -411,6 +412,24 @@ export default async function House({ params }: { params: Promise<{ slug: string
                 <p className="body" style={{ margin: 0, fontSize: 16 }}>{f.answer}</p>
               </div>
             ))}
+          </div>
+        </section>
+      )}
+      {r.lat != null && r.lng != null && (
+        <section className="wrap location-map" aria-label={`Where ${r.name} is`}>
+          <div className="location-map-head">
+            <div>
+              <p className="eb">Where it is</p>
+              <hr className="eb-rule" />
+              <h2 className="dsp">Where is {r.name}?</h2>
+              <p className="body" style={{ margin: "12px 0 0", maxWidth: 620 }}>
+                {r.name} is in {[r.place, r.region, r.country].filter(Boolean).join(", ")}.
+              </p>
+            </div>
+            <p className="cp muted location-map-coords">{coords.replace("   ", " · ")}</p>
+          </div>
+          <div className="location-map-frame">
+            <StayMap residences={[r]} variant="house" label={`Map showing ${r.name}`} />
           </div>
         </section>
       )}
