@@ -1,5 +1,6 @@
 import { youtubeId } from "./video";
 import type { Post } from "./types";
+import { scrub } from "./scrub";
 
 const TOKEN = process.env.AIRTABLE_TOKEN;
 const BASE = process.env.AIRTABLE_BASE_ID || "appnpcCxUZcapAgbo";
@@ -127,7 +128,7 @@ I've met the team behind all four, and each one is approved in the Ledger. I'm g
     date: "2026-10-10",
     readMinutes: 6,
     hero: { publicId: "gatherings/lone-mountain-ranch/family-trail-ride-lone-mountain-ranch-big-sky-montana", alt: "Family on horseback riding a forest trail at Lone Mountain Ranch in Big Sky, Montana", caption: "Fig. 1 — Into the backcountry, Lone Mountain Ranch. Courtesy of the ranch." },
-    draft: true,
+    draft: false,
     seoTitle: "Why James Wild Chose Lone Mountain Ranch for Family Reunions | Wild & Co Journal",
     metaDescription: "James Wild on why Lone Mountain Ranch in Big Sky, Montana is the first house in the Gatherings Ledger — where each generation should sleep, and what to know before booking.",
     body: `I have stayed in a great many beautiful places that I would never send a family to. Beauty is easy. What is hard is finding one place where a seven-year-old, a fifteen-year-old, their parents and their grandparents all have a good day — on the same day, without anyone sitting in the car waiting.
@@ -150,7 +151,7 @@ There is water on every side — the Gallatin and the Madison for fly fishing, L
 
 ## I put it in the Ledger because of a conversation
 
-Before a house goes in, I sit down with the person who runs it. With Lone Mountain that was [host name], [title], [in person / by video] in [month year]. I asked what I always ask. Who plans the week? What happens when it rains on rodeo night? What does a four-year-old do while her grandfather fishes? Where do the teenagers go when they need to get away from all of us?
+Before a house goes in, I sit down with the person who runs it. With Lone Mountain that was Jordann Cardinal. I asked what I always ask. Who plans the week? What happens when it rains on rodeo night? What does a four-year-old do while her grandfather fishes? Where do the teenagers go when they need to get away from all of us?
 
 The answers were specific, and they came without a brochure. That is the sign I look for.
 
@@ -174,6 +175,7 @@ Take all of it — 46 bedrooms, up to 130 people — and for a week the ranch is
 - Be on the Great Lawn at five on the first evening. The horses run.
 - Keep Yellowstone for the middle of the week, once everyone has the altitude.
 - Book the fly fishing early — it isn't in the all-inclusive rate, and the guides go fast in July.
+- In winter, book the sleigh ride dinner to the North Fork Cabin for the whole family on the first night you are all together.
 - Know the terms: half at booking, the rest 60 days out, and no refunds — a deposit can move to a new date within two years, before the final payment.
 - It is not a beach and it is not a nightclub. Early mornings, dinner under the stars. That is the point.
 
@@ -232,7 +234,8 @@ async function fromAirtable(): Promise<Post[]> {
     }));
 }
 
-export async function getPosts(): Promise<Post[]> {
+export async function getPosts(): Promise<Post[]> { return scrub(await getPostsRaw()); }
+async function getPostsRaw(): Promise<Post[]> {
   if (!TOKEN) return samplePosts;
   try { const rows = await fromAirtable(); return rows.length ? rows.sort((a, b) => b.date.localeCompare(a.date)) : samplePosts; }
   catch (e) { console.error(e); return samplePosts; }

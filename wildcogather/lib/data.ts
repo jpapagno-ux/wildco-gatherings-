@@ -2,6 +2,7 @@ import { youtubeId } from "./video";
 import type { Residence, Img, Stamp, Video, Booking, RoomCategory } from "./types";
 import { sampleResidences } from "./sample-data";
 import { settingFrom } from "./settings";
+import { scrub } from "./scrub";
 
 // Pages refresh from Airtable at most once an hour (set per page with `export const revalidate`).
 const TOKEN = process.env.AIRTABLE_TOKEN;
@@ -139,7 +140,8 @@ async function fromAirtable(): Promise<Residence[]> {
     .sort((a, b) => a.entryNo.localeCompare(b.entryNo, undefined, { numeric: true }));
 }
 
-export async function getResidences(): Promise<Residence[]> {
+export async function getResidences(): Promise<Residence[]> { return scrub(await getResidencesRaw()); }
+async function getResidencesRaw(): Promise<Residence[]> {
   if (!TOKEN) return sampleResidences;
   try {
     const rows = await fromAirtable();

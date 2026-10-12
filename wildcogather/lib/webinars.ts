@@ -3,6 +3,7 @@
 // (Event markup for Google) · Recorded = YouTube link plays on the page · Hidden = off.
 import type { Img } from "./types";
 import { youtubeId } from "./video";
+import { scrub } from "./scrub";
 
 const TOKEN = process.env.AIRTABLE_TOKEN;
 const BASE = process.env.AIRTABLE_BASE_ID || "appnpcCxUZcapAgbo";
@@ -70,7 +71,8 @@ async function fromAirtable(): Promise<Webinar[]> {
     .sort((a, b) => (a.startsAt || "9999").localeCompare(b.startsAt || "9999"));
 }
 
-export async function getWebinars(): Promise<Webinar[]> {
+export async function getWebinars(): Promise<Webinar[]> { return scrub(await getWebinarsRaw()); }
+async function getWebinarsRaw(): Promise<Webinar[]> {
   if (!TOKEN) return sampleWebinars;
   try { const rows = await fromAirtable(); return rows.length ? rows : sampleWebinars; } catch (e) { console.error(e); return sampleWebinars; }
 }

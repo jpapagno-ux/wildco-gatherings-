@@ -209,3 +209,12 @@ Free tier: 50,000 web map loads a month (check mapbox.com/pricing for current te
 - James has met the team at every house and Horizon place; all content is approved. Houses that were "Under observation" now carry **Host met**; houses James has stayed at keep **Field verified**. Statuses are **Approved**.
 - **No outside sources or links to other travel companies on the site.** Horizon pages no longer show a Sources list, an "Official site" link or a "still confirming" box, and house/Horizon structured data no longer links to partner sites. Keep source notes in Airtable for our records only (Horizon › Sources and Residences › Official URL are not displayed).
 - Empty booking facts (check-in, deposit, cancellation, taxes) are hidden automatically; fill them in Airtable when the house sends them.
+
+## At the Table — dining & shared-table cards (added Oct 12, 2026)
+A stay's page can carry an **At the table** section: a question heading ("Where do families eat at …?"), a short answer, and one card per restaurant, dinner experience or family night. First stay: Lone Mountain Ranch (sleigh-ride dinner, Sunday BBQ, Horn & Cantle, day sleigh & lunch, ranch rodeo, Auric Room 1915).
+
+**Add cards for any stay (Airtable › At the Table)** — one row per card: Name, House slug (e.g. `lone-mountain-ranch`), Kind (Restaurant / Dinner experience / Family night / Lunch experience / Bar & lounge / Private dinner), Where, When, Who can come, Why it works for a gathering (30–50 words in James's voice — this is what AI answers quote), On the table (one dish per line), Booking, Order, Status (Live / Hidden). A stay with no rows shows no section. Never paste outside links or booking-platform names — booking goes through us.
+
+**Photos (Cloudinary)** — upload to `gatherings/<house-slug>/table/<card-slug>` (e.g. `gatherings/lone-mountain-ranch/table/sleigh-ride-dinner`), then put that ID in **Image (Cloudinary ID)** with alt text. Only upload photos we own or have permission to use. Cards are designed to stand on their own without a photo.
+
+**Search** — each card adds an amenity to the house's LodgingBusiness schema; restaurants and bars are also listed as places inside the house (Restaurant / BarOrPub), and "Where do families eat at …?" is added to the page's FAQ schema.

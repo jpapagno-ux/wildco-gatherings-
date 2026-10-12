@@ -4,6 +4,7 @@
 // When James visits and a place earns its entry, it moves to Residences and gets a G- number.
 // Airtable: table "Horizon" (Status: Draft preview / Live / Moved to Ledger / Paused).
 import { settingFrom, type SettingKey } from "@/lib/settings";
+import { scrub } from "./scrub";
 
 const TOKEN = process.env.AIRTABLE_TOKEN;
 const BASE = process.env.AIRTABLE_BASE_ID || "appnpcCxUZcapAgbo";
@@ -340,7 +341,8 @@ async function fromAirtable(): Promise<Horizon[]> {
     .sort((a, b) => a.no.localeCompare(b.no));
 }
 
-export async function getHorizon(): Promise<Horizon[]> {
+export async function getHorizon(): Promise<Horizon[]> { return scrub(await getHorizonRaw()); }
+async function getHorizonRaw(): Promise<Horizon[]> {
   if (!TOKEN) return sampleHorizon;
   try { const rows = await fromAirtable(); return rows.length ? rows : sampleHorizon; } catch (e) { console.error(e); return sampleHorizon; }
 }

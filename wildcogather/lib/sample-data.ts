@@ -22,11 +22,11 @@ const raw: SampleResidence[] = [
     firstVisited: undefined,
     returned: undefined,
     host: {
-      name: "",
-      title: "Lone Mountain Ranch",
+      name: "Jordann Cardinal",
+      title: "Host, Lone Mountain Ranch",
       metOn: "",
       how: "",
-      note: "James sat down with the host to talk through how the ranch looks after three generations at once — who plans the week, how the children's program runs, what happens when the weather turns. That conversation is how this house entered the Ledger.",
+      note: "James sat down with Jordann to talk through how the ranch looks after three generations at once — who plans the week, how the children's program runs, what happens when the weather turns. That conversation is how this house entered the Ledger.",
     },
     line: "A century-old ranch your family can take over entirely — horses at the door, rivers either side, Yellowstone a day away.",
     verdict: [

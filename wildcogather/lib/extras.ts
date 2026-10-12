@@ -1,3 +1,4 @@
+import { scrub } from "./scrub";
 // Offers ("Worth Another Night" — Time Rewarded) and short inbound itineraries (3–4 days).
 // Both live in Airtable (tables "Offers" and "Itineraries", linked to Residences) and fall back to
 // the samples below until AIRTABLE_TOKEN is set. Add a row in Airtable — no code needed.
@@ -283,8 +284,8 @@ async function itinerariesFromAirtable(): Promise<Itinerary[]> {
 }
 
 async function safe<T>(fn: () => Promise<T[]>, sample: T[]): Promise<T[]> {
-  if (!TOKEN) return sample;
-  try { const rows = await fn(); return rows.length ? rows : sample; } catch (e) { console.error(e); return sample; }
+  if (!TOKEN) return scrub(sample);
+  try { const rows = await fn(); return scrub(rows.length ? rows : sample); } catch (e) { console.error(e); return scrub(sample); }
 }
 
 const today = () => new Date().toISOString().slice(0, 10);

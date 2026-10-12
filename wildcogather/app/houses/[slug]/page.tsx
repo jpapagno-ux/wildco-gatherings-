@@ -14,6 +14,8 @@ import { getResidence, getResidences, dms } from "@/lib/data";
 import { getPostForHouse, quotesOf } from "@/lib/journal";
 import OfferCard from "@/components/OfferCard";
 import StayMap from "@/components/StayMap";
+import TableCards from "@/components/TableCards";
+import { getTable, tableAnswer } from "@/lib/table";
 import { getOffersForHouse, getItinerariesForHouse } from "@/lib/extras";
 
 export const revalidate = 3600;
@@ -46,6 +48,9 @@ export default async function House({ params }: { params: Promise<{ slug: string
   const post = await getPostForHouse(r.slug);
   const offer = (await getOffersForHouse(r.slug))[0];
   const trips = await getItinerariesForHouse(r.slug);
+  const table = await getTable(r.slug);
+  const tableQ = table.length ? { question: `Where do families eat at ${r.name}?`, answer: tableAnswer(r.name, r.slug, table) } : null;
+  const faqAll = tableQ && !r.faqs.some((f) => /eat|dining|dinner|restaurant/i.test(f.question)) ? [...r.faqs, tableQ] : r.faqs;
   const webinars = await getWebinarsForPartner(r.partner?.name);
   const toTime = (t?: string) => { const m = t?.match(/(\d{1,2})\s*(am|pm)/i); if (!m) return undefined; let h = Number(m[1]) % 12; if (m[2].toLowerCase() === "pm") h += 12; return `${String(h).padStart(2, "0")}:00`; };
   const bookingFacts: [string, string | undefined][] = b ? [
@@ -88,7 +93,8 @@ export default async function House({ params }: { params: Promise<{ slug: string
         address: r.address ? { "@type": "PostalAddress", streetAddress: r.address } : { "@type": "PostalAddress", addressLocality: r.place, addressRegion: r.region, addressCountry: r.country },
         ...(r.lat ? { geo: { "@type": "GeoCoordinates", latitude: r.lat, longitude: r.lng }, hasMap: `https://www.google.com/maps/search/?api=1&query=${r.lat},${r.lng}` } : {}),
         ...(r.sleeps ? { occupancy: { "@type": "QuantitativeValue", maxValue: r.sleeps } } : {}),
-        amenityFeature: [r.kidsProgram, r.water].filter(Boolean).map((v) => ({ "@type": "LocationFeatureSpecification", name: v, value: true })),
+        amenityFeature: [r.kidsProgram, r.water, ...table.map((t) => `${t.name} (${t.kind.toLowerCase()})`)].filter(Boolean).map((v) => ({ "@type": "LocationFeatureSpecification", name: v, value: true })),
+        ...(table.some((t) => t.kind === "Restaurant" || t.kind === "Bar & lounge") ? { containsPlace: table.filter((t) => t.kind === "Restaurant" || t.kind === "Bar & lounge").map((t) => ({ "@type": t.kind === "Restaurant" ? "Restaurant" : "BarOrPub", name: t.name, description: t.gathering })) } : {}),
         image: r.images.map((i) => ({ "@type": "ImageObject", contentUrl: `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5"}/image/upload/${i.publicId}`, caption: i.alt, creditText: r.credit || undefined })),
         priceRange: "$$$$",
         ...(toTime(b?.checkIn) ? { checkinTime: toTime(b?.checkIn) } : {}),
@@ -111,7 +117,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
         itemOffered: { "@type": "LodgingBusiness", name: r.name, url: `${SITE}/houses/${r.slug}` },
         offeredBy: { "@type": "TravelAgency", name: "Wild & Co Gatherings", url: SITE },
       }} />}
-      {r.faqs.length > 0 && <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: r.faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })) }} />}
+      {faqAll.length > 0 && <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqAll.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })) }} />}
 
       <section className="hero" aria-label={r.name}>
         <Photo img={hero} priority style={{ position: "absolute", inset: 0 }} />
@@ -362,6 +368,17 @@ export default async function House({ params }: { params: Promise<{ slug: string
               </article>
             ))}
           </Strip>
+        </section>
+      )}
+
+      {table.length > 0 && (
+        <section className="wrap tbl-section" aria-label={`Dining at ${r.name}`} id="at-the-table">
+          <p className="eb">At the table</p>
+          <hr className="eb-rule" />
+          <h2 className="dsp tbl-q">Where do families eat at {r.name}?</h2>
+          <p className="body tbl-answer">{tableAnswer(r.name, r.slug, table)}</p>
+          <TableCards cards={table} house={r.slug} ink={st.ink} />
+          <p className="cp muted" style={{ margin: "22px 0 0" }}>Every dinner and table here can be booked with your stay — tell us which ones the family wants and we will hold them.</p>
         </section>
       )}
 
