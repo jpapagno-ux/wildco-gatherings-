@@ -4,24 +4,34 @@ import { JwcoSeal } from "./Marks";
 export default function Footer() {
   return (
     <>
-      <section style={{ borderTop: "1px solid var(--sand)" }}>
-        <div className="wrap" style={{ paddingTop: 80, paddingBottom: 80, display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 40 }}>
-          <div className="footer-brand">
-            <JwcoSeal size={104} />
-            <p className="cas" style={{ margin: 0, textTransform: "uppercase", lineHeight: 1.5 }}>Gather with<br />James Wild &amp; Company</p>
+      <section className="navy" aria-label="Plan a Gathering">
+        <div className="wrap" style={{ paddingTop: 80, paddingBottom: 80, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 48 }}>
+          <JwcoSeal size={150} tone="light" rotate={-6} />
+          <div style={{ flex: "1 1 380px" }}>
+            <h2 className="dsp" style={{ margin: 0, fontSize: 42, color: "var(--on-dark)" }}>Plan a Gathering</h2>
+            <p className="it" style={{ margin: "12px 0 0", fontSize: 24, color: "var(--on-dark-accent)" }}>Every great family journey begins with a conversation.</p>
+            <p className="body" style={{ margin: "8px 0 0", fontSize: 15, color: "rgba(244,241,236,.75)" }}>A conversation, not a booking funnel. Personal reply from James.</p>
           </div>
-          <p className="cas" style={{ margin: 0, fontSize: 18, lineHeight: 1.6, maxWidth: 360 }}>Every gathering is personally planned. Personal reply, no automation.</p>
-          <Link href="/plan" className="btn">Plan a Gathering</Link>
+          <Link href="/plan" className="btn btn-light">Ask James</Link>
         </div>
       </section>
-      <footer style={{ borderTop: "1px solid var(--sand)" }}>
-        <div className="wrap" style={{ paddingTop: 26, paddingBottom: 30, display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 16 }}>
-          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 14, textDecoration: "none" }}>
-            <JwcoSeal size={64} />
-            <span className="cp" style={{ lineHeight: 1.6 }}>A house of<br />James Wild &amp; Co</span>
+      <footer style={{ borderTop: "1px solid var(--stone)" }}>
+        <div className="wrap" style={{ paddingTop: 34, paddingBottom: 38, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20, alignItems: "center" }}>
+          <nav aria-label="Footer" className="cp" style={{ display: "flex", flexWrap: "wrap", gap: "8px 20px" }}>
+            <Link href="/houses" style={{ textDecoration: "none" }}>The Houses</Link>
+            <Link href="/itineraries" style={{ textDecoration: "none" }}>Itineraries</Link>
+            <Link href="/horizon" style={{ textDecoration: "none" }}>On the Horizon</Link>
+            <Link href="/advisors" style={{ textDecoration: "none" }}>For Advisors</Link>
+            <Link href="/webinars" style={{ textDecoration: "none" }}>Webinars</Link>
+            <Link href="/ledger" style={{ textDecoration: "none" }}>The Ledger</Link>
+            <Link href="/vip" style={{ textDecoration: "none" }}>Gatherings VIP</Link>
+            <Link href="/journal" style={{ textDecoration: "none" }}>The Journal</Link>
+          </nav>
+          <Link href="/" aria-label="James Wild & Co — home" style={{ justifySelf: "center", textAlign: "center", textDecoration: "none" }}>
+            <JwcoSeal size={84} />
+            <span className="cp" style={{ display: "block", marginTop: 8, fontSize: 10 }}>A house of James Wild &amp; Co.</span>
           </Link>
-          <p className="cp" style={{ margin: 0 }}>Linger for the wandering mind.</p>
-          <p className="cp" style={{ margin: 0 }}>JW&amp;Co. Gatherings Ledger No. 1982-G</p>
+          <p className="cp" style={{ margin: 0, textAlign: "right" }}>JW&amp;Co. Ledger No. 1982 · Still going since 1982</p>
         </div>
       </footer>
     </>

@@ -1,57 +1,50 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import DestinationExplorer from "@/components/DestinationExplorer";
+import JsonLd from "@/components/JsonLd";
 import { getResidences } from "@/lib/data";
+import { REGIONS, regionFor, regionMeta } from "@/lib/regions";
 
-const regionMeta: Record<string, { label: string; intro: string; description: string }> = {
-  "usa-mexico": { label: "USA & Mexico", intro: "Big sky, desert light, mountain air and warm-water escapes for large family groups.", description: "A blend of western ranches, desert hideaways and coastal stays for long gatherings across generations." },
-  caribbean: { label: "Caribbean", intro: "Soft shorelines, reef blues and private island ease for beach-centric chapters.", description: "Island homes, beachfront villas and private hideaways for relaxed family weeks by the sea." },
-  "latin-america": { label: "Latin America", intro: "Cloud forests, coastlines and mountain homes shaped for slow and generous travel.", description: "A mix of cultural stays and oceanfront homes designed for beautifully paced family weeks." },
-  europe: { label: "Europe", intro: "Historic homes, alpine stillness and warm coastal classics for elegant family reunion travel.", description: "Timeless houses in coastal, alpine and countryside settings for unforgettable gatherings." },
-  asia: { label: "Asia", intro: "Rice terraces, jungle views and glowing water villas shaped for immersive family escapes.", description: "Wellness-forward, nature-rich residences for families seeking cultural depth and quiet luxury." },
-  oceania: { label: "Oceania", intro: "Wide horizons, remote beaches and landscape-led stays shaped for long, spacious family chapters.", description: "Beachfront, vineyard and bush-country residences that feel as expansive as the view." },
-};
+export const revalidate = 3600;
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
-function regionForResidence(property: { place: string; region: string; country: string }) {
-  const value = `${property.region} ${property.country}`.toLowerCase();
-  if (value.includes("montana") || value.includes("mexico") || value.includes("california") || value.includes("arizona")) return "usa-mexico";
-  if (value.includes("turks") || value.includes("caicos") || value.includes("bahamas") || value.includes("caribbean")) return "caribbean";
-  if (value.includes("bali") || value.includes("indonesia") || value.includes("thailand") || value.includes("japan") || value.includes("vietnam") || value.includes("asia")) return "asia";
-  if (value.includes("australia") || value.includes("new zealand") || value.includes("fiji") || value.includes("oceania")) return "oceania";
-  if (value.includes("france") || value.includes("italy") || value.includes("spain") || value.includes("greece") || value.includes("portugal") || value.includes("croatia") || value.includes("europe")) return "europe";
-  if (value.includes("mexico") || value.includes("brazil") || value.includes("argentina") || value.includes("chile") || value.includes("peru") || value.includes("colombia") || value.includes("latin")) return "latin-america";
-  return "usa-mexico";
+export function generateStaticParams() { return REGIONS.map((r) => ({ region: r.key })); }
+
+export async function generateMetadata({ params }: { params: Promise<{ region: string }> }): Promise<Metadata> {
+  const m = regionMeta((await params).region);
+  if (!m) return {};
+  return { title: `Family Villas & Generational Residences in ${m.label} | Wild & Co Gatherings`, description: `${m.description} Vetted by James Wild for multigenerational families and family reunions.`.slice(0, 158), alternates: { canonical: `/destinations/${m.key}` } };
 }
 
-export function generateStaticParams() {
-  return Object.keys(regionMeta).map((region) => ({ region }));
-}
-
-export default async function DestinationPage({ params }: { params: Promise<{ region: string }> }) {
-  const region = (await params).region;
-  const residences = (await getResidences()).filter((property) => regionForResidence(property) === region);
-  const meta = regionMeta[region] ?? { label: region.replace(/-/g, " "), intro: "A restful collection of homes for memorable family gatherings.", description: "A curated selection of family-friendly stays chosen for their scale, ease and sense of place." };
-
+export default async function Destination({ params }: { params: Promise<{ region: string }> }) {
+  const key = (await params).region;
+  const m = regionMeta(key);
+  if (!m) notFound();
+  const houses = (await getResidences()).filter((h) => regionFor(h) === key);
   return (
     <>
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: `${m.label} — Wild & Co Gatherings`, url: `${SITE}/destinations/${key}`, description: m.description, mainEntity: { "@type": "ItemList", itemListElement: houses.map((h, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/houses/${h.slug}`, name: h.name })) } }} />
       <section className="wrap region-page-hero">
         <div>
-          <p className="cp ox region-tag"><span aria-hidden="true">✳</span> The collection · {String(residences.length).padStart(2, "0")} stays</p>
-          <h1 className="disp page-heading">{meta.label}</h1>
-          <p className="cas editorial-lead region-intro">{meta.intro}</p>
-          <p className="body region-description">{meta.description}</p>
-          <Link href="/plan" className="btn region-enquiry">Plan a gathering in {meta.label}</Link>
+          <nav aria-label="Breadcrumb" className="cp muted" style={{ fontSize: 11, marginBottom: 22 }}><Link href="/houses" style={{ textDecoration: "none" }}>Stays</Link> / {m.label}</nav>
+          <p className="eb">Region · {houses.length} {houses.length === 1 ? "house" : "houses"}</p>
+          <hr className="eb-rule" />
+          <h1 className="dsp page-heading">{m.label}</h1>
+          <p className="it region-intro">{m.intro}</p>
+          <p className="body region-description">{m.description}</p>
+          <Link href="/plan" className="btn region-enquiry">Plan a gathering in {m.label}</Link>
         </div>
       </section>
-
       <section className="wrap region-page-content">
-        {residences.length ? (
-          <DestinationExplorer residences={residences} />
+        {houses.length ? (
+          <DestinationExplorer residences={houses} />
         ) : (
-          <div className="region-empty">
-            <p className="cp ox" style={{ margin: "0 0 10px" }}>Coming soon</p>
-            <h2 className="cas section-heading" style={{ margin: "0 0 12px" }}>This region is being curated.</h2>
-            <p className="body" style={{ margin: "0 0 18px" }}>We’re preparing a new set of homes for this destination with family-friendly stays, private villas and the right pacing for a gathering.</p>
-            <Link href="/plan" className="btn">Enquire about this region</Link>
+          <div className="card" style={{ padding: "40px 36px", maxWidth: 720 }}>
+            <p className="eb">Being curated</p>
+            <h2 className="dsp" style={{ margin: "14px 0 12px", fontSize: 36 }}>This region is on James's list</h2>
+            <p className="body" style={{ margin: "0 0 22px" }}>We're vetting family houses here now. Tell us who's coming and we'll plan around the right one.</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 18, alignItems: "center" }}><Link href="/plan" className="btn">Plan a gathering here</Link><Link href="/horizon" className="lnk">On the Horizon <span>→</span></Link></div>
           </div>
         )}
       </section>

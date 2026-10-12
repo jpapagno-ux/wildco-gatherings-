@@ -1,3 +1,5 @@
+import type { SettingKey } from "./settings";
+
 export type Status = "Prospect" | "Vetting" | "Approved" | "Live" | "Paused";
 // Under observation = on the list · Host met = J.W. vetted it in conversation with the host
 // Field verified = J.W. toured and stayed · Gathering verified = visited and passes all six tests
@@ -72,9 +74,16 @@ export type Residence = {
   lng?: number;
   status: Status;
   stamp: Stamp;
+  // Natural setting: picks the ink for the luggage tag, VIP stamp and VIP card, and groups the house on /houses.
+  setting: SettingKey;
+  // "Notes for the family" icon row. Empty values are simply not shown.
+  notes?: { bestSeason?: string; power?: string; timeZone?: string };
+  // Featured on the home page (Airtable "Featured on home"), with its journal story / film.
+  featured?: boolean;
   firstVisited?: string;
   returned?: string;
   host?: Host;
+  partner?: { name: string; logo?: Img; url?: string };
   line: string;
   verdict: string[];
   bestFor?: string;
@@ -122,6 +131,9 @@ export type Post = {
   date: string; // YYYY-MM-DD
   readMinutes: number;
   hero?: Img;
+  // Featured film (e.g. a Wild Together episode). YouTube ID in Airtable "YouTube ID"; empty = a "film to come" slot on drafts.
+  video?: Video;
+  videoPlanned?: string;
   body: string;
   draft?: boolean;
   seoTitle: string;
