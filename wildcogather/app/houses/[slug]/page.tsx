@@ -13,6 +13,9 @@ import { embedUrl, thumbUrl } from "@/lib/video";
 import { getResidence, getResidences, dms } from "@/lib/data";
 import { getPostForHouse, quotesOf } from "@/lib/journal";
 import OfferCard from "@/components/OfferCard";
+import StayCard from "@/components/StayCard";
+import { relatedStays } from "@/lib/browse";
+import { regionFor, regionMeta } from "@/lib/regions";
 import { getOffersForHouse, getItinerariesForHouse } from "@/lib/extras";
 
 export const revalidate = 3600;
@@ -37,6 +40,8 @@ export default async function House({ params }: { params: Promise<{ slug: string
   const r = await getResidence((await params).slug);
   if (!r) notFound();
   const hero = r.images.find((i) => i.role === "Hero") || r.images[0];
+  const region = regionMeta(regionFor(r))!;
+  const moreStays = relatedStays(await getResidences(), r);
   const coords = dms(r.lat, r.lng);
   const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
   const b = r.booking;
@@ -412,6 +417,13 @@ export default async function House({ params }: { params: Promise<{ slug: string
               </div>
             ))}
           </div>
+        </section>
+      )}
+      {moreStays.length > 0 && (
+        <section aria-label="More stays" className="band" style={{ padding: "90px 0 50px", marginBottom: 40 }}>
+          <Strip label={`More stays · ${region.label}`} title="Keep exploring" action={<Link href={`/destinations/${region.key}`} className="lnk">All of {region.label} <span>→</span></Link>}>
+            {moreStays.map((h) => <div key={h.slug} className="strip-card"><StayCard r={h} sizes="340px" /></div>)}
+          </Strip>
         </section>
       )}
       <div className="wrap" style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12, paddingBottom: 30 }}>
