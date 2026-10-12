@@ -12,7 +12,7 @@ A house of James Wild & Co. Next.js site, deployed on Vercel from GitHub. Conten
 - `/vip/[collection]` a VIP collection hub, e.g. `/vip/ted-turner-reserves` — every stay, why it's on James's list, the wildlife it protects, his visit route
 - `/journal` and `/journal/[slug]` The Journal — James's "Why it's in the Ledger" entries, with his quotes
 - `/plan` Plan a Gathering — form that saves to the Airtable `Inquiries` table
-- `/destinations/[region]` Stays by region (USA & Mexico, Caribbean, Latin America, Europe, Africa, Asia & Indian Ocean, Oceania) — intro, map, scrollable rail of houses. Also in the "Stays" menu.
+- `/destinations/[region]` Stays by region (USA & Mexico, Caribbean, Latin America, Europe, Africa, Asia & Indian Ocean, Oceania) — intro, scroll-synced interactive map and residence cards. Also in the "Stays" menu.
 - `/horizon` and `/horizon/[slug]` On the Horizon — new places, not yet vetted
 - `/advisors` For travel advisors — why James Wild & Co, what we're building for agents who care, how we plan family & friend gatherings, FAQ, application form
 - `/webinars` and `/webinars/[slug]` Webinars on Livestorm — first one: Ted Turner Reserves with host Harry Tyner
@@ -20,6 +20,8 @@ A house of James Wild & Co. Next.js site, deployed on Vercel from GitHub. Conten
 
 ## Stamps (status ladder)
 Under observation → Host met → Field verified → Gathering verified → Founder favorite
+
+Destination maps use OpenStreetMap tiles and the latitude / longitude values in the residence data. No map API key is required; an internet connection is needed to load map tiles. Map locations are approximate.
 
 ## Run it the first time
 1. Install Node 20+.

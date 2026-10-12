@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { REGIONS } from "@/lib/regions";
 
@@ -17,7 +17,11 @@ const NAV: [string, string][] = [
 
 export default function Header() {
   const [compact, setCompact] = useState(false);
+  const [staysOpen, setStaysOpen] = useState(false);
+  const staysRef = useRef<HTMLSpanElement>(null);
+  const staysButtonRef = useRef<HTMLButtonElement>(null);
   const path = usePathname() || "/";
+
   useEffect(() => {
     const on = () => setCompact(window.scrollY > 150 && window.innerWidth >= 768);
     on();
@@ -25,6 +29,22 @@ export default function Header() {
     window.addEventListener("resize", on);
     return () => { window.removeEventListener("scroll", on); window.removeEventListener("resize", on); };
   }, []);
+
+  useEffect(() => {
+    function closeOnOutsideClick(event: PointerEvent) {
+      if (event.target instanceof Node && !staysRef.current?.contains(event.target)) {
+        setStaysOpen(false);
+      }
+    }
+
+    document.addEventListener("pointerdown", closeOnOutsideClick);
+    return () => document.removeEventListener("pointerdown", closeOnOutsideClick);
+  }, []);
+
+  useEffect(() => {
+    setStaysOpen(false);
+  }, [path]);
+
   return (
     <header className={`site-header${compact ? " compact" : ""}`}>
       <div className="wrap bar">
@@ -39,16 +59,39 @@ export default function Header() {
       </div>
       <nav aria-label="Main" className="site-nav">
         {NAV.map(([href, label]) => {
-          const current = path === href || (href !== "/" && path.startsWith(href)) || (href === "/houses" && path.startsWith("/destinations")) ? "page" : undefined;
+          const current = path === href || (href !== "/" && path.startsWith(href)) || (href === "/houses" && path.startsWith("/destinations"));
           return href === "/houses" ? (
-            <span key={href} className="nav-drop">
-              <Link href={href} aria-current={current} aria-haspopup="true">{label}</Link>
-              <span className="nav-drop-menu" role="menu">
-                <Link href="/houses" role="menuitem">All houses</Link>
-                {REGIONS.map((r) => <Link key={r.key} href={`/destinations/${r.key}`} role="menuitem">{r.label}</Link>)}
+            <span
+              key={href}
+              className="nav-dropdown"
+              ref={staysRef}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setStaysOpen(false);
+              }}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") {
+                  setStaysOpen(false);
+                  staysButtonRef.current?.focus();
+                }
+              }}
+            >
+              <button
+                ref={staysButtonRef}
+                type="button"
+                aria-expanded={staysOpen}
+                aria-controls="stays-menu"
+                data-current={current}
+                className="nav-dropdown-trigger cp"
+                onClick={() => setStaysOpen((open) => !open)}
+              >
+                {label}
+              </button>
+              <span id="stays-menu" className="nav-dropdown-menu" data-open={staysOpen}>
+                <Link href="/houses" aria-current={path === "/houses" ? "page" : undefined}>All houses</Link>
+                {REGIONS.map((r) => <Link key={r.key} href={`/destinations/${r.key}`} aria-current={path === `/destinations/${r.key}` ? "page" : undefined}>{r.label}</Link>)}
               </span>
             </span>
-          ) : <Link key={href} href={href} aria-current={current}>{label}</Link>;
+          ) : <Link key={href} href={href} aria-current={current ? "page" : undefined}>{label}</Link>;
         })}
       </nav>
     </header>

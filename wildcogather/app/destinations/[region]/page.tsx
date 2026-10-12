@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import DestinationExplorer from "@/components/DestinationExplorer";
 import JsonLd from "@/components/JsonLd";
-import MapEmbed from "@/components/MapEmbed";
-import Photo from "@/components/Photo";
 import { getResidences } from "@/lib/data";
 import { REGIONS, regionFor, regionMeta } from "@/lib/regions";
-import { SETTINGS } from "@/lib/settings";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -27,33 +25,20 @@ export default async function Destination({ params }: { params: Promise<{ region
   return (
     <>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: `${m.label} — Wild & Co Gatherings`, url: `${SITE}/destinations/${key}`, description: m.description, mainEntity: { "@type": "ItemList", itemListElement: houses.map((h, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/houses/${h.slug}`, name: h.name })) } }} />
-      <section className="wrap" style={{ paddingTop: 80, paddingBottom: 60, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 420px), 1fr))", gap: 50, alignItems: "center" }}>
+      <section className="wrap region-page-hero">
         <div>
           <nav aria-label="Breadcrumb" className="cp muted" style={{ fontSize: 11, marginBottom: 22 }}><Link href="/houses" style={{ textDecoration: "none" }}>Stays</Link> / {m.label}</nav>
           <p className="eb">Region · {houses.length} {houses.length === 1 ? "house" : "houses"}</p>
           <hr className="eb-rule" />
-          <h1 className="dsp" style={{ margin: "24px 0 0", fontSize: "clamp(44px, 5.6vw, 76px)" }}>{m.label}</h1>
-          <p className="it" style={{ margin: "18px 0 0", fontSize: 25, lineHeight: 1.35 }}>{m.intro}</p>
-          <p className="body" style={{ margin: "16px 0 0" }}>{m.description}</p>
+          <h1 className="dsp page-heading">{m.label}</h1>
+          <p className="it region-intro">{m.intro}</p>
+          <p className="body region-description">{m.description}</p>
+          <Link href="/plan" className="btn region-enquiry">Plan a gathering in {m.label}</Link>
         </div>
-        <MapEmbed items={houses.map((h) => ({ name: h.name, lat: h.lat, lng: h.lng }))} label={`Map of ${m.label} houses`} height={420} />
       </section>
-      <section className="wrap" style={{ paddingBottom: 100 }}>
+      <section className="wrap region-page-content">
         {houses.length ? (
-          <div className="stay-rail" role="list" aria-label={`${m.label} houses`}>
-            {houses.map((h) => {
-              const img = h.images.find((i) => i.role === "Hero") || h.images[0];
-              return (
-                <Link key={h.slug} href={`/houses/${h.slug}`} className="house-card" role="listitem">
-                  <Photo img={img} sizes="380px" aspect="5:4" style={{ height: 300 }} />
-                  <p className="cp muted" style={{ margin: "18px 0 0" }}>{h.place} · {h.country} · Entry {h.entryNo}</p>
-                  <h2 className="ser" style={{ margin: "8px 0 0", fontSize: 26, fontWeight: 500 }}>{h.name}</h2>
-                  <hr style={{ width: 30, height: 1, border: 0, background: SETTINGS[h.setting].ink, margin: "12px auto" }} />
-                  <p className="body" style={{ margin: 0, fontSize: 15 }}>{h.line}</p>
-                </Link>
-              );
-            })}
-          </div>
+          <DestinationExplorer residences={houses} />
         ) : (
           <div className="card" style={{ padding: "40px 36px", maxWidth: 720 }}>
             <p className="eb">Being curated</p>

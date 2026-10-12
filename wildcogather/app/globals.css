@@ -68,13 +68,23 @@ img { max-width: 100%; display: block; }
 .site-header.compact .seal { width: 40px !important; height: 40px !important; }
 .site-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 38px; padding-bottom: 14px; }
 .site-header.compact .site-nav { padding-bottom: 8px; }
-.site-nav a { white-space: nowrap; text-decoration: none; font-family: var(--f-sans), sans-serif; font-weight: 400; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; }
-.site-nav a[aria-current="page"] { color: var(--rust); }
+.site-nav a, .site-nav button { white-space: nowrap; text-decoration: none; font-family: var(--f-sans), sans-serif; font-weight: 400; font-size: 11px; letter-spacing: .22em; text-transform: uppercase; }
+.site-nav a[aria-current="page"], .site-nav button[data-current="true"] { color: var(--rust); }
+.nav-dropdown { position: relative; display: inline-flex; }
+.nav-dropdown-trigger { border: 0; padding: 0; background: transparent; color: inherit; cursor: pointer; }
+.nav-dropdown-menu {
+  position: absolute; top: calc(100% + 10px); left: 50%; z-index: 60; transform: translate(-50%, -5px); min-width: min(24rem, 88vw); padding: 10px; display: grid; grid-template-columns: repeat(2, minmax(130px, 1fr)); gap: 4px; background: var(--card); border: 1px solid var(--stone); box-shadow: 0 18px 40px rgba(43, 43, 43, .14); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s ease, visibility .2s ease, transform .2s ease;
+}
+.nav-dropdown-menu[data-open="true"] { transform: translate(-50%, 0); opacity: 1; visibility: visible; pointer-events: auto; }
+.nav-dropdown-menu a { display: block; padding: 10px; font-size: 10px; letter-spacing: .12em; }
+.nav-dropdown-menu a:hover, .nav-dropdown-menu a[aria-current="page"] { background: var(--paper-2); color: var(--rust); }
 @media (max-width: 760px) {
   .site-header .bar { grid-template-columns: auto 1fr; gap: 14px; }
   .site-header .bar .plan-link { display: none; }
   .site-header .wordmark { font-size: 15px; letter-spacing: .22em; }
-  .site-nav { gap: 6px 18px; justify-content: flex-start; padding: 0 20px 12px; overflow-x: auto; flex-wrap: nowrap; }
+  .site-nav { gap: 6px 18px; justify-content: flex-start; padding: 0 20px 12px; overflow: visible; flex-wrap: wrap; }
+  .nav-dropdown-menu { top: calc(100% + 6px); min-width: min(21rem, calc(100vw - 2rem)); }
+  .nav-dropdown-menu a { padding: 8px 6px; font-size: 9px; }
 }
 
 /* ---- Hero with ledger column ---- */
@@ -139,12 +149,100 @@ a.ledger-row:hover { background: var(--paper-2); }
 .house-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 34px; }
 .house-card { text-decoration: none; display: block; text-align: center; }
 .house-card:hover h3 { color: var(--rust); }
+.region-page-hero {
+  display: grid; grid-template-columns: minmax(0, 820px); gap: 1.25rem; align-items: start; padding-top: clamp(3.5rem, 8vw, 7rem); padding-bottom: 2.5rem;
+}
+.region-page-hero .page-heading { margin: .65rem 0 1rem; font-size: clamp(3rem, 7vw, 6rem); line-height: 1.04; }
+.region-intro { margin: 0 0 1rem; font-style: italic; font-size: clamp(1.5rem, 1.1rem + 1vw, 2.1rem); }
+.region-description { margin: 0; max-width: 58ch; }
+.region-enquiry { margin-top: 1.6rem; }
+.region-page-content { padding: 1.25rem 0 6rem; }
+.region-tag {
+  display: inline-flex; align-items: center; gap: .6rem; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; font-family: var(--f-mono), monospace; color: var(--oxblood);
+}
+.destination-explorer {
+  display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(2rem, 5vw, 5rem); align-items: start;
+}
+.destination-map-column { position: sticky; top: 7rem; min-width: 0; }
+.destination-map-heading { margin: 0 0 1rem; }
+.destination-map-heading p { margin: 0; }
+.destination-map-heading .cas { margin-top: .35rem; font-size: 20px; }
+.interactive-map, .destination-map-loading, .destination-map-unavailable {
+  height: clamp(24rem, 65vh, 46rem); min-height: 340px; overflow: hidden; border: 1px solid var(--sand); background: var(--paper-2);
+}
+.interactive-map .leaflet-container { width: 100%; height: 100%; background: #e6e0d3; font-family: var(--f-sans), sans-serif; }
+.destination-map-loading, .destination-map-unavailable { display: grid; place-items: center; padding: 2rem; text-align: center; color: var(--clay-text); }
+.destination-map-note { margin: .75rem 0 0; color: var(--clay-text); font-size: 12px; }
+.destination-list { display: grid; gap: 1.25rem; }
+.destination-card {
+  display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); min-height: 270px; background: var(--card); border: 1px solid var(--stone); transition: border-color .2s ease, box-shadow .2s ease;
+}
+.destination-card[data-active="true"] { border-color: var(--oxblood); box-shadow: 0 12px 32px rgba(43, 43, 43, .1); }
+.destination-card-image { position: relative; min-height: 100%; overflow: hidden; background: var(--paper-2); color: var(--clay-text); }
+.destination-card-image img { width: 100%; height: 100%; min-height: 270px; object-fit: cover; transition: transform .5s ease; }
+.destination-card-image:hover img { transform: scale(1.035); }
+.destination-card-image > .cp { display: grid; height: 100%; place-items: center; padding: 1rem; }
+.destination-card-number { position: absolute; top: .8rem; left: .8rem; padding: .35rem .5rem; background: var(--paper); color: var(--oxblood); }
+.destination-card-copy { display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: clamp(1rem, 2vw, 2rem); }
+.destination-card-location { margin: 0 0 .8rem; font-size: .68rem; }
+.destination-card-copy h2 { margin: 0; font-size: clamp(1.5rem, 1.3rem + .65vw, 2rem); line-height: 1.2; }
+.destination-card-copy h2 a { text-decoration: none; }
+.destination-card-line { margin: .8rem 0 1.25rem; color: var(--body); font-size: .94rem; line-height: 1.55; }
+.destination-card-footer { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .75rem; border-top: 1px solid var(--stone); padding-top: .85rem; }
+.destination-card-footer > .cp { font-size: .66rem; }
+.destination-locate { border: 0; padding: .25rem 0; background: transparent; color: var(--oxblood); cursor: pointer; }
+.destination-locate:hover { text-decoration: underline; text-underline-offset: .25rem; }
+.leaflet-popup-content-wrapper { border: 1px solid var(--sand); border-radius: 0; background: var(--card); color: var(--charcoal); box-shadow: 0 12px 30px rgba(43, 43, 43, .14); }
+.leaflet-popup-content { margin: 1rem 1.15rem; font-size: .85rem; line-height: 1.5; }
+.leaflet-popup-content p { margin: .35rem 0; }
+.leaflet-popup-content h2 { margin: .45rem 0; font-size: 1.25rem; }
+.leaflet-popup-content a { color: var(--oxblood); }
+.stay-marker { border: 0; background: transparent; }
+.stay-marker-dot { display: block; width: 18px; height: 18px; margin: 5px; border: 3px solid var(--paper); border-radius: 50%; background: var(--oxblood); box-shadow: 0 2px 9px rgba(43, 43, 43, .45); }
+.stay-marker.is-active .stay-marker-dot { width: 22px; height: 22px; margin: 3px; background: #a03b2a; }
+.leaflet-marker-icon:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 3px; }
+.leaflet-control-zoom a { color: var(--charcoal) !important; }
+.leaflet-control-attribution { font-size: 9px !important; }
+.region-empty { max-width: 760px; margin: 1rem auto 5rem; }
+.region-empty .body { margin-left: auto !important; margin-right: auto !important; }
+.region-empty {
+  padding: 2.8rem; background: var(--card); border: 1px solid var(--sand); text-align: center;
+}
+
+@media (max-width: 900px) {
+  .nav-dropdown-menu { left: 50%; transform: translate(-50%, -.35rem); }
+  .nav-dropdown-menu[data-open="true"] { transform: translate(-50%, 0); }
+  .region-page-hero { grid-template-columns: 1fr; }
+  .destination-explorer { grid-template-columns: minmax(0, 1fr); gap: 2.25rem; }
+  .destination-map-column { position: relative; top: auto; }
+  .interactive-map, .destination-map-loading, .destination-map-unavailable { height: min(60vh, 32rem); min-height: 320px; }
+  .destination-card { min-height: 250px; }
+}
+
+@media (max-width: 700px) {
+  .nav-dropdown-menu { top: calc(100% + .55rem); min-width: min(21rem, calc(100vw - 2rem)); padding: .65rem; }
+  .nav-dropdown-menu a { padding: .65rem .55rem; font-size: .66rem; }
+  .region-page-hero { padding-top: 3.25rem; padding-bottom: 1.5rem; }
+  .region-page-hero .page-heading { font-size: clamp(2.75rem, 12vw, 4.2rem); }
+  .region-page-content { padding-top: .5rem; }
+  .destination-card { grid-template-columns: minmax(0, 1fr); }
+  .destination-card-image img, .destination-card-image { height: auto; min-height: 0; aspect-ratio: 1.45; }
+  .destination-card-copy { padding: 1.15rem; }
+  .destination-map-column { margin-inline: -20px; }
+  .destination-map-heading, .destination-map-note { margin-inline: 20px; }
+  .destination-map-heading { margin-bottom: .8rem; }
+  .interactive-map, .destination-map-loading, .destination-map-unavailable { height: 58vh; min-height: 300px; max-height: 420px; border-inline: 0; }
+  .destination-map-note { margin-top: .6rem; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .fade { opacity: 1; transition: none; }
   .stamp.in { animation: none; }
   .site-header, .site-header .wordmark, .site-header .bar { transition: none; }
   .strip { scroll-behavior: auto; }
+  .btn { transition: none; }
+  .nav-dropdown-menu { transition: none; }
+  .destination-card, .destination-card-image img { transition: none; }
 }
 
 /* ---- Worth Another Night ticket ---- */
