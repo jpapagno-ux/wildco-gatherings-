@@ -86,7 +86,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
       <JsonLd data={{
         "@context": "https://schema.org", "@type": "LodgingBusiness", name: r.name, description: r.line,
         address: r.address ? { "@type": "PostalAddress", streetAddress: r.address } : { "@type": "PostalAddress", addressLocality: r.place, addressRegion: r.region, addressCountry: r.country },
-        ...(r.lat ? { geo: { "@type": "GeoCoordinates", latitude: r.lat, longitude: r.lng } } : {}),
+        ...(r.lat ? { geo: { "@type": "GeoCoordinates", latitude: r.lat, longitude: r.lng }, hasMap: `https://www.google.com/maps/search/?api=1&query=${r.lat},${r.lng}` } : {}),
         ...(r.sleeps ? { occupancy: { "@type": "QuantitativeValue", maxValue: r.sleeps } } : {}),
         amenityFeature: [r.kidsProgram, r.water].filter(Boolean).map((v) => ({ "@type": "LocationFeatureSpecification", name: v, value: true })),
         image: r.images.map((i) => ({ "@type": "ImageObject", contentUrl: `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5"}/image/upload/${i.publicId}`, caption: i.alt, creditText: r.credit || undefined })),
