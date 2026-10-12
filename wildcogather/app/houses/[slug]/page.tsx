@@ -90,7 +90,6 @@ export default async function House({ params }: { params: Promise<{ slug: string
         ...(r.sleeps ? { occupancy: { "@type": "QuantitativeValue", maxValue: r.sleeps } } : {}),
         amenityFeature: [r.kidsProgram, r.water].filter(Boolean).map((v) => ({ "@type": "LocationFeatureSpecification", name: v, value: true })),
         image: r.images.map((i) => ({ "@type": "ImageObject", contentUrl: `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5"}/image/upload/${i.publicId}`, caption: i.alt, creditText: r.credit || undefined })),
-        sameAs: r.officialUrl,
         priceRange: "$$$$",
         ...(toTime(b?.checkIn) ? { checkinTime: toTime(b?.checkIn) } : {}),
         ...(toTime(b?.checkOut) ? { checkoutTime: toTime(b?.checkOut) } : {}),
@@ -143,7 +142,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
           <hr className="eb-rule" />
           <h2 className="dsp" style={{ margin: "30px 0 0", fontSize: "clamp(40px, 4.6vw, 60px)" }}>Why it earned its place</h2>
           <p className="it" style={{ margin: "24px 0 0", fontSize: 28, lineHeight: 1.3 }}>{r.line}</p>
-          {r.verdict.map((v, i) => <p key={i} className="body" style={{ margin: "22px 0 0", maxWidth: 560 }}>{v}</p>)}
+          {r.verdict.filter(Boolean).map((v, i) => <p key={i} className="body" style={{ margin: "22px 0 0", maxWidth: 560 }}>{v}</p>)}
           <hr className="rule" style={{ width: 56, margin: "34px 0 22px" }} />
           <p className="eb" style={{ fontSize: 12 }}>From the personal ledger of James Wild &amp; Co.</p>
           <p className="lab" style={{ margin: "8px 0 0", color: "var(--body)" }}>Still going since 1982.</p>
@@ -237,7 +236,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
               <p className="ser ox" style={{ margin: "6px 0 0", fontSize: 60, fontWeight: 300, lineHeight: 1 }}>{r.rateFrom ? `$${r.rateFrom.toLocaleString()}` : "On request"}</p>
               {b.rateBasis && <p className="body" style={{ margin: "10px 0 24px", fontSize: 15 }}>{b.rateBasis}</p>}
               <dl style={{ margin: 0, borderTop: "1px solid var(--charcoal)" }}>
-                {b.fees.map((f) => <div key={f.label} className="mf"><dt className="cp muted">{f.label}</dt><dd className="mono" style={{ margin: 0, fontSize: 12 }}>{f.value}</dd></div>)}
+                {b.fees.filter((f) => f.value).map((f) => <div key={f.label} className="mf"><dt className="cp muted">{f.label}</dt><dd className="mono" style={{ margin: 0, fontSize: 12 }}>{f.value}</dd></div>)}
               </dl>
               <div style={{ marginTop: "auto", paddingTop: 24 }}><Link href={`/plan?house=${r.slug}`} className="btn" style={{ width: "100%" }}>Request a quote</Link></div>
             </div>
@@ -245,11 +244,11 @@ export default async function House({ params }: { params: Promise<{ slug: string
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))", gap: 28, marginTop: 28 }}>
             <div style={{ padding: "30px 0", borderTop: "1px solid var(--charcoal)" }}>
               <h3 className="lbl ox">✓ Included</h3>
-              <ul className="body" style={{ margin: 0, paddingLeft: 18, fontSize: 16 }}>{b.included.map((x) => <li key={x}>{x}</li>)}</ul>
+              <ul className="body" style={{ margin: 0, paddingLeft: 18, fontSize: 16 }}>{b.included.filter(Boolean).map((x) => <li key={x}>{x}</li>)}</ul>
             </div>
             <div style={{ padding: "30px 0", borderTop: "1px solid var(--charcoal)" }}>
               <h3 className="lbl">✕ Not included</h3>
-              <ul className="body" style={{ margin: 0, paddingLeft: 18, fontSize: 16 }}>{b.excluded.map((x) => <li key={x}>{x}</li>)}</ul>
+              <ul className="body" style={{ margin: 0, paddingLeft: 18, fontSize: 16 }}>{b.excluded.filter(Boolean).map((x) => <li key={x}>{x}</li>)}</ul>
             </div>
           </div>
         </section>
@@ -286,7 +285,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
         </section>
       )}
 
-      {r.host && (
+      {r.host?.name && (
         <section className="wrap" style={{ paddingTop: 90 }}>
           <div className="card" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 48, padding: 40 }}>
             <div style={{ position: "relative", flex: "none" }}>

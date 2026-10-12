@@ -262,15 +262,15 @@ export function OfferStamp({ stay = 3, pay = 2, size = 170, rotate = -9, tone = 
   );
 }
 
-// ── 7. "On the Horizon" stamp — new places on J.W.'s list, NOT yet vetted ─────
+// ── 7. "On the Horizon" stamp — new places J.W. has approved ─────
 // Rectangular (the Ledger stamps are round), in the setting's ink. Never use it on a Ledger house.
 export function HorizonStamp({ setting, no, opens, size = 230, rotate = -5, tone = "ink" }: { setting: SettingKey; no: string; opens: string; size?: number; rotate?: number; tone?: Tone }) {
   const id = useId().replace(/:/g, "");
   const c = tone === "light" ? LIGHT : SETTINGS[setting].ink;
   const o = opens.toUpperCase();
-  const foot = `NOT YET VETTED · ${o}`;
+  const foot = `APPROVED · ${o}`;
   return (
-    <svg width={size} height={Math.round(size * 150 / 260)} viewBox="0 0 260 150" role="img" aria-label={`On the Horizon ${no} — not yet vetted · ${opens}`} style={{ transform: `rotate(${rotate}deg)`, flex: "none" }}>
+    <svg width={size} height={Math.round(size * 150 / 260)} viewBox="0 0 260 150" role="img" aria-label={`On the Horizon ${no} — approved · ${opens}`} style={{ transform: `rotate(${rotate}deg)`, flex: "none" }}>
       <defs><Ink id={`h${id}`} seed={41 + no.length} /></defs>
       <g filter={`url(#h${id})`} fill={c} stroke={c} opacity={0.93}>
         <rect x="5" y="5" width="250" height="140" rx="6" fill="none" strokeWidth="3.4" />

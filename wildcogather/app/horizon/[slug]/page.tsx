@@ -40,7 +40,7 @@ export default async function HorizonPost({ params }: { params: Promise<{ slug: 
   const all = await getHorizon();
   const pair = h.pairsWith ? all.find((x) => x.slug === h.pairsWith) : undefined;
   const pairHouse = h.pairsWith && !pair ? await getResidence(h.pairsWith) : undefined;
-  // The "still to confirm" box below covers this, so drop a matching section from the body.
+  // Open questions are kept off the site, so drop any "still to confirm" section from the body.
   const raw = blocks(h.body);
   const cut = raw.findIndex((b) => b.kind === "h2" && /still want to know|still to confirm/i.test(b.text));
   const body = cut >= 0 ? raw.filter((_, i) => i < cut || (i > cut + 1)) : raw;
@@ -53,9 +53,8 @@ export default async function HorizonPost({ params }: { params: Promise<{ slug: 
         dateModified: h.updated, datePublished: h.updated, mainEntityOfPage: url,
         author: { "@type": "Person", name: "James Wild", jobTitle: "Founder, James Wild & Co" },
         publisher: { "@type": "Organization", name: "Wild & Co Gatherings" },
-        about: { "@type": "Resort", name: h.name.split(" — ")[0], ...(h.official ? { url: h.official } : {}), address: { "@type": "PostalAddress", addressLocality: h.place, addressCountry: h.country } },
+        about: { "@type": "Resort", name: h.name.split(" — ")[0], address: { "@type": "PostalAddress", addressLocality: h.place, addressCountry: h.country } },
         hasPart: quotesOf(h.body).map((q) => ({ "@type": "Quotation", text: q.replace(/\s*\[Draft[^\]]*\]/, ""), creator: { "@type": "Person", name: "James Wild" } })),
-        citation: h.sources.map((s) => ({ "@type": "CreativeWork", name: s.title, url: s.url })),
         speakable: { "@type": "SpeakableSpecification", cssSelector: [".dek", ".hz-answer"] },
       }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: h.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
@@ -106,10 +105,6 @@ export default async function HorizonPost({ params }: { params: Promise<{ slug: 
             return <p key={i} className={`body${prev?.kind === "h2" ? " hz-answer" : ""}`} style={{ margin: "0 0 22px" }}>{b.text}</p>;
           })}
 
-          <div className="box" style={{ padding: "24px 28px", marginTop: 40 }}>
-            <p className="lbl ox" style={{ margin: "0 0 10px" }}>Before it goes in the Ledger, we're confirming</p>
-            <ul className="body" style={{ margin: 0, paddingLeft: 22, fontSize: 15 }}>{h.confirm.map((c) => <li key={c} style={{ marginBottom: 6 }}>{c}</li>)}</ul>
-          </div>
 
           <section aria-label="Questions" style={{ marginTop: 50 }}>
             <p className="eb">Questions families ask</p>
@@ -126,7 +121,7 @@ export default async function HorizonPost({ params }: { params: Promise<{ slug: 
             <JwcoSeal size={84} rotate={-6} />
             <div>
               <p className="sig" style={{ margin: 0, fontSize: 38 }}>James Wild</p>
-              <p className="cp muted" style={{ margin: "4px 0 0", fontSize: 11 }}>Founder, James Wild &amp; Co · on the list since {month(h.updated)}</p>
+              <p className="cp muted" style={{ margin: "4px 0 0", fontSize: 11 }}>Founder, James Wild &amp; Co · approved {month(h.updated)}</p>
             </div>
           </div>
         </div>
@@ -137,7 +132,7 @@ export default async function HorizonPost({ params }: { params: Promise<{ slug: 
           <div>
             <p className="eb">Be the first · {h.no}</p>
             <h2 className="dsp" style={{ margin: "14px 0 0", fontSize: "clamp(30px, 3.4vw, 44px)", color: "var(--on-dark)" }}>First dates at {h.short}</h2>
-            <p className="body" style={{ margin: "14px 0 0", color: "rgba(244,241,236,.8)" }}>We'll write once — when the family details are confirmed and the first dates open.</p>
+            <p className="body" style={{ margin: "14px 0 0", color: "rgba(244,241,236,.8)" }}>We'll write once — when the first dates open.</p>
           </div>
           <BeFirst slug={h.slug} name={h.short} dark />
         </div>
@@ -153,13 +148,6 @@ export default async function HorizonPost({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      <section className="wrap" style={{ paddingTop: 40, paddingBottom: 100, maxWidth: 1100 }} aria-label="Sources">
-        <p className="lbl">Sources · facts checked {month(h.updated)}</p>
-        <ul className="cpn" style={{ margin: "10px 0 0", paddingLeft: 20, fontSize: 14 }}>
-          {h.sources.map((s) => <li key={s.url} style={{ marginBottom: 6 }}><a href={s.url} target="_blank" rel="noopener" className="lnk" style={{ borderBottomWidth: 1 }}>{s.title}</a></li>)}
-          {h.official && <li><a href={h.official} target="_blank" rel="noopener" className="lnk" style={{ borderBottomWidth: 1 }}>Official site</a></li>}
-        </ul>
-      </section>
     </article>
   );
 }

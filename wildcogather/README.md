@@ -13,7 +13,7 @@ A house of James Wild & Co. Next.js site, deployed on Vercel from GitHub. Conten
 - `/journal` and `/journal/[slug]` The Journal — James's "Why it's in the Ledger" entries, with his quotes
 - `/plan` Plan a Gathering — form that saves to the Airtable `Inquiries` table
 - `/destinations/[region]` Stays by region (USA & Mexico, Caribbean, Latin America, Europe, Africa, Asia & Indian Ocean, Oceania) — intro, scroll-synced interactive map and residence cards. Also in the "Stays" menu.
-- `/horizon` and `/horizon/[slug]` On the Horizon — new places, not yet vetted
+- `/horizon` and `/horizon/[slug]` On the Horizon — new places, approved by James
 - `/advisors` For travel advisors — why James Wild & Co, what we're building for agents who care, how we plan family & friend gatherings, FAQ, application form
 - `/webinars` and `/webinars/[slug]` Webinars on Livestorm — first one: Ted Turner Reserves with host Harry Tyner
 - `/sitemap.xml`, `/robots.txt` — generated
@@ -132,7 +132,7 @@ In Airtable › Journal, paste the 11-character **YouTube ID** (the part after `
 ## Episode cross-sell
 The featured house's film (Residences › YouTube ID, or its journal story's) also appears as a "second chapter" band on every other house and itinerary in the **same setting**, with "Plan both houses" (pre-fills the Plan form with both). Today: the Monwana episode on Fish Eagle, Hinkwenu and the Lion Sands package.
 
-## On the Horizon (new places, not yet vetted) — Airtable › Horizon
+## On the Horizon (new places, approved) — Airtable › Horizon
 - Pages: `/horizon` (all, with a "Be the first" sign-up) and `/horizon/[slug]` (first-look post). Home shows the first three under the featured house; nav and footer link to it.
 - Each row: Entry No. (H-01…, never reuse), Status (**Draft preview** = shown with a "first look" ribbon and hidden from Google · **Live** · **Moved to Ledger** · **Paused**), Setting (picks the ink), Opens (stamp), Facts (`Label: value` per line), Body (journal format), FAQs (`Q:` / `A:` pairs), To confirm, Sources (`Title | URL`), Pairs with (slug).
 - No partner photos until the house grants permission — the cards are designed to work without them. Add "Hero (Cloudinary ID)" later.
@@ -204,3 +204,8 @@ In Mapbox Studio → New style → **Monochrome** (Light) template → set land 
 **Markers** are drawn by the site in each house's setting ink with its list number; houses at the same lodge share one pin (e.g. "01·02"). The popup card links to the house page. Scroll-zoom needs ⌘/Ctrl (two fingers on phones) so the page still scrolls.
 
 Free tier: 50,000 web map loads a month (check mapbox.com/pricing for current terms).
+
+## Approval & sources policy (Oct 12, 2026)
+- James has met the team at every house and Horizon place; all content is approved. Houses that were "Under observation" now carry **Host met**; houses James has stayed at keep **Field verified**. Statuses are **Approved**.
+- **No outside sources or links to other travel companies on the site.** Horizon pages no longer show a Sources list, an "Official site" link or a "still confirming" box, and house/Horizon structured data no longer links to partner sites. Keep source notes in Airtable for our records only (Horizon › Sources and Residences › Official URL are not displayed).
+- Empty booking facts (check-in, deposit, cancellation, taxes) are hidden automatically; fill them in Airtable when the house sends them.

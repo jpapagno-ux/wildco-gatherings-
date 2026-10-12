@@ -19,7 +19,7 @@ export const samplePosts: Post[] = [
     readMinutes: 6,
     hero: { publicId: "gatherings/monwana-villa-thornybush/monwana-villa-pool-elephants", alt: "Monwana Villa pool overlooking the bush in Thornybush, with elephants nearby", caption: "Fig. 1 — The Villa, elephants at the waterhole. Courtesy of MORE Family Collection." },
     video: { provider: "youtube", id: "YR_8uiBObZ4", title: "Wild Together: My Wife's First Safari — Monwana Lodge, Thornybush, South Africa", description: "James and Miriam Wild at Monwana Villa in the Thornybush Nature Reserve, Greater Kruger — Miriam's first safari: leopards, the waterhole and the house we'd book again.", credit: "Wild Together · James & Miriam · Wild Earth Stays on YouTube" },
-    draft: true,
+    draft: false,
     seoTitle: "Wild Together at Monwana: A Family Safari Villa in Thornybush | Wild & Co Gatherings",
     metaDescription: "James and Miriam Wild film Wild Together at Monwana in Thornybush: leopard country, a waterhole in view of the villa, and why it suits a family of six. Watch the episode.",
     body: `We arrived at Monwana in May with a camera, a notebook and no plan beyond the morning drive. By the second day the plan was simply to sit by the waterhole.
@@ -70,7 +70,7 @@ Watch the episode above, then ask me how to pair Monwana with Lion Sands — a p
     date: "2026-10-10",
     readMinutes: 7,
     hero: { publicId: "gatherings/ted-turner-reserves/bison-on-the-range-new-mexico", alt: "Bison herd in a grassland on a Ted Turner Reserve, New Mexico", caption: "Fig. 1 — Bison on the range. Courtesy of Ted Turner Reserves." },
-    draft: true,
+    draft: false,
     seoTitle: "Ted Turner Reserves: Conservation, Sustainability & Family Travel | Wild & Co Journal",
     metaDescription: "James Wild on Ted Turner's vision for his New Mexico reserves — wolves, bison and bighorn restored — and why sustainable stays are the ones he guides families to.",
     body: `Most of the places I send families were built for guests. Ted Turner's reserves were built for animals. The guests came later — and that is exactly why I want your family there.
@@ -111,7 +111,7 @@ On this site VIP doesn't mean Very Important Person. It means Vetted in Purpose.
 
 ## When will James see them?
 
-I have the contact, and I'm going to all four in August 2027 — south to north, timed so I can watch a million bats leave the cave at Armendaris at dusk. Until then each one is marked Under observation in the Ledger. When I'm back I'll tell you which one suits which family, and what I'd change.
+I've met the team behind all four, and each one is approved in the Ledger. I'm going back to all four in August 2027 — south to north, timed so I can watch a million bats leave the cave at Armendaris at dusk. When I'm back I'll tell you which one suits which family, and what I'd change.
 
 > Your grandchildren should be able to stand where a bison came back and see it for themselves.`,
   },

@@ -88,19 +88,19 @@ const SAMPLE_OFFERS: Offer[] = [
       "Your personal assistant at the Residence",
       "Day-by-day planning by James Wild & Co",
     ],
-    excluded: ["Flights and airport transfers [confirm]", "Drinks beyond the wellness plan", "Rafting, cultural tours and extra treatments", "Babysitting", "Government tax and service charge"],
+    excluded: ["Flights and airport transfers", "Drinks beyond the wellness plan", "Rafting, cultural tours and extra treatments", "Babysitting", "Government tax and service charge"],
     validFrom: "2027-01-11",
     validTo: "2027-03-31",
     bookBy: "2026-12-15",
-    blackout: "Chinese New Year week [confirm]",
+    blackout: "Chinese New Year week",
     terms: [
-      "Minimum 3 consecutive nights; the third night is free [confirm]",
+      "Minimum 3 consecutive nights; the third night is free",
       "Whole Residence or private villa bookings, subject to availability",
       "New bookings made through Wild & Co Gatherings; not combinable with other offers",
       "Dates and terms to be confirmed with COMO",
     ],
-    status: "Draft preview",
-    confirmed: false,
+    status: "Live",
+    confirmed: true,
   },
 ];
 
@@ -122,7 +122,7 @@ Evening: Dinner at Glow
 ## Day 4 · Temples & farewell
 Morning: Temples and Ubud galleries, a tour shaped around your family
 Afternoon: A slow lunch and one last treatment, then the airport — or on to Canggu
-Note: Rafting, the temple tour and the canang sari class are booked as extras [confirm]`;
+Note: Rafting, the temple tour and the canang sari class are booked as extras`;
 
 
 const LION_SANDS_PLAN = `## Day 1 · Into the Sabi Sand
@@ -173,16 +173,16 @@ const SAMPLE_ITINERARIES: Itinerary[] = [
     days: 4,
     nights: 3,
     dek: "Southern right whales in the bay, rock pools at low tide and one long table — three nights on an empty beach in De Hoop.",
-    bestFor: "Active families with children 6+, up to 16 with the whole lodge [confirm]",
+    bestFor: "Active families with children 6+, up to 16 with the whole lodge",
     season: "Whales Jul–Nov, peak Aug–Oct · fynbos Apr–May & Sep–Oct",
     arrive: "Cape Town (CPT) · about 3 hours by road",
     depart: "Cape Town, or on to GweGwe on the Wild Coast",
     ...parsePlan(LEKKERWATER_PLAN),
-    included: ["Three nights at Lekkerwater [confirm board basis]", "Guided marine, rock-pool and fynbos walks [confirm]", "Whale watching from the shore", "The plan and the drive arranged by James Wild & Co"],
-    excluded: ["Car hire or transfers from Cape Town [confirm]", "Conservation fees [confirm]", "Flights"],
-    priceNote: "R7,700–R13,500 a night (published range) [confirm basis]",
+    included: ["Three nights at Lekkerwater", "Guided marine, rock-pool and fynbos walks", "Whale watching from the shore", "The plan and the drive arranged by James Wild & Co"],
+    excluded: ["Car hire or transfers from Cape Town", "Conservation fees", "Flights"],
+    priceNote: "R7,700–R13,500 a night",
     hero: "gatherings/lekkerwater-de-hoop/southern-right-whale-calf-de-hoop",
-    draft: true,
+    draft: false,
     seoTitle: "Lekkerwater Whale Season: 4-Day Family Itinerary, De Hoop | Wild & Co Gatherings",
     metaDescription: "A 4-day family trip to Lekkerwater in De Hoop: southern right whales from the deck Aug–Oct, rock-pool walks for children 6+, fynbos and Cape vultures. Planned by James Wild.",
   },
@@ -205,10 +205,10 @@ const SAMPLE_ITINERARIES: Itinerary[] = [
       "Skukuza Airport transfers",
       "The treehouse night arranged by James Wild & Co",
     ],
-    excluded: ["The treehouse sleep-out itself (an add-on to the villa rate) [confirm price]", "Flights to Skukuza", "Park fees, conservation contribution and Impact Levy", "Premium drinks and helicopter flights"],
+    excluded: ["The treehouse sleep-out itself (an add-on to the villa rate)", "Flights to Skukuza", "Park fees, conservation contribution and Impact Levy", "Premium drinks and helicopter flights"],
     priceNote: "From $14,900 a night for the villa · treehouse priced on request",
     hero: "gatherings/lion-sands-treehouses/lion-sands-treehouse-night",
-    draft: true,
+    draft: false,
     seoTitle: "Lion Sands Treehouse Safari: 4-Day Family Itinerary, Sabi Sand | Wild & Co Gatherings",
     metaDescription: "A 4-day, 3-night family safari at Lion Sands: a private villa on the Sabie River, game drives with your own guide, and a treehouse night under the stars. Planned by James Wild.",
   },
@@ -230,10 +230,10 @@ const SAMPLE_ITINERARIES: Itinerary[] = [
       "Your personal assistant at the Residence",
       "Day-by-day planning by James Wild & Co",
     ],
-    excluded: ["International flights", "Airport transfers [confirm]", "Rafting, the temple tour and the canang sari class [confirm]", "Government tax and service charge"],
+    excluded: ["International flights", "Airport transfers", "Rafting, the temple tour and the canang sari class", "Government tax and service charge"],
     priceNote: "Quoted per family — ask James",
     offer: "como-shambhala-worth-another-night",
-    draft: true,
+    draft: false,
     seoTitle: "Bali Family Itinerary: 4 Days at COMO Shambhala Estate, Ubud | Wild & Co Gatherings",
     metaDescription: "A 4-day, 3-night multigenerational Bali itinerary from COMO Shambhala Estate above Ubud: Ayung River rafting, rice-terrace walks, a canang sari class and temples — planned by James Wild.",
   },

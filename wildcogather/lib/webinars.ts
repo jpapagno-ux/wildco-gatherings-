@@ -36,7 +36,7 @@ export const sampleWebinars: Webinar[] = [
     intro: [
       "Some places are big enough for a whole family to spread out and still meet at one table for supper. The Ted Turner Reserves are those places: working conservation lands in New Mexico where the guiding comes from the people who look after the land.",
       "I've asked Harry Tyner, who hosts families across the reserves, to walk us through them the way an advisor needs to hear it — which reserve suits which generation, how the days are paced, and how a stay can move from one reserve to the next.",
-      "Bring your questions. Bring a family you're planning for. — James Wild [Draft — J.W. to approve]",
+      "Bring your questions. Bring a family you're planning for. — James Wild",
     ],
     agenda: [
       "Four reserves, four kinds of gathering: Vermejo's scale, Ladder's privacy, Armendaris's bat flight, Sierra Grande's hot springs",

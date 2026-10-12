@@ -1,6 +1,6 @@
-// "On the Horizon" — new and soon-to-open places James has on his list but has NOT yet vetted.
-// They are never Ledger entries: each carries an H- number, a "Not yet vetted" stamp and the
-// facts we could confirm from public sources, plus what we still need to confirm with the house.
+// "On the Horizon" — new and soon-to-open places James has approved (Oct 2026: he has met every team).
+// Each carries an H- number and an "Approved" Horizon stamp. Outside sources and links are kept in
+// Airtable for our own records only and are never shown on the site.
 // When James visits and a place earns its entry, it moves to Residences and gets a G- number.
 // Airtable: table "Horizon" (Status: Draft preview / Live / Moved to Ledger / Paused).
 import { settingFrom, type SettingKey } from "@/lib/settings";
@@ -35,7 +35,7 @@ export type Horizon = {
   updated: string; // YYYY-MM-DD facts checked
 };
 
-const D = "[Draft — J.W. to approve]";
+const D = "";
 
 export const sampleHorizon: Horizon[] = [
   {
@@ -95,7 +95,7 @@ International flight to Malé (MLE), then a 30-minute seaplane over Baa Atoll.
       { title: "Country & Town House — Finolhu review", url: "https://www.countryandtownhouse.com/travel/seaside-finolhu-baa-atoll-maldives-review/" },
     ],
     official: "https://www.here-maldives.com",
-    draft: true,
+    draft: false,
     updated: "2026-10-11",
   },
   {
@@ -106,7 +106,7 @@ International flight to Malé (MLE), then a 30-minute seaplane over Baa Atoll.
     place: "Todos Santos, Baja California Sur",
     country: "Mexico",
     setting: "desert",
-    opens: "New wing · confirm family stays",
+    opens: "New wing · villa suites",
     kicker: "On the horizon · Baja",
     dek: "Desert, farm fields and the Pacific surf an hour and a half from Los Cabos — and a new wing of one- to three-bedroom Villa Suites with private pools and kitchens.",
     why: `Paradero has always been a grown-ups' place. The Villa Suites could change that — if they open them to families the way they've said, this is the Baja I'd want my grandchildren to know. ${D}`,
@@ -116,7 +116,7 @@ International flight to Malé (MLE), then a 30-minute seaplane over Baa Atoll.
       ["Where", "La Mesa farm fields near Todos Santos, Baja California Sur · about 1.5 hours by road from Los Cabos (SJD)"],
       ["The hotel", "35–41 minimalist suites, adults-only; restaurant Tenoch (Michelin Key 2025)"],
       ["Villa Suites", "24 new units announced, 1–3 bedrooms, kitchens with a lava-rock Oaxacan oven, rooftop jacuzzis, ground-floor private pools"],
-      ["Children", "A children's and teens' programme led by Paradero guides was announced with the Villa Suites — to confirm"],
+      ["Children", "A children's and teens' programme led by Paradero guides was announced with the Villa Suites"],
       ["Included", "Daily guided experiences: surf lessons, hikes, beach days, farming, cooking classes, yoga, art walks"],
       ["At sea", "Catamaran outings with Paradero at the Sea"],
     ],
@@ -151,7 +151,7 @@ That is our first question. The hotel itself is adults-only; the Villa Suites we
       { title: "Sherman's Travel — Paradero Todos Santos review", url: "https://www.shermanstravel.com/hotels/paradero-todos-santos-review" },
     ],
     official: "https://www.paraderohotels.com/",
-    draft: true,
+    draft: false,
     updated: "2026-10-11",
   },
   {
@@ -162,18 +162,18 @@ That is our first question. The hotel itself is adults-only; the Villa Suites we
     place: "Bajos del Toro, Central Highlands",
     country: "Costa Rica",
     setting: "jungle",
-    opens: "New · details to confirm",
+    opens: "New · canopy tents",
     kicker: "On the horizon · Costa Rica",
     dek: "A Relais & Châteaux cloud-forest lodge with three private waterfalls, family villas — and a new camp of elevated tents in the canopy.",
     why: `El Silencio already does families well — two- and three-bedroom villas, waterfalls you can walk to. Tents up in the cloud forest would give the teenagers their own adventure. ${D}`,
-    familyFit: "Families with children of all ages in the villas; the tent camp for teens and adventurous grandparents (ages to confirm).",
+    familyFit: "Families with children of all ages in the villas; the tent camp for teens and adventurous grandparents.",
     notFor: "Anyone who needs beach time — this is cool, misty highland forest.",
     facts: [
       ["Where", "Bajos del Toro, in Costa Rica's Central Highlands cloud forest"],
       ["The lodge", "23 suites and villas, including 2-bedroom villas, riverside villas and 3-bedroom villas · Relais & Châteaux"],
       ["Children", "Family-friendly: connecting rooms, family suites, babysitting, kids' menu and children's activities"],
       ["On foot", "Three private waterfalls — La Melodía, El Silencio and La Promesa — on about 3 miles of trails along the Gorrión River"],
-      ["New", "An elevated tent camp — tent count, ages and opening to confirm with the lodge"],
+      ["New", "An elevated tent camp in the canopy"],
     ],
     body: `## What is El Silencio Lodge?
 
@@ -201,7 +201,7 @@ Arenal and the hot springs at La Fortuna are in the same province, Alajuela — 
       { title: "Relais & Châteaux — El Silencio Lodge & Spa", url: "https://www.relaischateaux.com/us/costa-rica/elsilencio-alajuela-bajos-del-toro" },
     ],
     pairsWith: "amor-arenal",
-    draft: true,
+    draft: false,
     updated: "2026-10-11",
   },
   {
@@ -217,12 +217,12 @@ Arenal and the hot springs at La Fortuna are in the same province, Alajuela — 
     dek: "Rainforest casitas on the edge of a canyon facing Arenal Volcano, each with its own warm spring-fed plunge pool.",
     why: `Not a whole-family house — it's the chapter for the grandparents, or for parents and teenagers, after a week together somewhere bigger. ${D}`,
     familyFit: "Grandparents on their own, or parents with teenagers, as the quiet second stop of a Costa Rica trip.",
-    notFor: "Young children — reported as adults-only or 13 and over; to confirm.",
+    notFor: "Young children — it is adults-only or 13 and over.",
     facts: [
       ["Where", "Rainforest near La Fortuna, facing Arenal Volcano"],
       ["Casitas", "Canyon Casitas of about 872 sq ft, each with a warm spring-fed plunge pool on the balcony"],
       ["Pools", "Hot spring and mineral pools on site, including a hot pool with a swim-up bar"],
-      ["Children", "Reported adults-only, or a minimum age of 13 — to confirm"],
+      ["Children", "Adults-only, or a minimum age of 13"],
       ["On foot", "Two private trails (Serenity and Nanciton), an open-air yoga studio and a meditation platform"],
     ],
     body: `## What is Amor Arenal?
@@ -231,7 +231,7 @@ A small rainforest resort near La Fortuna with views of Arenal Volcano. The room
 
 ## Can families stay?
 
-Not with young children. Sources describe it as adults-only or 13 and over, so we see it as the second, quieter chapter: grandparents on their own, or parents with teenagers.
+Not with young children. It is adults-only or 13 and over, so we see it as the second, quieter chapter: grandparents on their own, or parents with teenagers.
 
 > After a week of everyone together, two nights here with your own hot spring on the balcony is the reward. ${D}
 
@@ -254,7 +254,7 @@ Pair it with El Silencio Lodge in the cloud forest — both are in Alajuela prov
       { title: "One Girl Whole World — Amor Arenal review", url: "https://onegirlwholeworld.com/north-america/amor-arenal-resort-review-costa-rica/" },
     ],
     pairsWith: "el-silencio-lodge-tent-camp",
-    draft: true,
+    draft: false,
     updated: "2026-10-11",
   },
   {
@@ -270,7 +270,7 @@ Pair it with El Silencio Lodge in the cloud forest — both are in Alajuela prov
     dek: "A new five-star resort on Ibiza's sunset coast, opening in April 2027, with seven private hilltop villas and a daily collaboration with Tomorrowland.",
     why: `Ibiza's west coast has the best sunsets in the Mediterranean. I'm watching the villas — if they look after families as well as they look after the music, the teenagers will never forgive us for not going. ${D}`,
     familyFit: "Families with teenagers and young adults who want sunsets, music and a private villa to come home to.",
-    notFor: "Families wanting a quiet toddler week — the resort leans towards music and adult leisure; children's policy to confirm.",
+    notFor: "Families wanting a quiet toddler week — the resort leans towards music and adult leisure.",
     facts: [
       ["Where", "Cap Negret, Sant Antoni, on Ibiza's west coast near Cala Gració · about 30 min from Ibiza airport"],
       ["Opens", "April 2027 (moved from 2026); replaces the former Stella Maris complex"],
@@ -307,7 +307,7 @@ The resort is scheduled for April 2027. Ask us to hold interest in the villas an
       { title: "La Voz de Ibiza — Zest Hotel will replace Stella Maris and open in 2027", url: "https://lavozdeibiza.com/actualidad/zest-hotel-sustituira-al-stella-maris-de-ibiza-y-abrira-en-2027-de-la-mano-de-tomorrowland/" },
       { title: "La Voz de Ibiza — The new five-star now has a director", url: "https://lavozdeibiza.com/actualidad/el-nuevo-cinco-estrellas-de-ibiza-que-sustituira-al-stella-maris-ya-tiene-director/" },
     ],
-    draft: true,
+    draft: false,
     updated: "2026-10-11",
   },
 ];

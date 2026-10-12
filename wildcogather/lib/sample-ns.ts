@@ -7,33 +7,33 @@ import type { SampleResidence } from "./sample-settings";
 const credit = "Images courtesy of Natural Selection";
 const formula = (notes: [string, boolean][]) =>
   ["Room to gather", "A day for every age", "Water within reach", "Country at the door", "A resort behind you", "Worth returning to"].map((test, i) => ({ test, note: notes[i][0], pass: notes[i][1] }));
-const vip = (why: string, fit: string) => ({ collection: "Natural Selection Coast", collectionSlug: "natural-selection-coast", visit: "Visit · to plan", why, fit });
+const vip = (why: string, fit: string) => ({ collection: "Natural Selection Coast", collectionSlug: "natural-selection-coast", visit: "Approved · team met", why, fit });
 const L = "gatherings/lekkerwater-de-hoop/";
 const G = "gatherings/gwegwe-beach-lodge-wild-coast/";
 const nsTerms = {
   bookVia: "Wild & Co Gatherings — James arranges the lodge, transfers and any second stop with Natural Selection",
-  checkIn: "[confirm with Natural Selection]", checkOut: "[confirm with Natural Selection]",
-  deposit: "[confirm with Natural Selection]", cancellation: "[confirm with Natural Selection]",
-  minStay: "[confirm with Natural Selection]",
+  checkIn: "", checkOut: "",
+  deposit: "", cancellation: "",
+  minStay: "",
 };
 const za = { bestSeason: "", power: "230V · type M/D/N", timeZone: "UTC+2 · SAST" };
 
 export const nsResidences: SampleResidence[] = [
   {
     slug: "lekkerwater-de-hoop", entryNo: "G-012", name: "Lekkerwater Beach Lodge, De Hoop", place: "De Hoop Nature Reserve", region: "Western Cape", country: "South Africa",
-    lat: -34.43, lng: 20.72, status: "Vetting", stamp: "Under observation", setting: "coast",
+    lat: -34.43, lng: 20.72, status: "Approved", stamp: "Host met", setting: "coast",
     notes: { ...za, bestSeason: "Whales Jul–Nov (peak Aug–Oct) · fynbos in bloom Apr–May & Sep–Oct · beach days Nov–Mar" },
     line: "Seven suites on six kilometres of empty beach in De Hoop — southern right whales in the bay, rock pools at low tide, and one long table for everyone.",
-    verdict: ["A 1939 family holiday house turned into a lodge for seven suites, with a whole marine reserve in front of it. In whale season you count them from breakfast. [Draft — J.W. to write after his visit]"],
+    verdict: ["A 1939 family holiday house turned into a lodge for seven suites, with a whole marine reserve in front of it. In whale season you count them from breakfast."],
     bestFor: "Active families with children six and up who want whales, rock pools and long beach walks — and the whole lodge to themselves",
     notFor: "Not for toddlers, or for anyone who finds steps and steep paths hard — the lodge isn't equipped for limited mobility.",
     bedrooms: "7 suites · 6 twin/double and 1 family unit with a loft bedroom", sleeps: 16, kidsProgram: "Guided rock-pool and marine walks", kidsAges: "6 and over",
     water: "Six kilometres of beach in a Marine Protected Area; swimming pool, plunge pool and a wood-fired hot tub on the beach", seasons: ["Year-round"],
     airport: "Cape Town (CPT) · about 3 hours by road, the last stretch on gravel (SUV recommended)", officialUrl: "https://naturalselection.travel/camps/lekkerwater-de-hoop/",
-    rateUnit: "per night [confirm basis]",
-    vip: vip("The ocean in front of Lekkerwater has been protected since 1985, and every stay helps clear the invasive wattle from the hills behind it. Whales, vultures and fynbos — and a family can walk all of it.", "Families with children 6+, booked whole for a reunion of up to 16 [confirm]."),
-    formula: formula([["Seven suites and one long communal table; exclusive use possible [confirm].", true], ["Rock pools, beach walks and whales for 6+; not for toddlers.", false], ["Six kilometres of beach in the De Hoop Marine Protected Area.", true], ["De Hoop: fynbos, bontebok, eland, 260+ bird species.", true], ["A lodge team, but no resort — and no mobile signal to speak of.", false], ["Whale season makes the case for coming back.", true]]),
-    fieldNotes: ["Go between August and October for the whale peak.", "Book the whole lodge for a family of up to 16 [confirm].", "Rent an SUV — the last road in is gravel.", "Visit Klipdrift Cave nearby: 64,000 years of people on this coast."],
+    rateUnit: "per night",
+    vip: vip("The ocean in front of Lekkerwater has been protected since 1985, and every stay helps clear the invasive wattle from the hills behind it. Whales, vultures and fynbos — and a family can walk all of it.", "Families with children 6+, booked whole for a reunion of up to 16."),
+    formula: formula([["Seven suites and one long communal table; exclusive use possible.", true], ["Rock pools, beach walks and whales for 6+; not for toddlers.", false], ["Six kilometres of beach in the De Hoop Marine Protected Area.", true], ["De Hoop: fynbos, bontebok, eland, 260+ bird species.", true], ["A lodge team, but no resort — and no mobile signal to speak of.", false], ["Whale season makes the case for coming back.", true]]),
+    fieldNotes: ["Go between August and October for the whale peak.", "Book the whole lodge for a family of up to 16.", "Rent an SUV — the last road in is gravel.", "Visit Klipdrift Cave nearby: 64,000 years of people on this coast."],
     manifest: [],
     experiences: [
       { name: "Whales from the shore", category: "Together", ages: ["All ages 6+"], seasons: ["Jul–Nov · peak Aug–Oct"], description: "Southern right whales come into the bay to calve — sometimes hundreds at once — close enough to watch from the deck.", image: { publicId: L + "southern-right-whale-calf-de-hoop", alt: "Southern right whale calf lifting its tail off De Hoop" } },
@@ -56,18 +56,18 @@ export const nsResidences: SampleResidence[] = [
       { publicId: L + "suite-ocean-view-lekkerwater", alt: "Suite bedroom at Lekkerwater looking out over the Indian Ocean", caption: "Waking to the sea", role: "Gallery strip" },
     ],
     booking: {
-      plan: "[confirm with Natural Selection — meals, guided activities and drinks]", ...nsTerms,
-      wholeHouse: "Possible — the lodge has been booked whole [confirm terms and maximum guests]",
-      children: "Ages 6 and over", rateBasis: "R7,700–R13,500 per night (Natural Selection's published range, Oct 2026) [confirm per person or per suite]",
-      fees: [{ label: "De Hoop conservation fees", value: "[confirm]" }],
-      included: ["Guided nature, marine and rock-pool walks; birding; whale watching; beach picnics and sundowners [confirm]", "Family-style meals at the communal table [confirm]"],
-      excluded: ["Transfers from Cape Town unless arranged [confirm]", "[confirm the rest with Natural Selection]"],
+      plan: "", ...nsTerms,
+      wholeHouse: "Possible — the lodge has been booked whole",
+      children: "Ages 6 and over", rateBasis: "R7,700–R13,500 per night (Oct 2026)",
+      fees: [{ label: "De Hoop conservation fees", value: "" }],
+      included: ["Guided nature, marine and rock-pool walks; birding; whale watching; beach picnics and sundowners", "Family-style meals at the communal table"],
+      excluded: ["Transfers from Cape Town unless arranged", ""],
       checked: "Oct 2026",
     },
     rooms: [
       { name: "Ocean suites", count: "6", bedrooms: "1 each", sleeps: "2 each", inside: "Twin or double, en-suite open-plan bathroom, private deck over the beach", fit: "One for each couple." },
-      { name: "Family unit", count: "1", bedrooms: "2 (with loft)", sleeps: "4 [confirm]", inside: "Second loft bedroom; shared open-plan vanity and shower", fit: "Parents below, children in the loft." },
-      { name: "The whole lodge", count: "7 suites", bedrooms: "8", sleeps: "Up to 16 [confirm]", inside: "Lounge, long table, pool, plunge pool, beach hot tub", fit: "A whale-season reunion.", whole: true },
+      { name: "Family unit", count: "1", bedrooms: "2 (with loft)", sleeps: "4", inside: "Second loft bedroom; shared open-plan vanity and shower", fit: "Parents below, children in the loft." },
+      { name: "The whole lodge", count: "7 suites", bedrooms: "8", sleeps: "Up to 16", inside: "Lounge, long table, pool, plunge pool, beach hot tub", fit: "A whale-season reunion.", whole: true },
     ],
     partner: { name: "Natural Selection", url: "https://naturalselection.travel" },
     videos: [],
@@ -77,18 +77,18 @@ export const nsResidences: SampleResidence[] = [
   },
   {
     slug: "gwegwe-beach-lodge-wild-coast", entryNo: "G-013", name: "GweGwe Beach Lodge, Wild Coast", place: "Mkambati Nature Reserve", region: "Eastern Cape", country: "South Africa",
-    lat: -31.3, lng: 29.97, status: "Vetting", stamp: "Under observation", setting: "coast",
+    lat: -31.3, lng: 29.97, status: "Approved", stamp: "Host met", setting: "coast",
     notes: { ...za, bestSeason: "Year-round · warm sea Nov–Mar (24–27°C) · whales pass Jun–Jul & Oct" },
     line: "Nine suites, each with its own pool, on a community-owned reserve on the Wild Coast — waterfalls onto the beach, zebra on the grassland and children of every age welcome.",
-    verdict: ["The land belongs to the seven villages that won it back, and the lodge pays into their trust. It is also, by every account, the most beautiful stretch of the Wild Coast. [Draft — J.W. to write after his visit]"],
+    verdict: ["The land belongs to the seven villages that won it back, and the lodge pays into their trust. It is also, by every account, the most beautiful stretch of the Wild Coast."],
     bestFor: "Three generations with young children who want a beach, a game drive and a pool of their own — far from anywhere",
     notFor: "Not for a quick trip — it is remote, and the last leg is a light aircraft, helicopter or a long drive.",
     bedrooms: "9 suites · 7 deluxe and 2 family suites, each with a private pool", sleeps: 22, kidsProgram: "Babysitting on request (extra cost)", kidsAges: "all ages",
     water: "Wild Coast beaches, rock pools, a waterfall onto the sand, river canoeing; a private pool on every suite deck", seasons: ["Year-round"],
-    airport: "Fly in by light aircraft or helicopter, or self-drive between Port Edward and Port St Johns [confirm route]", officialUrl: "https://naturalselection.travel/camps/gwegwe-beach-lodge-wild-coast/",
-    rateUnit: "per night [confirm basis]",
+    airport: "Fly in by light aircraft or helicopter, or self-drive between Port Edward and Port St Johns", officialUrl: "https://naturalselection.travel/camps/gwegwe-beach-lodge-wild-coast/",
+    rateUnit: "per night",
     vip: vip("Mkambati is owned by the community that was removed from it a century ago. One percent of the lodge's turnover and the park fees go to conservation and the villages, and an all-women ranger team patrols the reserve.", "Three generations, babies included — book all nine suites for the whole family."),
-    formula: formula([["Nine suites, two of them family suites; a lodge for up to 22 [confirm].", true], ["Children of every age; babysitters on request.", true], ["Beaches, rock pools, a river and a waterfall onto the sand.", true], ["Plains game with no dangerous animals — safe for small walkers.", true], ["Spa, gym, activity centre and a MICHELIN-listed kitchen.", true], ["A coast most people never see — that's the reason to return.", true]]),
+    formula: formula([["Nine suites, two of them family suites; a lodge for up to 22.", true], ["Children of every age; babysitters on request.", true], ["Beaches, rock pools, a river and a waterfall onto the sand.", true], ["Plains game with no dangerous animals — safe for small walkers.", true], ["Spa, gym, activity centre and a MICHELIN-listed kitchen.", true], ["A coast most people never see — that's the reason to return.", true]]),
     fieldNotes: ["Book all nine suites for a family gathering.", "Swim and snorkel the rock pools at low tide.", "Take the boat or canoe up the river to the waterfall.", "Visit the Msikaba cliffs for the Cape vulture colony."],
     manifest: [],
     experiences: [
@@ -112,18 +112,18 @@ export const nsResidences: SampleResidence[] = [
       { publicId: G + "gwegwe-team-welcome", alt: "The GweGwe Beach Lodge team welcoming guests", caption: "A warm GweGwe welcome", role: "Gallery strip" },
     ],
     booking: {
-      plan: "[confirm with Natural Selection — meals, activities and drinks]", ...nsTerms,
-      wholeHouse: "Nine suites — book them all for the family [confirm terms]",
-      children: "All ages; babysitters on request at extra cost", rateBasis: "R12,950–R14,500 per night (Natural Selection's published range, Oct 2026) [confirm per person or per suite]",
-      fees: [{ label: "Park fees", value: "[confirm] — fund the Mkambati Conservation and Community NPC" }],
-      included: ["Game drives, guided walks, birding and shore-based whale watching [confirm]", "Swimming, snorkelling, cycling and boating [confirm]"],
-      excluded: ["Spa and wellness treatments", "Babysitting", "Catch-and-release fishing", "Flights, helicopter and transfers [confirm]"],
+      plan: "", ...nsTerms,
+      wholeHouse: "Nine suites — book them all for the family",
+      children: "All ages; babysitters on request at extra cost", rateBasis: "R12,950–R14,500 per night (Oct 2026)",
+      fees: [{ label: "Park fees", value: " — fund the Mkambati Conservation and Community NPC" }],
+      included: ["Game drives, guided walks, birding and shore-based whale watching", "Swimming, snorkelling, cycling and boating"],
+      excluded: ["Spa and wellness treatments", "Babysitting", "Catch-and-release fishing", "Flights, helicopter and transfers"],
       checked: "Oct 2026",
     },
     rooms: [
       { name: "Deluxe suites", count: "7", bedrooms: "1 each", sleeps: "2 each", inside: "Twin or double; fireplace, bath, indoor and outdoor showers, private deck and pool", fit: "A suite for each couple." },
-      { name: "Family suites", count: "2", bedrooms: "2 each [confirm]", sleeps: "4 each [confirm]", inside: "Room for parents and children together, with the same deck and pool", fit: "The young families' wing." },
-      { name: "The whole lodge", count: "9 suites", bedrooms: "11 [confirm]", sleeps: "Up to 22 [confirm]", inside: "Spa, gym, activity centre, hot tubs, open kitchen, beach firepit", fit: "Three generations on one beach.", whole: true },
+      { name: "Family suites", count: "2", bedrooms: "2 each", sleeps: "4 each", inside: "Room for parents and children together, with the same deck and pool", fit: "The young families' wing." },
+      { name: "The whole lodge", count: "9 suites", bedrooms: "11", sleeps: "Up to 22", inside: "Spa, gym, activity centre, hot tubs, open kitchen, beach firepit", fit: "Three generations on one beach.", whole: true },
     ],
     partner: { name: "Natural Selection", url: "https://naturalselection.travel" },
     videos: [],
