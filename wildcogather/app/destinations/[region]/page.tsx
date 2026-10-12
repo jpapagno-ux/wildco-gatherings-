@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import DestinationExplorer from "@/components/DestinationExplorer";
 import JsonLd from "@/components/JsonLd";
 import { getResidences } from "@/lib/data";
-import { REGIONS, regionFor, regionMeta } from "@/lib/regions";
+import { REGIONS, regionMeta } from "@/lib/regions";
+import { staysInRegion } from "@/lib/browse";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -21,7 +22,7 @@ export default async function Destination({ params }: { params: Promise<{ region
   const key = (await params).region;
   const m = regionMeta(key);
   if (!m) notFound();
-  const houses = (await getResidences()).filter((h) => regionFor(h) === key);
+  const houses = staysInRegion(await getResidences(), m.key);
   return (
     <>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: `${m.label} — Wild & Co Gatherings`, url: `${SITE}/destinations/${key}`, description: m.description, mainEntity: { "@type": "ItemList", itemListElement: houses.map((h, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/houses/${h.slug}`, name: h.name })) } }} />

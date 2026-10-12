@@ -7,10 +7,11 @@ import type { Img } from "@/lib/types";
 // aspect (e.g. "5:4") asks Cloudinary for a subject-aware crop in that shape, so a portrait
 // leopard or a wide pool still lands well in a landscape frame. Leave it off for full-bleed heroes.
 // If no public ID is set yet, the Sand panel shows with a small "photo to come" label.
-export default function Photo({ img, sizes = "100vw", priority = false, aspect, contain = false, style }: { img?: Img; sizes?: string; priority?: boolean; aspect?: string; contain?: boolean; style?: React.CSSProperties }) {
+// Give the frame a size with style (height) or className (e.g. aspect-ratio) — the photo fills it.
+export default function Photo({ img, sizes = "100vw", priority = false, aspect, contain = false, className, style }: { img?: Img; sizes?: string; priority?: boolean; aspect?: string; contain?: boolean; className?: string; style?: React.CSSProperties }) {
   const [loaded, setLoaded] = useState(false);
   return (
-    <div style={{ position: "relative", background: "var(--sand)", overflow: "hidden", ...style }}>
+    <div className={className} style={{ position: "relative", background: "var(--sand)", overflow: "hidden", ...style }}>
       {img?.publicId ? (
         <Image
           src={aspect && !img.publicId.startsWith("http") ? `ar_${aspect},c_fill,g_auto/${img.publicId}` : img.publicId}

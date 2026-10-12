@@ -5,7 +5,8 @@ import { SETTINGS } from "@/lib/settings";
 // Setting ink appears here only as a small dot; status text stays oxblood (the ledger colour).
 export default function LedgerTable({ rows }: { rows: Residence[] }) {
   return (
-    <div style={{ overflowX: "auto" }}>
+    // Wide on phones: the table scrolls sideways inside its own focusable region, never the page.
+    <div style={{ overflowX: "auto" }} role="region" aria-label="The Gatherings Ledger" tabIndex={0}>
       <div className="ledger">
         <div className="ledger-row cp muted">
           <span>Entry</span><span>House / Location</span><span>Setting</span><span>Status</span><span>First visited</span><span>Sleeps</span>
