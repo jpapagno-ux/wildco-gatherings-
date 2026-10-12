@@ -179,3 +179,9 @@ The brand kit (delivered as the `wild-co-brand-kit-*.zip` files — keep them in
 
 ## SEO & AEO
 See `docs/seo-aeo-playbook.md` — keyword and question clusters for families and advisors, the answer-first pattern, structured data by page, the next ten pages to write, and what to measure.
+
+## Natural Selection Coast (added Oct 12, 2026) — Gatherings VIP
+- Houses: **G-012 Lekkerwater Beach Lodge, De Hoop** (7 suites, children 6+, whales Aug–Oct) and **G-013 GweGwe Beach Lodge, Wild Coast** (9 pool suites, all ages). Both Coast & Island, region Africa, stamp Under observation, VIP collection `/vip/natural-selection-coast`.
+- Itinerary: "Whale Season: Four Days at Lekkerwater" (Draft preview).
+- Partner: Natural Selection (Airtable › Partners, Image permission **Requested**). 20 photos in Cloudinary tagged `permission-pending`; their web images are only 1100 px wide — ask Natural Selection for the hi-res set and replace (same public IDs) so the heroes are sharp.
+- Still to confirm with Natural Selection (marked [confirm] on the pages): rate basis (per person or per suite), board/inclusions, exclusive-use terms and maximum guests, check-in/out, deposit, cancellation, GweGwe flight route.

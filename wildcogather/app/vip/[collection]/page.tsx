@@ -70,7 +70,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
             <div style={{ flex: "1 1 440px", minWidth: 0 }}>
               <div style={{ float: "right", margin: "-10px -10px 10px 16px" }}><VipStamp setting={h.setting} size={150} rotate={7} /></div>
               <p className="cp" style={{ margin: "0 0 10px" }}>Ledger Entry {h.entryNo} · {h.stamp}</p>
-              <h2 className="dsp" style={{ margin: 0, fontSize: 52 }}>{h.name.replace(", a Ted Turner Reserve", "")}</h2>
+              <h2 className="dsp" style={{ margin: 0, fontSize: "clamp(32px, 3.4vw, 46px)", hyphens: "manual" }}>{h.name.replace(", a Ted Turner Reserve", "")}</h2>
               <p className="cp muted" style={{ margin: "10px 0 22px" }}>{h.place}, {h.region}</p>
               <p className="lbl ox">Why it&apos;s on my list</p>
               <p className="ser" style={{ margin: "0 0 6px", fontSize: 21, lineHeight: 1.5, fontStyle: "italic", clear: "both" }}>&ldquo;{h.vip?.why}&rdquo;</p>
@@ -98,7 +98,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
       {c.route && (
         <section className="wrap" style={{ paddingTop: 80, paddingBottom: 80 }}>
           <div className="box" style={{ padding: "34px 40px", overflowX: "auto" }}>
-            <p className="cp" style={{ margin: "0 0 14px", fontSize: 13, borderBottom: "1px solid var(--charcoal)", paddingBottom: 14 }}>J.W.&apos;s visit · August 2027 · proposed route</p>
+            <p className="cp" style={{ margin: "0 0 14px", fontSize: 13, borderBottom: "1px solid var(--charcoal)", paddingBottom: 14 }}>{c.routeLabel || "J.W.'s proposed route"}</p>
             {c.route.map((r) => <div key={r.when} className="cpn" style={{ display: "grid", gridTemplateColumns: "100px minmax(0,1fr) minmax(0,2fr)", gap: 16, padding: "14px 0", borderBottom: "1px solid var(--stone)", minWidth: 640 }}><span className="cp">{r.when}</span><span className="cas" style={{ fontSize: 19 }}>{r.where}</span><span>{r.what}</span></div>)}
           </div>
         </section>

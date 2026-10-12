@@ -145,7 +145,47 @@ Morning: Collected after sunrise with hot coffee; a last drive together
 Afternoon: Transfer to Skukuza — or on to Monwana in Thornybush for a second chapter
 Note: Kingston sleeps two adults and two children aged 10–15; Chalkley suits a couple. Treehouse nights are booked as an add-on.`;
 
+const LEKKERWATER_PLAN = `## Day 1 · The road to De Hoop
+Morning: Leave Cape Town after breakfast; about three hours east, the last stretch on gravel
+Afternoon: Arrive at Lekkerwater, lunch on the deck and a first walk on six kilometres of empty beach
+Evening: Supper at the long table, then the wood-fired hot tub on the sand
+
+## Day 2 · Whales and rock pools
+Morning: Whales from the deck with coffee — in August to October there can be hundreds in the bay
+Afternoon: A guided rock-pool walk at low tide for everyone six and up
+Evening: Sundowners on the dunes
+
+## Day 3 · Fynbos and vultures
+Morning: A guided fynbos walk; bontebok, eland and Cape mountain zebra on the plains
+Afternoon: The Cape vulture colony at Potberg, or a beach picnic and swim for the young ones
+Evening: Fire deck and a family supper
+Note: Klipdrift Cave, nearby, has 64,000 years of human history — ask the guide
+
+## Day 4 · One more morning on the beach
+Morning: A last walk and whale count after breakfast
+Afternoon: Drive back to Cape Town, or fly on to the Wild Coast for GweGwe`;
+
 const SAMPLE_ITINERARIES: Itinerary[] = [
+  {
+    slug: "lekkerwater-whale-season-four-days",
+    house: "lekkerwater-de-hoop",
+    title: "Whale Season: Four Days at Lekkerwater",
+    days: 4,
+    nights: 3,
+    dek: "Southern right whales in the bay, rock pools at low tide and one long table — three nights on an empty beach in De Hoop.",
+    bestFor: "Active families with children 6+, up to 16 with the whole lodge [confirm]",
+    season: "Whales Jul–Nov, peak Aug–Oct · fynbos Apr–May & Sep–Oct",
+    arrive: "Cape Town (CPT) · about 3 hours by road",
+    depart: "Cape Town, or on to GweGwe on the Wild Coast",
+    ...parsePlan(LEKKERWATER_PLAN),
+    included: ["Three nights at Lekkerwater [confirm board basis]", "Guided marine, rock-pool and fynbos walks [confirm]", "Whale watching from the shore", "The plan and the drive arranged by James Wild & Co"],
+    excluded: ["Car hire or transfers from Cape Town [confirm]", "Conservation fees [confirm]", "Flights"],
+    priceNote: "R7,700–R13,500 a night (published range) [confirm basis]",
+    hero: "gatherings/lekkerwater-de-hoop/southern-right-whale-calf-de-hoop",
+    draft: true,
+    seoTitle: "Lekkerwater Whale Season: 4-Day Family Itinerary, De Hoop | Wild & Co Gatherings",
+    metaDescription: "A 4-day family trip to Lekkerwater in De Hoop: southern right whales from the deck Aug–Oct, rock-pool walks for children 6+, fynbos and Cape vultures. Planned by James Wild.",
+  },
   {
     slug: "lion-sands-night-under-the-stars-four-days",
     house: "fish-eagle-villa-lion-sands",
