@@ -1,5 +1,5 @@
 import Link from "next/link";
-import MapEmbed from "@/components/MapEmbed";
+import DestinationExplorer from "@/components/DestinationExplorer";
 import { getResidences } from "@/lib/data";
 
 const regionMeta: Record<string, { label: string; intro: string; description: string }> = {
@@ -35,39 +35,17 @@ export default async function DestinationPage({ params }: { params: Promise<{ re
     <>
       <section className="wrap region-page-hero">
         <div>
-          <p className="cp ox region-tag">Region</p>
-          <h1 className="disp page-heading" style={{ margin: "0.5rem 0 1rem" }}>{meta.label}</h1>
-          <p className="cas editorial-lead" style={{ margin: "0 0 1rem", fontStyle: "italic" }}>{meta.intro}</p>
-          <p className="body" style={{ margin: 0 }}>{meta.description}</p>
-        </div>
-
-        <div className="map-panel">
-          <MapEmbed items={residences.map((res) => ({ name: res.name, lat: res.lat, lng: res.lng }))} label={`${meta.label} map`} height={420} />
+          <p className="cp ox region-tag"><span aria-hidden="true">✳</span> The collection · {String(residences.length).padStart(2, "0")} stays</p>
+          <h1 className="disp page-heading">{meta.label}</h1>
+          <p className="cas editorial-lead region-intro">{meta.intro}</p>
+          <p className="body region-description">{meta.description}</p>
+          <Link href="/plan" className="btn region-enquiry">Plan a gathering in {meta.label}</Link>
         </div>
       </section>
 
       <section className="wrap region-page-content">
         {residences.length ? (
-          <div className="region-card-grid">
-            {residences.map((res) => {
-              const hero = res.images.find((image) => image.role === "Card") || res.images[0];
-              return (
-                <article key={res.slug} className="property-card">
-                  <Link href={`/houses/${res.slug}`} style={{ textDecoration: "none" }}>
-                    <img src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5"}/image/upload/${hero.publicId}`} alt={hero.alt || res.name} style={{ width: "100%", height: 260, objectFit: "cover" }} />
-                    <div className="property-card-copy">
-                      <div className="property-card-meta cp">
-                        <span>{res.place}</span>
-                        <span>{res.country}</span>
-                      </div>
-                      <h2 className="cas" style={{ margin: "0.5rem 0" }}>{res.name}</h2>
-                      <p className="body" style={{ margin: 0 }}>{res.line}</p>
-                    </div>
-                  </Link>
-                </article>
-              );
-            })}
-          </div>
+          <DestinationExplorer residences={residences} />
         ) : (
           <div className="region-empty">
             <p className="cp ox" style={{ margin: "0 0 10px" }}>Coming soon</p>
