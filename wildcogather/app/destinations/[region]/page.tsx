@@ -40,7 +40,7 @@ export default async function DestinationPage({ params }: { params: Promise<{ re
           <Link key={d.slug} href={`/destinations/${d.slug}`} aria-current={d.slug === region ? "page" : undefined}>{d.label}</Link>
         ))}
       </nav>
-      <DestinationBrowser residences={residences} region={destination.slug} />
+      <DestinationBrowser key={destination.slug} residences={residences} region={destination.slug} />
     </>
   );
 }

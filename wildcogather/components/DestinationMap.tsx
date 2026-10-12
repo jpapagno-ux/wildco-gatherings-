@@ -6,11 +6,13 @@ import { destinations, type DestinationRegion } from "@/lib/destinations";
 
 type MapItem = { slug: string; name: string; lat: number; lng: number };
 
-export default function DestinationMap({ items, region, activeSlug, onSelect }: {
+export default function DestinationMap({ items, region, activeSlug, selectionRequest, onSelect, onOverview }: {
   items: MapItem[];
   region: DestinationRegion;
   activeSlug?: string;
+  selectionRequest: number;
   onSelect: (slug: string) => void;
+  onOverview: () => void;
 }) {
   const container = useRef<HTMLDivElement>(null);
   const map = useRef<LeafletMap | null>(null);
@@ -87,13 +89,13 @@ export default function DestinationMap({ items, region, activeSlug, onSelect }: 
       map.current.flyTo(marker.getLatLng(), 12, { animate: !window.matchMedia("(prefers-reduced-motion: reduce)").matches, duration: 0.8 });
       marker.openTooltip();
     } else reset.current?.();
-  }, [activeSlug, ready]);
+  }, [activeSlug, selectionRequest, ready]);
 
   return (
     <div className="map-panel">
       <div ref={container} className="destination-live-map" role="region" aria-label={`${destinations.find((d) => d.slug === region)!.label} interactive map`} />
       <div className="destination-map-tools">
-        <button type="button" className="btn" disabled={!ready} onClick={() => reset.current?.()}>Show all locations</button>
+        <button type="button" className="btn" disabled={!ready} onClick={() => { reset.current?.(); onOverview(); }}>Show all locations</button>
         <button type="button" className="btn" disabled={!ready} onClick={() => {
           const instance = map.current;
           if (!instance) return;
