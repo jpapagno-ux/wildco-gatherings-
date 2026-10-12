@@ -64,6 +64,7 @@ export const sampleTable: TableCard[] = [
     gathering: "The ranch's own restaurant, with roaring fireplaces and food grown locally or sourced from Montana producers. The H&C Saloon, its bar, pours craft cocktails and Montana spirits.",
     menu: ["Farm-to-table, from Montana producers", "Craft cocktails and Montana spirits at the saloon"],
     booking: "Reserve ahead for a large table",
+    image: { publicId: "gatherings/lone-mountain-ranch/horn-and-cantle-dining-big-sky", alt: "Horn & Cantle dining room at Lone Mountain Ranch, Big Sky, Montana" },
   },
   {
     slug: "day-sleigh-and-lunch", house: "lone-mountain-ranch", order: 4,
