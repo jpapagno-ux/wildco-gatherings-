@@ -30,6 +30,8 @@ export type TableCard = {
 
 /** Optional one-paragraph answer for "Where do families eat at …?" — falls back to an automatic one. */
 export const TABLE_INTRO: Record<string, string> = {
+  "ulum-moab":
+    "At ULUM the family eats at the camp restaurant, with a Southwest-inspired menu and handcrafted cocktails on the terraced patio, starts the day at the coffee bar, and ends it around the fire with s'mores.",
   "villa-ardore-tuscany":
     "At Villa Ardore the family eats together every day: breakfast at the villa, then lunch or dinner cooked by your own Tuscan chef, with herbs and vegetables from the garden. The dining table seats 18 to 20, the loggia looks over the vines, and the pizza oven is for the night everyone cooks.",
   "leeu-estates-franschhoek":
@@ -45,6 +47,38 @@ export const TABLE_INTRO: Record<string, string> = {
 };
 
 export const sampleTable: TableCard[] = [
+  {
+    slug: "ulum-terrace-dinner", house: "ulum-moab", order: 1,
+    name: "Dinner on the terrace", kind: "Restaurant",
+    where: "The terraced patio, facing Looking Glass Rock",
+    when: "Evenings, in season",
+    who: "The whole family",
+    gathering: "One long table for everyone after a day on the rock or the river — a Southwest menu, handcrafted cocktails for the grown-ups and the light going red on the cliffs.",
+    menu: ["Southwest-inspired menu", "Handcrafted cocktails"],
+    booking: "Ask us to reserve a long table",
+    image: { publicId: "gatherings/ulum-moab/ulum-moab-04", alt: "Drinks on the terrace at ULUM Moab" },
+  },
+  {
+    slug: "ulum-smores", house: "ulum-moab", order: 2,
+    name: "S'mores at the fire", kind: "Family night",
+    where: "The camp fire pits",
+    when: "Every evening",
+    who: "All ages",
+    gathering: "The nightly fire with s'mores and live music at sunset — where the day's adventures get retold, and the White Rim crew gets a hero's welcome.",
+    menu: ["S'mores"],
+    booking: "Included",
+    image: { publicId: "gatherings/ulum-moab/ulum-moab-09", alt: "ULUM Moab's lounge pavilion and fire pits at dusk" },
+  },
+  {
+    slug: "white-rim-camp-supper", house: "ulum-moab", order: 3,
+    name: "Supper on the White Rim", kind: "Dinner experience",
+    where: "A White Rim campsite, Canyonlands",
+    when: "The night out on the White Rim",
+    who: "The White Rim crew",
+    gathering: "Camp supper on the canyon rim, cooked by your guide, under a sky with no lights in it.",
+    menu: ["Camp supper and breakfast, packed by your guide"],
+    booking: "With the White Rim trip — arranged by us",
+  },
   {
     slug: "chefs-table-villa-ardore", house: "villa-ardore-tuscany", order: 1,
     name: "The chef's table", kind: "Private dinner",

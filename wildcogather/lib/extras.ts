@@ -254,7 +254,55 @@ Evening: The celebration dinner — the reason for the reunion
 ## Day 7 · Arrivederci
 Morning: Breakfast together, then the drive back to Florence`;
 
+const ULUM_PLAN = `## Day 1 · Into red-rock country
+Afternoon: Arrive at ULUM, twenty-five minutes south of Moab; settle into the suite tents
+Evening: The hot and cool dipping pools, sunset live music, then s'mores at the fire
+
+## Day 2 · Arches
+Morning: Delicate Arch at sunrise for the walkers; the Windows and Turret Arch for the youngest
+Afternoon: Back to camp: the massage cave for some, the pools for everyone else
+Evening: Dinner on the terrace, then the stars — ULUM is Dark Sky-approved
+
+## Day 3 · The river and the rock
+Morning: Rafting a family-friendly stretch of the Colorado River with a licensed outfitter
+Afternoon: Climbing and rappelling on Looking Glass Rock, right at camp
+Evening: A long table for everyone on the terrace
+
+## Day 4 · Two adventures
+Morning: The White Rim crew leaves early with their guide in a high-clearance 4x4, down the Shafer Trail into Canyonlands
+Afternoon: Everyone else takes a UTV out on Moab's open trails, or a slow day of yoga, painting and the pools
+Evening: Supper at a White Rim campsite for the crew; dinner at camp for the rest
+Note: The White Rim needs an overnight permit — we book it months ahead.
+
+## Day 5 · The long way home
+Morning: Sunrise on the White Rim, then the second half of the loop
+Afternoon: Back at camp for a swim; Dead Horse Point for anyone who wants another view
+Evening: The White Rim crew comes home to a hero's welcome at the fire
+
+## Day 6 · Farewell to the red rock
+Morning: Breakfast together, then on to the airport`;
+
 const SAMPLE_ITINERARIES: Itinerary[] = [
+  {
+    slug: "ulum-moab-red-rock-family-adventure-six-days",
+    house: "ulum-moab",
+    title: "Red Rock Family Adventure: Six Days at ULUM Moab and a Night on the White Rim",
+    days: 6,
+    nights: 5,
+    dek: "Arches at sunrise, the Colorado River by raft, climbing on Looking Glass Rock — and, for the ones who want a real adventure, one night out on Canyonlands' White Rim Road in a 4x4.",
+    bestFor: "Active families and three generations — teens and adults for the White Rim, every age for the rest",
+    season: "Late March to late October · spring and autumn are best",
+    arrive: "Canyonlands Regional (CNY), Grand Junction (GJT) or Salt Lake City (SLC)",
+    depart: "The same airport",
+    ...parsePlan(ULUM_PLAN),
+    included: ["Five nights in ULUM suite tents, one per branch of the family", "Guided White Rim overnight in a high-clearance 4x4, with permit and camp meals", "Half-day Colorado River rafting with a licensed outfitter", "Climbing and rappelling on Looking Glass Rock", "The plan and bookings by James Wild & Co"],
+    excluded: ["Flights and car hire", "Meals at camp", "Massage cave treatments", "UTV rental", "National park entry"],
+    priceNote: "On request — priced for your family",
+    hero: "gatherings/ulum-moab/ulum-moab-tent-08",
+    draft: false,
+    seoTitle: "Moab Family Adventure: 6 Days at ULUM with a White Rim Night | Wild & Co Gatherings",
+    metaDescription: "A 6-day Moab family adventure from ULUM: Arches at sunrise, Colorado River rafting, climbing Looking Glass Rock, UTV trails, the massage cave — and a one-night White Rim 4x4 trip in Canyonlands. Planned by James Wild.",
+  },
   {
     slug: "villa-ardore-tuscan-reunion-seven-days",
     house: "villa-ardore-tuscany",
