@@ -221,7 +221,60 @@ Evening: A farewell supper around the fire
 Morning: A final early drive, then breakfast
 Afternoon: Fly to Johannesburg for connections home`;
 
+const ARDORE_PLAN = `## Day 1 · Into Chianti
+Morning: Land in Florence; your driver brings everyone to the villa, about forty minutes
+Afternoon: Settle into the suites; first swim in the infinity pool over the vines
+Evening: Welcome aperitivo on the loggia, then the chef's first dinner
+
+## Day 2 · The villa
+Morning: Breakfast, then the garden and the forest paths
+Afternoon: A pottery class in the garden for anyone who wants clay on their hands
+Evening: Pizza masterclass at the pizza oven — every generation cooks
+
+## Day 3 · Florence
+Morning: A private guide in Florence: the Duomo and the Ponte Vecchio, timed before the crowds
+Afternoon: Lunch in the Oltrarno, then the artisans' workshops
+Evening: Back to the villa for the fire pits and a quiet supper
+
+## Day 4 · Chianti wine and hill towns
+Morning: A tasting with a small Chianti Classico maker
+Afternoon: San Gimignano's towers and gelato, a short drive away
+Evening: The chef's dinner at the long table
+
+## Day 5 · A slow day
+Morning: Foraging in the forest with a local expert
+Afternoon: The spa — whirlpool, steam and sauna — and a vineyard-view massage
+Evening: Supper by the pool as the light goes over the hills
+
+## Day 6 · Siena
+Morning: Siena's Piazza del Campo and the cathedral with a guide
+Afternoon: Lunch in the city, then home for a last swim
+Evening: The celebration dinner — the reason for the reunion
+
+## Day 7 · Arrivederci
+Morning: Breakfast together, then the drive back to Florence`;
+
 const SAMPLE_ITINERARIES: Itinerary[] = [
+  {
+    slug: "villa-ardore-tuscan-reunion-seven-days",
+    house: "villa-ardore-tuscany",
+    title: "A Tuscan Reunion: Seven Days at Villa Ardore",
+    days: 7,
+    nights: 6,
+    dek: "Six nights in a 16th-century stone farmhouse in Chianti Classico, with a private chef, an infinity pool over the vines, and Florence, Siena and San Gimignano within reach.",
+    bestFor: "Three generations, up to 16 plus 2, celebrating a birthday, an anniversary or simply being together",
+    season: "May–Jun and Sep–Oct are best; harvest in late September",
+    arrive: "Florence · private transfer, about 40 minutes",
+    depart: "Florence",
+    ...parsePlan(ARDORE_PLAN),
+    included: ["Six nights at Villa Ardore, the whole villa", "Daily breakfast and a private chef for lunch or dinner", "Villa manager, concierge and daily housekeeping", "Private transfers from and to Florence", "The plan, guides and tastings arranged by James Wild & Co"],
+    excluded: ["Flights", "Guides and tastings (quoted with your plan)", "Massages and treatments"],
+    priceNote: "On request — the whole villa, for your family",
+    hero: "gatherings/villa-ardore-tuscany/villa-ardore-infinity-pool",
+    draft: false,
+    seoTitle: "Tuscan Family Reunion: 7-Day Villa Ardore Itinerary, Chianti | Wild & Co Gatherings",
+    metaDescription: "A 7-day family reunion in Chianti at Villa Ardore: a private chef, pizza masterclass, wine tastings, the spa and infinity pool, with days in Florence, Siena and San Gimignano. Planned by James Wild.",
+  },
   {
     slug: "cape-winelands-malaria-free-safari-nine-days",
     house: "morukuru-farm-house-madikwe",

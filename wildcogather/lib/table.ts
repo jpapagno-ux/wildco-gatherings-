@@ -30,6 +30,8 @@ export type TableCard = {
 
 /** Optional one-paragraph answer for "Where do families eat at …?" — falls back to an automatic one. */
 export const TABLE_INTRO: Record<string, string> = {
+  "villa-ardore-tuscany":
+    "At Villa Ardore the family eats together every day: breakfast at the villa, then lunch or dinner cooked by your own Tuscan chef, with herbs and vegetables from the garden. The dining table seats 18 to 20, the loggia looks over the vines, and the pizza oven is for the night everyone cooks.",
   "leeu-estates-franschhoek":
     "At Leeu Estates the family eats at The Dining Room, which is kept for resident guests and cooks from the estate's own gardens, and the grown-ups book a night at La Petite Colombe. Wine is next door: the Mullineux & Leeu Wine Studio pours a tutored tasting included with every stay.",
   "morukuru-farm-house-madikwe":
@@ -43,6 +45,39 @@ export const TABLE_INTRO: Record<string, string> = {
 };
 
 export const sampleTable: TableCard[] = [
+  {
+    slug: "chefs-table-villa-ardore", house: "villa-ardore-tuscany", order: 1,
+    name: "The chef's table", kind: "Private dinner",
+    where: "The dining room and the loggia",
+    when: "Lunch or dinner, every day",
+    who: "The whole family",
+    gathering: "A top Tuscan chef cooks for your family alone, with herbs and vegetables from the garden — and anyone can come into the kitchen to watch and learn.",
+    menu: ["Tuscan cooking from the garden", "Wines from the villa's cellar"],
+    booking: "Included with the villa",
+    image: { publicId: "gatherings/villa-ardore-tuscany/villa-ardore-04", alt: "The long dining table set for dinner at Villa Ardore" },
+  },
+  {
+    slug: "pizza-masterclass-villa-ardore", house: "villa-ardore-tuscany", order: 2,
+    name: "Pizza masterclass", kind: "Family night",
+    where: "The outdoor pizza oven",
+    when: "Any evening",
+    who: "All ages",
+    gathering: "The night every generation cooks: the chef shows the youngest how to stretch the dough, and dinner is whatever the family makes.",
+    menu: ["Pizza you make yourselves"],
+    booking: "Ask us to arrange it",
+    image: { publicId: "gatherings/villa-ardore-tuscany/villa-ardore-05", alt: "The chef making pizza with a young guest at Villa Ardore" },
+  },
+  {
+    slug: "chianti-tasting-villa-ardore", house: "villa-ardore-tuscany", order: 3,
+    name: "Chianti tasting", kind: "Bar & lounge",
+    where: "The villa's cellar, or at a small Chianti winery",
+    when: "On request",
+    who: "Adults",
+    gathering: "A tasting with makers from the smaller Chianti wineries — the grown-ups' afternoon while the children are in the pool.",
+    menu: ["Tuscan and Italian labels from the cellar", "Chianti Classico from small producers"],
+    booking: "Ask us to arrange it",
+    image: { publicId: "gatherings/villa-ardore-tuscany/villa-ardore-wine-cellar", alt: "The wine cellar at Villa Ardore" },
+  },
   {
     slug: "the-dining-room-leeu-estates", house: "leeu-estates-franschhoek", order: 1,
     name: "The Dining Room", kind: "Restaurant",

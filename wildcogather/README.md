@@ -238,3 +238,8 @@ A stay's page can carry an **At the table** section: a question heading ("Where 
 - New stays G-014 to G-017: Jaci's Madikwe House, Morukuru Farm House, Morukuru River House & Owner's House (Madikwe, malaria-free Big Five) and Leeu Estates (Franschhoek). Data in `lib/sample-capesafari.ts`, mirrored to Airtable (Residences, Images, Experiences, FAQs, Room Categories, Destinations "Madikwe Game Reserve" and "Franschhoek").
 - Photos in Cloudinary under `gatherings/jacis-madikwe-house/`, `gatherings/morukuru-farm-house-madikwe/`, `gatherings/morukuru-river-house-madikwe/`, `gatherings/morukuru-madikwe-wildlife/` and `gatherings/leeu-estates-franschhoek/` (tag `cape-and-safari`). Airtable Images › Permission is "Pending" until each partner confirms in writing.
 - Multi-stay journeys: Itineraries › **Stops** (one line per chapter: `house-slug | nights | label | other-slugs`). The itinerary page shows each chapter as a card, lists every house in the TouristTrip schema, and the journey appears on each stop's house page. First journey: `/itineraries/cape-winelands-malaria-free-safari-nine-days`.
+
+## .Here and Villa Ardore (Oct 2026)
+
+- .Here moved from On the Horizon into the Ledger as G-018 (`lib/sample-here.ts`); Airtable Horizon › Status = "Moved to Ledger". `/horizon/<slug>` now permanently redirects to `/houses/<slug>` for any Horizon entry that has become a stay.
+- Villa Ardore, Chianti (G-019, `lib/sample-italy.ts`) with a 7-day Tuscan reunion itinerary and At the Table cards. Photos in Cloudinary `gatherings/villa-ardore-tuscany/`.
