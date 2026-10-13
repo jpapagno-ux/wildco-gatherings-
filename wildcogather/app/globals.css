@@ -196,20 +196,18 @@ a.ledger-row:hover { background: var(--paper-2); }
 .region-tag {
   display: inline-flex; align-items: center; gap: .6rem; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; font-family: var(--f-mono), monospace; color: var(--oxblood);
 }
-.destination-explorer {
-  display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(2rem, 5vw, 5rem); align-items: start;
-}
-.destination-map-column { position: sticky; top: 7rem; min-width: 0; }
+.destination-explorer { display: block; }
+.destination-map-section { margin-top: clamp(3.5rem, 7vw, 6rem); padding-top: clamp(2rem, 4vw, 3rem); border-top: 1px solid var(--stone); scroll-margin-top: 6rem; }
 .destination-map-heading { margin: 0 0 1rem; }
 .destination-map-heading p { margin: 0; }
 .destination-map-heading .cas { margin-top: .35rem; font-size: 20px; }
-.interactive-map, .destination-map-loading, .destination-map-unavailable {
-  height: clamp(24rem, 65vh, 46rem); min-height: 340px; overflow: hidden; border: 1px solid var(--sand); background: var(--paper-2);
+.interactive-map, .destination-map-loading, .destination-map-unavailable, .brand-map {
+  height: clamp(24rem, 62vh, 40rem); min-height: 340px; overflow: hidden; border: 1px solid var(--sand); background: var(--paper-2);
 }
 .interactive-map .leaflet-container { width: 100%; height: 100%; background: #e6e0d3; font-family: var(--f-sans), sans-serif; }
 .destination-map-loading, .destination-map-unavailable { display: grid; place-items: center; padding: 2rem; text-align: center; color: var(--clay-text); }
 .destination-map-note { margin: .75rem 0 0; color: var(--clay-text); font-size: 12px; }
-.destination-list { display: grid; gap: 1.25rem; }
+.destination-list { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); }
 .destination-card {
   display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); min-height: 270px; background: var(--card); border: 1px solid var(--stone); transition: border-color .2s ease, box-shadow .2s ease;
 }
@@ -246,9 +244,7 @@ a.ledger-row:hover { background: var(--paper-2); }
 
 @media (max-width: 900px) {
   .region-page-hero { grid-template-columns: 1fr; }
-  .destination-explorer { grid-template-columns: minmax(0, 1fr); gap: 2.25rem; }
-  .destination-map-column { position: relative; top: auto; }
-  .interactive-map, .destination-map-loading, .destination-map-unavailable { height: min(60vh, 32rem); min-height: 320px; }
+  .interactive-map, .destination-map-loading, .destination-map-unavailable, .brand-map { height: min(60vh, 32rem); min-height: 320px; }
   .destination-card { min-height: 250px; }
 }
 
@@ -259,10 +255,10 @@ a.ledger-row:hover { background: var(--paper-2); }
   .destination-card { grid-template-columns: minmax(0, 1fr); }
   .destination-card-image { height: auto; min-height: 0; aspect-ratio: 1.45; }
   .destination-card-copy { padding: 1.15rem; }
-  .destination-map-column { margin-inline: -20px; }
-  .destination-map-heading, .destination-map-note { margin-inline: 20px; }
+  .location-map-frame { margin-inline: -20px; }
+  .location-map-frame .brand-map, .location-map-frame .interactive-map { border-inline: 0; }
   .destination-map-heading { margin-bottom: .8rem; }
-  .interactive-map, .destination-map-loading, .destination-map-unavailable { height: 58vh; min-height: 300px; max-height: 420px; border-inline: 0; }
+  .interactive-map, .destination-map-loading, .destination-map-unavailable, .brand-map { height: 58vh; min-height: 300px; max-height: 420px; }
   .destination-map-note { margin-top: .6rem; }
 }
 
@@ -319,3 +315,69 @@ a.ledger-row:hover { background: var(--paper-2); }
 
 /* Long uppercase words ("multigenerational") must never push a phone screen sideways */
 h1, h2, h3, .dsp, .ser { overflow-wrap: break-word; hyphens: auto; }
+
+/* ---------- Brand map (Mapbox) ---------- */
+.brand-map { position: relative; width: 100%; }
+.brand-map--house, .location-map .interactive-map, .location-map .destination-map-loading { height: clamp(20rem, 48vh, 30rem); }
+.brand-map .mapboxgl-canvas { outline: none; }
+.bm-pin { min-width: 30px; height: 30px; padding: 0 7px; border-radius: 999px; border: 2px solid var(--paper); background: var(--set, var(--charcoal)); color: var(--paper); font: 500 10.5px/1 var(--f-mono), monospace; letter-spacing: .04em; box-shadow: 0 3px 10px rgba(20,18,16,.35); cursor: pointer; transition: transform .2s ease, box-shadow .2s ease; }
+.bm-pin:hover, .bm-pin:focus-visible { transform: scale(1.08); outline: none; }
+.bm-pin.is-active, .brand-map--house .bm-pin { box-shadow: 0 0 0 3px var(--oxblood), 0 6px 16px rgba(20,18,16,.4); transform: scale(1.12); }
+.bm-popup .mapboxgl-popup-content { padding: 0; border-radius: 0; background: var(--card); border: 1px solid rgba(44,42,39,.16); box-shadow: 0 14px 34px rgba(20,18,16,.2); }
+.bm-popup .mapboxgl-popup-tip { display: none; }
+.bm-card { padding: 14px 16px 13px; min-width: 230px; }
+.bm-card + .bm-card { border-top: 1px solid var(--stone); }
+.bm-k { margin: 0; font: 500 9px/1.3 var(--f-mono), monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--oxblood); }
+.bm-h { margin: 6px 0 3px; font: 400 23px/1.08 var(--f-serif), serif; color: var(--charcoal); }
+.bm-p { margin: 0; font: 400 12px/1.45 var(--f-sans), sans-serif; color: var(--clay-text); }
+.bm-row { display: flex; justify-content: space-between; gap: 12px; margin: 10px 0 0; padding-top: 9px; border-top: 1px solid var(--stone); font: 500 9.5px/1 var(--f-mono), monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--clay-text); }
+.bm-row a { color: var(--oxblood); text-decoration: none; }
+.brand-map .mapboxgl-ctrl-group { border-radius: 0; box-shadow: none; border: 1px solid rgba(44,42,39,.16); background: var(--card); }
+.brand-map .mapboxgl-ctrl-group button { width: 30px; height: 30px; }
+.brand-map .mapboxgl-ctrl-scale { background: var(--card); border-color: var(--charcoal); color: var(--charcoal); font: 500 9px/1.5 var(--f-mono), monospace; letter-spacing: .1em; padding: 0 4px; }
+.location-map { padding-top: clamp(70px, 9vw, 100px); padding-bottom: 40px; }
+.location-map-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 32px; margin-bottom: 22px; }
+.location-map-head h2 { margin: 18px 0 0; font-size: clamp(30px, 3.4vw, 40px); }
+.location-map-coords { margin: 0; text-align: right; }
+@media (max-width: 640px) { .location-map-coords { text-align: left; } }
+
+/* ---------- At the Table (dining & shared-table cards) ---------- */
+.tbl-section { padding-top: clamp(70px, 9vw, 100px); }
+.tbl-q { margin: 26px 0 0; font-size: clamp(32px, 3.8vw, 46px); max-width: 22ch; }
+.tbl-answer { margin: 16px 0 34px; max-width: 64ch; }
+.tbl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 22px; align-items: start; }
+.tbl-card { background: var(--card); border: 1px solid var(--stone); display: flex; flex-direction: column; min-width: 0; }
+.tbl-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--ink); color: var(--paper); }
+.tbl-no { font: 500 10px/1 var(--f-mono), monospace; letter-spacing: .16em; text-transform: uppercase; color: rgba(244,241,236,.8); }
+.tbl-body { padding: 20px 22px 18px; display: flex; flex-direction: column; min-width: 0; }
+.tbl-kind { margin: 0; font: 500 10px/1.3 var(--f-mono), monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+.tbl-name { margin: 8px 0 4px; font: 400 28px/1.08 var(--f-serif), serif; color: var(--charcoal); text-wrap: balance; }
+.tbl-where { margin: 0; font: italic 400 17px/1.35 var(--f-serif), serif; color: var(--rust); }
+.tbl-facts { margin: 14px 0 0; border-top: 1px solid var(--charcoal); }
+.tbl-facts div { display: grid; grid-template-columns: 64px 1fr; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--stone); }
+.tbl-facts dt { font: 500 9.5px/1.6 var(--f-mono), monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--clay-text); }
+.tbl-facts dd { margin: 0; font-size: 14px; line-height: 1.45; color: var(--body); }
+.tbl-why { margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: var(--body); }
+.tbl-label { margin: 16px 0 6px; font: 500 9.5px/1 var(--f-mono), monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--oxblood); }
+.tbl-menu { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.55; color: var(--body); }
+.tbl-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 14px; margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--stone); font: 500 9.5px/1.5 var(--f-mono), monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--clay-text); }
+.tbl-foot a { color: var(--oxblood); text-decoration: none; }
+.tbl-foot a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Horizon experiences */
+.hz-exp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 22px; }
+.hz-exp { background: var(--card); border: 1px solid var(--stone); min-width: 0; }
+.hz-exp-body { padding: 18px 20px 20px; }
+.hz-photo { margin: 0 0 18px; overflow: hidden; }
+.hz-photo img { transition: transform .5s ease; }
+.hz-card:hover .hz-photo img { transform: scale(1.03); }
+.ledger-house { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.ledger-thumb { flex: none; width: 88px; height: 66px; overflow: hidden; border: 1px solid var(--stone); background: var(--paper-2); }
+@media (max-width: 700px) { .ledger-thumb { width: 64px; height: 48px; } }
+
+/* Multi-stay journeys: one card per chapter on an itinerary page */
+.jr-stops { display: grid; gap: 28px; margin-top: 30px; }
+.jr-stop { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); background: var(--card); border: 1px solid var(--stone); }
+.jr-photo { position: relative; min-height: 300px; display: block; }
+.jr-body { padding: 30px 34px; min-width: 0; }
+@media (max-width: 760px) { .jr-stop { grid-template-columns: 1fr; } .jr-photo { min-height: 220px; } .jr-body { padding: 24px 20px; } }

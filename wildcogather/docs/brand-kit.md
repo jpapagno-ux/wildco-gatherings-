@@ -18,7 +18,7 @@ The badges, stamps, luggage tags, VIP cards, setting colour cards, tape and phot
 | Luggage tag (by setting) | `tag-mountain`, `-jungle`, `-coast`, `-desert`, `-savanna`, `-polar` | Which natural setting the house belongs to | Hanging on each house hero | Residences › **Setting** + **Entry No.** |
 | Gatherings VIP stamp (oval) | `vip-stamp-[setting]`, `vip-stamp-house`, `vip-stamp-cream` | Vetted in Purpose — VIP houses only | VIP block on VIP houses; /vip | Residences › **VIP (Vetted in Purpose)** |
 | VIP cards (setting colour cards) | `vip-card-[setting]` | The VIP card in each setting's ink | /vip, partner decks, social | Residences › **Setting** |
-| On the Horizon stamp (rectangular) | `horizon-stamp-[setting]` | New place, **not yet vetted** | /horizon cards and posts | Horizon › **Setting**, **Entry No.**, **Opens (stamp)** |
+| On the Horizon stamp (rectangular) | `horizon-stamp-[setting]` | New place, **approved by J.W.** | /horizon cards and posts | Horizon › **Setting**, **Entry No.**, **Opens (stamp)** |
 | Worth Another Night stamp + ticket | `offer-stamp-stay3-pay2`, `offer-ticket-como-shambhala` | Stay 3, pay 2 offers | Offer ticket on the house page | Offers table |
 | Postmarks | `postmark-nassau`, `postmark-ubud` | Dateline | Journal posts, thank-you page, emails | automatic (place + date) |
 | Tape + photo frame | `tape-cream`, `tape-kraft`, `tape-cream-long`, `photo-frame` | James's own photographs | Taped photo on the house page; host photo | Images › Role = **Card** |

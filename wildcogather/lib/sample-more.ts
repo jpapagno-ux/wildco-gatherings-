@@ -17,8 +17,8 @@ const treehouseExp = (which: string) => ({
 const lionSandsTerms = {
   bookVia: "Wild & Co Gatherings — James arranges the villa, the treehouse night and the flights with MORE",
   wholeHouse: "Always exclusive use — the villa, its team and its safari vehicle are yours",
-  checkIn: "[confirm with MORE]", checkOut: "[confirm with MORE]",
-  deposit: "[confirm with MORE]", cancellation: "[confirm with MORE]",
+  checkIn: "", checkOut: "",
+  deposit: "", cancellation: "",
 };
 const lionSandsIncluded = [
   "Exclusive use of the villa, with concierge, butler, housekeeper and private chef",
@@ -46,9 +46,9 @@ const lionSandsFaqs = (name: string, sleeps: string) => [
 export const moreResidences: SampleResidence[] = [
   {
     slug: "fish-eagle-villa-lion-sands", entryNo: "G-009", name: "Fish Eagle Villa, Lion Sands", place: "Sabi Sand", region: "Mpumalanga", country: "South Africa",
-    lat: -24.98, lng: 31.62, status: "Vetting", stamp: "Field verified", firstVisited: "May 2026", setting: "savanna",
+    lat: -24.98, lng: 31.62, status: "Approved", stamp: "Field verified", firstVisited: "May 2026", setting: "savanna",
     line: "Three bedrooms on the Sabie River beside Ivory Lodge — your own pool, chef, guide and safari vehicle, with leopard country at the deck rail.",
-    verdict: ["The river does the work here. Elephants come down to drink while the coffee is still hot, and the whole family watches from one deck. [Draft — J.W. to approve]"],
+    verdict: ["The river does the work here. Elephants come down to drink while the coffee is still hot, and the whole family watches from one deck."],
     bestFor: "Three generations who want a private safari house on the Sabie River, with a treehouse night for the bold ones",
     notFor: "Not for families of more than eight — take Fish Eagle and Hinkwenu together for a larger gathering.",
     bedrooms: "3 en-suite bedrooms · 6,350 ft²", sleeps: 8, kidsProgram: "Mack & Madi kids' activities and childminding", kidsAges: "all ages",
@@ -74,12 +74,12 @@ export const moreResidences: SampleResidence[] = [
     ],
     booking: {
       plan: "Fully inclusive, exclusive use: meals, drinks, private safari and the villa team", ...lionSandsTerms,
-      minStay: "[confirm with MORE]", children: "All ages; up to 2 children (6 adults + 2 children)", rateBasis: "From $14,900 per night for the whole villa (MORE's published rate, Oct 2026)",
-      fees: [{ label: "Impact Levy", value: "R160 per person per night" }, { label: "Park & conservation fees", value: "Extra [confirm]" }],
+      minStay: "", children: "All ages; up to 2 children (6 adults + 2 children)", rateBasis: "From $14,900 per night for the whole villa (Oct 2026)",
+      fees: [{ label: "Impact Levy", value: "R160 per person per night" }, { label: "Park & conservation fees", value: "Extra" }],
       included: lionSandsIncluded, excluded: lionSandsExcluded, checked: "Oct 2026",
     },
     rooms: [
-      { name: "Main suite", count: "1", bedrooms: "1", sleeps: "2", inside: "En-suite, river-facing [confirm layout]", fit: "The grandparents' room." },
+      { name: "Main suite", count: "1", bedrooms: "1", sleeps: "2", inside: "En-suite, river-facing", fit: "The grandparents' room." },
       { name: "Two further suites", count: "2", bedrooms: "1 each", sleeps: "2 + children", inside: "En-suite; two children can share with parents", fit: "One for each branch." },
       { name: "The villa, whole", count: "1", bedrooms: "3", sleeps: "8 (6 adults, 2 children)", inside: "Lap pool, wine room, fire deck, private vehicle, chef and team", fit: "How a family should do Lion Sands.", whole: true },
     ],
@@ -91,9 +91,9 @@ export const moreResidences: SampleResidence[] = [
   },
   {
     slug: "hinkwenu-villa-lion-sands", entryNo: "G-010", name: "Hinkwenu Villa, Lion Sands", place: "Sabi Sand", region: "Mpumalanga", country: "South Africa",
-    lat: -24.98, lng: 31.6, status: "Vetting", stamp: "Field verified", firstVisited: "May 2026", setting: "savanna",
+    lat: -24.98, lng: 31.6, status: "Approved", stamp: "Field verified", firstVisited: "May 2026", setting: "savanna",
     line: "Two bedrooms beside Tinga Lodge — a private safari house for a young family, its name meaning \"together\" in Shangaan.",
-    verdict: ["Hinkwenu is the one I'd give a young family: small enough to feel like home, with its own guide and vehicle so nap time never decides the game drive. [Draft — J.W. to approve]"],
+    verdict: ["Hinkwenu is the one I'd give a young family: small enough to feel like home, with its own guide and vehicle so nap time never decides the game drive."],
     bestFor: "Parents with young children, or grandparents with one family — up to six",
     notFor: "Not for big reunions on its own; pair it with Fish Eagle Villa for up to fourteen.",
     bedrooms: "2 en-suite bedrooms · 3,714 ft²", sleeps: 6, kidsProgram: "Mack & Madi kids' activities and childminding", kidsAges: "all ages",
@@ -116,8 +116,8 @@ export const moreResidences: SampleResidence[] = [
     ],
     booking: {
       plan: "Fully inclusive, exclusive use: meals, drinks, private safari and the villa team", ...lionSandsTerms,
-      minStay: "[confirm with MORE]", children: "All ages; up to 2 children (4 adults + 2 children)", rateBasis: "From $9,600 per night for the whole villa (MORE's published rate, Oct 2026)",
-      fees: [{ label: "Impact Levy", value: "R160 per person per night" }, { label: "Park & conservation fees", value: "Extra [confirm]" }],
+      minStay: "", children: "All ages; up to 2 children (4 adults + 2 children)", rateBasis: "From $9,600 per night for the whole villa (Oct 2026)",
+      fees: [{ label: "Impact Levy", value: "R160 per person per night" }, { label: "Park & conservation fees", value: "Extra" }],
       included: lionSandsIncluded, excluded: lionSandsExcluded, checked: "Oct 2026",
     },
     rooms: [
@@ -132,9 +132,9 @@ export const moreResidences: SampleResidence[] = [
   },
   {
     slug: "monwana-villa-thornybush", entryNo: "G-011", name: "Monwana Villa", place: "Thornybush", region: "Limpopo", country: "South Africa",
-    lat: -24.42, lng: 31.17, status: "Vetting", stamp: "Field verified", firstVisited: "May 2026", setting: "savanna", featured: true,
+    lat: -24.42, lng: 31.17, status: "Approved", stamp: "Field verified", firstVisited: "May 2026", setting: "savanna", featured: true,
     line: "An off-grid safari house in leopard country — two suites, three plunge pools and a waterhole you can watch from the kitchen.",
-    verdict: ["Miriam and I sat by that waterhole with coffee and watched the morning arrive one animal at a time. It is the quietest luxury I know. [Draft — J.W. to approve]"],
+    verdict: ["Miriam and I sat by that waterhole with coffee and watched the morning arrive one animal at a time. It is the quietest luxury I know."],
     bestFor: "A family of up to six who want Thornybush's leopards, a private guide and a house that runs on the sun",
     notFor: "Not for large groups unless you take the whole lodge — the villa sleeps six.",
     bedrooms: "2 en-suite bedrooms, each with a plunge pool · 5,597 ft²", sleeps: 6, kidsProgram: "Mosaba Rangers kids' activities and childminding", kidsAges: "all ages",
@@ -167,9 +167,9 @@ export const moreResidences: SampleResidence[] = [
       plan: "Fully inclusive, exclusive use: meals, premium drinks, private safari and the villa team",
       bookVia: "Wild & Co Gatherings — James arranges the villa and the flights with MORE",
       wholeHouse: "Always exclusive use; the whole lodge can also be taken (up to 24 guests)",
-      checkIn: "[confirm with MORE]", checkOut: "[confirm with MORE]", deposit: "[confirm with MORE]", cancellation: "[confirm with MORE]",
+      checkIn: "", checkOut: "", deposit: "", cancellation: "",
       children: "All ages in the villa; 10+ in lodge suites; bush walks 16+", rateBasis: "From about $14,900 per night for the whole villa (MORE, Oct 2026)",
-      fees: [{ label: "Park, impact & reserve fees", value: "Extra [confirm]" }],
+      fees: [{ label: "Park, impact & reserve fees", value: "Extra" }],
       included: ["Exclusive use of the villa, with chef, butler, concierge and housekeeper", "All meals, snacks, teas and coffees", "Premium beers, spirits and cellar wines; pantry stocked to your preference", "Twice-daily game drives and guided bush walks in a private vehicle, with refreshments", "Mosaba Rangers kids' activities and childminding", "Gratuities; transfers to Hoedspruit Airport and Thornybush airstrip"],
       excluded: ["Helicopter flights and K9 anti-poaching demonstrations", "Exclusive bush breakfasts and dinners", "Community experiences", "Park, impact and reserve fees", "Gallery purchases, cigars and cigarettes", "Flights and transfers not listed"],
       checked: "Oct 2026",

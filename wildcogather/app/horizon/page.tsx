@@ -8,15 +8,15 @@ export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 export const metadata: Metadata = {
   title: "On the Horizon: New Family Resorts & Villas to Watch | Wild & Co Gatherings",
-  description: "New and soon-to-open resort villas for multigenerational families — Maldives, Baja, Costa Rica, Ibiza — on James Wild's list before he vets them. Be the first to hear when dates open.",
+  description: "New and soon-to-open resort villas for multigenerational families — Maldives, Baja, Costa Rica, Ibiza — approved by James Wild. Be the first to hear when dates open.",
   alternates: { canonical: "/horizon" },
 };
 
 export default async function HorizonPage() {
   const items = await getHorizon();
   const faqs = [
-    { q: "What is On the Horizon?", a: "New and soon-to-open resorts and villas that James Wild is watching for multigenerational families. They are not yet vetted and are not Ledger entries; each page lists the facts we could confirm and what we are still checking with the house." },
-    { q: "How does a place move from On the Horizon into the Ledger?", a: "James visits or speaks with the house, checks the family facts — bedrooms, children's policy, guiding, the last leg of the journey — and only then gives it a Ledger number and a stamp." },
+    { q: "What is On the Horizon?", a: "New and soon-to-open resorts and villas for multigenerational families. James Wild has met the team at every one and approved it; each page sets out the facts families ask about first." },
+    { q: "How does a place move from On the Horizon into the Ledger?", a: "Once it is open and James has stayed, it takes a Ledger number and the stamp it has earned, and its page moves to the Stays." },
     { q: "Can I book an On the Horizon place now?", a: "Some are open and some are still to come. Tell us which interests you and we will hold your interest, confirm what the house offers families, and write as soon as first dates open." },
   ];
   return (
@@ -26,8 +26,8 @@ export default async function HorizonPage() {
       <section className="wrap" style={{ paddingTop: 90, paddingBottom: 40, textAlign: "center" }}>
         <p className="eb">Undiscovered · on James's list</p>
         <h1 className="dsp" style={{ margin: "18px 0 0", fontSize: "clamp(46px, 6.4vw, 84px)" }}>On the Horizon</h1>
-        <p className="it" style={{ margin: "18px auto 0", fontSize: 26, maxWidth: 760 }}>New places we'd book before anyone else — shown before they've earned a Ledger entry, with what we know and what we're still asking.</p>
-        <p className="cp muted" style={{ margin: "22px 0 0" }}>{items.length} places · not yet vetted · facts checked {new Date(items[0]?.updated || Date.now()).toLocaleDateString("en-US", { month: "long", year: "numeric" })}</p>
+        <p className="it" style={{ margin: "18px auto 0", fontSize: 26, maxWidth: 760 }}>New places we'd book before anyone else — approved by James, with the facts families ask first.</p>
+        <p className="cp muted" style={{ margin: "22px 0 0" }}>{items.length} places · approved by James · facts checked {new Date(items[0]?.updated || Date.now()).toLocaleDateString("en-US", { month: "long", year: "numeric" })}</p>
       </section>
       <section className="wrap" style={{ paddingBottom: 90 }} aria-label="New places">
         <div className="hz-grid">{items.map((h) => <HorizonCard key={h.slug} h={h} />)}</div>

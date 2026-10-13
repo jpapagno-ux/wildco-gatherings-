@@ -1,51 +1,22 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Residence } from "@/lib/types";
 import { cardImage } from "@/lib/browse";
 import Photo from "./Photo";
-
-const InteractiveMap = dynamic(() => import("./InteractiveMap"), {
-  ssr: false,
-  loading: () => <div className="destination-map-loading" role="status">Preparing the location map…</div>,
-});
+import StayMap from "./StayMap";
 
 export default function DestinationExplorer({ residences }: { residences: Residence[] }) {
   const [activeSlug, setActiveSlug] = useState(residences[0]?.slug ?? "");
 
-  useEffect(() => {
-    const cards = document.querySelectorAll<HTMLElement>("[data-residence-slug]");
-    const visible = new Map<HTMLElement, number>();
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          visible.set(entry.target as HTMLElement, entry.boundingClientRect.top + entry.boundingClientRect.height / 2);
-        }
-        else visible.delete(entry.target as HTMLElement);
-      });
-
-      const nearest = [...visible.entries()].sort(
-        ([, first], [, second]) => Math.abs(first - window.innerHeight * 0.45) - Math.abs(second - window.innerHeight * 0.45),
-      )[0]?.[0];
-      if (nearest?.dataset.residenceSlug) setActiveSlug(nearest.dataset.residenceSlug);
-    }, { rootMargin: "-30% 0px -40% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] });
-
-    cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
-  }, [residences]);
+  const locate = (slug: string) => {
+    setActiveSlug(slug);
+    document.getElementById("stay-map")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+  };
 
   return (
     <div className="destination-explorer">
-      <aside className="destination-map-column" aria-label="Map of stays">
-        <div className="destination-map-heading">
-          <p className="cp ox">Find your place</p>
-          <p className="cas">A sense of where it all begins.</p>
-        </div>
-        <InteractiveMap residences={residences} activeSlug={activeSlug} onSelect={setActiveSlug} />
-        <p className="destination-map-note">Map locations are approximate. Select a marker or stay to explore.</p>
-      </aside>
 
       <section className="destination-list" aria-label="Stays in this region">
         {residences.map((residence, index) => {
@@ -72,7 +43,7 @@ export default function DestinationExplorer({ residences }: { residences: Reside
                 <p className="destination-card-line">{residence.line}</p>
                 <div className="destination-card-footer">
                   <span className="cp muted">{residence.sleeps ? `Sleeps ${residence.sleeps}` : residence.bedrooms ? `${residence.bedrooms} bedrooms` : "Family residence"}</span>
-                  <button type="button" className="destination-locate cp" onClick={() => setActiveSlug(residence.slug)}>
+                  <button type="button" className="destination-locate cp" onClick={() => locate(residence.slug)}>
                     Locate on map <span aria-hidden="true">↗</span>
                   </button>
                 </div>
@@ -80,6 +51,15 @@ export default function DestinationExplorer({ residences }: { residences: Reside
             </article>
           );
         })}
+      </section>
+
+      <section id="stay-map" className="destination-map-section" aria-label="Map of stays">
+        <div className="destination-map-heading">
+          <p className="cp ox">Find your place</p>
+          <p className="cas">Where the gatherings begin.</p>
+        </div>
+        <StayMap residences={residences} activeSlug={activeSlug} onSelect={setActiveSlug} />
+        <p className="destination-map-note">Map locations are approximate. Select a marker, or &ldquo;Locate on map&rdquo; on any stay.</p>
       </section>
     </div>
   );
