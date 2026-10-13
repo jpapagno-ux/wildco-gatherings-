@@ -243,3 +243,8 @@ A stay's page can carry an **At the table** section: a question heading ("Where 
 
 - .Here moved from On the Horizon into the Ledger as G-018 (`lib/sample-here.ts`); Airtable Horizon › Status = "Moved to Ledger". `/horizon/<slug>` now permanently redirects to `/houses/<slug>` for any Horizon entry that has become a stay.
 - Villa Ardore, Chianti (G-019, `lib/sample-italy.ts`) with a 7-day Tuscan reunion itinerary and At the Table cards. Photos in Cloudinary `gatherings/villa-ardore-tuscany/`.
+
+## ULUM Moab (Oct 2026)
+
+- ULUM Moab, Utah (G-020, `lib/sample-utah.ts`): J.W.'s favourite family stay, Field verified April 2023, setting Desert. Photos in Cloudinary `gatherings/ulum-moab/` (partner use approved).
+- 6-day "Red Rock Family Adventure" itinerary with a one-night White Rim 4x4 trip, and three At the Table cards. All mirrored in Airtable (Residence recgqsCsjMvXoj3JA).

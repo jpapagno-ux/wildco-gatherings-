@@ -6,6 +6,7 @@ import { nsResidences } from "./sample-ns";
 import { capeSafariResidences } from "./sample-capesafari";
 import { hereResidences } from "./sample-here";
 import { italyResidences } from "./sample-italy";
+import { utahResidences } from "./sample-utah";
 
 // Used until AIRTABLE_TOKEN is set, and as the template for every Airtable row.
 const P = "gatherings/lone-mountain-ranch/";
@@ -351,6 +352,7 @@ const raw: SampleResidence[] = [
   ...capeSafariResidences,
   ...hereResidences,
   ...italyResidences,
+  ...utahResidences,
 ];
 
 // Setting and family notes are added in sample-settings.ts (mirrors the Airtable fields).
