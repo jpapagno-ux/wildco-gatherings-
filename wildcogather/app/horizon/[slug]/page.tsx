@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import Photo from "@/components/Photo";
 import BeFirst from "@/components/BeFirst";
@@ -36,7 +36,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 const month = (d: string) => new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { month: "long", year: "numeric" });
 
 export default async function HorizonPost({ params }: { params: Promise<{ slug: string }> }) {
-  const h = await getHorizonItem((await params).slug);
+  const slug = (await params).slug;
+  const h = await getHorizonItem(slug);
+  // Moved to the Ledger: send readers (and search engines) to the stay page.
+  if (!h && (await getResidence(slug))) permanentRedirect(`/houses/${slug}`);
   if (!h) notFound();
   const st = SETTINGS[h.setting];
   const url = `${SITE}/horizon/${h.slug}`;
