@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import type { Residence } from "@/lib/types";
+import { cardImage } from "@/lib/browse";
+import Photo from "./Photo";
 import StayMap from "./StayMap";
 
 export default function DestinationExplorer({ residences }: { residences: Residence[] }) {
@@ -18,7 +20,7 @@ export default function DestinationExplorer({ residences }: { residences: Reside
 
       <section className="destination-list" aria-label="Stays in this region">
         {residences.map((residence, index) => {
-          const image = residence.images.find((item) => item.role === "Card") ?? residence.images[0];
+          const image = cardImage(residence);
           return (
             <article
               key={residence.slug}
@@ -31,13 +33,8 @@ export default function DestinationExplorer({ residences }: { residences: Reside
               }}
             >
               <Link href={`/houses/${residence.slug}`} className="destination-card-image" aria-label={`Explore ${residence.name}`}>
-                {image ? (
-                  <img
-                    src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5"}/image/upload/f_auto,q_auto,w_900,c_limit/${image.publicId}`}
-                    loading="lazy"
-                    alt={image.alt || residence.name}
-                  />
-                ) : <span className="cp">A place to gather</span>}
+                {/* Resized and subject-cropped by Cloudinary, so a large original never ships to the phone. */}
+                <Photo img={image ? { ...image, alt: image.alt || residence.name } : undefined} aspect="4:3" sizes="(max-width: 700px) 100vw, (max-width: 900px) 45vw, 320px" className="destination-card-photo" style={{ position: "absolute", inset: 0 }} />
                 <span className="destination-card-number cp">{String(index + 1).padStart(2, "0")}</span>
               </Link>
               <div className="destination-card-copy">

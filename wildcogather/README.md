@@ -13,6 +13,13 @@ A house of James Wild & Co. Next.js site, deployed on Vercel from GitHub. Conten
 - `/journal` and `/journal/[slug]` The Journal — James's "Why it's in the Ledger" entries, with his quotes
 - `/plan` Plan a Gathering — form that saves to the Airtable `Inquiries` table
 - `/destinations/[region]` Stays by region (USA & Mexico, Caribbean, Latin America, Europe, Africa, Asia & Indian Ocean, Oceania) — intro, scroll-synced interactive map and residence cards. Also in the "Stays" menu.
+
+## Navigation & browsing (built to grow)
+- **Top nav stays short:** Stays ▾ · Itineraries · Gatherings VIP · The Journal · Advisors, plus Plan a Gathering. New houses never add top-level links.
+- **"Stays" mega-menu** (`components/Header.tsx`): Destinations (every region, with a count or "Soon"), By setting (with counts) and Collections (All stays, the Ledger, VIP, On the Horizon). Counts come from `browseNav()` in `lib/browse.ts`, read once in `app/layout.tsx`. On phones it sits inside a single "Menu" button. Escape closes it and returns focus; so does clicking outside or following a link.
+- **Pages scroll down; rails scroll sideways.** Use `components/Strip.tsx` only for galleries and card rails (archive photos, experiences, "More stays" at the foot of each house page). The home page shows the first 8 Ledger entries and links to `/ledger` for the rest.
+- **One card for every stay:** `components/StayCard.tsx` — fixed 5:4 frame, Cloudinary crops around the subject (`g_auto`), so new photography of any size or orientation lines up. The photo is chosen by `cardImage()` in `lib/browse.ts`: Role Hero, then Card, then the first image.
+- A new region: add it to `REGIONS` and its countries to `RULES` in `lib/regions.ts` — the menu, `/destinations/<key>`, the sitemap and the /houses region links pick it up.
 - `/horizon` and `/horizon/[slug]` On the Horizon — new places, approved by James
 - `/advisors` For travel advisors — why James Wild & Co, what we're building for agents who care, how we plan family & friend gatherings, FAQ, application form
 - `/webinars` and `/webinars/[slug]` Webinars on Livestorm — first one: Ted Turner Reserves with host Harry Tyner

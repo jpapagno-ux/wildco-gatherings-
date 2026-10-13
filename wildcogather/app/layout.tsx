@@ -5,6 +5,8 @@ import "leaflet/dist/leaflet.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
+import { getResidences } from "@/lib/data";
+import { browseNav } from "@/lib/browse";
 
 // Self-hosted at build time by next/font: no layout shift, no request to Google from the visitor's browser.
 const serif = Cormorant_Garamond({ weight: ["300", "400", "500", "600"], style: ["normal", "italic"], subsets: ["latin"], variable: "--f-serif", display: "swap" });
@@ -22,7 +24,9 @@ export const metadata: Metadata = {
   other: { "theme-color": "#F4F1EC" },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Counts for the "Stays" menu; same cached Airtable read the pages use.
+  const nav = browseNav(await getResidences());
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable} ${script.variable}`}>
       <body>
@@ -41,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           sameAs: ["https://www.youtube.com/@WildEarthStays1"],
         }} />
         <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: "Wild & Co Gatherings", url: SITE, inLanguage: "en-US", publisher: { "@type": "Organization", name: "James Wild & Co" } }} />
-        <Header />
+        <Header nav={nav} />
         <main>{children}</main>
         <Footer />
       </body>

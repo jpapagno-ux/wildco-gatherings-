@@ -12,6 +12,7 @@ import { getHorizon } from "@/lib/horizon";
 import HorizonCard from "@/components/HorizonCard";
 
 export const revalidate = 3600;
+const LEDGER_PREVIEW = 8;
 
 const FORMULA: [string, string][] = [
   ["Room to gather", "One table for all of you, a door to close for each branch."],
@@ -193,8 +194,12 @@ export default async function Home() {
             <div><p className="eb">A personal archive</p><h2 className="dsp" style={{ margin: "14px 0 0", fontSize: 44 }}>The Gatherings Ledger</h2></div>
             <p className="cp muted" style={{ margin: 0 }}>Entries {String(all.length).padStart(3, "0")}</p>
           </div>
-          <LedgerTable rows={all} />
-          <p className="cp muted" style={{ margin: "22px 0 0" }}>New entries added when earned.</p>
+          {/* A preview, so the home page stays the same length however many houses join the Ledger. */}
+          <LedgerTable rows={all.slice(0, LEDGER_PREVIEW)} />
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16, marginTop: 22 }}>
+            <p className="cp muted" style={{ margin: 0 }}>New entries added when earned.</p>
+            {all.length > LEDGER_PREVIEW && <Link href="/ledger" className="lnk">All {all.length} entries <span>→</span></Link>}
+          </div>
         </div>
       </section>
 
