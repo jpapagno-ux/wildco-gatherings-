@@ -349,3 +349,10 @@ h1, h2, h3, .dsp, .ser { overflow-wrap: break-word; hyphens: auto; }
 .ledger-house { display: flex; align-items: center; gap: 16px; min-width: 0; }
 .ledger-thumb { flex: none; width: 88px; height: 66px; overflow: hidden; border: 1px solid var(--stone); background: var(--paper-2); }
 @media (max-width: 700px) { .ledger-thumb { width: 64px; height: 48px; } }
+
+/* Multi-stay journeys: one card per chapter on an itinerary page */
+.jr-stops { display: grid; gap: 28px; margin-top: 30px; }
+.jr-stop { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); background: var(--card); border: 1px solid var(--stone); }
+.jr-photo { position: relative; min-height: 300px; display: block; }
+.jr-body { padding: 30px 34px; min-width: 0; }
+@media (max-width: 760px) { .jr-stop { grid-template-columns: 1fr; } .jr-photo { min-height: 220px; } .jr-body { padding: 24px 20px; } }

@@ -7,13 +7,13 @@ export const REGIONS: { key: RegionKey; label: string; intro: string; descriptio
   { key: "caribbean", label: "Caribbean", intro: "Soft shorelines, reef blues and private island ease for beach-centric chapters.", description: "Island homes, beachfront villas and private hideaways for relaxed family weeks by the sea." },
   { key: "latin-america", label: "Latin America", intro: "Cloud forests, coastlines and mountain homes shaped for slow and generous travel.", description: "Cultural stays and oceanfront homes for beautifully paced family weeks." },
   { key: "europe", label: "Europe", intro: "Historic homes, alpine stillness and warm coastal classics for family reunion travel.", description: "Coastal, alpine and countryside houses for unforgettable gatherings." },
-  { key: "africa", label: "Africa", intro: "Private safari villas, treehouse nights and a waterhole you can watch from the kitchen.", description: "Exclusive-use safari houses in the Greater Kruger where a whole family shares one guide and one vehicle." },
+  { key: "africa", label: "Africa", intro: "Private safari villas, malaria-free Big Five in Madikwe, treehouse nights and the Cape Winelands.", description: "Exclusive-use safari houses in Madikwe and the Greater Kruger, coast lodges and Winelands cottages — where a whole family shares one guide and one vehicle." },
   { key: "asia", label: "Asia & Indian Ocean", intro: "Rice terraces, jungle views and glowing water villas shaped for immersive family escapes.", description: "Wellness-forward, nature-rich residences for families seeking cultural depth and quiet luxury." },
   { key: "oceania", label: "Oceania", intro: "Wide horizons, remote beaches and landscape-led stays for long, spacious family chapters.", description: "Beachfront, vineyard and bush-country residences as expansive as the view." },
 ];
 
 const RULES: [RegionKey, string[]][] = [
-  ["africa", ["south africa", "botswana", "namibia", "kenya", "tanzania", "rwanda", "zambia", "zimbabwe", "limpopo", "mpumalanga", "sabi sand", "kruger"]],
+  ["africa", ["south africa", "botswana", "namibia", "kenya", "tanzania", "rwanda", "zambia", "zimbabwe", "limpopo", "mpumalanga", "sabi sand", "kruger", "madikwe", "franschhoek", "western cape"]],
   ["caribbean", ["turks", "caicos", "bahamas", "barbados", "st. barts", "st barts", "anguilla", "jamaica", "caribbean", "antigua", "grenada"]],
   ["asia", ["indonesia", "bali", "thailand", "japan", "vietnam", "maldives", "sri lanka", "india", "philippines", "cambodia"]],
   ["oceania", ["australia", "new zealand", "fiji", "french polynesia", "oceania"]],

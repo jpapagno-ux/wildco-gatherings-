@@ -30,6 +30,12 @@ export type TableCard = {
 
 /** Optional one-paragraph answer for "Where do families eat at …?" — falls back to an automatic one. */
 export const TABLE_INTRO: Record<string, string> = {
+  "leeu-estates-franschhoek":
+    "At Leeu Estates the family eats at The Dining Room, which is kept for resident guests and cooks from the estate's own gardens, and the grown-ups book a night at La Petite Colombe. Wine is next door: the Mullineux & Leeu Wine Studio pours a tutored tasting included with every stay.",
+  "morukuru-farm-house-madikwe":
+    "At Morukuru the house chef cooks for your family alone — breakfast when everyone is up, lunch on the lawn, supper in the boma — and teaches a cooking class to anyone who wants one.",
+  "jacis-madikwe-house":
+    "At Jaci's Madikwe House a private chef cooks in the house, with a pizza oven and a safari bar on hand; on lodge nights the family joins open-air breakfasts, fireside dinners and the boma.",
   "here-somewhere-nowhere-maldives":
     "At .Here the family eats at SAFAR, the overwater restaurant, whose seasonal menus take their name from the Dhivehi word for journey — or stays in, at the residence's own long table. On the best days lunch is on a private sandbank and the evening ends with a golden-hour sail and a barbecue aboard ASMAS.",
   "lone-mountain-ranch":
@@ -37,6 +43,81 @@ export const TABLE_INTRO: Record<string, string> = {
 };
 
 export const sampleTable: TableCard[] = [
+  {
+    slug: "the-dining-room-leeu-estates", house: "leeu-estates-franschhoek", order: 1,
+    name: "The Dining Room", kind: "Restaurant",
+    where: "The Conservatory, Leeu Estates",
+    when: "Breakfast, lunch and dinner",
+    who: "Resident guests only",
+    gathering: "The estate's own restaurant, open only to people staying at Leeu Estates, cooking with produce from its gardens. The easy dinner for the whole family on arrival night.",
+    menu: ["#LeeuLocallyGrown produce from the estate gardens", "Mullineux & Leeu Family Wines"],
+    booking: "Booked with your stay",
+    image: { publicId: "gatherings/leeu-estates-franschhoek/leeu-estates-dining-room-conservatory", alt: "The Dining Room conservatory at Leeu Estates, Franschhoek" },
+  },
+  {
+    slug: "la-petite-colombe", house: "leeu-estates-franschhoek", order: 2,
+    name: "La Petite Colombe", kind: "Restaurant",
+    where: "On the estate",
+    when: "Ask us for the season's hours",
+    who: "The grown-ups",
+    gathering: "The sister of La Colombe in Constantia, for the night the grandparents take the parents out to dinner.",
+    menu: ["A tasting menu"],
+    booking: "Reserve ahead — we book it with your stay",
+    image: { publicId: "gatherings/leeu-estates-franschhoek/la-petite-colombe-cuisine-leeu-estates", alt: "A dish at La Petite Colombe, Leeu Estates" },
+  },
+  {
+    slug: "wine-studio-tasting", house: "leeu-estates-franschhoek", order: 3,
+    name: "The Wine Studio", kind: "Bar & lounge",
+    where: "Mullineux & Leeu Family Wines, on the estate",
+    when: "Daily, booked ahead",
+    who: "Adults",
+    gathering: "A tutored tasting with the wines Chris and Andrea Mullineux make for the estate — one is included in every stay.",
+    menu: ["Mullineux & Leeu Family Wines", "Swartland wines from Roundstone Farm"],
+    booking: "Included once per stay — book ahead",
+    image: { publicId: "gatherings/leeu-estates-franschhoek/mullineux-leeu-wine-studio", alt: "The Wine Studio at Leeu Estates, Franschhoek" },
+  },
+  {
+    slug: "morukuru-boma-supper", house: "morukuru-farm-house-madikwe", order: 1,
+    name: "Supper in the boma", kind: "Dinner experience",
+    where: "The Farm House boma",
+    when: "Evenings",
+    who: "The whole family",
+    gathering: "Your own chef, your own fire and nobody else at the table — the night the stories from the afternoon drive get told.",
+    menu: ["Cooked by the house chef for your family"],
+    booking: "Included",
+    image: { publicId: "gatherings/morukuru-farm-house-madikwe/morukuru-farm-house-06", alt: "A long table on the lawn under the trees at Morukuru Farm House" },
+  },
+  {
+    slug: "morukuru-cooking-class", house: "morukuru-farm-house-madikwe", order: 2,
+    name: "Cooking with the chef", kind: "Family night",
+    where: "The Farm House kitchen",
+    when: "Any afternoon",
+    who: "All ages",
+    gathering: "A class with the house chef — the youngest roll the dough, the grandparents taste, and it all comes back as dinner.",
+    menu: ["What the family cooks together"],
+    booking: "Ask us to arrange it",
+  },
+  {
+    slug: "jacis-boma-dinner", house: "jacis-madikwe-house", order: 1,
+    name: "Boma dinner", kind: "Dinner experience",
+    where: "The boma at Jaci's",
+    when: "Evenings",
+    who: "The whole family",
+    gathering: "Lanterns, a fire and dinner under the trees, with the sounds of the reserve around the table.",
+    menu: ["Flavour-led cooking with local ingredients"],
+    booking: "Included",
+    image: { publicId: "gatherings/jacis-madikwe-house/jacis-madikwe-boma-dinner", alt: "Boma tables set under the trees for dinner at Jaci's, Madikwe" },
+  },
+  {
+    slug: "jacis-pizza-night", house: "jacis-madikwe-house", order: 2,
+    name: "Pizza night at the house", kind: "Family night",
+    where: "Jaci's Madikwe House",
+    when: "Any evening",
+    who: "All ages",
+    gathering: "The house has its own pizza oven and a private chef. Give the children an evening of their own choosing.",
+    menu: ["Wood-fired pizza", "Drinks from the safari bar"],
+    booking: "Ask your chef",
+  },
   {
     slug: "safar", house: "here-somewhere-nowhere-maldives", order: 1,
     name: "SAFAR", kind: "Restaurant",

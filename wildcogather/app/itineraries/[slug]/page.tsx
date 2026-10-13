@@ -29,9 +29,11 @@ export default async function ItineraryPage({ params }: { params: Promise<{ slug
   if (!r) notFound();
   const st = SETTINGS[r.setting];
   const offer = t.offer ? await getOffer(t.offer) : undefined;
+  // Multi-stay journeys: resolve each chapter's house (and its alternatives).
+  const stops = t.stops ? (await Promise.all(t.stops.map(async (s) => ({ ...s, r: await getResidence(s.house), alts: (await Promise.all((s.or || []).map((h) => getResidence(h)))).filter(Boolean) as NonNullable<Awaited<ReturnType<typeof getResidence>>>[] })))).filter((s) => s.r) : [];
   const hero = t.hero ? { publicId: t.hero, alt: `${t.title} — ${r.name}` } : r.images.find((i) => i.role === "Hero") || r.images[0];
   const facts: [string, string | undefined][] = [
-    ["Length", `${t.days} days · ${t.nights} nights`], ["Base", r.name], ["Arrive", t.arrive], ["Depart", t.depart],
+    ["Length", `${t.days} days · ${t.nights} nights`], stops.length ? ["Stays", stops.map((s) => `${s.r!.name} · ${s.nights} nights`).join("\n")] : ["Base", r.name], ["Arrive", t.arrive], ["Depart", t.depart],
     ["Best for", t.bestFor], ["Season", t.season], ["Price", t.priceNote],
   ];
   return (
@@ -41,7 +43,9 @@ export default async function ItineraryPage({ params }: { params: Promise<{ slug
         touristType: ["Multigenerational families", "Family reunions"],
         ...(hero?.publicId ? { image: `https://res.cloudinary.com/${CLOUD}/image/upload/${hero.publicId}` } : {}),
         provider: { "@type": "TravelAgency", name: "Wild & Co Gatherings", url: SITE },
-        subjectOf: { "@type": "LodgingBusiness", name: r.name, url: `${SITE}/houses/${r.slug}` },
+        subjectOf: stops.length
+          ? stops.flatMap((s) => [s.r!, ...s.alts]).map((h) => ({ "@type": "LodgingBusiness", name: h.name, url: `${SITE}/houses/${h.slug}`, address: { "@type": "PostalAddress", addressLocality: h.place, addressRegion: h.region, addressCountry: h.country } }))
+          : { "@type": "LodgingBusiness", name: r.name, url: `${SITE}/houses/${r.slug}` },
         itinerary: { "@type": "ItemList", numberOfItems: t.plan.length, itemListElement: t.plan.map((d, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "TouristAttraction", name: `Day ${i + 1} · ${d.title}`, description: [d.morning, d.afternoon, d.evening].filter(Boolean).join(" · ") } })) },
       }} />
       {t.draft && <div className="cp" style={{ background: "var(--oxblood)", color: "var(--paper)", textAlign: "center", padding: "10px 20px" }}>Sample itinerary · draft for James&apos;s approval</div>}
@@ -51,8 +55,8 @@ export default async function ItineraryPage({ params }: { params: Promise<{ slug
         <div className="shade" />
         <div className="title" style={{ left: 48, right: 48 }}>
           <nav aria-label="Breadcrumb" className="cp" style={{ color: "rgba(244,241,236,.78)", marginBottom: 20 }}><Link href="/itineraries" style={{ textDecoration: "none" }}>Itineraries</Link> / <Link href={`/houses/${r.slug}`} style={{ textDecoration: "none" }}>{r.name}</Link></nav>
-          <p className="eb" style={{ color: "#F0D9C6" }}>Short itinerary · {t.days} days · {t.nights} nights · {r.region}</p>
-          <h1 className="dsp" style={{ margin: "18px 0 0", fontSize: "clamp(44px, 6vw, 86px)", color: "var(--on-dark)", maxWidth: 1000 }}>{t.title}</h1>
+          <p className="eb" style={{ color: "#F0D9C6" }}>{stops.length ? "Journey" : "Short itinerary"} · {t.days} days · {t.nights} nights · {stops.length ? r.country : r.region}</p>
+          <h1 className="dsp" style={{ margin: "18px 0 0", fontSize: "clamp(32px, 6vw, 86px)", color: "var(--on-dark)", maxWidth: 1000 }}>{t.title}</h1>
           <p className="ser" style={{ margin: "18px 0 0", fontStyle: "italic", fontSize: "clamp(20px, 2.2vw, 27px)", lineHeight: 1.35, maxWidth: 780 }}>{t.dek}</p>
         </div>
       </section>
@@ -62,11 +66,41 @@ export default async function ItineraryPage({ params }: { params: Promise<{ slug
           {[facts.filter(([, v]) => v).slice(0, 4), facts.filter(([, v]) => v).slice(4)].map((col, ci) => (
             <dl key={ci} style={{ margin: 0, padding: "30px 40px", borderLeft: ci ? "1px solid var(--stone)" : 0 }}>
               <p className="lbl" style={{ paddingBottom: 14, borderBottom: "1px solid var(--charcoal)", margin: 0, display: "flex", alignItems: "center", gap: 10 }}>{ci ? " " : <><Icon name="route" size={22} color={st.ink} /> The Manifest</>}</p>
-              {col.map(([k, v]) => <div key={k} className="mf"><dt className="cp muted">{k}</dt><dd className="mono" style={{ margin: 0 }}>{k === "Base" ? <Link href={`/houses/${r.slug}`}>{v}</Link> : v}</dd></div>)}
+              {col.map(([k, v]) => <div key={k} className="mf"><dt className="cp muted">{k}</dt><dd className="mono" style={{ margin: 0, whiteSpace: "pre-line" }}>{k === "Base" ? <Link href={`/houses/${r.slug}`}>{v}</Link> : v}</dd></div>)}
             </dl>
           ))}
         </div>
       </section>
+
+      {stops.length > 0 && (
+        <section className="wrap" style={{ paddingBottom: 80 }} aria-labelledby="journey-stays">
+          <p className="eb">The stays</p>
+          <hr className="eb-rule" />
+          <h2 id="journey-stays" className="dsp" style={{ margin: "26px 0 0", fontSize: "clamp(30px, 3.4vw, 44px)" }}>{stops.length} chapters, {t.nights} nights</h2>
+          <div className="jr-stops">
+            {stops.map((s, i) => {
+              const h = s.r!;
+              const img = h.images.find((x) => x.role === "Card") || h.images.find((x) => x.role === "Hero") || h.images[0];
+              return (
+                <article key={s.house} className="jr-stop">
+                  <Link href={`/houses/${h.slug}`} className="jr-photo" aria-label={h.name}>{img && <Photo img={img} sizes="(max-width: 760px) 100vw, 560px" style={{ position: "absolute", inset: 0 }} />}</Link>
+                  <div className="jr-body">
+                    <p className="mono ox" style={{ margin: 0, fontSize: 13 }}>Chapter {String(i + 1).padStart(2, "0")} · {s.nights} nights</p>
+                    <h3 className="dsp" style={{ margin: "10px 0 0", fontSize: 28 }}>{s.label}</h3>
+                    <p className="lbl" style={{ margin: "14px 0 0" }}><Link href={`/houses/${h.slug}`}>{h.name}</Link> · {h.place}</p>
+                    <p className="body" style={{ margin: "10px 0 0", fontSize: 16, lineHeight: 1.6 }}>{h.line}</p>
+                    {s.alts.length > 0 && (
+                      <p className="cp muted" style={{ margin: "14px 0 0", textTransform: "none", letterSpacing: ".02em" }}>
+                        Or stay at {s.alts.map((a, j) => <span key={a.slug}>{j ? " or " : ""}<Link href={`/houses/${a.slug}`}>{a.name}</Link></span>)}
+                      </p>
+                    )}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       <section className="wrap" style={{ paddingBottom: 80 }} aria-label="Day by day">
         <p className="eb">Day by day</p>

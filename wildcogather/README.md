@@ -225,3 +225,9 @@ A stay's page can carry an **At the table** section: a question heading ("Where 
 - **Airtable › Horizon** has two new fields any Horizon post can use: **Gallery (Cloudinary IDs)** — one photo per line `id | alt text`; **Experiences** — one per line `Name | sentence | image id`.
 - **Horizon cards** (home page and /horizon) now lead with the hero photo whenever one is set.
 - **The Ledger** shows a photo thumbnail for every house (its Card photo, else its Hero).
+
+## The Cape & a malaria-free safari (Oct 2026)
+
+- New stays G-014 to G-017: Jaci's Madikwe House, Morukuru Farm House, Morukuru River House & Owner's House (Madikwe, malaria-free Big Five) and Leeu Estates (Franschhoek). Data in `lib/sample-capesafari.ts`, mirrored to Airtable (Residences, Images, Experiences, FAQs, Room Categories, Destinations "Madikwe Game Reserve" and "Franschhoek").
+- Photos in Cloudinary under `gatherings/jacis-madikwe-house/`, `gatherings/morukuru-farm-house-madikwe/`, `gatherings/morukuru-river-house-madikwe/`, `gatherings/morukuru-madikwe-wildlife/` and `gatherings/leeu-estates-franschhoek/` (tag `cape-and-safari`). Airtable Images › Permission is "Pending" until each partner confirms in writing.
+- Multi-stay journeys: Itineraries › **Stops** (one line per chapter: `house-slug | nights | label | other-slugs`). The itinerary page shows each chapter as a card, lists every house in the TouristTrip schema, and the journey appears on each stop's house page. First journey: `/itineraries/cape-winelands-malaria-free-safari-nine-days`.

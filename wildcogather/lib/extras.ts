@@ -28,6 +28,7 @@ export type Offer = {
 };
 
 export type ItineraryDay = { title: string; morning?: string; afternoon?: string; evening?: string; note?: string };
+export type ItineraryStop = { house: string; nights: number; label: string; or?: string[] };
 export type Itinerary = {
   slug: string;
   house: string;
@@ -46,10 +47,20 @@ export type Itinerary = {
   priceNote?: string;
   offer?: string; // offer slug it pairs with
   hero?: string; // Cloudinary public ID (falls back to the house hero)
+  // Multi-stay journeys: each chapter's house, nights and any alternative houses for that chapter.
+  // Airtable "Stops": one per line, "house-slug | nights | label | alt-slug, alt-slug".
+  stops?: ItineraryStop[];
   draft: boolean;
   seoTitle: string;
   metaDescription: string;
 };
+
+// "house-slug | nights | label | alt-slug, alt-slug" — one per line
+export function parseStops(v?: string): ItineraryStop[] | undefined {
+  const out = (v || "").split("\n").map((l) => l.split("|").map((s) => s.trim())).filter((p) => p[0])
+    .map(([house, nights, label, or]) => ({ house, nights: Number(nights || 0), label: label || "", or: or ? or.split(",").map((s) => s.trim()).filter(Boolean) : undefined }));
+  return out.length ? out : undefined;
+}
 
 const lines = (v?: string) => (v || "").split(/\n+/).map((s) => s.trim()).filter(Boolean);
 
@@ -166,7 +177,75 @@ Note: Klipdrift Cave, nearby, has 64,000 years of human history — ask the guid
 Morning: A last walk and whale count after breakfast
 Afternoon: Drive back to Cape Town, or fly on to the Wild Coast for GweGwe`;
 
+const CAPE_SAFARI_PLAN = `## Day 1 · Into the Winelands
+Morning: Land in Cape Town; about an hour's drive to Franschhoek
+Afternoon: Settle into the cottages and houses at Leeu Estates; a first walk through the gardens and vines
+Evening: The whole family at The Dining Room, cooking from the estate's own gardens
+
+## Day 2 · The estate
+Morning: Breakfast, then the Everard Read gallery and the edible gardens
+Afternoon: The included tasting at the Wine Studio for the grown-ups; the pool for everyone else
+Evening: The shuttle into Franschhoek village for dinner
+
+## Day 3 · Cape Town
+Morning: Table Mountain by cableway, early, before the cloud
+Afternoon: The penguins at Boulders Beach and the drive along the peninsula to Cape Point, with a private guide
+Evening: Back to the vines; supper on the terrace
+
+## Day 4 · A slow day
+Morning: Leeu Spa for whoever wants it; lawn games for whoever doesn't
+Afternoon: Lunch in the village, or a picnic among the vines
+Evening: La Petite Colombe for the grown-ups
+
+## Day 5 · North to Madikwe
+Morning: Fly Cape Town to Johannesburg, about two hours
+Afternoon: The light-aircraft shuttle to Madikwe, about an hour; tea at the house, then the first game drive
+Evening: Supper in the boma — and no malaria tablets on this trip
+
+## Day 6 · The Big Five
+Morning: Early drive with your own guide and tracker — rhino, elephant, lion
+Afternoon: The pool; a children's bush walk for the under-16s
+Evening: Sundowner drive and stars
+
+## Day 7 · Wild dogs and the river
+Morning: Out early for Madikwe's wild dogs and cheetah
+Afternoon: Fishing on the Marico River, a cooking class or drumming lessons
+Evening: A hide sleep-out for the bold; dinner at the house for everyone else
+
+## Day 8 · Last full day
+Morning: The drive the youngest gets to plan
+Afternoon: Wellness treatments in the sala, or a last swim
+Evening: A farewell supper around the fire
+
+## Day 9 · Home
+Morning: A final early drive, then breakfast
+Afternoon: Fly to Johannesburg for connections home`;
+
 const SAMPLE_ITINERARIES: Itinerary[] = [
+  {
+    slug: "cape-winelands-malaria-free-safari-nine-days",
+    house: "morukuru-farm-house-madikwe",
+    title: "The Cape & a Malaria-Free Safari: Nine Days for Three Generations",
+    days: 9,
+    nights: 8,
+    dek: "Four nights among the vines at Leeu Estates in Franschhoek, with a day in Cape Town — then four nights in a private safari house in Madikwe, where the Big Five come without malaria tablets.",
+    bestFor: "Grandparents, parents and children of any age — up to ten in one safari house, or twenty-two across Jaci's three villas",
+    season: "Year-round · May–Sep for the clearest game viewing · Nov–Mar for Cape summer",
+    arrive: "Cape Town (CPT) · about an hour to Franschhoek",
+    depart: "Johannesburg (JNB), by light aircraft from Madikwe",
+    ...parsePlan(CAPE_SAFARI_PLAN),
+    stops: [
+      { house: "leeu-estates-franschhoek", nights: 4, label: "The Winelands & Cape Town" },
+      { house: "morukuru-farm-house-madikwe", nights: 4, label: "A malaria-free safari in Madikwe", or: ["jacis-madikwe-house", "morukuru-river-house-madikwe"] },
+    ],
+    included: ["Four nights at Leeu Estates in family cottages or houses, with breakfast", "One tutored tasting at the Wine Studio", "A day in Cape Town with a private guide", "Four nights in a private safari house in Madikwe, all-inclusive with your own guide and vehicle", "The plan, the flights and the transfers arranged by James Wild & Co"],
+    excluded: ["International flights", "Dinners in the Winelands", "Reserve conservation levy", "Spa treatments"],
+    priceNote: "On request — priced for your family and dates",
+    hero: "gatherings/morukuru-madikwe-wildlife/white-rhino-game-drive-madikwe",
+    draft: false,
+    seoTitle: "Cape Town, Winelands & Malaria-Free Safari: 9-Day Family Itinerary | Wild & Co Gatherings",
+    metaDescription: "A 9-day South Africa itinerary for three generations: four nights at Leeu Estates in Franschhoek with a day in Cape Town, then four nights in a private malaria-free safari house in Madikwe. Planned by James Wild.",
+  },
   {
     slug: "lekkerwater-whale-season-four-days",
     house: "lekkerwater-de-hoop",
@@ -277,6 +356,7 @@ async function itinerariesFromAirtable(): Promise<Itinerary[]> {
       dek: f["Dek"] || "", bestFor: f["Best for"], season: f["Season"], arrive: f["Arrive"], depart: f["Depart"],
       ...parsePlan(f["Day plan"] || ""), included: lines(f["Included"]), excluded: lines(f["Not included"]),
       priceNote: f["Price note"], offer: f["Pairs with offer (slug)"] || undefined, hero: f["Hero (Cloudinary ID)"] || undefined,
+      stops: parseStops(f["Stops"]),
       draft: f["Status"] !== "Published",
       seoTitle: f["SEO title"] || `${f["Itinerary"]} | Wild & Co Gatherings`, metaDescription: f["Meta description"] || f["Dek"] || "",
     } as Itinerary;
@@ -300,6 +380,6 @@ export async function getOffer(slug: string) {
 }
 export async function getItineraries() { return safe(itinerariesFromAirtable, SAMPLE_ITINERARIES); }
 export async function getItinerary(slug: string) { return (await getItineraries()).find((i) => i.slug === slug); }
-export async function getItinerariesForHouse(house: string) { return (await getItineraries()).filter((i) => i.house === house); }
+export async function getItinerariesForHouse(house: string) { return (await getItineraries()).filter((i) => i.house === house || i.stops?.some((s) => s.house === house || s.or?.includes(house))); }
 
 export const fmtDate = (d?: string) => d ? new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" }) : "";
