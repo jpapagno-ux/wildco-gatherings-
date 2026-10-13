@@ -413,3 +413,49 @@ h1, h2, h3, .dsp, .ser { overflow-wrap: break-word; hyphens: auto; }
   .fd-line li { grid-template-columns: 1fr; gap: 6px; }
   .fd-year { font-size: 28px; }
 }
+
+/* ---- Luxe sketch borders (pen-and-ink bands from Cloudinary) ---- */
+.sk-band { position: relative; overflow: hidden; line-height: 0; }
+.sk-band img { width: 100%; height: auto; display: block; mix-blend-mode: multiply;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%), linear-gradient(180deg, transparent 0, #000 14%);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%), linear-gradient(180deg, transparent 0, #000 14%); mask-composite: intersect; }
+/* armed = waiting off-screen; play = the one entrance. "rest" (no JS / reduced motion) shows the drawing as is. */
+.sk-ink.sk-armed img { clip-path: inset(0 100% 0 0); filter: grayscale(1) contrast(1.1); }
+.sk-ink.sk-play img { animation: sk-ink 2.6s cubic-bezier(.6,.05,.3,1) both, sk-bloom 1.6s 2.2s ease-out both; }
+@keyframes sk-ink { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes sk-bloom { from { filter: grayscale(1) contrast(1.1); } to { filter: none; } }
+.sk-tide.sk-armed img { opacity: 0; }
+.sk-tide.sk-play img { animation: sk-fade 1.6s ease-out both, sk-swell 14s 1.6s ease-in-out infinite alternate; }
+@keyframes sk-swell { from { transform: translateX(-0.6%) scale(1.02); } to { transform: translateX(0.6%) scale(1.02); } }
+.sk-mist.sk-armed img { opacity: 0; filter: blur(10px); transform: translateY(12px); }
+.sk-mist.sk-play img { animation: sk-mist 2.8s cubic-bezier(.2,.6,.2,1) both; }
+@keyframes sk-mist { from { opacity: 0; filter: blur(10px); transform: translateY(12px); } to { opacity: 1; filter: blur(0); transform: none; } }
+.sk-dusk.sk-armed img { opacity: .35; filter: saturate(.2) hue-rotate(160deg) brightness(.9); }
+.sk-dusk.sk-play img { animation: sk-dusk 3.4s ease-out both; }
+@keyframes sk-dusk { 0% { opacity: .35; filter: saturate(.2) hue-rotate(160deg) brightness(.9); } 60% { opacity: 1; } 100% { opacity: 1; filter: none; } }
+.sk-rise.sk-armed img { opacity: 0; transform: translateY(18%) scale(1.04); transform-origin: 50% 100%; }
+.sk-rise.sk-play img { animation: sk-rise 2.4s cubic-bezier(.2,.7,.2,1) both; transform-origin: 50% 100%; }
+@keyframes sk-rise { from { opacity: 0; transform: translateY(18%) scale(1.04); } to { opacity: 1; transform: none; } }
+.sk-shimmer.sk-armed img { opacity: 0; }
+.sk-shimmer.sk-play img { animation: sk-fade 1.8s ease-out both; }
+.sk-glint { position: absolute; inset: 0; pointer-events: none; opacity: 0; mix-blend-mode: soft-light;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.85) 50%, transparent 65%); background-size: 260% 100%; }
+.sk-shimmer.sk-play .sk-glint { animation: sk-glint 6s 1.8s ease-in-out infinite; }
+@keyframes sk-glint { 0% { opacity: 0; background-position: 130% 0; } 15% { opacity: 1; } 45% { opacity: 1; background-position: -30% 0; } 50%, 100% { opacity: 0; background-position: -30% 0; } }
+.sk-route.sk-armed img { clip-path: inset(0 50% 0 50%); }
+.sk-route.sk-play img { animation: sk-route 2.6s cubic-bezier(.5,.05,.25,1) both; }
+@keyframes sk-route { from { clip-path: inset(0 50% 0 50%); } to { clip-path: inset(0 0 0 0); } }
+@keyframes sk-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .sk-band img, .sk-glint { animation: none !important; } }
+
+/* Review board for the borders (/studio/sketch-borders) */
+.skr-row { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 40px; align-items: start; padding: 54px 0; border-top: 1px solid var(--stone); }
+.skr-meta dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 18px 0 0; }
+.skr-meta dt { font-family: var(--f-mono), monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--clay-text); padding-top: 3px; }
+.skr-meta dd { margin: 0; font-size: 15px; color: var(--body); }
+.skr-stage { background: var(--paper); border: 1px solid var(--stone); padding: 26px 0 0; }
+.skr-mock { padding: 0 34px 22px; }
+.skr-actions { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; margin-top: 18px; }
+.skr-btn { font: 500 12px/1 var(--f-sans), sans-serif; letter-spacing: .2em; text-transform: uppercase; color: var(--rust); background: none; border: 1px solid var(--rust); padding: 10px 14px; cursor: pointer; }
+.skr-btn:hover, .skr-btn:focus-visible { background: var(--rust); color: var(--on-dark); outline: none; }
+@media (max-width: 860px) { .skr-row { grid-template-columns: 1fr; gap: 22px; } .skr-mock { padding: 0 18px 18px; } }
