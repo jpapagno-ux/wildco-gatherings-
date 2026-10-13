@@ -5,6 +5,7 @@ import JsonLd from "@/components/JsonLd";
 import { getItineraries } from "@/lib/extras";
 import { getResidences } from "@/lib/data";
 import { SETTINGS } from "@/lib/settings";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -18,6 +19,7 @@ export default async function Itineraries() {
   const [trips, houses] = await Promise.all([getItineraries(), getResidences()]);
   const H = Object.fromEntries(houses.map((h) => [h.slug, h]));
   return (
+    <>
     <section className="wrap" style={{ paddingTop: 90, paddingBottom: 100 }}>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: "Short itineraries — Wild & Co Gatherings", itemListElement: trips.map((t, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/itineraries/${t.slug}`, name: t.title })) }} />
       <div style={{ textAlign: "center" }}>
@@ -41,5 +43,7 @@ export default async function Itineraries() {
         })}
       </div>
     </section>
+      <PageSketch k={"route"} label="Itineraries" />
+    </>
   );
 }

@@ -13,6 +13,7 @@ import { SETTINGS } from "@/lib/settings";
 import Strip from "@/components/Strip";
 import TableCards from "@/components/TableCards";
 import { getTable, tableAnswer } from "@/lib/table";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -58,6 +59,7 @@ export default async function HorizonPost({ params }: { params: Promise<{ slug: 
   const others = all.filter((x) => x.slug !== h.slug && x.slug !== pair?.slug).slice(0, 2);
 
   return (
+    <>
     <article>
       <JsonLd data={{
         "@context": "https://schema.org", "@type": "BlogPosting", "@id": url, headline: h.name, description: h.dek,
@@ -205,5 +207,7 @@ export default async function HorizonPost({ params }: { params: Promise<{ slug: 
       </section>
 
     </article>
+      <PageSketch k={h.setting} label={`On the Horizon · ${h.place}`} />
+    </>
   );
 }

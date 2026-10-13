@@ -5,6 +5,7 @@ import LeadForm from "@/components/LeadForm";
 import { JwcoSeal, Stamp, Icon } from "@/components/Marks";
 import { getResidences } from "@/lib/data";
 import { getWebinars, whenLabel } from "@/lib/webinars";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -163,6 +164,7 @@ export default async function Advisors() {
             ]} />
         </div>
       </section>
+      <PageSketch k={"route"} label="For advisors" />
     </>
   );
 }

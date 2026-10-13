@@ -3,6 +3,7 @@ import JsonLd from "@/components/JsonLd";
 import HorizonCard from "@/components/HorizonCard";
 import BeFirst from "@/components/BeFirst";
 import { getHorizon } from "@/lib/horizon";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -52,6 +53,7 @@ export default async function HorizonPage() {
           </div>
         ))}
       </section>
+      <PageSketch k={"route"} label="On the Horizon" />
     </>
   );
 }

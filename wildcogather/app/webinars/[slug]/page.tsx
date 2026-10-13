@@ -8,6 +8,7 @@ import LeadForm from "@/components/LeadForm";
 import { JwcoSeal, TapedPhoto } from "@/components/Marks";
 import { getWebinar, getWebinars, whenLabel } from "@/lib/webinars";
 import { getResidences } from "@/lib/data";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -28,6 +29,7 @@ export default async function WebinarPage({ params }: { params: Promise<{ slug: 
   const url = `${SITE}/webinars/${w.slug}`;
   const live = w.status === "Scheduled" && w.registerUrl && w.startsAt;
   return (
+    <>
     <article>
       {live && <JsonLd data={{
         "@context": "https://schema.org", "@type": "EducationEvent", name: w.title, description: w.dek, url, startDate: w.startsAt,
@@ -111,5 +113,7 @@ export default async function WebinarPage({ params }: { params: Promise<{ slug: 
         </section>
       )}
     </article>
+      <PageSketch k={"route"} label="Webinars" />
+    </>
   );
 }

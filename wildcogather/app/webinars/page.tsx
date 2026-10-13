@@ -3,6 +3,7 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { getWebinars, whenLabel } from "@/lib/webinars";
 import { Icon } from "@/components/Marks";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default async function Webinars() {
   const list = await getWebinars();
   return (
+    <>
     <section className="wrap" style={{ paddingTop: 90, paddingBottom: 100 }}>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: "Wild & Co Gatherings webinars", itemListElement: list.map((w, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/webinars/${w.slug}`, name: w.title })) }} />
       <div style={{ textAlign: "center" }}>
@@ -36,5 +38,7 @@ export default async function Webinars() {
         ))}
       </div>
     </section>
+      <PageSketch k={"route"} label="Webinars" />
+    </>
   );
 }

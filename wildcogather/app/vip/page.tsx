@@ -5,6 +5,7 @@ import { VipStamp } from "@/components/Marks";
 import { collections, VIP_MEANING } from "@/lib/collections";
 import { getResidences } from "@/lib/data";
 import { SETTINGS, SETTING_ORDER } from "@/lib/settings";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 
@@ -63,6 +64,7 @@ export default async function Vip() {
           </Link>
         ))}
       </section>
+      <PageSketch k={"route"} label="Gatherings VIP" />
     </>
   );
 }

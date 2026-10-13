@@ -4,6 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import { JwcoSeal, Stamp, Icon } from "@/components/Marks";
 import { getResidences } from "@/lib/data";
 import { FOUNDER, FOUNDER_PHOTOS, FOUNDER_LEDE, FOUNDER_BIO, FOUNDER_TIMELINE, GUIDING_PRINCIPLES, AFRICA_QUOTES, FOUNDER_FAQS, type FounderPhoto } from "@/lib/founder";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -168,6 +169,7 @@ export default async function Founder() {
           ))}
         </div>
       </section>
+      <PageSketch k={"savanna"} label="Africa, again and again" />
     </>
   );
 }

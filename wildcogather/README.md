@@ -253,3 +253,9 @@ A stay's page can carry an **At the table** section: a question heading ("Where 
 
 - `/founder` — James Wild's story since 1982: bio, the road so far (timeline), "On Africa" quotes, how James guides a family, and an FAQ. Content lives in `lib/founder.ts`; James's own photos are in `public/founder/`.
 - Linked from the header ("Our Founder"), footer, home page teaser and every Journal byline by James. Schema: ProfilePage + Person (`/founder#james-wild`, also referenced from the site Organization `founder`), BreadcrumbList and FAQPage.
+
+## Sketch borders and the Ledger registry (Oct 2026)
+
+- Every page ends with one luxe pen-and-ink border (`components/PageSketch.tsx`) above the Plan band: a stay page wears its setting's drawing, a destination its region's (`REGION_SKETCH`), the founder page the savanna, and index pages, itineraries and journal entries without a house the route divider. Drawings live in Cloudinary under `gatherings/sketch-borders/luxe/`; effects and crops in `lib/sketch-borders.ts`. Review board: `/studio/sketch-borders` (noindex).
+- Ledger registry for the chat agent and LLMs: `/ledger.json`, `/llms.txt`, `/llms-full.txt`, built by `lib/ledger-registry.ts` from live Airtable data. House IDs are the permanent Entry No. (`G-###`); see `docs/ledger-ids.md` for the ID map with Airtable record IDs. Airtable › Residences now has a **Ledger key** formula and **Page path** points at `/houses/<slug>`.
+- Each house page's LodgingBusiness schema carries `@id` (`/houses/<slug>#stay`) and `identifier` (its Ledger ID).

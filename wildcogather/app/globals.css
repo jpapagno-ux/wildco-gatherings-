@@ -459,3 +459,17 @@ h1, h2, h3, .dsp, .ser { overflow-wrap: break-word; hyphens: auto; }
 .skr-btn { font: 500 12px/1 var(--f-sans), sans-serif; letter-spacing: .2em; text-transform: uppercase; color: var(--rust); background: none; border: 1px solid var(--rust); padding: 10px 14px; cursor: pointer; }
 .skr-btn:hover, .skr-btn:focus-visible { background: var(--rust); color: var(--on-dark); outline: none; }
 @media (max-width: 860px) { .skr-row { grid-template-columns: 1fr; gap: 22px; } .skr-mock { padding: 0 18px 18px; } }
+
+/* Page-foot sketch: one per page, above the Plan band */
+.sk-foot { padding: 56px 0 34px; }
+.sk-foot .sk-band { max-width: 1100px; margin: 0 auto; }
+.sk-foot.sk-tight { padding-top: 24px; }
+.sk-cap { display: flex; align-items: center; gap: 14px; max-width: 1100px; margin: 14px auto 0; font-family: var(--f-mono), monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--clay-text); }
+.sk-cap::before, .sk-cap::after { content: ""; flex: 1; height: 1px; background: var(--stone); order: 0; }
+.sk-cap span { flex: none; }
+.sk-cap span:first-child { order: -1; }
+.sk-cap::before { order: 0; }
+.sk-cap .sk-cap-mid { order: 1; color: var(--rust); }
+.sk-cap::after { order: 2; }
+.sk-cap span:last-child { order: 3; }
+@media (max-width: 640px) { .sk-cap span:first-child, .sk-cap span:last-child { display: none; } .sk-foot { padding: 40px 0 26px; } }

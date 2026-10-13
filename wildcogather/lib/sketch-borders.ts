@@ -80,3 +80,8 @@ export function borderJpg(b: SketchBorder, width = 2400) {
 export function borderFor(key: SettingKey | "route") {
   return SKETCH_BORDERS.find((b) => b.key === key);
 }
+
+/** Which border each destination region wears. */
+export const REGION_SKETCH: Record<string, SettingKey | "route"> = {
+  "usa-mexico": "desert", caribbean: "coast", "latin-america": "jungle", europe: "mountain", africa: "savanna", asia: "jungle", oceania: "coast",
+};

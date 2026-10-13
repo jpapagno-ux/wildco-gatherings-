@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import LedgerTable from "@/components/LedgerTable";
 import JsonLd from "@/components/JsonLd";
 import { getResidences } from "@/lib/data";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 export const metadata: Metadata = {
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default async function Ledger() {
   const rows = await getResidences();
   return (
+    <>
     <section className="wrap" style={{ paddingTop: 80, paddingBottom: 100 }}>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", itemListElement: rows.map((r, i) => ({ "@type": "ListItem", position: i + 1, url: `/houses/${r.slug}`, name: r.name })) }} />
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 16, marginBottom: 30 }}>
@@ -30,5 +32,7 @@ export default async function Ledger() {
       </div>
       <p className="cp muted" style={{ margin: "22px 0 0", fontSize: 11 }}>New entries added when earned.</p>
     </section>
+      <PageSketch k={"route"} label="The Gatherings Ledger" />
+    </>
   );
 }

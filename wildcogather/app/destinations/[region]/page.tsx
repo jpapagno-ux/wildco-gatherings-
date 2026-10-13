@@ -6,6 +6,8 @@ import JsonLd from "@/components/JsonLd";
 import { getResidences } from "@/lib/data";
 import { REGIONS, regionMeta } from "@/lib/regions";
 import { staysInRegion } from "@/lib/browse";
+import PageSketch from "@/components/PageSketch";
+import { REGION_SKETCH } from "@/lib/sketch-borders";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -49,6 +51,7 @@ export default async function Destination({ params }: { params: Promise<{ region
           </div>
         )}
       </section>
+      <PageSketch k={REGION_SKETCH[m.key] || "route"} label={m.label} />
     </>
   );
 }
