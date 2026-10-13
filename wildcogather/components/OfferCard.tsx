@@ -6,7 +6,7 @@ import { fmtDate, type Offer } from "@/lib/extras";
 // pointing to the valid dates and what's included / not included on the right.
 export default function OfferCard({ offer, house, houseName }: { offer: Offer; house: string; houseName: string }) {
   const draft = offer.status !== "Live" || !offer.confirmed;
-  const dates = offer.validFrom && offer.validTo ? `${fmtDate(offer.validFrom)} – ${fmtDate(offer.validTo)}` : "Dates to confirm";
+  const dates = offer.validFrom && offer.validTo ? `${fmtDate(offer.validFrom)} – ${fmtDate(offer.validTo)}` : "Dates on request";
   return (
     <section className="wrap" id="offer" aria-label={`Offer: ${offer.name}`} style={{ paddingBottom: 90 }}>
       <div className="offer-grid">

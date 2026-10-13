@@ -55,6 +55,7 @@ const ICON: Record<string, React.ReactNode> = {
   family: <><circle cx="13" cy="10" r="4" /><circle cx="28" cy="13" r="3.2" /><path d="M6 36v-12a7 7 0 0 1 14 0v12M23 36v-9a5 5 0 0 1 10 0v9" /></>,
   water: <path d="M2 27c5-5 11 5 18 0s13 5 18 0M2 34c5-5 11 5 18 0s13 5 18 0M11 19l9-14 9 14" />,
   moon: <><path d="M26 6 A 15 15 0 1 0 34 30 A 12 12 0 1 1 26 6 Z" /><path d="M31 8 l1.2 2.6 2.8 .4 -2 2 .5 2.8 -2.5 -1.3 -2.5 1.3 .5 -2.8 -2 -2 2.8 -.4 Z" fill="currentColor" /></>,
+  table: <><path d="M13 6v10a4 4 0 0 0 8 0V6" /><path d="M17 6v28" /><path d="M28 34V6c-3.5 2-5 6-5 11s1.5 6 5 6" /></>,
   route: <><circle cx="8" cy="32" r="3.5" /><circle cx="32" cy="8" r="3.5" /><path d="M11 30 C 22 28, 12 16, 22 13 S 28 10, 29 10" strokeDasharray="3 3" /></>,
 };
 
@@ -262,15 +263,15 @@ export function OfferStamp({ stay = 3, pay = 2, size = 170, rotate = -9, tone = 
   );
 }
 
-// ── 7. "On the Horizon" stamp — new places on J.W.'s list, NOT yet vetted ─────
+// ── 7. "On the Horizon" stamp — new places J.W. has approved ─────
 // Rectangular (the Ledger stamps are round), in the setting's ink. Never use it on a Ledger house.
 export function HorizonStamp({ setting, no, opens, size = 230, rotate = -5, tone = "ink" }: { setting: SettingKey; no: string; opens: string; size?: number; rotate?: number; tone?: Tone }) {
   const id = useId().replace(/:/g, "");
   const c = tone === "light" ? LIGHT : SETTINGS[setting].ink;
   const o = opens.toUpperCase();
-  const foot = `NOT YET VETTED · ${o}`;
+  const foot = `APPROVED · ${o}`;
   return (
-    <svg width={size} height={Math.round(size * 150 / 260)} viewBox="0 0 260 150" role="img" aria-label={`On the Horizon ${no} — not yet vetted · ${opens}`} style={{ transform: `rotate(${rotate}deg)`, flex: "none" }}>
+    <svg width={size} height={Math.round(size * 150 / 260)} viewBox="0 0 260 150" role="img" aria-label={`On the Horizon ${no} — approved · ${opens}`} style={{ transform: `rotate(${rotate}deg)`, flex: "none" }}>
       <defs><Ink id={`h${id}`} seed={41 + no.length} /></defs>
       <g filter={`url(#h${id})`} fill={c} stroke={c} opacity={0.93}>
         <rect x="5" y="5" width="250" height="140" rx="6" fill="none" strokeWidth="3.4" />

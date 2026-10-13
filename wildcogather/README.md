@@ -13,7 +13,14 @@ A house of James Wild & Co. Next.js site, deployed on Vercel from GitHub. Conten
 - `/journal` and `/journal/[slug]` The Journal — James's "Why it's in the Ledger" entries, with his quotes
 - `/plan` Plan a Gathering — form that saves to the Airtable `Inquiries` table
 - `/destinations/[region]` Stays by region (USA & Mexico, Caribbean, Latin America, Europe, Africa, Asia & Indian Ocean, Oceania) — intro, scroll-synced interactive map and residence cards. Also in the "Stays" menu.
-- `/horizon` and `/horizon/[slug]` On the Horizon — new places, not yet vetted
+
+## Navigation & browsing (built to grow)
+- **Top nav stays short:** Stays ▾ · Itineraries · Gatherings VIP · The Journal · Advisors, plus Plan a Gathering. New houses never add top-level links.
+- **"Stays" mega-menu** (`components/Header.tsx`): Destinations (every region, with a count or "Soon"), By setting (with counts) and Collections (All stays, the Ledger, VIP, On the Horizon). Counts come from `browseNav()` in `lib/browse.ts`, read once in `app/layout.tsx`. On phones it sits inside a single "Menu" button. Escape closes it and returns focus; so does clicking outside or following a link.
+- **Pages scroll down; rails scroll sideways.** Use `components/Strip.tsx` only for galleries and card rails (archive photos, experiences, "More stays" at the foot of each house page). The home page shows the first 8 Ledger entries and links to `/ledger` for the rest.
+- **One card for every stay:** `components/StayCard.tsx` — fixed 5:4 frame, Cloudinary crops around the subject (`g_auto`), so new photography of any size or orientation lines up. The photo is chosen by `cardImage()` in `lib/browse.ts`: Role Hero, then Card, then the first image.
+- A new region: add it to `REGIONS` and its countries to `RULES` in `lib/regions.ts` — the menu, `/destinations/<key>`, the sitemap and the /houses region links pick it up.
+- `/horizon` and `/horizon/[slug]` On the Horizon — new places, approved by James
 - `/advisors` For travel advisors — why James Wild & Co, what we're building for agents who care, how we plan family & friend gatherings, FAQ, application form
 - `/webinars` and `/webinars/[slug]` Webinars on Livestorm — first one: Ted Turner Reserves with host Harry Tyner
 - `/sitemap.xml`, `/robots.txt` — generated
@@ -132,7 +139,7 @@ In Airtable › Journal, paste the 11-character **YouTube ID** (the part after `
 ## Episode cross-sell
 The featured house's film (Residences › YouTube ID, or its journal story's) also appears as a "second chapter" band on every other house and itinerary in the **same setting**, with "Plan both houses" (pre-fills the Plan form with both). Today: the Monwana episode on Fish Eagle, Hinkwenu and the Lion Sands package.
 
-## On the Horizon (new places, not yet vetted) — Airtable › Horizon
+## On the Horizon (new places, approved) — Airtable › Horizon
 - Pages: `/horizon` (all, with a "Be the first" sign-up) and `/horizon/[slug]` (first-look post). Home shows the first three under the featured house; nav and footer link to it.
 - Each row: Entry No. (H-01…, never reuse), Status (**Draft preview** = shown with a "first look" ribbon and hidden from Google · **Live** · **Moved to Ledger** · **Paused**), Setting (picks the ink), Opens (stamp), Facts (`Label: value` per line), Body (journal format), FAQs (`Q:` / `A:` pairs), To confirm, Sources (`Title | URL`), Pairs with (slug).
 - No partner photos until the house grants permission — the cards are designed to work without them. Add "Hero (Cloudinary ID)" later.
@@ -187,3 +194,62 @@ See `docs/seo-aeo-playbook.md` — keyword and question clusters for families an
 - Itinerary: "Whale Season: Four Days at Lekkerwater" (Draft preview).
 - Partner: Natural Selection (Airtable › Partners, Image permission **Requested**). 20 photos in Cloudinary tagged `permission-pending`; their web images are only 1100 px wide — ask Natural Selection for the hi-res set and replace (same public IDs) so the heroes are sharp.
 - Still to confirm with Natural Selection (marked [confirm] on the pages): rate basis (per person or per suite), board/inclusions, exclusive-use terms and maximum guests, check-in/out, deposit, cancellation, GweGwe flight route.
+
+## Maps — Mapbox, in the brand style (added Oct 12, 2026)
+Maps now sit at the **bottom** of every stay feature: on region pages (/destinations/…) the stays come first and the map follows; every house page ends with a "Where is …?" section and a zoomed map of that house.
+
+**Turn Mapbox on (5 minutes, no code)**
+1. Create a free account at mapbox.com → **Tokens** → *Create a token*. Leave the public scopes as they are and add URL restrictions for your domain(s) and `*.vercel.app` previews.
+2. Vercel → wildcogather → Settings → Environment Variables:
+   - `NEXT_PUBLIC_MAPBOX_TOKEN` = the `pk.…` token
+   - `NEXT_PUBLIC_MAPBOX_THEME` = `paper` (approved look; also `coast` or `night`)
+3. Redeploy. Without a token the site keeps the plain OpenStreetMap map, so nothing breaks.
+
+**Optional: your own Mapbox Studio style (the finished "Paper Atlas")**
+In Mapbox Studio → New style → **Monochrome** (Light) template → set land `#F4F1EC`, water `#D3DFDC`, parks `#ECE7DB`, roads `#DCCFB6`, labels `#5C564D` with a `#F4F1EC` halo, country borders dashed ink at 50%. Upload the brand fonts (IBM Plex Mono for place names, Cormorant Garamond Italic for water and regions — both open licence) and hide POIs, transit and road labels. Publish, copy the style URL (`mapbox://styles/<you>/<id>`) into `NEXT_PUBLIC_MAPBOX_STYLE`. When that variable is set the site uses the Studio style exactly; when it isn't, the site recolours Mapbox Light to the same palette automatically (`lib/map-theme.ts`).
+
+**Markers** are drawn by the site in each house's setting ink with its list number; houses at the same lodge share one pin (e.g. "01·02"). The popup card links to the house page. Scroll-zoom needs ⌘/Ctrl (two fingers on phones) so the page still scrolls.
+
+Free tier: 50,000 web map loads a month (check mapbox.com/pricing for current terms).
+
+## Approval & sources policy (Oct 12, 2026)
+- James has met the team at every house and Horizon place; all content is approved. Houses that were "Under observation" now carry **Host met**; houses James has stayed at keep **Field verified**. Statuses are **Approved**.
+- **No outside sources or links to other travel companies on the site.** Horizon pages no longer show a Sources list, an "Official site" link or a "still confirming" box, and house/Horizon structured data no longer links to partner sites. Keep source notes in Airtable for our records only (Horizon › Sources and Residences › Official URL are not displayed).
+- Empty booking facts (check-in, deposit, cancellation, taxes) are hidden automatically; fill them in Airtable when the house sends them.
+
+## At the Table — dining & shared-table cards (added Oct 12, 2026)
+A stay's page can carry an **At the table** section: a question heading ("Where do families eat at …?"), a short answer, and one card per restaurant, dinner experience or family night. First stay: Lone Mountain Ranch (sleigh-ride dinner, Sunday BBQ, Horn & Cantle, day sleigh & lunch, ranch rodeo, Auric Room 1915).
+
+**Add cards for any stay (Airtable › At the Table)** — one row per card: Name, House slug (e.g. `lone-mountain-ranch`), Kind (Restaurant / Dinner experience / Family night / Lunch experience / Bar & lounge / Private dinner), Where, When, Who can come, Why it works for a gathering (30–50 words in James's voice — this is what AI answers quote), On the table (one dish per line), Booking, Order, Status (Live / Hidden). A stay with no rows shows no section. Never paste outside links or booking-platform names — booking goes through us.
+
+**Photos (Cloudinary)** — upload to `gatherings/<house-slug>/table/<card-slug>` (e.g. `gatherings/lone-mountain-ranch/table/sleigh-ride-dinner`), then put that ID in **Image (Cloudinary ID)** with alt text. Only upload photos we own or have permission to use. Cards are designed to stand on their own without a photo.
+
+**Search** — each card adds an amenity to the house's LodgingBusiness schema; restaurants and bars are also listed as places inside the house (Restaurant / BarOrPub), and "Where do families eat at …?" is added to the page's FAQ schema.
+
+## .Here Maldives — photos and partner approval (Oct 12, 2026)
+.Here approved us, as a wholesale tour operator, for all image use (logged in Airtable › Partners). 39 photos are in Cloudinary under `gatherings/here-maldives/` with search-friendly names, alt text and the credit "Courtesy of .Here Maldives".
+- **Horizon post** (/horizon/here-somewhere-nowhere-maldives): aerial hero, an "Inside .Here" photo strip, "What is there to do at .Here?" experience cards (mantas, diving, ASMAS, sandbank, watersports, Finolhu, spa, yoga) and "At the table" dining cards (SAFAR, dinner at the residence, sandbank lunch, sunset on ASMAS).
+- **Airtable › Horizon** has two new fields any Horizon post can use: **Gallery (Cloudinary IDs)** — one photo per line `id | alt text`; **Experiences** — one per line `Name | sentence | image id`.
+- **Horizon cards** (home page and /horizon) now lead with the hero photo whenever one is set.
+- **The Ledger** shows a photo thumbnail for every house (its Card photo, else its Hero).
+
+## The Cape & a malaria-free safari (Oct 2026)
+
+- New stays G-014 to G-017: Jaci's Madikwe House, Morukuru Farm House, Morukuru River House & Owner's House (Madikwe, malaria-free Big Five) and Leeu Estates (Franschhoek). Data in `lib/sample-capesafari.ts`, mirrored to Airtable (Residences, Images, Experiences, FAQs, Room Categories, Destinations "Madikwe Game Reserve" and "Franschhoek").
+- Photos in Cloudinary under `gatherings/jacis-madikwe-house/`, `gatherings/morukuru-farm-house-madikwe/`, `gatherings/morukuru-river-house-madikwe/`, `gatherings/morukuru-madikwe-wildlife/` and `gatherings/leeu-estates-franschhoek/` (tag `cape-and-safari`). Airtable Images › Permission is "Pending" until each partner confirms in writing.
+- Multi-stay journeys: Itineraries › **Stops** (one line per chapter: `house-slug | nights | label | other-slugs`). The itinerary page shows each chapter as a card, lists every house in the TouristTrip schema, and the journey appears on each stop's house page. First journey: `/itineraries/cape-winelands-malaria-free-safari-nine-days`.
+
+## .Here and Villa Ardore (Oct 2026)
+
+- .Here moved from On the Horizon into the Ledger as G-018 (`lib/sample-here.ts`); Airtable Horizon › Status = "Moved to Ledger". `/horizon/<slug>` now permanently redirects to `/houses/<slug>` for any Horizon entry that has become a stay.
+- Villa Ardore, Chianti (G-019, `lib/sample-italy.ts`) with a 7-day Tuscan reunion itinerary and At the Table cards. Photos in Cloudinary `gatherings/villa-ardore-tuscany/`.
+
+## ULUM Moab (Oct 2026)
+
+- ULUM Moab, Utah (G-020, `lib/sample-utah.ts`): J.W.'s favourite family stay, Field verified April 2023, setting Desert. Photos in Cloudinary `gatherings/ulum-moab/` (partner use approved).
+- 6-day "Red Rock Family Adventure" itinerary with a one-night White Rim 4x4 trip, and three At the Table cards. All mirrored in Airtable (Residence recgqsCsjMvXoj3JA).
+
+## Founder story (Oct 2026)
+
+- `/founder` — James Wild's story since 1982: bio, the road so far (timeline), "On Africa" quotes, how James guides a family, and an FAQ. Content lives in `lib/founder.ts`; James's own photos are in `public/founder/`.
+- Linked from the header ("Our Founder"), footer, home page teaser and every Journal byline by James. Schema: ProfilePage + Person (`/founder#james-wild`, also referenced from the site Organization `founder`), BreadcrumbList and FAQPage.

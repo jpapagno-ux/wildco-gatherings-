@@ -13,6 +13,12 @@ import { embedUrl, thumbUrl } from "@/lib/video";
 import { getResidence, getResidences, dms } from "@/lib/data";
 import { getPostForHouse, quotesOf } from "@/lib/journal";
 import OfferCard from "@/components/OfferCard";
+import StayMap from "@/components/StayMap";
+import TableCards from "@/components/TableCards";
+import { getTable, tableAnswer } from "@/lib/table";
+import StayCard from "@/components/StayCard";
+import { relatedStays } from "@/lib/browse";
+import { regionFor, regionMeta } from "@/lib/regions";
 import { getOffersForHouse, getItinerariesForHouse } from "@/lib/extras";
 import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
 
@@ -38,6 +44,8 @@ export default async function House({ params }: { params: Promise<{ slug: string
   const r = await getResidence((await params).slug);
   if (!r) notFound();
   const hero = r.images.find((i) => i.role === "Hero") || r.images[0];
+  const region = regionMeta(regionFor(r))!;
+  const moreStays = relatedStays(await getResidences(), r);
   const coords = dms(r.lat, r.lng);
   const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
   const b = r.booking;
@@ -46,6 +54,9 @@ export default async function House({ params }: { params: Promise<{ slug: string
   const post = await getPostForHouse(r.slug);
   const offer = (await getOffersForHouse(r.slug))[0];
   const trips = await getItinerariesForHouse(r.slug);
+  const table = await getTable(r.slug);
+  const tableQ = table.length ? { question: `Where do families eat at ${r.name}?`, answer: tableAnswer(r.name, r.slug, table) } : null;
+  const faqAll = tableQ && !r.faqs.some((f) => /eat|dining|dinner|restaurant/i.test(f.question)) ? [...r.faqs, tableQ] : r.faqs;
   const webinars = await getWebinarsForPartner(r.partner?.name);
   const toTime = (t?: string) => { const m = t?.match(/(\d{1,2})\s*(am|pm)/i); if (!m) return undefined; let h = Number(m[1]) % 12; if (m[2].toLowerCase() === "pm") h += 12; return `${String(h).padStart(2, "0")}:00`; };
   const bookingFacts: [string, string | undefined][] = b ? [
@@ -86,9 +97,10 @@ export default async function House({ params }: { params: Promise<{ slug: string
       <JsonLd data={{
         "@context": "https://schema.org", "@type": "LodgingBusiness", name: r.name, description: r.line,
         address: r.address ? { "@type": "PostalAddress", streetAddress: r.address } : { "@type": "PostalAddress", addressLocality: r.place, addressRegion: r.region, addressCountry: r.country },
-        ...(r.lat ? { geo: { "@type": "GeoCoordinates", latitude: r.lat, longitude: r.lng } } : {}),
+        ...(r.lat ? { geo: { "@type": "GeoCoordinates", latitude: r.lat, longitude: r.lng }, hasMap: `https://www.google.com/maps/search/?api=1&query=${r.lat},${r.lng}` } : {}),
         ...(r.sleeps ? { occupancy: { "@type": "QuantitativeValue", maxValue: r.sleeps } } : {}),
-        amenityFeature: [r.kidsProgram, r.water].filter(Boolean).map((v) => ({ "@type": "LocationFeatureSpecification", name: v, value: true })),
+        amenityFeature: [r.kidsProgram, r.water, ...table.map((t) => `${t.name} (${t.kind.toLowerCase()})`)].filter(Boolean).map((v) => ({ "@type": "LocationFeatureSpecification", name: v, value: true })),
+        ...(table.some((t) => t.kind === "Restaurant" || t.kind === "Bar & lounge") ? { containsPlace: table.filter((t) => t.kind === "Restaurant" || t.kind === "Bar & lounge").map((t) => ({ "@type": t.kind === "Restaurant" ? "Restaurant" : "BarOrPub", name: t.name, description: t.gathering })) } : {}),
         image: r.images.map((i) => ({
           "@type": "ImageObject",
           contentUrl: buildCloudinaryUrl({ src: i.publicId, width: 1600, quality: "auto", format: "auto" }),
@@ -118,7 +130,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
         itemOffered: { "@type": "LodgingBusiness", name: r.name, url: `${SITE}/houses/${r.slug}` },
         offeredBy: { "@type": "TravelAgency", name: "Wild & Co Gatherings", url: SITE },
       }} />}
-      {r.faqs.length > 0 && <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: r.faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })) }} />}
+      {faqAll.length > 0 && <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqAll.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })) }} />}
 
       <section className="hero" aria-label={r.name}>
         <Photo img={hero} priority style={{ position: "absolute", inset: 0 }} />
@@ -149,7 +161,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
           <hr className="eb-rule" />
           <h2 className="dsp" style={{ margin: "30px 0 0", fontSize: "clamp(40px, 4.6vw, 60px)" }}>Why it earned its place</h2>
           <p className="it" style={{ margin: "24px 0 0", fontSize: 28, lineHeight: 1.3 }}>{r.line}</p>
-          {r.verdict.map((v, i) => <p key={i} className="body" style={{ margin: "22px 0 0", maxWidth: 560 }}>{v}</p>)}
+          {r.verdict.filter(Boolean).map((v, i) => <p key={i} className="body" style={{ margin: "22px 0 0", maxWidth: 560 }}>{v}</p>)}
           <hr className="rule" style={{ width: 56, margin: "34px 0 22px" }} />
           <p className="eb" style={{ fontSize: 12 }}>From the personal ledger of James Wild &amp; Co.</p>
           <p className="lab" style={{ margin: "8px 0 0", color: "var(--body)" }}>Still going since 1982.</p>
@@ -243,7 +255,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
               <p className="ser ox" style={{ margin: "6px 0 0", fontSize: 60, fontWeight: 300, lineHeight: 1 }}>{r.rateFrom ? `$${r.rateFrom.toLocaleString()}` : "On request"}</p>
               {b.rateBasis && <p className="body" style={{ margin: "10px 0 24px", fontSize: 15 }}>{b.rateBasis}</p>}
               <dl style={{ margin: 0, borderTop: "1px solid var(--charcoal)" }}>
-                {b.fees.map((f) => <div key={f.label} className="mf"><dt className="cp muted">{f.label}</dt><dd className="mono" style={{ margin: 0, fontSize: 12 }}>{f.value}</dd></div>)}
+                {b.fees.filter((f) => f.value).map((f) => <div key={f.label} className="mf"><dt className="cp muted">{f.label}</dt><dd className="mono" style={{ margin: 0, fontSize: 12 }}>{f.value}</dd></div>)}
               </dl>
               <div style={{ marginTop: "auto", paddingTop: 24 }}><Link href={`/plan?house=${r.slug}`} className="btn" style={{ width: "100%" }}>Request a quote</Link></div>
             </div>
@@ -251,11 +263,11 @@ export default async function House({ params }: { params: Promise<{ slug: string
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))", gap: 28, marginTop: 28 }}>
             <div style={{ padding: "30px 0", borderTop: "1px solid var(--charcoal)" }}>
               <h3 className="lbl ox">✓ Included</h3>
-              <ul className="body" style={{ margin: 0, paddingLeft: 18, fontSize: 16 }}>{b.included.map((x) => <li key={x}>{x}</li>)}</ul>
+              <ul className="body" style={{ margin: 0, paddingLeft: 18, fontSize: 16 }}>{b.included.filter(Boolean).map((x) => <li key={x}>{x}</li>)}</ul>
             </div>
             <div style={{ padding: "30px 0", borderTop: "1px solid var(--charcoal)" }}>
               <h3 className="lbl">✕ Not included</h3>
-              <ul className="body" style={{ margin: 0, paddingLeft: 18, fontSize: 16 }}>{b.excluded.map((x) => <li key={x}>{x}</li>)}</ul>
+              <ul className="body" style={{ margin: 0, paddingLeft: 18, fontSize: 16 }}>{b.excluded.filter(Boolean).map((x) => <li key={x}>{x}</li>)}</ul>
             </div>
           </div>
         </section>
@@ -292,7 +304,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
         </section>
       )}
 
-      {r.host && (
+      {r.host?.name && (
         <section className="wrap" style={{ paddingTop: 90 }}>
           <div className="card" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 48, padding: 40 }}>
             <div style={{ position: "relative", flex: "none" }}>
@@ -372,6 +384,17 @@ export default async function House({ params }: { params: Promise<{ slug: string
         </section>
       )}
 
+      {table.length > 0 && (
+        <section className="wrap tbl-section" aria-label={`Dining at ${r.name}`} id="at-the-table">
+          <p className="eb">At the table</p>
+          <hr className="eb-rule" />
+          <h2 className="dsp tbl-q">Where do families eat at {r.name}?</h2>
+          <p className="body tbl-answer">{tableAnswer(r.name, r.slug, table)}</p>
+          <TableCards cards={table} house={r.slug} ink={st.ink} />
+          <p className="cp muted" style={{ margin: "22px 0 0" }}>Every dinner and table here can be booked with your stay — tell us which ones the family wants and we will hold them.</p>
+        </section>
+      )}
+
       {r.manifest.length > 0 && (
         <section className="wrap" style={{ paddingTop: 90 }}>
           <div className="card" style={{ padding: "34px 44px", overflowX: "auto" }}>
@@ -418,6 +441,31 @@ export default async function House({ params }: { params: Promise<{ slug: string
                 <p className="body" style={{ margin: 0, fontSize: 16 }}>{f.answer}</p>
               </div>
             ))}
+          </div>
+        </section>
+      )}
+      {moreStays.length > 0 && (
+        <section aria-label="More stays" className="band" style={{ padding: "90px 0 50px", marginBottom: 40 }}>
+          <Strip label={`More stays · ${region.label}`} title="Keep exploring" action={<Link href={`/destinations/${region.key}`} className="lnk">All of {region.label} <span>→</span></Link>}>
+            {moreStays.map((h) => <div key={h.slug} className="strip-card"><StayCard r={h} sizes="340px" /></div>)}
+          </Strip>
+        </section>
+      )}
+      {r.lat != null && r.lng != null && (
+        <section className="wrap location-map" aria-label={`Where ${r.name} is`}>
+          <div className="location-map-head">
+            <div>
+              <p className="eb">Where it is</p>
+              <hr className="eb-rule" />
+              <h2 className="dsp">Where is {r.name}?</h2>
+              <p className="body" style={{ margin: "12px 0 0", maxWidth: 620 }}>
+                {r.name} is in {[r.place, r.region, r.country].filter(Boolean).join(", ")}.
+              </p>
+            </div>
+            <p className="cp muted location-map-coords">{coords.replace("   ", " · ")}</p>
+          </div>
+          <div className="location-map-frame">
+            <StayMap residences={[r]} variant="house" label={`Map showing ${r.name}`} />
           </div>
         </section>
       )}

@@ -37,7 +37,7 @@ export default function Photo({
   const rawSrc = img?.publicId?.trim();
   if (!rawSrc) {
     return (
-      <div style={{ position: "relative", background: "var(--sand)", overflow: "hidden", ...style }}>
+      <div className={className} style={{ position: "relative", background: "var(--sand)", overflow: "hidden", ...style }}>
         <span className="cp" style={{ position: "absolute", left: 12, bottom: 10, fontSize: 11 }}>
           Photo to come
         </span>
@@ -60,7 +60,7 @@ export default function Photo({
   }
 
   return (
-    <div style={{ position: "relative", background: "var(--sand)", overflow: "hidden", ...style }}>
+    <div className={className} style={{ position: "relative", background: "var(--sand)", overflow: "hidden", ...style }}>
       {hasError ? (
         <span className="cp" style={{ position: "absolute", left: 12, bottom: 10, fontSize: 11 }}>
           {altText || "Photo unavailable"}
@@ -72,7 +72,7 @@ export default function Photo({
           fill
           sizes={sizes}
           priority={priority}
-          className={`fade${isLoaded ? " in" : ""}${className ? ` ${className}` : ""}`}
+          className={`fade${isLoaded ? " in" : ""}`}
           style={{
             objectFit: contain ? "contain" : "cover",
             ...(objectPosition ? { objectPosition } : {}),

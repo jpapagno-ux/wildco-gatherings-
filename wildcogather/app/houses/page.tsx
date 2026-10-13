@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Photo from "@/components/Photo";
+import StayCard from "@/components/StayCard";
 import JsonLd from "@/components/JsonLd";
 import { Icon } from "@/components/Marks";
 import { getResidences } from "@/lib/data";
 import { SETTINGS, SETTING_ORDER } from "@/lib/settings";
-import { REGIONS, regionFor } from "@/lib/regions";
+import { browseNav, staysInSetting } from "@/lib/browse";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -19,7 +19,8 @@ export const metadata: Metadata = {
 // Every stay in Airtable appears here automatically, under its Setting. Empty settings are hidden.
 export default async function Houses() {
   const all = await getResidences();
-  const groups = SETTING_ORDER.map((k) => ({ s: SETTINGS[k], rows: all.filter((r) => r.setting === k) })).filter((g) => g.rows.length);
+  const groups = SETTING_ORDER.map((k) => ({ s: SETTINGS[k], rows: staysInSetting(all, k) })).filter((g) => g.rows.length);
+  const regions = browseNav(all).regions.filter((g) => g.count);
   return (
     <>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: "The Houses — Wild & Co Gatherings", url: `${SITE}/houses`,
@@ -37,8 +38,8 @@ export default async function Houses() {
         </nav>
         <nav aria-label="Regions" className="cp" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "8px 22px", marginTop: 22 }}>
           <span className="muted">By region:</span>
-          {REGIONS.map((g) => ({ g, n: all.filter((h) => regionFor(h) === g.key).length })).filter(({ n }) => n).map(({ g, n }) => (
-            <Link key={g.key} href={`/destinations/${g.key}`} className="lnk" style={{ borderBottomWidth: 1 }}>{g.label} · {n}</Link>
+          {regions.map((g) => (
+            <Link key={g.href} href={g.href} className="lnk" style={{ borderBottomWidth: 1 }}>{g.label} · {g.count}</Link>
           ))}
         </nav>
       </section>
@@ -52,18 +53,7 @@ export default async function Houses() {
             <p className="cp muted" style={{ margin: 0 }}>{rows.length} {rows.length === 1 ? "house" : "houses"}</p>
           </div>
           <div className="house-grid">
-            {rows.map((r) => {
-              const img = r.images.find((i) => i.role === "Hero") || r.images[0];
-              return (
-                <Link key={r.slug} href={`/houses/${r.slug}`} className="house-card">
-                  <Photo img={img} sizes="(max-width: 700px) 100vw, 380px" aspect="5:4" style={{ height: 300 }} />
-                  <p className="cp muted" style={{ margin: "18px 0 0" }}>Entry {r.entryNo} · {r.place}, {r.region}</p>
-                  <h3 className="ser" style={{ margin: "8px 0 0", fontSize: 26, fontWeight: 500 }}>{r.name}</h3>
-                  <hr style={{ width: 30, height: 1, border: 0, background: s.ink, margin: "12px auto" }} />
-                  <p className="cp oxblood" style={{ margin: 0 }}>{r.stamp}{r.vip ? " · Gatherings VIP" : ""}</p>
-                </Link>
-              );
-            })}
+            {rows.map((r) => <StayCard key={r.slug} r={r} />)}
           </div>
         </section>
       ))}

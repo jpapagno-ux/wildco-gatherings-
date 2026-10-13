@@ -10,8 +10,10 @@ import { getResidences, dms } from "@/lib/data";
 import { getPostForHouse } from "@/lib/journal";
 import { getHorizon } from "@/lib/horizon";
 import HorizonCard from "@/components/HorizonCard";
+import { FOUNDER_PHOTOS, FOUNDER_LEDE, AFRICA_QUOTES } from "@/lib/founder";
 
 export const revalidate = 3600;
+const LEDGER_PREVIEW = 8;
 
 const FORMULA: [string, string][] = [
   ["Room to gather", "One table for all of you, a door to close for each branch."],
@@ -25,7 +27,7 @@ const FORMULA: [string, string][] = [
 const FAQS = [
   { q: "What is a resort residence?", a: "A private, multi-bedroom home inside or beside a resort: your own space and kitchen, with the resort's dining, housekeeping, children's programs and activities close at hand." },
   { q: "Is a resort residence better than a villa for a family reunion?", a: "For three generations, usually. You keep a villa's privacy, nobody has to run the house, and every age has something waiting." },
-  { q: "How does James vet each house?", a: "Against the six tests of the Gathering Formula, drawing on forty-four years of travel. Houses he has not yet visited are marked Under observation." },
+  { q: "How does James vet each house?", a: "Against the six tests of the Gathering Formula, drawing on forty-four years of travel. He has met the team at every house in the Ledger, and each one carries the stamp it has earned, from Host met to Founder favorite." },
 ];
 
 export default async function Home() {
@@ -119,6 +121,25 @@ export default async function Home() {
         </section>
       )}
 
+      <section className="wrap" style={{ paddingTop: 90, paddingBottom: 90 }} aria-labelledby="home-founder">
+        <div className="fd-teaser">
+          <figure className="polaroid" style={{ margin: 0, transform: "rotate(-2deg)", maxWidth: 300, justifySelf: "center", width: "100%" }}>
+            <img className="tape" src="/kit/tape-kraft.png" alt="" aria-hidden="true" />
+            <img src={FOUNDER_PHOTOS.sundowner.src} alt={FOUNDER_PHOTOS.sundowner.alt} width={FOUNDER_PHOTOS.sundowner.w} height={FOUNDER_PHOTOS.sundowner.h} loading="lazy" decoding="async" style={{ width: "100%", height: 340, objectFit: "cover", objectPosition: FOUNDER_PHOTOS.sundowner.focus }} />
+            <figcaption className="sig">{FOUNDER_PHOTOS.sundowner.caption}</figcaption>
+          </figure>
+          <div>
+            <p className="eb">The founder · since 1982</p>
+            <h2 id="home-founder" className="dsp" style={{ margin: "16px 0 0", fontSize: "clamp(34px, 4vw, 52px)" }}>Forty-four years on the road — and still going</h2>
+            <p className="it" style={{ margin: "20px 0 0", fontSize: 24, lineHeight: 1.35, maxWidth: 640 }}>“{AFRICA_QUOTES[0].text}”</p>
+            <p className="body" style={{ margin: "18px 0 0", maxWidth: 620 }}>{FOUNDER_LEDE}</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 18, alignItems: "center", marginTop: 26 }}>
+              <Link href="/founder" className="btn btn-o">Read James's story</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="band" style={{ padding: "80px 0" }} aria-label="For families and for advisors">
         <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))", gap: 50 }}>
           <div>
@@ -193,8 +214,12 @@ export default async function Home() {
             <div><p className="eb">A personal archive</p><h2 className="dsp" style={{ margin: "14px 0 0", fontSize: 44 }}>The Gatherings Ledger</h2></div>
             <p className="cp muted" style={{ margin: 0 }}>Entries {String(all.length).padStart(3, "0")}</p>
           </div>
-          <LedgerTable rows={all} />
-          <p className="cp muted" style={{ margin: "22px 0 0" }}>New entries added when earned.</p>
+          {/* A preview, so the home page stays the same length however many houses join the Ledger. */}
+          <LedgerTable rows={all.slice(0, LEDGER_PREVIEW)} />
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16, marginTop: 22 }}>
+            <p className="cp muted" style={{ margin: 0 }}>New entries added when earned.</p>
+            {all.length > LEDGER_PREVIEW && <Link href="/ledger" className="lnk">All {all.length} entries <span>→</span></Link>}
+          </div>
         </div>
       </section>
 

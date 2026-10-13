@@ -26,6 +26,7 @@ export default function Footer() {
             <Link href="/ledger" style={{ textDecoration: "none" }}>The Ledger</Link>
             <Link href="/vip" style={{ textDecoration: "none" }}>Gatherings VIP</Link>
             <Link href="/journal" style={{ textDecoration: "none" }}>The Journal</Link>
+            <Link href="/founder" style={{ textDecoration: "none" }}>Our Founder</Link>
           </nav>
           <Link href="/" aria-label="James Wild & Co — home" style={{ justifySelf: "center", textAlign: "center", textDecoration: "none" }}>
             <JwcoSeal size={84} />
