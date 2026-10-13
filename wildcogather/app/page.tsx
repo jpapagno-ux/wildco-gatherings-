@@ -10,6 +10,7 @@ import { getResidences, dms } from "@/lib/data";
 import { getPostForHouse } from "@/lib/journal";
 import { getHorizon } from "@/lib/horizon";
 import HorizonCard from "@/components/HorizonCard";
+import { FOUNDER_PHOTOS, FOUNDER_LEDE, AFRICA_QUOTES } from "@/lib/founder";
 
 export const revalidate = 3600;
 const LEDGER_PREVIEW = 8;
@@ -119,6 +120,25 @@ export default async function Home() {
           <div className="hz-grid">{horizon.map((h) => <HorizonCard key={h.slug} h={h} />)}</div>
         </section>
       )}
+
+      <section className="wrap" style={{ paddingTop: 90, paddingBottom: 90 }} aria-labelledby="home-founder">
+        <div className="fd-teaser">
+          <figure className="polaroid" style={{ margin: 0, transform: "rotate(-2deg)", maxWidth: 300, justifySelf: "center", width: "100%" }}>
+            <img className="tape" src="/kit/tape-kraft.png" alt="" aria-hidden="true" />
+            <img src={FOUNDER_PHOTOS.sundowner.src} alt={FOUNDER_PHOTOS.sundowner.alt} width={FOUNDER_PHOTOS.sundowner.w} height={FOUNDER_PHOTOS.sundowner.h} loading="lazy" decoding="async" style={{ width: "100%", height: 340, objectFit: "cover", objectPosition: FOUNDER_PHOTOS.sundowner.focus }} />
+            <figcaption className="sig">{FOUNDER_PHOTOS.sundowner.caption}</figcaption>
+          </figure>
+          <div>
+            <p className="eb">The founder · since 1982</p>
+            <h2 id="home-founder" className="dsp" style={{ margin: "16px 0 0", fontSize: "clamp(34px, 4vw, 52px)" }}>Forty-four years on the road — and still going</h2>
+            <p className="it" style={{ margin: "20px 0 0", fontSize: 24, lineHeight: 1.35, maxWidth: 640 }}>“{AFRICA_QUOTES[0].text}”</p>
+            <p className="body" style={{ margin: "18px 0 0", maxWidth: 620 }}>{FOUNDER_LEDE}</p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 18, alignItems: "center", marginTop: 26 }}>
+              <Link href="/founder" className="btn btn-o">Read James's story</Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="band" style={{ padding: "80px 0" }} aria-label="For families and for advisors">
         <div className="wrap" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))", gap: 50 }}>
