@@ -248,3 +248,8 @@ A stay's page can carry an **At the table** section: a question heading ("Where 
 
 - ULUM Moab, Utah (G-020, `lib/sample-utah.ts`): J.W.'s favourite family stay, Field verified April 2023, setting Desert. Photos in Cloudinary `gatherings/ulum-moab/` (partner use approved).
 - 6-day "Red Rock Family Adventure" itinerary with a one-night White Rim 4x4 trip, and three At the Table cards. All mirrored in Airtable (Residence recgqsCsjMvXoj3JA).
+
+## Founder story (Oct 2026)
+
+- `/founder` — James Wild's story since 1982: bio, the road so far (timeline), "On Africa" quotes, how James guides a family, and an FAQ. Content lives in `lib/founder.ts`; James's own photos are in `public/founder/`.
+- Linked from the header ("Our Founder"), footer, home page teaser and every Journal byline by James. Schema: ProfilePage + Person (`/founder#james-wild`, also referenced from the site Organization `founder`), BreadcrumbList and FAQPage.

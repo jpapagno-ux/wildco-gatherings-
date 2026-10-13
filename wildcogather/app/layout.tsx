@@ -38,7 +38,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           description: "Resort residences and family journeys on land and water, across generations, chosen by James Wild.",
           logo: `${SITE}/brand/jwco-hare-600.png`,
           parentOrganization: { "@type": "Organization", name: "James Wild & Co", foundingDate: "1982", slogan: "Ledgered & Vetted · Journey design since 1982", logo: `${SITE}/brand/jwco-hare-600.png` },
-          founder: { "@type": "Person", name: "James Wild" },
+          founder: { "@type": "Person", "@id": `${SITE}/founder#james-wild`, name: "James Wild", url: `${SITE}/founder`, jobTitle: "Founder, James Wild & Co" },
           slogan: "Family and generational residences, vetted by James Wild — advisor-led since 1982",
           knowsAbout: ["multigenerational travel", "family reunion travel", "generational residences", "family villas", "exclusive-use safari villas", "family ranch vacations", "travel advisor partnerships", "friends' gathering trips"],
           audience: [{ "@type": "PeopleAudience", audienceType: "Multigenerational families" }, { "@type": "BusinessAudience", audienceType: "Travel advisors" }],

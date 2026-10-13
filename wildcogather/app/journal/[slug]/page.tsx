@@ -47,7 +47,7 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
         "@context": "https://schema.org", "@type": "BlogPosting", "@id": url, headline: p.title, description: p.metaDescription,
         datePublished: p.date, dateModified: p.date, mainEntityOfPage: url, wordCount: p.body.split(/\s+/).length,
         image: p.hero ? `https://res.cloudinary.com/${CLOUD}/image/upload/${p.hero.publicId}` : undefined,
-        author: { "@type": "Person", name: p.author, jobTitle: p.authorTitle, worksFor: { "@type": "Organization", name: "James Wild & Co" } },
+        author: { "@type": "Person", name: p.author, jobTitle: p.authorTitle, ...(p.author === "James Wild" ? { url: `${SITE}/founder`, "@id": `${SITE}/founder#james-wild` } : {}), worksFor: { "@type": "Organization", name: "James Wild & Co" } },
         publisher: { "@type": "Organization", name: "Wild & Co Gatherings" },
         ...(house ? { about: { "@type": "LodgingBusiness", name: house.name, url: `${SITE}/houses/${house.slug}`, address: { "@type": "PostalAddress", addressLocality: house.place, addressRegion: house.region, addressCountry: house.country } } } : {}),
         // James's quotes, marked up so answer engines can attribute them to him
@@ -62,7 +62,7 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
         <p className="eb" style={{ margin: "0 0 18px" }}>{p.kicker}</p>
         <h1 className="ser" style={{ margin: 0, fontSize: "clamp(40px, 5.4vw, 72px)", lineHeight: 1.05, fontWeight: 400 }}>{p.title}</h1>
         <p className="it dek" style={{ margin: "26px auto 0", maxWidth: 680, fontSize: 26, lineHeight: 1.4 }}>{p.dek}</p>
-        <p className="cp" style={{ margin: "30px 0 0" }}><span className="ser" style={{ fontSize: 18, textTransform: "none", letterSpacing: 0 }}>{p.author}</span> · {p.authorTitle} · {date(p.date)} · {p.readMinutes} min read</p>
+        <p className="cp" style={{ margin: "30px 0 0" }}>{p.author === "James Wild" ? <Link href="/founder" className="ser" style={{ fontSize: 18, textTransform: "none", letterSpacing: 0, textDecoration: "none" }}>{p.author}</Link> : <span className="ser" style={{ fontSize: 18, textTransform: "none", letterSpacing: 0 }}>{p.author}</span>} · {p.authorTitle} · {date(p.date)} · {p.readMinutes} min read</p>
         <div style={{ display: "flex", justifyContent: "center", marginTop: 24 }}><Postmark place={house ? `${house.place} · ${house.region}` : coll ? coll.region : "James Wild & Co"} date={date(p.date)} width={250} /></div>
       </header>
 
