@@ -10,10 +10,10 @@ import { getCollection } from "@/lib/collections";
 import { VipStamp, JwcoSeal, Postmark, Icon } from "@/components/Marks";
 import Film from "@/components/Film";
 import { embedUrl, thumbUrl } from "@/lib/video";
+import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
-const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5";
 
 export async function generateStaticParams() {
   return (await getPosts()).map((p) => ({ slug: p.slug }));
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: p.seoTitle, description: p.metaDescription, alternates: { canonical: `/journal/${p.slug}` },
     authors: [{ name: p.author }],
     openGraph: { type: "article", title: p.title, description: p.metaDescription, publishedTime: p.date, authors: [p.author],
-      images: p.hero ? [`https://res.cloudinary.com/${CLOUD}/image/upload/f_jpg,q_auto,w_1200,h_630,c_fill/${p.hero.publicId}`] : [] },
+      images: p.hero ? [getOgImageUrl(p.hero)] : [] },
     robots: p.draft ? { index: false } : undefined,
   };
 }
@@ -46,7 +46,7 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
       <JsonLd data={{
         "@context": "https://schema.org", "@type": "BlogPosting", "@id": url, headline: p.title, description: p.metaDescription,
         datePublished: p.date, dateModified: p.date, mainEntityOfPage: url, wordCount: p.body.split(/\s+/).length,
-        image: p.hero ? `https://res.cloudinary.com/${CLOUD}/image/upload/${p.hero.publicId}` : undefined,
+        image: p.hero ? buildCloudinaryUrl({ src: p.hero.publicId, width: 1600, quality: "auto", format: "auto" }) : undefined,
         author: { "@type": "Person", name: p.author, jobTitle: p.authorTitle, ...(p.author === "James Wild" ? { url: `${SITE}/founder`, "@id": `${SITE}/founder#james-wild` } : {}), worksFor: { "@type": "Organization", name: "James Wild & Co" } },
         publisher: { "@type": "Organization", name: "Wild & Co Gatherings" },
         ...(house ? { about: { "@type": "LodgingBusiness", name: house.name, url: `${SITE}/houses/${house.slug}`, address: { "@type": "PostalAddress", addressLocality: house.place, addressRegion: house.region, addressCountry: house.country } } } : {}),

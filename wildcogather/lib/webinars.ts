@@ -63,7 +63,7 @@ async function fromAirtable(): Promise<Webinar[]> {
     .map((f) => ({
       slug: f["Slug"], title: f["Title"], status: f["Status"], partner: f["Partner"] || undefined,
       startsAt: f["Starts"] || undefined, minutes: Number(f["Length (minutes)"] || 45), registerUrl: f["Livestorm link"] || undefined,
-      host: { name: f["Host name"] || "James Wild", title: f["Host title"] || "", photo: f["Host photo (Cloudinary ID)"] ? { publicId: f["Host photo (Cloudinary ID)"], alt: f["Host name"] } : undefined },
+      host: { name: f["Host name"] || "James Wild", title: f["Host title"] || "", photo: f["Host photo (Cloudinary ID)"] ? { publicId: f["Host photo (Cloudinary ID)"], alt: f["Host photo alt text"] || (f["Host name"] ? `Portrait of ${f["Host name"]}` : "Host portrait") } : undefined },
       dek: f["Dek"] || "", intro: (f["Introduction"] || "").split(/\n\s*\n/).map((p: string) => p.trim()).filter(Boolean),
       agenda: lines(f["Agenda"]), audience: lines(f["Who it's for"]), houses: lines(f["Houses (slugs)"]),
       recording: youtubeId(f["Recording (YouTube link)"]),

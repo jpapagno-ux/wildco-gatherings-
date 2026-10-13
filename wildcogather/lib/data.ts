@@ -70,7 +70,23 @@ async function fromAirtable(): Promise<Residence[]> {
   const toRoom = (r: Rec): RoomCategory => ({ name: r.fields["Category"], count: r.fields["Count"], bedrooms: r.fields["Bedrooms"], sleeps: r.fields["Sleeps"], inside: r.fields["What's inside"] || "", fit: r.fields["Family fit (J.W.)"], whole: !!r.fields["Whole house"], order: r.fields["Order"] } as RoomCategory & { order?: number });
   const toImg = (r: Rec): Img => {
     const pid = r.fields["Cloudinary public ID"] || r.fields["Cloudinary URL"] || "";
-    return { publicId: pid, alt: r.fields["Alt text"] || "", caption: r.fields["Caption"], credit: r.fields["Credit"], role: r.fields["Role"], order: r.fields["Order"] };
+    return {
+      publicId: pid,
+      alt: r.fields["Alt text"] || "",
+      caption: r.fields["Caption"],
+      credit: r.fields["Credit"],
+      role: r.fields["Role"],
+      order: r.fields["Order"],
+      aspect: r.fields["Aspect ratio"] || r.fields["Aspect"],
+      gravity: r.fields["Gravity"],
+      focalPoint: r.fields["Focal point"] || r.fields["Object position"],
+      objectPosition: r.fields["Object position"] || r.fields["Focal point"],
+      permission: r.fields["Permission"] || (r.fields["Permission confirmed"] ? "confirmed" : undefined),
+      altStatus: r.fields["Alt review status"] || r.fields["Alt status"],
+      subjectDescription: r.fields["Subject description"],
+      width: r.fields["Width"] ? Number(r.fields["Width"]) : undefined,
+      height: r.fields["Height"] ? Number(r.fields["Height"]) : undefined,
+    };
   };
 
   return res
@@ -79,7 +95,7 @@ async function fromAirtable(): Promise<Residence[]> {
       const f = r.fields;
       const d = (f["Destination"] || []).map((id: string) => D[id]).filter(Boolean)[0];
       const score = Number(f["Formula score (of 6)"] || 0);
-      const myImgs = (f["Images"] || []).map((id: string) => I[id]).filter(Boolean).map(toImg).sort((a: Img, b: Img) => (a.order || 99) - (b.order || 99));
+      const myImgs = (f["Images"] || []).map((id: string) => I[id]).filter(Boolean).map(toImg).sort((a: Img, b: Img) => (a.order ?? 99) - (b.order ?? 99));
       const tests: [string, string][] = [
         ["Room to gather", "Formula: Room to gather"], ["A day for every age", "Formula: A day for every age"],
         ["Water within reach", "Formula: Water within reach"], ["Country at the door", "Formula: Wild at the door"],
@@ -130,7 +146,7 @@ async function fromAirtable(): Promise<Residence[]> {
         images: myImgs,
         booking: bookingFrom(f),
         vip: f["VIP (Vetted in Purpose)"] ? { collection: f["Collection"] || "", collectionSlug: f["Collection slug"] || "", visit: f["Visit planned"] || undefined, why: f["Why on J.W.'s list"] || "", fit: f["Family fit"] || undefined } : undefined,
-        rooms: (f["Room Categories"] || []).map((id: string) => R[id]).filter(Boolean).map(toRoom).sort((a: any, b: any) => (a.order || 99) - (b.order || 99)),
+        rooms: (f["Room Categories"] || []).map((id: string) => R[id]).filter(Boolean).map(toRoom).sort((a: any, b: any) => (a.order ?? 99) - (b.order ?? 99)),
         videos: videosFrom(f),
         seoTitle: f["SEO title"] || `${f["Residence"]} | Wild & Co Gatherings`,
         metaDescription: f["Meta description"] || f["The Line"] || "",
