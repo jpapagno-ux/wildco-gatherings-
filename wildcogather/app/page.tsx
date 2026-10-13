@@ -11,6 +11,7 @@ import { getPostForHouse } from "@/lib/journal";
 import { getHorizon } from "@/lib/horizon";
 import HorizonCard from "@/components/HorizonCard";
 import { FOUNDER_PHOTOS, FOUNDER_LEDE, AFRICA_QUOTES } from "@/lib/founder";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 const LEDGER_PREVIEW = 8;
@@ -250,6 +251,7 @@ export default async function Home() {
           ))}
         </div>
       </section>
+      <PageSketch k={"route"} label="The road since 1982" />
     </>
   );
 }

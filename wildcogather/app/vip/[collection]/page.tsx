@@ -8,6 +8,7 @@ import { collections, getCollection, VIP_MEANING } from "@/lib/collections";
 import { getResidences } from "@/lib/data";
 import { getPost } from "@/lib/journal";
 import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -110,6 +111,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
         </section>
       )}
       <p className="wrap cp muted" style={{ fontSize: 11, paddingBottom: 30 }}>{c.credit}</p>
+      <PageSketch k={houses[0]?.setting || "route"} label={c.name} />
     </>
   );
 }

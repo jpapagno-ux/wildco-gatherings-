@@ -9,6 +9,7 @@ import { Icon } from "@/components/Marks";
 import { getItineraries, getItinerary, getOffer } from "@/lib/extras";
 import { getResidence } from "@/lib/data";
 import { SETTINGS } from "@/lib/settings";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -37,6 +38,7 @@ export default async function ItineraryPage({ params }: { params: Promise<{ slug
     ["Best for", t.bestFor], ["Season", t.season], ["Price", t.priceNote],
   ];
   return (
+    <>
     <article>
       <JsonLd data={{
         "@context": "https://schema.org", "@type": "TouristTrip", name: t.title, description: t.dek, url: `${SITE}/itineraries/${t.slug}`,
@@ -144,5 +146,7 @@ export default async function ItineraryPage({ params }: { params: Promise<{ slug
         </div>
       </section>
     </article>
+      <PageSketch k={"route"} label={`${t.days} days · ${r.place}`} />
+    </>
   );
 }

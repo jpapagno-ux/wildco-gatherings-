@@ -21,6 +21,7 @@ import { relatedStays } from "@/lib/browse";
 import { regionFor, regionMeta } from "@/lib/regions";
 import { getOffersForHouse, getItinerariesForHouse } from "@/lib/extras";
 import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 
@@ -95,7 +96,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
   return (
     <>
       <JsonLd data={{
-        "@context": "https://schema.org", "@type": "LodgingBusiness", name: r.name, description: r.line,
+        "@context": "https://schema.org", "@type": "LodgingBusiness", "@id": `${SITE}/houses/${r.slug}#stay`, url: `${SITE}/houses/${r.slug}`, identifier: { "@type": "PropertyValue", propertyID: "JW&Co Gatherings Ledger", value: r.entryNo }, name: r.name, description: r.line,
         address: r.address ? { "@type": "PostalAddress", streetAddress: r.address } : { "@type": "PostalAddress", addressLocality: r.place, addressRegion: r.region, addressCountry: r.country },
         ...(r.lat ? { geo: { "@type": "GeoCoordinates", latitude: r.lat, longitude: r.lng }, hasMap: `https://www.google.com/maps/search/?api=1&query=${r.lat},${r.lng}` } : {}),
         ...(r.sleeps ? { occupancy: { "@type": "QuantitativeValue", maxValue: r.sleeps } } : {}),
@@ -473,6 +474,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
         {r.credit && <p className="cp muted" style={{ margin: 0 }}>{r.credit}</p>}
         <p className="cp muted" style={{ margin: 0 }}>JW&amp;Co. Ledger · Entry {r.entryNo} · {st.name}</p>
       </div>
+      <PageSketch k={r.setting} label={`${r.place} · Entry ${r.entryNo}`} />
     </>
   );
 }

@@ -11,6 +11,7 @@ import { VipStamp, JwcoSeal, Postmark, Icon } from "@/components/Marks";
 import Film from "@/components/Film";
 import { embedUrl, thumbUrl } from "@/lib/video";
 import { getOgImageUrl } from "@/lib/cloudinary-loader";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -43,6 +44,7 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
   let fig = 1;
 
   return (
+    <>
     <article>
       <JsonLd data={{
         "@context": "https://schema.org", "@type": "BlogPosting", "@id": url, headline: p.title, description: p.metaDescription,
@@ -149,5 +151,7 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
         </section>
       )}
     </article>
+      <PageSketch k={house?.setting || "route"} label={house ? house.place : "The Journal"} />
+    </>
   );
 }

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Photo from "@/components/Photo";
 import JsonLd from "@/components/JsonLd";
 import { getPosts, quotesOf } from "@/lib/journal";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 export default async function Journal() {
   const posts = await getPosts();
   return (
+    <>
     <section className="wrap" style={{ paddingTop: 80, paddingBottom: 100 }}>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Blog", name: "The Wild & Co Gatherings Journal", url: `${SITE}/journal`, author: { "@type": "Person", name: "James Wild" },
         blogPost: posts.map((p) => ({ "@type": "BlogPosting", headline: p.title, url: `${SITE}/journal/${p.slug}`, datePublished: p.date })) }} />
@@ -36,5 +38,7 @@ export default async function Journal() {
         ))}
       </div>
     </section>
+      <PageSketch k={"route"} label="The Journal" />
+    </>
   );
 }

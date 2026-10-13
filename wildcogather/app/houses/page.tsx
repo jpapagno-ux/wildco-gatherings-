@@ -6,6 +6,7 @@ import { Icon } from "@/components/Marks";
 import { getResidences } from "@/lib/data";
 import { SETTINGS, SETTING_ORDER } from "@/lib/settings";
 import { browseNav, staysInSetting } from "@/lib/browse";
+import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -58,6 +59,7 @@ export default async function Houses() {
         </section>
       ))}
       <div style={{ height: 80 }} />
+      <PageSketch k={"route"} label="The houses" />
     </>
   );
 }
