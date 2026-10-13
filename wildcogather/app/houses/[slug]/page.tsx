@@ -20,6 +20,7 @@ import StayCard from "@/components/StayCard";
 import { relatedStays } from "@/lib/browse";
 import { regionFor, regionMeta } from "@/lib/regions";
 import { getOffersForHouse, getItinerariesForHouse } from "@/lib/extras";
+import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
 
 export const revalidate = 3600;
 
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: r.seoTitle,
     description: r.metaDescription,
     alternates: { canonical: `/houses/${r.slug}` },
-    openGraph: { title: r.seoTitle, description: r.metaDescription, images: hero ? [`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5"}/image/upload/f_jpg,q_auto,w_1200,h_630,c_fill/${hero.publicId}`] : [] },
+    openGraph: { title: r.seoTitle, description: r.metaDescription, images: hero ? [getOgImageUrl(hero)] : [] },
   };
 }
 
@@ -100,7 +101,14 @@ export default async function House({ params }: { params: Promise<{ slug: string
         ...(r.sleeps ? { occupancy: { "@type": "QuantitativeValue", maxValue: r.sleeps } } : {}),
         amenityFeature: [r.kidsProgram, r.water, ...table.map((t) => `${t.name} (${t.kind.toLowerCase()})`)].filter(Boolean).map((v) => ({ "@type": "LocationFeatureSpecification", name: v, value: true })),
         ...(table.some((t) => t.kind === "Restaurant" || t.kind === "Bar & lounge") ? { containsPlace: table.filter((t) => t.kind === "Restaurant" || t.kind === "Bar & lounge").map((t) => ({ "@type": t.kind === "Restaurant" ? "Restaurant" : "BarOrPub", name: t.name, description: t.gathering })) } : {}),
-        image: r.images.map((i) => ({ "@type": "ImageObject", contentUrl: `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5"}/image/upload/${i.publicId}`, caption: i.alt, creditText: r.credit || undefined })),
+        image: r.images.map((i) => ({
+          "@type": "ImageObject",
+          contentUrl: buildCloudinaryUrl({ src: i.publicId, width: 1600, quality: "auto", format: "auto" }),
+          caption: i.caption || i.alt,
+          description: i.alt,
+          creditText: i.credit || r.credit || undefined,
+        })),
+        sameAs: r.officialUrl,
         priceRange: "$$$$",
         ...(toTime(b?.checkIn) ? { checkinTime: toTime(b?.checkIn) } : {}),
         ...(toTime(b?.checkOut) ? { checkoutTime: toTime(b?.checkOut) } : {}),

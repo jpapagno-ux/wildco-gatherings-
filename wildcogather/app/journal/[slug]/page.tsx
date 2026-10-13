@@ -10,6 +10,7 @@ import { getCollection } from "@/lib/collections";
 import { VipStamp, JwcoSeal, Postmark, Icon } from "@/components/Marks";
 import Film from "@/components/Film";
 import { embedUrl, thumbUrl } from "@/lib/video";
+import { getOgImageUrl } from "@/lib/cloudinary-loader";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: p.seoTitle, description: p.metaDescription, alternates: { canonical: `/journal/${p.slug}` },
     authors: [{ name: p.author }],
     openGraph: { type: "article", title: p.title, description: p.metaDescription, publishedTime: p.date, authors: [p.author],
-      images: p.hero ? [`https://res.cloudinary.com/${CLOUD}/image/upload/f_jpg,q_auto,w_1200,h_630,c_fill/${p.hero.publicId}`] : [] },
+      images: p.hero ? [getOgImageUrl(p.hero)] : [] },
     robots: p.draft ? { index: false } : undefined,
   };
 }
