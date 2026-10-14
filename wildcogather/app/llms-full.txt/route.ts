@@ -16,6 +16,7 @@ export async function GET() {
     ...line("URL", h.url),
     ...line("Stamp", h.stamp + (h.firstVisited ? ` · first visited ${h.firstVisited}` : "")),
     ...line("Why here (James Wild)", h.whyHere ? `“${h.whyHere.quote}”${h.whyHere.film ? ` Film: ${h.whyHere.film}` : ""}` : undefined),
+    ...line("Book online (live rates)", h.bookOnline),
     ...line("Where", `${h.place}, ${h.region}, ${h.country}`),
     ...line("Setting", h.setting),
     ...line("In one line", h.line),

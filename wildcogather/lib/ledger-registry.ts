@@ -1,3 +1,4 @@
+import { liveBookingFor } from "./live-booking";
 import { WHY_HERE } from "./why-here";
 // ——— The Ledger registry ———
 // One machine-readable record per house, itinerary and Horizon place, keyed by its permanent Ledger ID.
@@ -60,6 +61,7 @@ export async function buildLedger() {
       url: `${SITE}/houses/${h.slug}`,
       stamp: h.stamp,
       firstVisited: h.firstVisited,
+      bookOnline: liveBookingFor(h.slug)?.engineUrl,
       whyHere: (h.whyHere || WHY_HERE[h.slug]) ? { quote: (h.whyHere || WHY_HERE[h.slug])!.quote, by: "James Wild", film: (h.whyHere || WHY_HERE[h.slug])!.film ? `https://www.youtube.com/watch?v=${(h.whyHere || WHY_HERE[h.slug])!.film!.id}` : undefined } : undefined,
       setting: h.setting,
       place: h.place, region: h.region, country: h.country,

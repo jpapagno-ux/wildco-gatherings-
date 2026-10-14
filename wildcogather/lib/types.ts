@@ -129,6 +129,8 @@ export type Residence = {
   videos: Video[];
   // "Why here": James's reason for the house, in his words, with a short film shown under the hero.
   whyHere?: WhyHere;
+  // Live booking engine page for this house (Airtable "Live booking URL"), e.g. book.wildearthstays.com/en/property/…
+  liveBookingUrl?: string;
   seoTitle: string;
   metaDescription: string;
   credit: string;
