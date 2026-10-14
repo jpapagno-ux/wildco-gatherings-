@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
@@ -14,9 +15,9 @@ import Strip from "@/components/Strip";
 import TableCards from "@/components/TableCards";
 import { getTable, tableAnswer } from "@/lib/table";
 import PageSketch from "@/components/PageSketch";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
 export async function generateStaticParams() {
   return (await getHorizon()).map((h) => ({ slug: h.slug }));
@@ -26,12 +27,12 @@ const seoTitle = (h: { short: string; place: string; country: string }) => `${h.
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const h = await getHorizonItem((await params).slug);
-  if (!h) return {};
-  return {
+  if (!h) return fit({});
+  return fit({
     title: seoTitle(h), description: h.dek.slice(0, 158), alternates: { canonical: `/horizon/${h.slug}` },
     openGraph: { type: "article", title: h.name, description: h.dek, modifiedTime: h.updated },
     robots: h.draft ? { index: false } : undefined,
-  };
+  });
 }
 
 const month = (d: string) => new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { month: "long", year: "numeric" });

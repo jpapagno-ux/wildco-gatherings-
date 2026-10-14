@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
@@ -6,14 +7,14 @@ import { JwcoSeal, Stamp, Icon } from "@/components/Marks";
 import { getResidences } from "@/lib/data";
 import { getWebinars, whenLabel } from "@/lib/webinars";
 import PageSketch from "@/components/PageSketch";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   title: "For Travel Advisors: Family & Generational Residences | Wild & Co Gatherings",
   description: "An advisor-led platform for multigenerational travel. Vetted family residences, host conversations, short itineraries and webinars for advisors who plan family and friend gatherings. Apply to join.",
   alternates: { canonical: "/advisors" },
-};
+});
 
 const faqs = [
   { q: "What does advisor-led mean at Wild & Co Gatherings?", a: "Every gathering is planned with a travel advisor in the room. We vet the houses and supply the family facts; the advisor owns the client relationship, the plan and the booking." },

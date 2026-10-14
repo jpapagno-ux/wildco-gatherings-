@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,16 +10,16 @@ import { JwcoSeal, TapedPhoto } from "@/components/Marks";
 import { getWebinar, getWebinars, whenLabel } from "@/lib/webinars";
 import { getResidences } from "@/lib/data";
 import PageSketch from "@/components/PageSketch";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
 export async function generateStaticParams() { return (await getWebinars()).map((w) => ({ slug: w.slug })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const w = await getWebinar((await params).slug);
-  if (!w) return {};
-  return { title: `${w.title} | Webinar · Wild & Co Gatherings`, description: w.dek.slice(0, 158), alternates: { canonical: `/webinars/${w.slug}` } };
+  if (!w) return fit({});
+  return fit({ title: `${w.title} | Webinar · Wild & Co Gatherings`, description: w.dek.slice(0, 158), alternates: { canonical: `/webinars/${w.slug}` } });
 }
 
 export default async function WebinarPage({ params }: { params: Promise<{ slug: string }> }) {

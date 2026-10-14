@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Photo from "@/components/Photo";
@@ -9,11 +10,11 @@ import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   title: "Gatherings VIP — Vetted in Purpose | Wild & Co Gatherings",
   description: "VIP doesn't mean Very Important Person. It means Vetted in Purpose: family stays James Wild has vetted, guided from within the land, where every night helps keep it wild.",
   alternates: { canonical: "/vip" },
-};
+});
 
 export default async function Vip() {
   const vip = (await getResidences()).filter((r) => r.vip);

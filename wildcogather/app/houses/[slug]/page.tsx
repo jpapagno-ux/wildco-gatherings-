@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -24,6 +25,7 @@ import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
 import PageSketch from "@/components/PageSketch";
 import TravelerActions from "@/components/TravelerActions";
 import { evidenceForHouse, evidenceBasis, formatEvidenceDate, formulaSummary, METHOD_MEANING } from "@/lib/entities";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -33,14 +35,14 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const r = await getResidence((await params).slug);
-  if (!r) return {};
+  if (!r) return fit({});
   const hero = r.images.find((i) => i.role === "Hero") || r.images[0];
-  return {
+  return fit({
     title: r.seoTitle,
     description: r.metaDescription,
     alternates: { canonical: `/houses/${r.slug}` },
     openGraph: { title: r.seoTitle, description: r.metaDescription, images: hero ? [getOgImageUrl(hero)] : [] },
-  };
+  });
 }
 
 export default async function House({ params }: { params: Promise<{ slug: string }> }) {
@@ -50,7 +52,6 @@ export default async function House({ params }: { params: Promise<{ slug: string
   const region = regionMeta(regionFor(r))!;
   const moreStays = relatedStays(await getResidences(), r);
   const coords = dms(r.lat, r.lng);
-  const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
   const b = r.booking;
   const film = r.videos[0];
   const more = r.videos.slice(1);
@@ -141,6 +142,12 @@ export default async function House({ params }: { params: Promise<{ slug: string
         itemOffered: { "@type": "LodgingBusiness", name: r.name, url: `${SITE}/houses/${r.slug}` },
         offeredBy: { "@type": "TravelAgency", name: "Wild & Co Gatherings", url: SITE },
       }} />}
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Wild & Co Gatherings", item: `${SITE}/` },
+        { "@type": "ListItem", position: 2, name: "The Houses", item: `${SITE}/houses` },
+        { "@type": "ListItem", position: 3, name: region.label, item: `${SITE}/destinations/${region.key}` },
+        { "@type": "ListItem", position: 4, name: r.name, item: `${SITE}/houses/${r.slug}` },
+      ] }} />
       {faqAll.length > 0 && <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqAll.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })) }} />}
 
       <section className="hero" aria-label={r.name}>

@@ -1,17 +1,18 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import HorizonCard from "@/components/HorizonCard";
 import BeFirst from "@/components/BeFirst";
 import { getHorizon } from "@/lib/horizon";
 import PageSketch from "@/components/PageSketch";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   title: "On the Horizon: New Family Resorts & Villas to Watch | Wild & Co Gatherings",
   description: "New and soon-to-open resort villas for multigenerational families — Maldives, Baja, Costa Rica, Ibiza — approved by James Wild. Be the first to hear when dates open.",
   alternates: { canonical: "/horizon" },
-};
+});
 
 export default async function HorizonPage() {
   const items = await getHorizon();

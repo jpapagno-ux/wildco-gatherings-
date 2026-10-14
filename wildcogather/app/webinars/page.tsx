@@ -1,17 +1,18 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { getWebinars, whenLabel } from "@/lib/webinars";
 import { Icon } from "@/components/Marks";
 import PageSketch from "@/components/PageSketch";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   title: "Webinars for Travel Advisors & Families | Wild & Co Gatherings",
   description: "Live webinars on Livestorm with the hosts of family and generational residences — starting with Ted Turner Reserves. For advisors planning multigenerational trips and families planning a gathering.",
   alternates: { canonical: "/webinars" },
-};
+});
 
 export default async function Webinars() {
   const list = await getWebinars();

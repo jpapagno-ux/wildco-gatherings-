@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
 import { getItineraries } from "@/lib/extras";
@@ -8,14 +9,14 @@ import { checkDuration, durationBand, DURATION_BANDS } from "@/lib/journeys";
 import { templateIdFor } from "@/lib/entities";
 import PageSketch from "@/components/PageSketch";
 import JourneyDirectory, { type JourneyCard } from "./JourneyDirectory";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   title: "Family Journeys & Itineraries for Every Generation | Wild & Co Gatherings",
   description: "Multigenerational family journeys built around James Wild's vetted houses — from a few days at one house to longer chapters across several stays. Suggested templates you can save to My Folios.",
   alternates: { canonical: "/itineraries" },
-};
+});
 
 export default async function Itineraries() {
   const [trips, houses] = await Promise.all([getItineraries(), getResidences()]);

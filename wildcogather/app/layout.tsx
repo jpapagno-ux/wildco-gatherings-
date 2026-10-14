@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans, IBM_Plex_Mono, Mrs_Saint_Delafield } from "next/font/google";
 import "./globals.css";
@@ -8,6 +9,7 @@ import JourneyProvider from "@/components/JourneyProvider";
 import JsonLd from "@/components/JsonLd";
 import { getResidences } from "@/lib/data";
 import { browseNav } from "@/lib/browse";
+import { SITE } from "@/lib/site";
 
 // Self-hosted at build time by next/font: no layout shift, no request to Google from the visitor's browser.
 const serif = Cormorant_Garamond({ weight: ["300", "400", "500", "600"], style: ["normal", "italic"], subsets: ["latin"], variable: "--f-serif", display: "swap" });
@@ -15,15 +17,14 @@ const sans = DM_Sans({ weight: ["300", "400", "500"], subsets: ["latin"], variab
 const mono = IBM_Plex_Mono({ weight: ["400", "500"], subsets: ["latin"], variable: "--f-mono", display: "swap" });
 const script = Mrs_Saint_Delafield({ weight: "400", subsets: ["latin"], variable: "--f-script", display: "swap" });
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   metadataBase: new URL(SITE),
   title: { default: "Multigenerational Family Resort Residences | Wild & Co Gatherings", template: "%s" },
   description: "Resort residences for families travelling across generations, chosen by James Wild after forty-four years on the road. A house of James Wild & Co.",
   openGraph: { siteName: "Wild & Co Gatherings", type: "website", images: ["/brand/og-default.jpg"] },
   other: { "theme-color": "#F2EEE7" },
-};
+});
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Counts for the "Stays" menu; same cached Airtable read the pages use.

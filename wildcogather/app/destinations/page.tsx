@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Photo from "@/components/Photo";
@@ -6,15 +7,15 @@ import PageSketch from "@/components/PageSketch";
 import { getResidences } from "@/lib/data";
 import { REGIONS } from "@/lib/regions";
 import { staysInRegion, cardImage } from "@/lib/browse";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   title: "Destinations for Family & Generational Travel | Wild & Co Gatherings",
   description: "Where the Gatherings Ledger houses are: Africa, the Americas, Europe, Asia and the islands — each region with the family residences James Wild has chosen.",
   alternates: { canonical: "/destinations" },
-};
+});
 
 export default async function Destinations() {
   const all = await getResidences();
