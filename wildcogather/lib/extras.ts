@@ -344,7 +344,7 @@ const SAMPLE_ITINERARIES: Itinerary[] = [
     priceNote: "On request — priced for your family and dates",
     hero: "gatherings/morukuru-madikwe-wildlife/white-rhino-game-drive-madikwe",
     draft: false,
-    seoTitle: "Cape Town, Winelands & Malaria-Free Safari: 9-Day Family Itinerary | Wild & Co Gatherings",
+    seoTitle: "Cape Winelands & Malaria-Free Safari: 9-Day Family Trip | Wild & Co Gatherings",
     metaDescription: "A 9-day South Africa itinerary for three generations: four nights at Leeu Estates in Franschhoek with a day in Cape Town, then four nights in a private malaria-free safari house in Madikwe. Planned by James Wild.",
   },
   {

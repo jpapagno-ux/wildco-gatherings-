@@ -1,3 +1,4 @@
+import { LEGAL } from "@/lib/legal";
 import type { MetadataRoute } from "next";
 import { getResidences } from "@/lib/data";
 import { getPosts } from "@/lib/journal";
@@ -24,6 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/destinations`, changeFrequency: "weekly", priority: 0.8 },
     ...REGIONS.filter((r) => staysInRegion(houses, r.key).length).map((r) => ({ url: `${SITE}/destinations/${r.key}`, changeFrequency: "weekly" as const, priority: 0.8 })),
     { url: `${SITE}/founder`, changeFrequency: "monthly", priority: 0.8 },
+    ...(LEGAL.reviewed ? ["/privacy", "/terms", "/privacy-choices"].map((p) => ({ url: `${SITE}${p}`, changeFrequency: "yearly" as const, priority: 0.2 })) : []),
     { url: `${SITE}/advisors`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE}/webinars`, changeFrequency: "weekly", priority: 0.7 },
     ...webinars.map((w) => ({ url: `${SITE}/webinars/${w.slug}`, changeFrequency: "weekly" as const, priority: 0.7 })),

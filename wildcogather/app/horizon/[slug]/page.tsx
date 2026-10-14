@@ -23,7 +23,10 @@ export async function generateStaticParams() {
   return (await getHorizon()).map((h) => ({ slug: h.slug }));
 }
 
-const seoTitle = (h: { short: string; place: string; country: string }) => `${h.short}, ${h.country}: New for Families | On the Horizon`;
+const seoTitle = (h: { short: string; place: string; country: string }) => {
+  const base = `${h.short}, ${h.country}: New for Families`;
+  return base.length + 17 <= 60 ? `${base} | On the Horizon` : base;
+};
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const h = await getHorizonItem((await params).slug);

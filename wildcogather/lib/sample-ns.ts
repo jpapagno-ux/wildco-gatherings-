@@ -127,7 +127,7 @@ export const nsResidences: SampleResidence[] = [
     ],
     partner: { name: "Natural Selection", url: "https://naturalselection.travel" },
     videos: [],
-    seoTitle: "GweGwe Beach Lodge, Wild Coast — Family Beach Lodge with Private Pools | Wild & Co Gatherings",
+    seoTitle: "GweGwe Beach Lodge, Wild Coast: Family Lodge, Private Pools | Wild & Co Gatherings",
     metaDescription: "Nine pool suites on a community-owned reserve on South Africa's Wild Coast: children of all ages, safe game drives, waterfalls onto the beach. A Gatherings VIP house on James Wild's list.",
     credit,
   },

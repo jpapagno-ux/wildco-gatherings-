@@ -88,7 +88,7 @@ export default function IggiPanel({ open, ctx, onClose }: { open: boolean; ctx?:
               <label className="lbl" htmlFor="iggi-name">Your name<input id="iggi-name" name="name" required autoComplete="name" /></label>
               <label className="lbl" htmlFor="iggi-email">Email<input id="iggi-email" name="email" type="email" required autoComplete="email" /></label>
             </div>
-            <p className="cp muted" style={{ margin: 0 }}>Please don&apos;t include passport, payment or other sensitive details.</p>
+            <p className="cp muted" style={{ margin: 0 }}>Please don&apos;t include passport, payment or other sensitive details. See our <Link href="/privacy" onClick={onClose}>Privacy Policy</Link>.</p>
             <div><button type="submit" className="btn" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send to an advisor"}</button></div>
             {state === "error" && <p className="cpn ox" role="alert" style={{ margin: 0 }}>Your question didn&apos;t send. Please try again, or use <Link href="/plan" onClick={onClose}>Plan a Gathering</Link>.</p>}
           </form>

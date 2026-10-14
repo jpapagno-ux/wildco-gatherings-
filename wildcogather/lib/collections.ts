@@ -42,7 +42,7 @@ export const collections: Collection[] = [
     journal: "ted-turner-vision-guide-from-within",
     routeLabel: "J.W.'s visit · August 2027 · proposed route",
     credit: "Images courtesy of Ted Turner Reserves",
-    seoTitle: "Ted Turner Reserves for Families — Vermejo, Ladder, Armendaris & Sierra Grande | Wild & Co Gatherings",
+    seoTitle: "Ted Turner Reserves for Families: Vermejo, Ladder & More | Wild & Co Gatherings",
     metaDescription: "James Wild's guide to the four Ted Turner Reserves in New Mexico for family gatherings: where to stay, what's included, guide rates, and the wildlife each stay protects.",
   },
   {

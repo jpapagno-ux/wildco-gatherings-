@@ -68,7 +68,7 @@ export const hereResidences: SampleResidence[] = [
     ],
     partner: { name: ".Here Maldives" },
     videos: [],
-    seoTitle: ".Here Maldives — Private Island Residences for Families, Baa Atoll | Wild & Co Gatherings",
+    seoTitle: ".Here Maldives: Private Island Residences for Families | Wild & Co Gatherings",
     metaDescription: "Three- to five-bedroom beach residences on two private islands in Baa Atoll, Maldives: private jetties and sky pools, a whole-island buyout for up to 24, kids' clubs next door at Finolhu.",
     credit: "Images courtesy of .Here Maldives",
   },

@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 
 type Field = { name: string; label: string; type?: "text" | "email" | "textarea" | "select"; required?: boolean; options?: string[]; full?: boolean };
 
@@ -14,8 +15,12 @@ export default function LeadForm({ id, occasion, fields, submit, done, from, dar
     setState("sending");
     const f = new FormData(e.currentTarget);
     const extra = fields.filter((x) => !["name", "email"].includes(x.name)).map((x) => `${x.label}: ${f.get(x.name) || "—"}`).join("\n");
-    const res = await fetch("/api/inquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: f.get("name"), email: f.get("email"), occasion, musts: extra, house: from }) });
-    setState(res.ok ? "done" : "error");
+    try {
+      const res = await fetch("/api/inquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: f.get("name"), email: f.get("email"), occasion, musts: extra, house: from }) });
+      setState(res.ok ? "done" : "error");
+    } catch {
+      setState("error");
+    }
   }
   if (state === "done") return <p className="it" role="status" style={{ margin: 0, fontSize: 24, color: dark ? "var(--on-dark-accent)" : "var(--rust)" }}>{done}</p>;
   return (
@@ -28,6 +33,7 @@ export default function LeadForm({ id, occasion, fields, submit, done, from, dar
             : <input id={`${id}-${x.name}`} name={x.name} type={x.type || "text"} required={x.required} style={box} />}
         </label>
       ))}
+      <p className="form-consent" style={{ gridColumn: "1 / -1", color: dark ? "rgba(244,241,236,.7)" : undefined }}>By sending, you agree we may use these details to reply. See our <Link href="/privacy" style={{ color: "inherit" }}>Privacy Policy</Link>.</p>
       <div style={{ gridColumn: "1 / -1", display: "flex", flexWrap: "wrap", gap: 16, alignItems: "center" }}>
         <button className={dark ? "btn btn-light" : "btn"} disabled={state === "sending"}>{state === "sending" ? "Sending…" : submit}</button>
         {state === "error" && <p className="cp" role="alert" style={{ margin: 0, color: "var(--rust)" }}>That didn't send. Please try again in a moment.</p>}

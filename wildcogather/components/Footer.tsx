@@ -2,8 +2,10 @@ import Link from "next/link";
 import { JwcoSeal } from "./Marks";
 import AskIggiButton from "./AskIggiButton";
 import { MASTER_HOME_URL, VOLUMES } from "@/lib/ecosystem";
+import { LEGAL, sellerOfTravelLine } from "@/lib/legal";
 
 export default function Footer() {
+  const sot = sellerOfTravelLine();
   return (
     <>
       <section className="navy" aria-label="Plan Our Gathering">
@@ -54,6 +56,21 @@ export default function Footer() {
             <Link href="/advisors">Advisors</Link>
             <Link href="/plan">Contact</Link>
           </nav>
+        </div>
+        <div className="wrap foot-legal">
+          <nav aria-label="Legal">
+            <Link href="/privacy">Privacy Policy</Link>
+            <Link href="/terms">Terms &amp; Booking Conditions</Link>
+            <Link href="/privacy-choices">Your Privacy Choices</Link>
+          </nav>
+          <div className="foot-reg">
+            {LEGAL.iataLogo ? <img src={LEGAL.iataLogo} alt="IATA accredited agent" width={64} height={40} style={{ height: 40, width: "auto" }} /> : null}
+            <p className="cp muted">
+              Copyright © {LEGAL.copyrightYear} {LEGAL.legalName || "James Wild & Co"}. All rights reserved.
+              {sot ? <><br />{sot}</> : null}
+              {LEGAL.iataNo ? <><br />IATA No. {LEGAL.iataNo}</> : null}
+            </p>
+          </div>
         </div>
       </footer>
     </>
