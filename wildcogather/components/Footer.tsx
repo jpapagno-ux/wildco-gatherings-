@@ -2,8 +2,10 @@ import Link from "next/link";
 import { JwcoSeal } from "./Marks";
 import AskIggiButton from "./AskIggiButton";
 import { MASTER_HOME_URL, VOLUMES } from "@/lib/ecosystem";
+import { sellerOfTravelLine } from "@/lib/legal";
 
 export default function Footer() {
+  const sot = sellerOfTravelLine();
   return (
     <>
       <section className="navy" aria-label="Plan Our Gathering">
@@ -54,6 +56,14 @@ export default function Footer() {
             <Link href="/advisors">Advisors</Link>
             <Link href="/plan">Contact</Link>
           </nav>
+        </div>
+        <div className="wrap foot-legal">
+          <nav aria-label="Legal">
+            <Link href="/privacy">Privacy Policy</Link>
+            <Link href="/terms">Terms &amp; Booking Conditions</Link>
+            <Link href="/privacy-choices">Your Privacy Choices</Link>
+          </nav>
+          <p className="cp muted">© {new Date().getFullYear()} James Wild &amp; Co{sot ? <> · {sot}</> : null}</p>
         </div>
       </footer>
     </>

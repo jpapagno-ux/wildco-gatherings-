@@ -612,3 +612,29 @@ button.lnk { background: none; border: 0; border-bottom: 1px solid currentColor;
 .why-here-quote figcaption { margin: 18px 0 0; color: var(--rust); }
 .why-here-watch { margin: 22px 0 0; padding-top: 18px; border-top: 1px solid var(--stone); font-family: var(--f-sans), sans-serif; font-size: 16px; line-height: 1.6; color: var(--clay-text); }
 @media (max-width: 860px) { .why-here-grid { grid-template-columns: 1fr; } }
+
+/* Legal pages */
+.lg { max-width: 860px; padding-block: 70px 90px; }
+.lg-draft { margin: 0 0 30px; padding: 14px 18px; border: 1px solid var(--rust); background: var(--card); font-family: var(--f-sans), sans-serif; font-size: 15px; color: var(--charcoal); }
+.lg-fill { background: #F6E3D6; color: var(--rust-dark); padding: 0 4px; font-family: var(--f-mono), monospace; font-size: .85em; }
+.lg-intro { margin-top: 24px; }
+.lg-intro p { margin: 0 0 14px; }
+.lg-toc { margin: 30px 0 10px; padding: 18px 22px; background: var(--card); border: 1px solid var(--stone); }
+.lg-toc ol { margin: 10px 0 0; padding-left: 20px; columns: 2 240px; font-family: var(--f-sans), sans-serif; font-size: 15px; }
+.lg-toc li { margin: 0 0 6px; break-inside: avoid; }
+.lg-body h2 { margin: 46px 0 12px; font-family: var(--f-serif), Georgia, serif; font-weight: 500; font-size: 30px; scroll-margin-top: 160px; }
+.lg-body h3 { margin: 24px 0 8px; font-family: var(--f-sans), sans-serif; font-weight: 500; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--rust); }
+.lg-body p, .lg-body li { font-size: 16.5px; line-height: 1.75; color: var(--body); font-weight: 300; }
+.lg-body ul, .lg-body ol { padding-left: 20px; }
+.lg-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-family: var(--f-sans), sans-serif; font-size: 15px; }
+.lg-table th, .lg-table td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--stone); vertical-align: top; }
+.lg-table th { font-weight: 500; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--clay-text); border-bottom-color: var(--charcoal); }
+.lg-foot { margin-top: 50px; padding-top: 18px; border-top: 1px solid var(--stone); }
+.lg-wrap { overflow-x: auto; }
+.form-consent { margin: 0; font-family: var(--f-sans), sans-serif; font-size: 13px; color: var(--clay-text); }
+.form-consent a { color: inherit; }
+.sot-line { margin: 0; font-family: var(--f-sans), sans-serif; font-size: 12px; color: var(--clay-text); }
+.foot-legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 28px; padding-block: 18px 26px; border-top: 1px solid var(--stone); }
+.foot-legal nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-family: var(--f-sans), sans-serif; font-size: 13px; }
+.foot-legal nav a { color: var(--charcoal); text-decoration: underline; text-underline-offset: 3px; }
+.foot-legal p { margin: 0; font-size: 10px; }
