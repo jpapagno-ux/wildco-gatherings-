@@ -113,7 +113,17 @@ img { max-width: 100%; display: block; }
   .mega[data-open="true"] { display: grid; transform: none; }
   .mega li a { min-height: 44px; align-items: center; }
   .mega-cta { display: none; }
+  .eco-bar { display: none; }
+  .nav-eco { display: grid; gap: 12px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--stone); }
+  .nav-eco-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .nav-eco-tools a, .nav-eco-tools button { display: flex; align-items: center; justify-content: center; min-height: 44px; border: 1px solid var(--charcoal); background: transparent; color: var(--charcoal); font-family: var(--f-sans), sans-serif; font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; cursor: pointer; }
+  .nav-eco .mega-h { margin: 6px 0 0; }
+  .nav-eco-vols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+  .nav-eco-vols a, .nav-eco-vols span { display: flex; align-items: center; min-height: 40px; font-family: var(--f-sans), sans-serif; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--charcoal); text-decoration: none; }
+  .nav-eco-vols [aria-current] { color: var(--rust); }
+  .nav-eco-vols span { color: var(--clay-text); }
 }
+@media (min-width: 761px) { .nav-eco { display: none; } }
 
 /* ---- Hero with ledger column ---- */
 .hero { position: relative; min-height: min(86vh, 780px); color: var(--on-dark); }
@@ -640,3 +650,30 @@ button.lnk { background: none; border: 0; border-bottom: 1px solid currentColor;
 .foot-legal p { margin: 0; font-size: 10px; }
 .foot-reg { display: flex; align-items: center; gap: 14px; }
 .foot-reg p { line-height: 1.7; }
+/* How It Works */
+.hiw-steps { list-style: none; margin: 30px 0 0; padding: 0; border-top: 1px solid var(--charcoal); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); column-gap: 48px; }
+.hiw-steps li { display: grid; grid-template-columns: 56px 1fr; gap: 14px; padding: 28px 0; border-bottom: 1px solid var(--stone); }
+.hiw-n { font-size: 15px; color: var(--rust); padding-top: 2px; }
+.hiw-t { margin: 6px 0 8px; font-size: 26px; font-weight: 500; }
+.hiw-steps .lnk { display: inline-flex; }
+.hiw-glance { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(30px, 5vw, 64px); align-items: start; }
+@media (max-width: 860px) { .hiw-glance { grid-template-columns: 1fr; } }
+/* Questions hub */
+.qa-group { padding-top: 46px; scroll-margin-top: 140px; }
+.qa-h { margin: 0 0 14px; font-size: clamp(28px, 3.2vw, 38px); }
+.qa { border-bottom: 1px solid var(--stone); }
+.qa:first-of-type { border-top: 1px solid var(--charcoal); }
+.qa summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 18px; align-items: baseline; padding: 20px 0; }
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary::after { content: "+"; font-family: var(--f-mono), monospace; font-size: 18px; color: var(--rust); flex: none; }
+.qa[open] summary::after { content: "–"; }
+.qa summary h3, .qa summary h4 { margin: 0; font-size: 22px; font-weight: 500; }
+.qa p { margin: 0 0 22px; font-size: 16px; max-width: 760px; }
+.qa-house { margin-top: 28px; }
+.qa-house h3 { margin: 0 0 6px; }
+.qa-house h3 a { color: var(--charcoal); }
+/* Home: How it works + compact Formula */
+.home-how, .home-formula { list-style: none; margin: 34px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 0 40px; border-top: 1px solid var(--charcoal); }
+.home-how li, .home-formula li { padding: 24px 0; border-bottom: 1px solid var(--stone); }
+.home-how .ser, .home-formula .ser { margin: 8px 0 6px; font-size: 24px; font-weight: 500; }
+.home-how .body, .home-formula .body { margin: 0; font-size: 16px; }

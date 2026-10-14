@@ -25,6 +25,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/destinations`, changeFrequency: "weekly", priority: 0.8 },
     ...REGIONS.filter((r) => staysInRegion(houses, r.key).length).map((r) => ({ url: `${SITE}/destinations/${r.key}`, changeFrequency: "weekly" as const, priority: 0.8 })),
     { url: `${SITE}/founder`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE}/how-it-works`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE}/questions`, changeFrequency: "weekly", priority: 0.7 },
     ...(LEGAL.reviewed ? ["/privacy", "/terms", "/privacy-choices"].map((p) => ({ url: `${SITE}${p}`, changeFrequency: "yearly" as const, priority: 0.2 })) : []),
     { url: `${SITE}/advisors`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE}/webinars`, changeFrequency: "weekly", priority: 0.7 },

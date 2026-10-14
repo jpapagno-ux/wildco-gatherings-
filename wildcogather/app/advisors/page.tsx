@@ -1,3 +1,4 @@
+import { ADVISOR_FAQS } from "@/lib/faqs";
 import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -16,13 +17,7 @@ export const metadata: Metadata = fit({
   alternates: { canonical: "/advisors" },
 });
 
-const faqs = [
-  { q: "What does advisor-led mean at Wild & Co Gatherings?", a: "Every gathering is planned with a travel advisor in the room. We vet the houses and supply the family facts; the advisor owns the client relationship, the plan and the booking." },
-  { q: "Can travel advisors book Wild & Co houses for their clients?", a: "Yes. Apply below and we will set you up with house sheets, availability holds and a direct line to the team for each family you are planning for." },
-  { q: "How does Wild & Co vet a family residence?", a: "James Wild inspects or speaks with each house and scores it against six tests — room to gather, a day for every age, water within reach, country at the door, a resort behind you and worth returning to. Each house page shows its evidence: whether James stayed, inspected and approved it, or met the host, and when." },
-  { q: "What is a generational residence?", a: "A villa, lodge or private house that sleeps a whole extended family under one roof or one booking, with space for grandparents, parents and children to be together and apart in the same stay." },
-  { q: "Do you help plan gatherings of friends as well as families?", a: "Yes. Milestone birthdays, reunions of old friends and weddings weekends work the same way: one house, a plan for every age and pace, and one long table." },
-];
+const faqs = ADVISOR_FAQS;
 
 const why = [
   ["route", "Forty-four years on the road", "James Wild has designed journeys since 1982. Every house is one he would send his own family to — or he says so."],
