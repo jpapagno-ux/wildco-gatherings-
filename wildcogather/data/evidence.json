@@ -403,9 +403,9 @@
    "role": "Founder, James Wild & Co",
    "date": "2026-05",
    "precision": "Month",
-   "scope": "James and Miriam were at Lion Sands in May 2026 (they stayed at Ivory Lodge) and vetted Fish Eagle Villa. Does not by itself confirm an overnight in the Villa or current rates.",
+   "scope": "James and Miriam were at Lion Sands in May 2026 (they stayed at Ivory Lodge) and inspected and approved Fish Eagle Villa. Does not by itself confirm an overnight in the Villa or current rates.",
    "source": "Owner statement to Wild & Co, planning sessions 10–14 Oct 2026",
-   "wording": "Visited in person · May 2026",
+   "wording": "Founder inspected & approved · May 2026",
    "status": "Approved"
   },
   {
@@ -431,10 +431,10 @@
    "role": "Founder, James Wild & Co",
    "date": "2026-05",
    "precision": "Month",
-   "scope": "James and Miriam were at Lion Sands in May 2026 and vetted Hinkwenu Villa. They stayed at Ivory Lodge, not at Hinkwenu Villa.",
-   "source": "Owner statement to Wild & Co, planning sessions 10–14 Oct 2026",
-   "wording": "Visited in person · May 2026",
-   "status": "Needs confirmation"
+   "scope": "James and Miriam were at Lion Sands in May 2026; James inspected and approved Hinkwenu Villa. They stayed at Ivory Lodge, not at Hinkwenu Villa. Does not confirm current rates or policies.",
+   "source": "Owner statement to Wild & Co, planning sessions 10–14 Oct 2026; inspection confirmed by James Wild, 14 Oct 2026",
+   "wording": "Founder inspected & approved · May 2026",
+   "status": "Approved"
   },
   {
    "id": "JWC-V-0032",
@@ -446,7 +446,7 @@
    "date": "2026-05",
    "precision": "Month",
    "scope": "James and Miriam stayed at Monwana Villa in May 2026 and filmed Wild Together there. Covers the Villa only — not the other Monwana Lodge suites or a whole-lodge buyout — and not current rates.",
-   "source": "Wild Together episode YR_8uiBObZ4 ('James and Miriam Wild at Monwana Villa'); Ledger copy approved Oct 2026",
+   "source": "Wild Together episode YR_8uiBObZ4 ('James and Miriam Wild at Monwana Villa'); Ledger copy approved Oct 2026; stay confirmed by James Wild, 14 Oct 2026",
    "wording": "Stayed in the Villa · May 2026",
    "status": "Approved"
   },
@@ -501,9 +501,9 @@
    "role": "Founder, James Wild & Co",
    "date": "2026-05",
    "precision": "Month",
-   "scope": "James visited and vetted Jaci's Madikwe House in May 2026. Does not by itself confirm an overnight in the House or current rates.",
+   "scope": "James inspected and approved Jaci's Madikwe House in May 2026. Does not by itself confirm an overnight in the House or current rates.",
    "source": "Owner statement to Wild & Co, planning sessions 10–14 Oct 2026",
-   "wording": "Visited in person · May 2026",
+   "wording": "Founder inspected & approved · May 2026",
    "status": "Approved"
   },
   {
@@ -557,9 +557,9 @@
    "role": "Founder, James Wild & Co",
    "date": "2026-05",
    "precision": "Month",
-   "scope": "James visited and vetted all the Leeu Estates properties in May 2026. Does not confirm current rates or policies.",
+   "scope": "James inspected and approved all the Leeu Estates properties in May 2026. Does not confirm current rates or policies.",
    "source": "Owner statement to Wild & Co, planning sessions 10–14 Oct 2026",
-   "wording": "Visited in person · May 2026",
+   "wording": "Founder inspected & approved · May 2026",
    "status": "Approved"
   },
   {
@@ -599,9 +599,9 @@
    "role": "Founder, James Wild & Co",
    "date": "2023-04",
    "precision": "Month",
-   "scope": "James vetted ULUM Moab in April 2023. Confirm whether this included an overnight before it is shown as a stay. Does not confirm current rates or policies.",
-   "source": "Owner statement to Wild & Co, planning sessions 10–14 Oct 2026",
-   "wording": "Visited in person · April 2023",
+   "scope": "James inspected and approved ULUM Moab in April 2023. Shown as an inspection, not an overnight stay. Does not confirm current rates or policies.",
+   "source": "Owner statement to Wild & Co, planning sessions 10–14 Oct 2026; wording confirmed by James Wild, 14 Oct 2026",
+   "wording": "Founder inspected & approved · April 2023",
    "status": "Approved"
   },
   {

@@ -27,7 +27,7 @@ export default async function Ledger() {
       </div>
       <LedgerTable rows={rows} />
       <div className="box" style={{ marginTop: 40, padding: "26px 30px", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
-        {[["Under observation", "On the list; James has not yet stayed."], ["Host met", "James has vetted the house in conversation with its host."], ["Field verified", "James has visited in person; Formula being confirmed. See each house's evidence for whether he stayed."], ["Gathering verified", "Visited, and passes all six tests."], ["Founder favorite", "James's personal favourite — an opinion, not a verification."]].map(([k, v]) => (
+        {[["Under observation", "On the list; James has not yet stayed."], ["Host met", "James has vetted the house in conversation with its host."], ["Founder inspected & approved", "James inspected the house in person and approved it for the Ledger. See each house's evidence for whether he stayed overnight."], ["Gathering verified", "Inspected, and passes all six tests."], ["Founder favorite", "James's personal favourite — an opinion, not a verification."]].map(([k, v]) => (
           <div key={k}><p className="eb" style={{ margin: "0 0 6px" }}>{k}</p><p className="cpn" style={{ margin: 0, fontSize: 14 }}>{v}</p></div>
         ))}
       </div>

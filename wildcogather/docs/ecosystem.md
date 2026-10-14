@@ -39,7 +39,7 @@ Next free IDs: JWC-P-0020 · JWC-R-0007 · JWC-I-0007 · JWC-O-0002 · JWC-V-004
 ## Evidence rules (shown on every house page under "How we know")
 Personally Stayed · Personally Inspected · Host / Partner Reviewed · Host Met · House Selected · Founder Favorite · On the Horizon.
 Founder Favorite is an opinion; Host Met does not verify every fact; a past visit does not verify current rates or policies.
-Only `Approved` evidence is shown. Records marked `Needs confirmation` (today: Hinkwenu Villa inspection) stay hidden until approved.
+Only `Approved` evidence is shown. Records marked `Needs confirmation` stay hidden until approved (none pending as of 14 Oct 2026; Hinkwenu Villa inspection confirmed).
 Prices show only with currency, rate basis, occupancy, dates, exclusions and source (`isVerifiedRate`); otherwise "Request a quote".
 
 ## What is connected vs device-local

@@ -4,7 +4,7 @@ import type { SampleResidence } from "./sample-settings";
 // Jaci's and Morukuru in Madikwe Game Reserve (North West Province, malaria-free Big Five), paired with
 // Leeu Estates in Franschhoek for the Winelands chapter. Facts from each house's own pages (Oct 2026).
 // Images in Cloudinary under gatherings/<house>/… (tag cape-and-safari); partner photo use confirmed (Oct 2026).
-// J.W. visited Jaci's and every Leeu Estates property in May 2026 (Field verified) and met the Morukuru team (Host met).
+// J.W. visited Jaci's and every Leeu Estates property in May 2026 (Founder inspected & approved) and met the Morukuru team (Host met).
 const formula = (notes: [string, boolean][]) =>
   ["Room to gather", "A day for every age", "Water within reach", "Country at the door", "A resort behind you", "Worth returning to"].map((test, i) => ({ test, note: notes[i][0], pass: notes[i][1] }));
 const za = { power: "230V · type M/D/N", timeZone: "UTC+2 · SAST" };
@@ -22,7 +22,7 @@ const madikweHow = { question: "How do you get to Madikwe from Cape Town?", answ
 export const capeSafariResidences: SampleResidence[] = [
   {
     slug: "jacis-madikwe-house", entryNo: "G-014", name: "Jaci's Madikwe House", place: "Madikwe Game Reserve", region: "North West Province", country: "South Africa",
-    lat: -24.72, lng: 26.38, status: "Approved", stamp: "Field verified", firstVisited: "May 2026", setting: "savanna",
+    lat: -24.72, lng: 26.38, status: "Approved", stamp: "Founder inspected & approved", firstVisited: "May 2026", setting: "savanna",
     notes: { ...za, bestSeason: madikweSeason },
     line: "Five suites, a wood-fired hot tub and a 270° view of a malaria-free Big Five reserve — the largest private house at Jaci's, with its own guide, chef and vehicle.",
     verdict: [
@@ -212,7 +212,7 @@ export const capeSafariResidences: SampleResidence[] = [
   },
   {
     slug: "leeu-estates-franschhoek", entryNo: "G-017", name: "Leeu Estates, Franschhoek", place: "Franschhoek", region: "Western Cape", country: "South Africa",
-    lat: -33.9, lng: 19.11, status: "Approved", stamp: "Field verified", firstVisited: "May 2026", setting: "mountain",
+    lat: -33.9, lng: 19.11, status: "Approved", stamp: "Founder inspected & approved", firstVisited: "May 2026", setting: "mountain",
     notes: { ...za, bestSeason: "Summer Nov–Mar · harvest Feb–Mar · green, quiet winters Jun–Aug" },
     line: "A wine estate below the Franschhoek mountains with cottages and houses for families — vineyards, gardens, a gallery, a spa and a winery on the grounds, five minutes from the village.",
     verdict: [

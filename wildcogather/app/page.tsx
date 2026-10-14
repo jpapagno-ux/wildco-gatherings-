@@ -38,7 +38,7 @@ const FORMULA: [string, string][] = [
 const FAQS = [
   { q: "What is a resort residence?", a: "A private, multi-bedroom home inside or beside a resort: your own space and kitchen, with the resort's dining, housekeeping, children's programs and activities close at hand." },
   { q: "Is a resort residence better than a villa for a family reunion?", a: "For three generations, usually. You keep a villa's privacy, nobody has to run the house, and every age has something waiting." },
-  { q: "How does James vet each house?", a: "Against the six tests of the Gathering Formula, drawing on forty-four years of travel. Every house in the Ledger shows its evidence — whether James stayed, visited in person or met the host, and when — so you can see exactly what each claim rests on." },
+  { q: "How does James vet each house?", a: "Against the six tests of the Gathering Formula, drawing on forty-four years of travel. Every house in the Ledger shows its evidence — whether James stayed, inspected and approved it in person, or met the host, and when — so you can see exactly what each claim rests on." },
 ];
 
 export default async function Home() {
