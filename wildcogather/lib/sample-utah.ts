@@ -9,7 +9,7 @@ const U = "gatherings/ulum-moab/";
 export const utahResidences: SampleResidence[] = [
   {
     slug: "ulum-moab", entryNo: "G-020", name: "ULUM Moab", place: "Moab", region: "Utah", country: "United States",
-    lat: 38.34, lng: -109.38, status: "Approved", stamp: "Field verified", firstVisited: "April 2023", setting: "desert",
+    lat: 38.34, lng: -109.38, status: "Approved", stamp: "Founder inspected & approved", firstVisited: "April 2023", setting: "desert",
     notes: { bestSeason: "Open late March to late October · spring and autumn for hiking and rafting", power: "120V · type A/B", timeZone: "Mountain Time (MT)" },
     line: "Canvas suite tents under Looking Glass Rock, twenty-five minutes from Moab — the base camp for a family that wants Arches at sunrise, the Colorado River by raft and a night on the White Rim.",
     verdict: [

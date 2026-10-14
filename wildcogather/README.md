@@ -26,7 +26,7 @@ A house of James Wild & Co. Next.js site, deployed on Vercel from GitHub. Conten
 - `/sitemap.xml`, `/robots.txt` — generated
 
 ## Stamps (status ladder)
-Under observation → Host met → Field verified → Gathering verified → Founder favorite
+Under observation → Host met → Founder inspected & approved → Gathering verified → Founder favorite
 
 Destination maps use OpenStreetMap tiles and the latitude / longitude values in the residence data. No map API key is required; an internet connection is needed to load map tiles. Map locations are approximate.
 
@@ -60,7 +60,7 @@ Everything on the page — the luggage tag, the stamp, the VIP mark, its place o
 1. **Residences › new row.** Name, Slug (lowercase-with-dashes), Destination, Status (`Vetting` to show it).
 2. **Entry No.** — the next free number (G-009, G-010…). Set once, never reuse.
 3. **Setting** — Mountain, Jungle, Coast & Island, Desert, Savanna or Polar & Ice. This picks the ink of its tag and VIP stamp and its group on /houses.
-4. **Ledger stamp** — its one current status (Under observation → Host met → Field verified → Gathering verified → Founder favorite).
+4. **Ledger stamp** — its one current status (Under observation → Host met → Founder inspected & approved → Gathering verified → Founder favorite).
 5. **Notes for the family** — Best season, Power & plugs, Time zone (plus Kids' program, Water access). Blank fields are simply hidden.
 6. **Facts, booking and film** — The Line, Best for (shown under the name in the hero), Not for, Sleeps, booking fields, Included / Not included, YouTube ID.
 7. **Images** — drop photos in the Images table (Role: Hero, Card = James's own photo for the taped frame, Gallery strip, Feature), then say "move the parked photos" to send them to Cloudinary.
@@ -213,7 +213,7 @@ In Mapbox Studio → New style → **Monochrome** (Light) template → set land 
 Free tier: 50,000 web map loads a month (check mapbox.com/pricing for current terms).
 
 ## Approval & sources policy (Oct 12, 2026)
-- James has met the team at every house and Horizon place; all content is approved. Houses that were "Under observation" now carry **Host met**; houses James has stayed at keep **Field verified**. Statuses are **Approved**.
+- James has met the team at every house and Horizon place; all content is approved. Houses that were "Under observation" now carry **Host met**; houses James has stayed at keep **Founder inspected & approved**. Statuses are **Approved**.
 - **No outside sources or links to other travel companies on the site.** Horizon pages no longer show a Sources list, an "Official site" link or a "still confirming" box, and house/Horizon structured data no longer links to partner sites. Keep source notes in Airtable for our records only (Horizon › Sources and Residences › Official URL are not displayed).
 - Empty booking facts (check-in, deposit, cancellation, taxes) are hidden automatically; fill them in Airtable when the house sends them.
 
@@ -246,7 +246,7 @@ A stay's page can carry an **At the table** section: a question heading ("Where 
 
 ## ULUM Moab (Oct 2026)
 
-- ULUM Moab, Utah (G-020, `lib/sample-utah.ts`): J.W.'s favourite family stay, Field verified April 2023, setting Desert. Photos in Cloudinary `gatherings/ulum-moab/` (partner use approved).
+- ULUM Moab, Utah (G-020, `lib/sample-utah.ts`): J.W.'s favourite family stay, Founder inspected & approved April 2023, setting Desert. Photos in Cloudinary `gatherings/ulum-moab/` (partner use approved).
 - 6-day "Red Rock Family Adventure" itinerary with a one-night White Rim 4x4 trip, and three At the Table cards. All mirrored in Airtable (Residence recgqsCsjMvXoj3JA).
 
 ## Founder story (Oct 2026)

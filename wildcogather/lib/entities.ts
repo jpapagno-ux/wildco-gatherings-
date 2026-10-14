@@ -59,7 +59,7 @@ export const gatheringsRef = (e?: Entity) => e?.collectionRefs.find((c) => c.col
 export const METHOD_ORDER: EvidenceMethod[] = ["Personally Stayed", "Personally Inspected", "Host / Partner Reviewed", "Host Met", "House Selected", "Founder Favorite", "On the Horizon"];
 export const METHOD_MEANING: Record<EvidenceMethod, string> = {
   "Personally Stayed": "James stayed overnight at this exact house or residence.",
-  "Personally Inspected": "James visited in person. A visit is not an overnight stay.",
+  "Personally Inspected": "Founder inspected & approved: James inspected the house in person and approved it for the Ledger. An inspection is not an overnight stay.",
   "Host / Partner Reviewed": "The host or partner has reviewed the facts on this page.",
   "Host Met": "James has spoken with the host. It does not verify every fact.",
   "House Selected": "James chose the house for the Ledger — an editorial judgement.",
@@ -84,6 +84,17 @@ export function evidenceBasis(slug: string): Evidence | undefined {
   return evidenceForHouse(slug).own.find((x) => x.method !== "Founder Favorite" && x.method !== "House Selected")
     || evidenceForHouse(slug).own.find((x) => x.method === "House Selected");
 }
+
+/** How each method is named on the site. */
+export const METHOD_LABEL: Record<EvidenceMethod, string> = {
+  "Personally Stayed": "Personally Stayed",
+  "Personally Inspected": "Founder Inspected & Approved",
+  "Host / Partner Reviewed": "Host / Partner Reviewed",
+  "Host Met": "Host Met",
+  "House Selected": "House Selected",
+  "Founder Favorite": "Founder Favorite",
+  "On the Horizon": "On the Horizon",
+};
 
 /** True when James has been there in person (stayed or inspected) — needed before a Formula result reads as confirmed. */
 export const visitedInPerson = (slug: string) => evidenceForHouse(slug).own.some((x) => x.method === "Personally Stayed" || x.method === "Personally Inspected");

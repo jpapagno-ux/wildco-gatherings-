@@ -24,7 +24,7 @@ import { getOffersForHouse, getItinerariesForHouse } from "@/lib/extras";
 import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
 import PageSketch from "@/components/PageSketch";
 import TravelerActions from "@/components/TravelerActions";
-import { evidenceForHouse, evidenceBasis, formatEvidenceDate, formulaSummary, METHOD_MEANING } from "@/lib/entities";
+import { evidenceForHouse, evidenceBasis, formatEvidenceDate, formulaSummary, METHOD_MEANING, METHOD_LABEL } from "@/lib/entities";
 import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -407,7 +407,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
           <ul className="ev-list">
             {[...ev.own, ...ev.fromParent].map((x) => (
               <li key={x.id}>
-                <span className="ev-method">{x.method}{ev.fromParent.includes(x) && <span className="ev-tag">{parent?.name}</span>}<small>{[formatEvidenceDate(x), x.reviewer].filter(Boolean).join(" · ")}</small></span>
+                <span className="ev-method">{METHOD_LABEL[x.method]}{ev.fromParent.includes(x) && <span className="ev-tag">{parent?.name}</span>}<small>{[formatEvidenceDate(x), x.reviewer].filter(Boolean).join(" · ")}</small></span>
                 <span className="body" style={{ fontSize: 15 }}>{x.scope}<span className="cp muted" style={{ display: "block", marginTop: 4, fontSize: 10 }}>{METHOD_MEANING[x.method]} · Ref {x.id}</span></span>
               </li>
             ))}

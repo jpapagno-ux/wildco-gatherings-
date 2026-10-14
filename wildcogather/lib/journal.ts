@@ -181,7 +181,7 @@ Take all of it — 46 bedrooms, up to 130 people — and for a week the ranch is
 
 ## What I still have to see for myself
 
-I'll be straight with you: I have met the host, but I have not yet slept at the ranch. That is why its stamp reads Host met and not Field verified. When I've stayed, I'll say what I found here — good and bad — and the stamp will change or the entry will come out.
+I'll be straight with you: I have met the host, but I have not yet slept at the ranch. That is why its stamp reads Host met and not Founder inspected & approved. When I've stayed, I'll say what I found here — good and bad — and the stamp will change or the entry will come out.
 
 > The Ledger only works if I tell you what I haven't seen yet.`,
   },

@@ -16,7 +16,7 @@ import { SITE } from "./site";
 export const STAMP_MEANING: Record<string, string> = {
   "Under observation": "On the list; James has not yet stayed.",
   "Host met": "James has vetted the house in conversation with its host.",
-  "Field verified": "James has visited in person; Formula being confirmed. See each house's evidence for whether he stayed.",
+  "Founder inspected & approved": "James inspected the house in person and approved it for the Ledger; Formula being confirmed. See each house's evidence for whether he stayed overnight.",
   "Gathering verified": "Visited, and passes all six tests of the Gathering Formula.",
   "Founder favorite": "James's personal favourite — an opinion, not a verification.",
 };
