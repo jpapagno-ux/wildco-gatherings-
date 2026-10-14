@@ -1,5 +1,6 @@
 import { youtubeId } from "./video";
-import type { Residence, Img, Stamp, Video, Booking, RoomCategory } from "./types";
+import type { Residence, Img, Stamp, Video, Booking, RoomCategory, WhyHere } from "./types";
+import { WHY_HERE } from "./why-here";
 import { sampleResidences } from "./sample-data";
 import { settingFrom } from "./settings";
 import { scrub } from "./scrub";
@@ -34,6 +35,19 @@ const lines = (v?: string) => (v || "").split(/\n+/).map((s) => s.trim()).filter
 
 // "Label: value" on each line of the "Fees & taxes" field
 const pairs = (v?: string) => lines(v).map((l) => { const i = l.indexOf(":"); return i > 0 ? { label: l.slice(0, i).trim(), value: l.slice(i + 1).trim() } : { label: "Note", value: l }; });
+
+// Airtable: "Why here — James's quote", "Why here — watch line", "Why here — film (YouTube link)", "Why here — film title".
+// Falls back to lib/why-here.ts, so a house keeps its film while the Airtable fields are still empty.
+function whyHereFrom(f: Record<string, any>, slug: string): WhyHere | undefined {
+  const fb = WHY_HERE[slug];
+  const id = youtubeId(f["Why here — film (YouTube link)"]);
+  const quote = (f["Why here — James's quote"] || "").trim() || fb?.quote;
+  const film: Video | undefined = id
+    ? { provider: "youtube", id, title: (f["Why here — film title"] || "").trim() || `${f["Residence"]} — the film`, credit: "James Wild & Co" }
+    : fb?.film;
+  if (!quote && !film) return undefined;
+  return { quote: quote || "", watch: (f["Why here — watch line"] || "").trim() || fb?.watch, film };
+}
 
 function videosFrom(f: Record<string, any>): Video[] {
   const base = { title: f["Video title"] || `${f["Residence"]} — film`, description: f["Video description"], duration: f["Video duration (ISO)"], uploadDate: f["Video upload date"], credit: f["Video credit"] };
@@ -151,6 +165,7 @@ async function fromAirtable(): Promise<Residence[]> {
         vip: f["VIP (Vetted in Purpose)"] ? { collection: f["Collection"] || "", collectionSlug: f["Collection slug"] || "", visit: f["Visit planned"] || undefined, why: f["Why on J.W.'s list"] || "", fit: f["Family fit"] || undefined } : undefined,
         rooms: (f["Room Categories"] || []).map((id: string) => R[id]).filter(Boolean).map(toRoom).sort((a: any, b: any) => (a.order ?? 99) - (b.order ?? 99)),
         videos: videosFrom(f),
+        whyHere: whyHereFrom(f, f["Slug"]),
         seoTitle: f["SEO title"] || `${f["Residence"]} | Wild & Co Gatherings`,
         metaDescription: f["Meta description"] || f["The Line"] || "",
         credit: "",
