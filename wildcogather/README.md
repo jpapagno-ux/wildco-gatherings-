@@ -259,3 +259,7 @@ A stay's page can carry an **At the table** section: a question heading ("Where 
 - Every page ends with one luxe pen-and-ink border (`components/PageSketch.tsx`) above the Plan band: a stay page wears its setting's drawing, a destination its region's (`REGION_SKETCH`), the founder page the savanna, and index pages, itineraries and journal entries without a house the route divider. Drawings live in Cloudinary under `gatherings/sketch-borders/luxe/`; effects and crops in `lib/sketch-borders.ts`. Review board: `/studio/sketch-borders` (noindex).
 - Ledger registry for the chat agent and LLMs: `/ledger.json`, `/llms.txt`, `/llms-full.txt`, built by `lib/ledger-registry.ts` from live Airtable data. House IDs are the permanent Entry No. (`G-###`); see `docs/ledger-ids.md` for the ID map with Airtable record IDs. Airtable › Residences now has a **Ledger key** formula and **Page path** points at `/houses/<slug>`.
 - Each house page's LodgingBusiness schema carries `@id` (`/houses/<slug>#stay`) and `identifier` (its Ledger ID).
+
+## James Wild & Co ecosystem (Oct 2026)
+
+Gatherings is now one of four volumes (Stays · Safaris · Gatherings · Voyages) with My Folios, Iggi and the shared Ledger. See **docs/ecosystem.md** for the navigation config, the shared record structure (JWC entity IDs, evidence, parent/child residences), what is connected versus saved on the device, and the future connections. Run `npm run check:ledger` before releasing data changes.

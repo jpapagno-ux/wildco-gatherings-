@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "node --test --experimental-strip-types test/*.test.ts"
+    "test": "node --test --experimental-strip-types test/*.test.ts",
+    "check:ledger": "node scripts/check-ledger.mjs"
   },
   "dependencies": {
     "leaflet": "1.9.4",

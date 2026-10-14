@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 const faqs = [
   { q: "What does advisor-led mean at Wild & Co Gatherings?", a: "Every gathering is planned with a travel advisor in the room. We vet the houses and supply the family facts; the advisor owns the client relationship, the plan and the booking." },
   { q: "Can travel advisors book Wild & Co houses for their clients?", a: "Yes. Apply below and we will set you up with house sheets, availability holds and a direct line to the team for each family you are planning for." },
-  { q: "How does Wild & Co vet a family residence?", a: "James Wild visits or speaks with each house and scores it against six tests — room to gather, a day for every age, water within reach, wild at the door, a resort behind you and worth returning to — before it earns a Ledger stamp." },
+  { q: "How does Wild & Co vet a family residence?", a: "James Wild visits or speaks with each house and scores it against six tests — room to gather, a day for every age, water within reach, country at the door, a resort behind you and worth returning to. Each house page shows its evidence: whether James stayed, visited or met the host, and when." },
   { q: "What is a generational residence?", a: "A villa, lodge or private house that sleeps a whole extended family under one roof or one booking, with space for grandparents, parents and children to be together and apart in the same stay." },
   { q: "Do you help plan gatherings of friends as well as families?", a: "Yes. Milestone birthdays, reunions of old friends and weddings weekends work the same way: one house, a plan for every age and pace, and one long table." },
 ];
@@ -33,7 +33,7 @@ const why = [
 const building = [
   ["Client-ready house sheets", "Every Ledger page doubles as a sheet you can send, with stamps, rooms and inclusions."],
   ["Short itineraries to adapt", "Three- and four-day plans built around one house, ready to tailor to your family."],
-  ["Worth Another Night offers", "Stay-and-pay offers you can hold for clients, with the fine print on the card."],
+  ["Time Rewarded offers", "Verified stay-and-pay offers you can hold for clients, with dates, eligibility and exclusions on the card."],
   ["Webinars with the hosts", "Live sessions on Livestorm with the people who run the houses, recorded for later."],
   ["First word on new openings", "On the Horizon places reach advisors before they reach the public."],
   ["A planning partner for complex groups", "Room-by-room plans and age-by-age days for gatherings of 8 to 40."],

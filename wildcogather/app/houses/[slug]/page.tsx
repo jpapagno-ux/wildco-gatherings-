@@ -22,6 +22,8 @@ import { regionFor, regionMeta } from "@/lib/regions";
 import { getOffersForHouse, getItinerariesForHouse } from "@/lib/extras";
 import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
 import PageSketch from "@/components/PageSketch";
+import TravelerActions from "@/components/TravelerActions";
+import { evidenceForHouse, evidenceBasis, formatEvidenceDate, formulaSummary, METHOD_MEANING } from "@/lib/entities";
 
 export const revalidate = 3600;
 
@@ -66,6 +68,13 @@ export default async function House({ params }: { params: Promise<{ slug: string
     ["Deposit", b.deposit], ["Cancel", b.cancellation], ["Children", b.children],
   ] : [];
   const st = SETTINGS[r.setting];
+  const ev = evidenceForHouse(r.slug);
+  const ent = ev.entity;
+  const parent = ev.parent;
+  const isResidence = ent?.type === "residence";
+  const basis = evidenceBasis(r.slug);
+  const fs = formulaSummary(r.slug, r.formula);
+  const suggestedNights = trips.length ? Array.from(new Set(trips.map((t) => (t.stops?.find((x) => x.house === r.slug || x.or?.includes(r.slug))?.nights) ?? t.nights))).sort((a, b) => a - b) : [];
   const card = r.images.find((i) => i.role === "Card");
   const tagStatus = r.vip ? "Gatherings VIP" : r.stamp;
   const familyNotes: [string, string, string | undefined][] = [
@@ -81,7 +90,8 @@ export default async function House({ params }: { params: Promise<{ slug: string
     ["Coordinates", coords ? coords.replace("   ", "\n") : undefined],
     ["Setting", st.name],
     ["Sleeps", r.sleeps ? `Up to ${r.sleeps}` : r.units ? `${r.units} houses & cabins` : undefined],
-    ["Recorded", r.firstVisited ? `${r.firstVisited} · in person` : r.vip?.visit ? `Visit ${r.vip.visit.replace(/^visit\s*/i, "")}` : "On the list"],
+    ["Evidence", basis ? basis.wording : r.vip?.visit ? `Visit ${r.vip.visit.replace(/^visit\s*/i, "")}` : "On the list"],
+    ["Identity", ent ? `${ent.id}${isResidence ? " · residence" : ""}` : undefined],
   ];
   const facts: [string, string | undefined][] = [
     ["Season", r.seasons.join(" & ")],
@@ -90,7 +100,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
     ["Children", r.kidsProgram ? `${r.kidsProgram}${r.kidsAges ? (/^\d/.test(r.kidsAges) ? `, ages ${r.kidsAges}` : `, ${r.kidsAges}`) : ""}` : undefined],
     ["Last leg", r.airport],
     ["Water", r.water],
-    ["From", r.rateFrom ? `$${r.rateFrom.toLocaleString()} ${r.rateUnit || ""}` : "On request"],
+    ["Rates", "Request a quote"],
   ];
 
   return (
@@ -110,10 +120,10 @@ export default async function House({ params }: { params: Promise<{ slug: string
           creditText: i.credit || r.credit || undefined,
         })),
         sameAs: r.officialUrl,
-        priceRange: "$$$$",
+        ...(ent ? { additionalProperty: [{ "@type": "PropertyValue", propertyID: "JWC entity", value: ent.id }, ...(parent ? [{ "@type": "PropertyValue", propertyID: "Parent property", value: `${parent.id} · ${parent.name}` }] : [])] } : {}),
+        ...(parent ? { containedInPlace: { "@type": "LodgingBusiness", name: parent.name } } : {}),
         ...(toTime(b?.checkIn) ? { checkinTime: toTime(b?.checkIn) } : {}),
         ...(toTime(b?.checkOut) ? { checkoutTime: toTime(b?.checkOut) } : {}),
-        ...(r.rateFrom ? { makesOffer: { "@type": "Offer", url: `${SITE}/houses/${r.slug}`, priceSpecification: { "@type": "UnitPriceSpecification", price: r.rateFrom, priceCurrency: "USD", unitText: r.rateUnit || "per night" }, description: b?.included.join("; ") } } : {}),
         ...(film ? { subjectOf: { "@id": `${SITE}/houses/${r.slug}#film` } } : {}),
       }} />
       {r.videos.map((v, i) => (
@@ -141,7 +151,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
         </div>
         <div className="title">
           <nav aria-label="Breadcrumb" className="cp" style={{ color: "rgba(244,241,236,.78)", marginBottom: 20 }}><Link href="/ledger" style={{ textDecoration: "none" }}>The Ledger</Link> / <Link href={`/houses#${r.setting}`} style={{ textDecoration: "none" }}>{st.name}</Link> / Entry {r.entryNo}</nav>
-          <p className="eb" style={{ color: "#F0D9C6" }}>Curated from experience · {r.region}, {r.country}</p>
+          <p className="eb" style={{ color: "#F0D9C6" }}>{isResidence && parent?.name ? `A residence at ${parent.name} · ` : ""}{r.region}, {r.country}</p>
           <h1 className="dsp" style={{ margin: "18px 0 0", fontSize: "clamp(48px, 6.4vw, 92px)", color: "var(--on-dark)" }}>{r.name}</h1>
           {r.bestFor && <p className="ser" style={{ margin: "18px 0 0", fontStyle: "italic", fontSize: "clamp(20px, 2.2vw, 28px)", lineHeight: 1.3, maxWidth: 760 }}>{r.bestFor}</p>}
         </div>
@@ -174,10 +184,16 @@ export default async function House({ params }: { params: Promise<{ slug: string
         <div className="tag-clear" style={{ position: "relative", display: "grid", gap: 46 }}>
           {card ? <TapedPhoto img={card} caption={card.caption} /> : null}
           <div className="card" style={{ padding: "28px 30px" }}>
-            <p className="eb" style={{ fontSize: 12 }}>Not for everyone</p>
+            {r.bestFor && <><p className="eb" style={{ fontSize: 12 }}>Best for</p>
+            <p className="ser" style={{ margin: "12px 0 22px", fontSize: 20, lineHeight: 1.5, color: "var(--charcoal)" }}>{r.bestFor}</p></>}
+            <p className="eb" style={{ fontSize: 12 }}>What to consider</p>
             <p className="ser" style={{ margin: "14px 0 0", fontSize: 21, lineHeight: 1.5, color: "var(--charcoal)" }}>{r.notFor}</p>
           </div>
         </div>
+      </section>
+
+      <section className="wrap" style={{ paddingBottom: 60 }} aria-label="Plan with this house">
+        <TravelerActions item={{ kind: "house", slug: r.slug, name: r.name, entityId: ent?.id, ref: r.entryNo, href: `/houses/${r.slug}` }} />
       </section>
 
       {offer && <OfferCard offer={offer} house={r.slug} houseName={r.name.replace(/, a Ted Turner Reserve$/, "")} />}
@@ -208,9 +224,43 @@ export default async function House({ params }: { params: Promise<{ slug: string
         </div>
       </section>
 
+      {r.rooms.length > 0 && (
+        <section className="band" style={{ padding: "100px 0" }} aria-label="Sleeping plan">
+          <div className="wrap">
+            <p className="eb">Sleeping plan{isResidence && parent?.name ? ` · a residence at ${parent.name}` : ""}</p>
+            <hr className="eb-rule" />
+            <h2 className="dsp" style={{ margin: "30px 0 30px", fontSize: 46 }}>Where everyone sleeps</h2>
+            <div className="card" style={{ padding: "8px 40px 26px", overflowX: "auto" }}>
+              <table style={{ width: "100%", minWidth: 860, borderCollapse: "collapse" }}>
+                <thead>
+                  <tr className="cp muted" style={{ textAlign: "left", borderBottom: "1px solid var(--charcoal)" }}>
+                    {["Category", "Count", "Bedrooms", "Sleeps", "What's inside", "Family fit · J.W."].map((h) => <th key={h} scope="col" style={{ padding: "18px 12px 14px 0", fontWeight: 400 }}>{h}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {r.rooms.map((m) => (
+                    <tr key={m.name} style={{ borderBottom: m.whole ? 0 : "1px solid var(--stone)", background: m.whole ? "var(--paper-2)" : undefined, verticalAlign: "baseline" }}>
+                      <th scope="row" className={`ser${m.whole ? " ox" : ""}`} style={{ padding: "18px 12px 18px 0", fontSize: 22, fontWeight: 500, textAlign: "left" }}>{m.name}{m.whole && <span className="ev-tag">{isResidence && parent?.name && /lodge|camp|estate|buyout|whole property/i.test(m.name) ? `Whole-${/lodge/i.test(m.name) ? "lodge" : "property"} buyout · not the ${r.name.split(",")[0]} alone` : isResidence ? "Whole residence · exclusive use" : "Whole-property booking"}</span>}</th>
+                      <td className="mono" style={{ padding: "18px 12px 18px 0" }}>{m.count}</td>
+                      <td className="mono" style={{ padding: "18px 12px 18px 0" }}>{m.bedrooms}</td>
+                      <td className="mono" style={{ padding: "18px 12px 18px 0" }}>{m.sleeps}</td>
+                      <td className="body" style={{ padding: "18px 12px 18px 0", fontSize: 15, lineHeight: 1.55 }}>{m.inside}</td>
+                      <td className="it" style={{ padding: "18px 0", fontSize: 19, lineHeight: 1.3 }}>{m.fit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {isResidence && parent?.name && <p className="cp muted" style={{ margin: "16px 0 0" }}>{r.name} is one residence at {parent.name}. Booking the whole of {parent.name} is a separate arrangement — ask us. Bathrooms, bed types and occupancy limits are confirmed with your quote.</p>}
+            {!isResidence && <p className="cp muted" style={{ margin: "16px 0 0" }}>Bathrooms, bed types and permitted adult/child occupancy are confirmed with your quote.</p>}
+          </div>
+        </section>
+      )}
+
       {familyNotes.some(([, , v]) => v) && (
-        <section className="wrap" style={{ paddingBottom: 90 }} aria-label="Notes for the family">
-          <p className="lbl">Notes for the family</p>
+        <section className="wrap" style={{ paddingBottom: 90 }} aria-label="Family planning">
+          <p className="eb">Family planning</p>
+          <hr className="eb-rule" style={{ marginBottom: 22 }} />
           <div className="notes">
             {familyNotes.filter(([, , v]) => v).map(([icon, k, v]) => (
               <div key={k}><Icon name={icon} /><span className="cp" style={{ color: "var(--charcoal)" }}>{k}</span><span className="mono" style={{ fontSize: 12 }}>{v}</span></div>
@@ -237,11 +287,11 @@ export default async function House({ params }: { params: Promise<{ slug: string
 
       {b && (
         <section className="wrap" style={{ paddingTop: 100, paddingBottom: 90 }} aria-label="Booking facts and pricing">
-          <p className="eb">Booking facts &amp; pricing</p>
+          <p className="eb">The practical ledger</p>
           <hr className="eb-rule" />
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "end", flexWrap: "wrap", gap: 16, margin: "30px 0 34px" }}>
             <h2 className="dsp" style={{ margin: 0, fontSize: 46 }}>How the stay works</h2>
-            {b.checked && <p className="cp muted" style={{ margin: 0 }}>Checked with the house · {b.checked}</p>}
+            {b.checked && <p className="cp muted" style={{ margin: 0 }}>Facts last reviewed · {b.checked} · confirm current rates &amp; policies with us</p>}
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))", gap: 28 }}>
             <div className="card" style={{ padding: "34px 40px" }}>
@@ -252,9 +302,10 @@ export default async function House({ params }: { params: Promise<{ slug: string
               </dl>
             </div>
             <div className="card" style={{ padding: "34px 40px", display: "flex", flexDirection: "column" }}>
-              <p className="cp muted" style={{ margin: 0 }}>{r.rateFrom ? "From" : "Rates"}</p>
-              <p className="ser ox" style={{ margin: "6px 0 0", fontSize: 60, fontWeight: 300, lineHeight: 1 }}>{r.rateFrom ? `$${r.rateFrom.toLocaleString()}` : "On request"}</p>
-              {b.rateBasis && <p className="body" style={{ margin: "10px 0 24px", fontSize: 15 }}>{b.rateBasis}</p>}
+              <p className="cp muted" style={{ margin: 0 }}>Rates</p>
+              <p className="ser ox" style={{ margin: "6px 0 0", fontSize: 44, fontWeight: 300, lineHeight: 1.05 }}>Request a quote</p>
+              <p className="body" style={{ margin: "10px 0 0", fontSize: 14 }}>We publish a price only with its currency, rate basis, occupancy, dates, exclusions and source. Until then, rates are quoted for your family and dates.</p>
+              {b.rateBasis && !/[$€£¥]|\bR\s?\d|\d[\d,.]*\s?(USD|ZAR|EUR|GBP)/i.test(b.rateBasis) && <p className="body" style={{ margin: "10px 0 24px", fontSize: 15 }}>{b.rateBasis}</p>}
               <dl style={{ margin: 0, borderTop: "1px solid var(--charcoal)" }}>
                 {b.fees.filter((f) => f.value).map((f) => <div key={f.label} className="mf"><dt className="cp muted">{f.label}</dt><dd className="mono" style={{ margin: 0, fontSize: 12 }}>{f.value}</dd></div>)}
               </dl>
@@ -269,37 +320,6 @@ export default async function House({ params }: { params: Promise<{ slug: string
             <div style={{ padding: "30px 0", borderTop: "1px solid var(--charcoal)" }}>
               <h3 className="lbl">✕ Not included</h3>
               <ul className="body" style={{ margin: 0, paddingLeft: 18, fontSize: 16 }}>{b.excluded.filter(Boolean).map((x) => <li key={x}>{x}</li>)}</ul>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {r.rooms.length > 0 && (
-        <section className="band" style={{ padding: "100px 0" }} aria-label="Room categories">
-          <div className="wrap">
-            <p className="eb">Room categories</p>
-            <hr className="eb-rule" />
-            <h2 className="dsp" style={{ margin: "30px 0 30px", fontSize: 46 }}>Where everyone sleeps</h2>
-            <div className="card" style={{ padding: "8px 40px 26px", overflowX: "auto" }}>
-              <table style={{ width: "100%", minWidth: 860, borderCollapse: "collapse" }}>
-                <thead>
-                  <tr className="cp muted" style={{ textAlign: "left", borderBottom: "1px solid var(--charcoal)" }}>
-                    {["Category", "Count", "Bedrooms", "Sleeps", "What's inside", "Family fit · J.W."].map((h) => <th key={h} scope="col" style={{ padding: "18px 12px 14px 0", fontWeight: 400 }}>{h}</th>)}
-                  </tr>
-                </thead>
-                <tbody>
-                  {r.rooms.map((m) => (
-                    <tr key={m.name} style={{ borderBottom: m.whole ? 0 : "1px solid var(--stone)", background: m.whole ? "var(--paper-2)" : undefined, verticalAlign: "baseline" }}>
-                      <th scope="row" className={`ser${m.whole ? " ox" : ""}`} style={{ padding: "18px 12px 18px 0", fontSize: 22, fontWeight: 500, textAlign: "left" }}>{m.name}</th>
-                      <td className="mono" style={{ padding: "18px 12px 18px 0" }}>{m.count}</td>
-                      <td className="mono" style={{ padding: "18px 12px 18px 0" }}>{m.bedrooms}</td>
-                      <td className="mono" style={{ padding: "18px 12px 18px 0" }}>{m.sleeps}</td>
-                      <td className="body" style={{ padding: "18px 12px 18px 0", fontSize: 15, lineHeight: 1.55 }}>{m.inside}</td>
-                      <td className="it" style={{ padding: "18px 0", fontSize: 19, lineHeight: 1.3 }}>{m.fit}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
             </div>
           </div>
         </section>
@@ -330,15 +350,16 @@ export default async function House({ params }: { params: Promise<{ slug: string
       <EpisodeCross from={r.slug} setting={r.setting} fromName={r.name} />
 
       {trips.length > 0 && (
-        <section className="wrap" style={{ paddingTop: 100 }} aria-label="Short itineraries">
-          <p className="eb">Short itineraries · {trips.map((t) => `${t.days} days`).join(" · ")}</p>
+        <section className="wrap" style={{ paddingTop: 100 }} aria-label="Your chapter">
+          <p className="eb">Your chapter · suggested {suggestedNights.length ? `${suggestedNights.join(" or ")} nights here` : "journeys"}</p>
           <hr className="eb-rule" />
-          <h2 className="dsp" style={{ margin: "28px 0 28px", fontSize: 44 }}>A few days from the house</h2>
+          <h2 className="dsp" style={{ margin: "28px 0 10px", fontSize: 44 }}>Your chapter here</h2>
+          <p className="body" style={{ margin: "0 0 26px", maxWidth: 680 }}>Suggested journeys, not bookings. Save one to My Folios to make your own copy — the original stays as it is.</p>
           <div style={{ display: "grid", gap: 24 }}>
             {trips.map((t) => (
               <Link key={t.slug} href={`/itineraries/${t.slug}`} className="card" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))", gap: 30, padding: "30px 36px", textDecoration: "none", alignItems: "center" }}>
                 <div>
-                  <p className="cp muted" style={{ margin: 0 }}>{t.days} days · {t.nights} nights{t.offer && offer?.slug === t.offer ? " · pairs with Worth Another Night" : ""}</p>
+                  <p className="cp muted" style={{ margin: 0 }}>{t.days} days · {t.nights} nights{t.offer && offer?.slug === t.offer ? " · pairs with Time Rewarded" : ""}</p>
                   <h3 className="ser" style={{ margin: "10px 0 8px", fontSize: 30, fontWeight: 500 }}>{t.title}</h3>
                   <p className="body" style={{ margin: 0, fontSize: 16 }}>{t.dek}</p>
                 </div>
@@ -356,18 +377,37 @@ export default async function House({ params }: { params: Promise<{ slug: string
           <p className="eb">The Gathering Formula</p>
           <hr className="eb-rule" />
           <h2 className="dsp" style={{ margin: "28px 0 18px", fontSize: 42 }}>How it measures up</h2>
-          <p className="body" style={{ margin: 0 }}>{r.formula.filter((f) => f.pass).length} of 6 tests passed.</p>
+          <p className="body" style={{ margin: 0 }}>{fs.line}</p>
+          <p className="cp muted" style={{ margin: "14px 0 0" }}>Water within reach means a water setting nearby. Swimming and boating only where the note says so.</p>
         </div>
         <ol style={{ flex: "2 1 560px", listStyle: "none", margin: 0, padding: 0, borderTop: "1px solid var(--charcoal)" }}>
           {r.formula.map((f, i) => (
             <li key={f.test} style={{ display: "grid", gridTemplateColumns: "90px minmax(0,220px) 1fr", gap: 16, padding: "18px 0", borderBottom: "1px solid var(--stone)", alignItems: "baseline" }}>
               <span className={`mono${f.pass ? " ox" : " muted"}`}>{f.pass ? "✓" : "○"} {String(i + 1).padStart(2, "0")}</span>
               <span className="ser" style={{ fontSize: 22, fontWeight: 500 }}>{f.test}</span>
-              <span className="body" style={{ fontSize: 16 }}>{f.note}</span>
+              <span className="body" style={{ fontSize: 16 }}>{f.note}{fs.exceptions[f.test] && <span className="cp" style={{ display: "block", marginTop: 6, color: "var(--rust)", textTransform: "none", letterSpacing: 0, fontSize: 14 }}>Exception · {fs.exceptions[f.test]}</span>}</span>
             </li>
           ))}
         </ol>
       </section>
+
+      {(ev.own.length > 0 || ev.fromParent.length > 0) && (
+        <section className="wrap" style={{ paddingBottom: 90 }} aria-labelledby="ev-h">
+          <p className="eb">The evidence</p>
+          <hr className="eb-rule" />
+          <h2 id="ev-h" className="dsp" style={{ margin: "26px 0 10px", fontSize: 40 }}>How we know</h2>
+          <p className="body" style={{ margin: "0 0 22px", maxWidth: 700 }}>Each line says what James did, when, and what it covers. A past visit does not confirm current rates or policies; Host met does not verify every fact; Founder Favorite is an opinion.</p>
+          <ul className="ev-list">
+            {[...ev.own, ...ev.fromParent].map((x) => (
+              <li key={x.id}>
+                <span className="ev-method">{x.method}{ev.fromParent.includes(x) && <span className="ev-tag">{parent?.name}</span>}<small>{[formatEvidenceDate(x), x.reviewer].filter(Boolean).join(" · ")}</small></span>
+                <span className="body" style={{ fontSize: 15 }}>{x.scope}<span className="cp muted" style={{ display: "block", marginTop: 4, fontSize: 10 }}>{METHOD_MEANING[x.method]} · Ref {x.id}</span></span>
+              </li>
+            ))}
+          </ul>
+          {r.firstVisited && <p className="cp muted" style={{ margin: "14px 0 0" }}>First visit · {r.firstVisited}{b?.checked ? ` · Facts last reviewed · ${b.checked}` : ""}</p>}
+        </section>
+      )}
 
       {r.experiences.length > 0 && (
         <section aria-label="Experiences" className="band" style={{ padding: "90px 0 50px" }}>

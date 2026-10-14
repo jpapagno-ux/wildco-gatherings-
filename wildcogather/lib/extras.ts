@@ -1,5 +1,5 @@
 import { scrub } from "./scrub";
-// Offers ("Worth Another Night" — Time Rewarded) and short inbound itineraries (3–4 days).
+// Offers ("Time Rewarded" — verified offers only) and family journey templates.
 // Both live in Airtable (tables "Offers" and "Itineraries", linked to Residences) and fall back to
 // the samples below until AIRTABLE_TOKEN is set. Add a row in Airtable — no code needed.
 
@@ -10,7 +10,7 @@ export type OfferStatus = "Draft preview" | "Live" | "Paused" | "Expired";
 export type Offer = {
   slug: string;
   house: string; // residence slug
-  name: string; // "Worth Another Night — Stay 3, Pay 2"
+  name: string; // "Time Rewarded — Stay 3, Pay 2"
   kind: string; // "Stay 3, Pay 2"
   stayNights: number;
   payNights: number;
@@ -88,7 +88,7 @@ const SAMPLE_OFFERS: Offer[] = [
   {
     slug: "como-shambhala-worth-another-night",
     house: "como-shambhala-estate",
-    name: "Worth Another Night — Stay 3, Pay 2",
+    name: "Time Rewarded — Stay 3, Pay 2",
     kind: "Stay 3, Pay 2",
     stayNights: 3,
     payNights: 2,
@@ -399,14 +399,14 @@ const SAMPLE_ITINERARIES: Itinerary[] = [
     title: "Ubud & the Ayung in Four Days",
     days: 4,
     nights: 3,
-    dek: "Four days, three nights, one Residence: the river, the rice terraces, the temples and a long table every evening — sized to fit the Worth Another Night offer.",
+    dek: "Four days, three nights, one Residence: the river, the rice terraces, the temples and a long table every evening — sized to fit a Time Rewarded offer when one is live.",
     bestFor: "Three generations on a first trip to Bali, from teenagers to grandparents",
     season: "Year-round · best in the dry season, Apr–Oct",
     arrive: "Denpasar (DPS) · about 90 min by car",
     depart: "Denpasar (DPS), or on to the coast at Canggu",
     ...parsePlan(COMO_PLAN),
     included: [
-      "Three nights in a Residence (the third free with Worth Another Night, when valid)",
+      "Three nights in a Residence (the third free with a Time Rewarded offer, when one is live)",
       "COMO Shambhala inclusive plan: meals, a daily treatment or class, yoga",
       "Your personal assistant at the Residence",
       "Day-by-day planning by James Wild & Co",
@@ -471,10 +471,12 @@ async function safe<T>(fn: () => Promise<T[]>, sample: T[]): Promise<T[]> {
 
 const today = () => new Date().toISOString().slice(0, 10);
 
-// Shown: Live or Draft preview, and not past "Valid to". Draft previews carry a "sample — to confirm" ribbon.
+// "Time Rewarded" is reserved for VERIFIED offers: Live, confirmed with the partner, with eligibility terms,
+// travel window, book-by date, exclusions and expiry all recorded — and not yet expired. Anything else stays hidden.
+export const isVerifiedOffer = (o: Offer, t = today()) =>
+  o.status === "Live" && o.confirmed && !!o.validFrom && !!o.validTo && !!o.bookBy && o.terms.length > 0 && o.excluded.length > 0 && o.validTo >= t && o.bookBy >= t;
 export async function getOffersForHouse(house: string): Promise<Offer[]> {
-  const t = today();
-  return (await safe(offersFromAirtable, SAMPLE_OFFERS)).filter((o) => o.house === house && (o.status === "Live" || o.status === "Draft preview") && (!o.validTo || o.validTo >= t));
+  return (await safe(offersFromAirtable, SAMPLE_OFFERS)).filter((o) => o.house === house && isVerifiedOffer(o));
 }
 export async function getOffer(slug: string) {
   return (await safe(offersFromAirtable, SAMPLE_OFFERS)).find((o) => o.slug === slug);

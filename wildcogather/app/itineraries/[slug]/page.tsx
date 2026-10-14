@@ -10,6 +10,9 @@ import { getItineraries, getItinerary, getOffer } from "@/lib/extras";
 import { getResidence } from "@/lib/data";
 import { SETTINGS } from "@/lib/settings";
 import PageSketch from "@/components/PageSketch";
+import TravelerActions from "@/components/TravelerActions";
+import { checkDuration } from "@/lib/journeys";
+import { templateIdFor, entityForHouse } from "@/lib/entities";
 
 export const revalidate = 3600;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
@@ -33,9 +36,13 @@ export default async function ItineraryPage({ params }: { params: Promise<{ slug
   // Multi-stay journeys: resolve each chapter's house (and its alternatives).
   const stops = t.stops ? (await Promise.all(t.stops.map(async (s) => ({ ...s, r: await getResidence(s.house), alts: (await Promise.all((s.or || []).map((h) => getResidence(h)))).filter(Boolean) as NonNullable<Awaited<ReturnType<typeof getResidence>>>[] })))).filter((s) => s.r) : [];
   const hero = t.hero ? { publicId: t.hero, alt: `${t.title} — ${r.name}` } : r.images.find((i) => i.role === "Hero") || r.images[0];
+  const dur = checkDuration(t);
+  const templateId = templateIdFor(t.slug);
+  const planningQs = t.plan.map((d) => d.note).filter(Boolean) as string[];
   const facts: [string, string | undefined][] = [
-    ["Length", `${t.days} days · ${t.nights} nights`], stops.length ? ["Stays", stops.map((s) => `${s.r!.name} · ${s.nights} nights`).join("\n")] : ["Base", r.name], ["Arrive", t.arrive], ["Depart", t.depart],
-    ["Best for", t.bestFor], ["Season", t.season], ["Price", t.priceNote],
+    ["Template", `${templateId ? `${templateId} · ` : ""}Suggested journey — not a booking`],
+    ["Length", `${dur.days} days · ${dur.nights} nights`], stops.length ? ["Stays", stops.map((s) => `${s.r!.name} · ${s.nights} nights`).join("\n")] : ["Base", r.name], ["Arrive", t.arrive], ["Depart", t.depart],
+    ["Best for", t.bestFor], ["Season", t.season], ["Price", t.priceNote || "Request a quote"],
   ];
   return (
     <>
@@ -48,6 +55,7 @@ export default async function ItineraryPage({ params }: { params: Promise<{ slug
         subjectOf: stops.length
           ? stops.flatMap((s) => [s.r!, ...s.alts]).map((h) => ({ "@type": "LodgingBusiness", name: h.name, url: `${SITE}/houses/${h.slug}`, address: { "@type": "PostalAddress", addressLocality: h.place, addressRegion: h.region, addressCountry: h.country } }))
           : { "@type": "LodgingBusiness", name: r.name, url: `${SITE}/houses/${r.slug}` },
+        identifier: templateId,
         itinerary: { "@type": "ItemList", numberOfItems: t.plan.length, itemListElement: t.plan.map((d, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "TouristAttraction", name: `Day ${i + 1} · ${d.title}`, description: [d.morning, d.afternoon, d.evening].filter(Boolean).join(" · ") } })) },
       }} />
       {t.draft && <div className="cp" style={{ background: "var(--oxblood)", color: "var(--paper)", textAlign: "center", padding: "10px 20px" }}>Sample itinerary · draft for James&apos;s approval</div>}
@@ -56,8 +64,8 @@ export default async function ItineraryPage({ params }: { params: Promise<{ slug
         <Photo img={hero} priority style={{ position: "absolute", inset: 0 }} />
         <div className="shade" />
         <div className="title" style={{ left: 48, right: 48 }}>
-          <nav aria-label="Breadcrumb" className="cp" style={{ color: "rgba(244,241,236,.78)", marginBottom: 20 }}><Link href="/itineraries" style={{ textDecoration: "none" }}>Itineraries</Link> / <Link href={`/houses/${r.slug}`} style={{ textDecoration: "none" }}>{r.name}</Link></nav>
-          <p className="eb" style={{ color: "#F0D9C6" }}>{stops.length ? "Journey" : "Short itinerary"} · {t.days} days · {t.nights} nights · {stops.length ? r.country : r.region}</p>
+          <nav aria-label="Breadcrumb" className="cp" style={{ color: "rgba(244,241,236,.78)", marginBottom: 20 }}><Link href="/itineraries" style={{ textDecoration: "none" }}>Family Journeys</Link> / <Link href={`/houses/${r.slug}`} style={{ textDecoration: "none" }}>{r.name}</Link></nav>
+          <p className="eb" style={{ color: "#F0D9C6" }}>{stops.length ? "Journey" : "Family journey"} · {dur.days} days · {dur.nights} nights · {stops.length ? r.country : r.region}</p>
           <h1 className="dsp" style={{ margin: "18px 0 0", fontSize: "clamp(32px, 6vw, 86px)", color: "var(--on-dark)", maxWidth: 1000 }}>{t.title}</h1>
           <p className="ser" style={{ margin: "18px 0 0", fontStyle: "italic", fontSize: "clamp(20px, 2.2vw, 27px)", lineHeight: 1.35, maxWidth: 780 }}>{t.dek}</p>
         </div>
@@ -72,6 +80,20 @@ export default async function ItineraryPage({ params }: { params: Promise<{ slug
             </dl>
           ))}
         </div>
+      </section>
+
+      <section className="wrap" style={{ paddingBottom: 60 }} aria-label="Plan with this journey">
+        <TravelerActions item={{
+          kind: "itinerary", slug: t.slug, name: t.title, href: `/itineraries/${t.slug}`, entityId: templateId, ref: r.entryNo,
+          template: { templateId, title: t.title, days: dur.days, nights: dur.nights, stops: (t.stops || []).map((x) => ({ house: x.house, nights: x.nights, label: x.label })), dayTitles: t.plan.map((d) => d.title), snapshotAt: new Date().toISOString() },
+        }} />
+        {planningQs.length > 0 && (
+          <div style={{ marginTop: 26 }}>
+            <p className="lbl" style={{ margin: 0 }}>Planning questions to settle</p>
+            <ul className="body" style={{ margin: "8px 0 0", paddingLeft: 18, fontSize: 16 }}>{planningQs.map((q) => <li key={q}>{q}</li>)}</ul>
+          </div>
+        )}
+        <p className="cp muted" style={{ margin: "18px 0 0" }}>A suggested template{entityForHouse(r.slug) ? ` built on ${r.entryNo} (${entityForHouse(r.slug)!.id})` : ""}. Dates, rooms, transfers and prices are confirmed only when an advisor quotes them.</p>
       </section>
 
       {stops.length > 0 && (

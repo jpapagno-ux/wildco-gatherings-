@@ -2,7 +2,7 @@ import Link from "next/link";
 import { OfferStamp } from "./Marks";
 import { fmtDate, type Offer } from "@/lib/extras";
 
-// "Worth Another Night" ticket on a stay's page: the offer on the left, a hand-drawn arrow
+// "Time Rewarded" ticket on a stay's page: the offer on the left, a hand-drawn arrow
 // pointing to the valid dates and what's included / not included on the right.
 export default function OfferCard({ offer, house, houseName }: { offer: Offer; house: string; houseName: string }) {
   const draft = offer.status !== "Live" || !offer.confirmed;
@@ -17,7 +17,7 @@ export default function OfferCard({ offer, house, houseName }: { offer: Offer; h
           <div className="ticket-main">
             <div style={{ position: "absolute", right: -34, top: -64 }}><OfferStamp stay={offer.stayNights} pay={offer.payNights} size={150} /></div>
             {draft && <p className="cp" style={{ display: "inline-block", maxWidth: "calc(100% - 120px)", margin: "0 0 16px", padding: "3px 8px", border: "1px solid var(--rust)", color: "var(--rust)" }}>Sample offer · dates &amp; terms to confirm with the house</p>}
-            <p className="eb">Worth another night</p>
+            <p className="eb">Time Rewarded · a verified offer</p>
             <h2 className="dsp" style={{ margin: "14px 0 0", fontSize: "clamp(32px, 3.3vw, 46px)", maxWidth: "88%" }}>{offer.headline}</h2>
             {offer.line && <p className="it" style={{ margin: "14px 0 0", fontSize: 23, lineHeight: 1.35 }}>{offer.line}</p>}
             <div className="ticket-row">
