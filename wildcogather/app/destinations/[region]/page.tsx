@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -8,16 +9,17 @@ import { REGIONS, regionMeta } from "@/lib/regions";
 import { staysInRegion } from "@/lib/browse";
 import PageSketch from "@/components/PageSketch";
 import { REGION_SKETCH } from "@/lib/sketch-borders";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
 export function generateStaticParams() { return REGIONS.map((r) => ({ region: r.key })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ region: string }> }): Promise<Metadata> {
   const m = regionMeta((await params).region);
-  if (!m) return {};
-  return { title: `Family Villas & Generational Residences in ${m.label} | Wild & Co Gatherings`, description: `${m.description} Vetted by James Wild for multigenerational families and family reunions.`.slice(0, 158), alternates: { canonical: `/destinations/${m.key}` } };
+  if (!m) return fit({});
+  const count = staysInRegion(await getResidences(), m.key).length;
+  return fit({ title: `Family Villas & Residences in ${m.label} | Wild & Co Gatherings`, description: `${m.description} Vetted by James Wild for multigenerational families and family reunions.`, alternates: { canonical: `/destinations/${m.key}` }, ...(count ? {} : { robots: { index: false, follow: true } }) });
 }
 
 export default async function Destination({ params }: { params: Promise<{ region: string }> }) {

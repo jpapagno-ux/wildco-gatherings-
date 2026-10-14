@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { fit } from "@/lib/seo";
 import Link from "next/link";
 import Photo from "@/components/Photo";
 import Film from "@/components/Film";
@@ -17,6 +19,11 @@ import { FOUNDER_PHOTOS, FOUNDER_LEDE, AFRICA_QUOTES } from "@/lib/founder";
 import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
+export const metadata: Metadata = fit({
+  title: "Multigenerational Family Resort Residences | Wild & Co Gatherings",
+  description: "Resort residences and family journeys for every generation, chosen by James Wild after forty-four years on the road. A house of James Wild & Co.",
+  alternates: { canonical: "/" },
+});
 const LEDGER_PREVIEW = 8;
 
 const FORMULA: [string, string][] = [

@@ -5,8 +5,9 @@ import { getItineraries } from "@/lib/extras";
 import { getHorizon } from "@/lib/horizon";
 import { getWebinars } from "@/lib/webinars";
 import { REGIONS } from "@/lib/regions";
+import { staysInRegion } from "@/lib/browse";
+import { SITE } from "@/lib/site";
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const houses = await getResidences();
@@ -20,7 +21,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/ledger`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE}/itineraries`, changeFrequency: "weekly", priority: 0.8 },
     ...trips.map((t) => ({ url: `${SITE}/itineraries/${t.slug}`, changeFrequency: "monthly" as const, priority: 0.7 })),
-    ...REGIONS.map((r) => ({ url: `${SITE}/destinations/${r.key}`, changeFrequency: "weekly" as const, priority: 0.8 })),
+    { url: `${SITE}/destinations`, changeFrequency: "weekly", priority: 0.8 },
+    ...REGIONS.filter((r) => staysInRegion(houses, r.key).length).map((r) => ({ url: `${SITE}/destinations/${r.key}`, changeFrequency: "weekly" as const, priority: 0.8 })),
     { url: `${SITE}/founder`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE}/advisors`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE}/webinars`, changeFrequency: "weekly", priority: 0.7 },

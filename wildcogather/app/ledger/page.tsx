@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import LedgerTable from "@/components/LedgerTable";
 import JsonLd from "@/components/JsonLd";
@@ -5,11 +6,11 @@ import { getResidences } from "@/lib/data";
 import PageSketch from "@/components/PageSketch";
 
 export const revalidate = 3600;
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   title: "The Gatherings Ledger — Family Resort Residences Vetted by James Wild",
   description: "Every house in the Wild & Co Gatherings Ledger, with entry number, status and when James Wild first visited.",
   alternates: { canonical: "/ledger" },
-};
+});
 
 export default async function Ledger() {
   const rows = await getResidences();

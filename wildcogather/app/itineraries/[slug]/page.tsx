@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -10,20 +11,21 @@ import { getItineraries, getItinerary, getOffer } from "@/lib/extras";
 import { getResidence } from "@/lib/data";
 import { SETTINGS } from "@/lib/settings";
 import PageSketch from "@/components/PageSketch";
+import { getOgImageUrl } from "@/lib/cloudinary-loader";
 import TravelerActions from "@/components/TravelerActions";
 import { checkDuration } from "@/lib/journeys";
 import { templateIdFor, entityForHouse } from "@/lib/entities";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5";
 
 export async function generateStaticParams() { return (await getItineraries()).map((i) => ({ slug: i.slug })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const t = await getItinerary((await params).slug);
-  if (!t) return {};
-  return { title: t.seoTitle, description: t.metaDescription, alternates: { canonical: `/itineraries/${t.slug}` }, robots: t.draft ? { index: false } : undefined, openGraph: { title: t.title, description: t.metaDescription } };
+  if (!t) return fit({});
+  return fit({ title: t.seoTitle, description: t.metaDescription, alternates: { canonical: `/itineraries/${t.slug}` }, robots: t.draft ? { index: false } : undefined, openGraph: { title: t.title, description: t.metaDescription, ...(t.hero ? { images: [getOgImageUrl(t.hero)] } : {}) } });
 }
 
 export default async function ItineraryPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -58,6 +60,11 @@ export default async function ItineraryPage({ params }: { params: Promise<{ slug
         identifier: templateId,
         itinerary: { "@type": "ItemList", numberOfItems: t.plan.length, itemListElement: t.plan.map((d, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "TouristAttraction", name: `Day ${i + 1} · ${d.title}`, description: [d.morning, d.afternoon, d.evening].filter(Boolean).join(" · ") } })) },
       }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Wild & Co Gatherings", item: `${SITE}/` },
+        { "@type": "ListItem", position: 2, name: "Family Journeys & Itineraries", item: `${SITE}/itineraries` },
+        { "@type": "ListItem", position: 3, name: t.title, item: `${SITE}/itineraries/${t.slug}` },
+      ] }} />
       {t.draft && <div className="cp" style={{ background: "var(--oxblood)", color: "var(--paper)", textAlign: "center", padding: "10px 20px" }}>Sample itinerary · draft for James&apos;s approval</div>}
 
       <section className="hero" style={{ minHeight: "min(70vh, 640px)" }} aria-label={t.title}>

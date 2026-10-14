@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import StayCard from "@/components/StayCard";
@@ -7,15 +8,15 @@ import { getResidences } from "@/lib/data";
 import { SETTINGS, SETTING_ORDER } from "@/lib/settings";
 import { browseNav, staysInSetting } from "@/lib/browse";
 import PageSketch from "@/components/PageSketch";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   title: "Family Resort Residences by Natural Setting — Mountain, Jungle, Coast & Desert | Wild & Co Gatherings",
   description: "Every multigenerational resort residence in the Gatherings Ledger, grouped by natural setting — mountain ranches, jungle estates, island beach houses and desert reserves — chosen by James Wild.",
   alternates: { canonical: "/houses" },
-};
+});
 
 // Every stay in Airtable appears here automatically, under its Setting. Empty settings are hidden.
 export default async function Houses() {

@@ -1,12 +1,13 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import FoliosClient from "./FoliosClient";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   title: "My Folios | Wild & Co Gatherings",
   description: "Your private shelf of journeys: save houses and family journeys, note dates and who's coming, and send a Folio to an advisor.",
   robots: { index: false, follow: true },
   alternates: { canonical: "/folios" },
-};
+});
 
 export default function FoliosPage() {
   return (

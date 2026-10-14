@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
@@ -5,11 +6,11 @@ import { JwcoSeal, Stamp, Icon } from "@/components/Marks";
 import { getResidences } from "@/lib/data";
 import { FOUNDER, FOUNDER_PHOTOS, FOUNDER_LEDE, FOUNDER_BIO, FOUNDER_TIMELINE, GUIDING_PRINCIPLES, AFRICA_QUOTES, FOUNDER_FAQS, type FounderPhoto } from "@/lib/founder";
 import PageSketch from "@/components/PageSketch";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   title: "James Wild, Founder — 44 Years on the Road Since 1982 | Wild & Co Gatherings",
   description: "The founder story of James Wild: journey design since 1982, forty-four years of guiding family and friends from Eleuthera to the Okavango — and still going. In his words, on Africa and on vetting every house himself.",
   alternates: { canonical: FOUNDER.path },
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     description: "Journey design since 1982. The founder of James Wild & Co on Africa, guiding others and vetting every house himself.",
     images: [{ url: FOUNDER_PHOTOS.sundowner.src, width: FOUNDER_PHOTOS.sundowner.w, height: FOUNDER_PHOTOS.sundowner.h, alt: FOUNDER_PHOTOS.sundowner.alt }],
   },
-};
+});
 
 function Snap({ p, rotate = 0, height = 420, tape = "/kit/tape-kraft.png", priority = false }: { p: FounderPhoto; rotate?: number; height?: number; tape?: string; priority?: boolean }) {
   return (

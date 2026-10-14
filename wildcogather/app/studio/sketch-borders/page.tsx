@@ -1,13 +1,14 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import SketchBorderReview from "@/components/SketchBorderReview";
 import { SKETCH_BORDERS } from "@/lib/sketch-borders";
 import { SETTINGS } from "@/lib/settings";
 
 // Internal review board for the luxe sketch borders. Not linked, not in the sitemap, not indexed.
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   title: "Sketch borders — studio review | Wild & Co Gatherings",
   robots: { index: false, follow: false, nocache: true },
-};
+});
 
 const EXAMPLE_HOUSE: Record<string, string> = {
   savanna: "Morukuru Farm House, Madikwe",

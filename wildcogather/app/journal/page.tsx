@@ -1,18 +1,19 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Photo from "@/components/Photo";
 import JsonLd from "@/components/JsonLd";
 import { getPosts, quotesOf } from "@/lib/journal";
 import PageSketch from "@/components/PageSketch";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   title: "The Journal — Why James Wild Chose Each House | Wild & Co Gatherings",
   description: "James Wild on the family resort residences in the Gatherings Ledger: why each one was chosen, where each generation should sleep, and what to know before you book.",
   alternates: { canonical: "/journal" },
-};
+});
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
 export default async function Journal() {
   const posts = await getPosts();

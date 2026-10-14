@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -12,9 +13,9 @@ import Film from "@/components/Film";
 import { embedUrl, thumbUrl } from "@/lib/video";
 import { getOgImageUrl } from "@/lib/cloudinary-loader";
 import PageSketch from "@/components/PageSketch";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5";
 
 export async function generateStaticParams() {
@@ -23,14 +24,14 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const p = await getPost((await params).slug);
-  if (!p) return {};
-  return {
+  if (!p) return fit({});
+  return fit({
     title: p.seoTitle, description: p.metaDescription, alternates: { canonical: `/journal/${p.slug}` },
     authors: [{ name: p.author }],
     openGraph: { type: "article", title: p.title, description: p.metaDescription, publishedTime: p.date, authors: [p.author],
       images: p.hero ? [getOgImageUrl(p.hero)] : [] },
     robots: p.draft ? { index: false } : undefined,
-  };
+  });
 }
 
 const date = (d: string) => new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { month: "long", year: "numeric" });

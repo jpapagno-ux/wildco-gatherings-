@@ -10,7 +10,8 @@ import { FOUNDER } from "./founder";
 import { entityForHouse, evidenceForHouse, formatEvidenceDate, templateIdFor } from "./entities";
 import { checkDuration } from "./journeys";
 
-export const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
+export { SITE } from "./site";
+import { SITE } from "./site";
 
 export const STAMP_MEANING: Record<string, string> = {
   "Under observation": "On the list; James has not yet stayed.",

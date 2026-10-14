@@ -1,12 +1,13 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import PlanForm from "./PlanForm";
 import PageSketch from "@/components/PageSketch";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = fit({
   title: "Plan a Multigenerational Family Gathering | Wild & Co Gatherings",
   description: "Tell James Wild who is coming — ages, dates and the occasion — and receive a personal shortlist of resort residences and a Family Chapter plan.",
   alternates: { canonical: "/plan" },
-};
+});
 
 export default function Plan() {
   return (

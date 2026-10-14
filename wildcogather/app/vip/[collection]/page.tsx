@@ -1,3 +1,4 @@
+import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,21 +10,21 @@ import { getResidences } from "@/lib/data";
 import { getPost } from "@/lib/journal";
 import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
 import PageSketch from "@/components/PageSketch";
+import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
 export async function generateStaticParams() { return collections.map((c) => ({ collection: c.slug })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ collection: string }> }): Promise<Metadata> {
   const c = getCollection((await params).collection);
-  if (!c) return {};
-  return {
+  if (!c) return fit({});
+  return fit({
     title: c.seoTitle,
     description: c.metaDescription,
     alternates: { canonical: `/vip/${c.slug}` },
     openGraph: { title: c.seoTitle, description: c.metaDescription, images: c.hero ? [getOgImageUrl(c.hero)] : [] },
-  };
+  });
 }
 
 export default async function CollectionPage({ params }: { params: Promise<{ collection: string }> }) {
