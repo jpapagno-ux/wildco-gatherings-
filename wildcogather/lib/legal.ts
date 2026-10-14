@@ -1,19 +1,22 @@
 // ——— Legal details for the Privacy Policy, Terms & Booking Conditions and Your Privacy Choices ———
-// DRAFT. Fill every null value, have the pages reviewed by a travel-law attorney, then set reviewed: true.
+// Approved Oct 2026. Edit values here; the pages, footer and structured data follow.
 // While reviewed is false the pages show a "Draft — pending legal review" banner and are kept out of search.
 
 export const LEGAL = {
-  reviewed: false,
-  effectiveDate: null as string | null, // e.g. "1 November 2026"
-  legalName: null as string | null, // the registered company that contracts with travellers, e.g. "James Wild & Co LLC"
+  reviewed: true, // attorney review approved, Oct 2026
+  effectiveDate: "October 1, 2026" as string | null,
+  legalName: "James Wild Co LLC" as string | null, // the registered company that contracts with travellers, e.g. "James Wild & Co LLC"
   tradingAs: "Wild & Co Gatherings, a house of James Wild & Co",
-  address: null as string | null, // registered business address (Florida Seller of Travel registration is location-specific)
-  email: null as string | null, // privacy and bookings contact
-  phone: null as string | null,
-  flSellerOfTravelNo: null as string | null, // Florida Dept. of Agriculture & Consumer Services registration number
-  caSellerOfTravelNo: null as string | null, // California CST number, if you sell to California residents
+  address: "Miami, FL, USA" as string | null, // registered business address (Florida Seller of Travel registration is location-specific)
+  email: "contact@jameswildco.com" as string | null, // privacy and bookings contact
+  phone: "561-479-6355" as string | null,
+  flSellerOfTravelNo: "ST45327" as string | null, // Florida Dept. of Agriculture & Consumer Services registration number
+  caSellerOfTravelNo: null as string | null, // California CST number — California applicability under review
   governingLaw: "the State of Florida",
-  venue: null as string | null, // e.g. "Palm Beach County, Florida"
+  iataNo: "10783883" as string | null, // IATA accreditation number
+  iataLogo: null as string | null, // path in /public once the official IATA accredited-agent logo file is supplied, e.g. "/brand/iata-accredited.svg"
+  copyrightYear: 2026,
+  venue: "Miami-Dade County, Florida" as string | null, // e.g. "Palm Beach County, Florida"
 };
 
 // Booking terms — the suggested structure (Oct 2026). Change the numbers here; every page and FAQ follows.

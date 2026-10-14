@@ -638,3 +638,5 @@ button.lnk { background: none; border: 0; border-bottom: 1px solid currentColor;
 .foot-legal nav { display: flex; flex-wrap: wrap; gap: 8px 22px; font-family: var(--f-sans), sans-serif; font-size: 13px; }
 .foot-legal nav a { color: var(--charcoal); text-decoration: underline; text-underline-offset: 3px; }
 .foot-legal p { margin: 0; font-size: 10px; }
+.foot-reg { display: flex; align-items: center; gap: 14px; }
+.foot-reg p { line-height: 1.7; }

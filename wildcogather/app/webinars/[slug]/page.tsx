@@ -19,7 +19,7 @@ export async function generateStaticParams() { return (await getWebinars()).map(
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const w = await getWebinar((await params).slug);
   if (!w) return fit({});
-  return fit({ title: `${w.title} | Webinar · Wild & Co Gatherings`, description: w.dek.slice(0, 158), alternates: { canonical: `/webinars/${w.slug}` } });
+  return fit({ title: `${w.title} | Webinar`.length <= 60 ? `${w.title} | Webinar` : w.title, description: w.dek.slice(0, 158), alternates: { canonical: `/webinars/${w.slug}` } });
 }
 
 export default async function WebinarPage({ params }: { params: Promise<{ slug: string }> }) {

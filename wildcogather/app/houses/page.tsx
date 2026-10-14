@@ -13,7 +13,7 @@ import { SITE } from "@/lib/site";
 export const revalidate = 3600;
 
 export const metadata: Metadata = fit({
-  title: "Family Resort Residences by Natural Setting — Mountain, Jungle, Coast & Desert | Wild & Co Gatherings",
+  title: "Family Houses by Setting: Mountain, Jungle, Coast & Desert | Wild & Co Gatherings",
   description: "Every multigenerational resort residence in the Gatherings Ledger, grouped by natural setting — mountain ranches, jungle estates, island beach houses and desert reserves — chosen by James Wild.",
   alternates: { canonical: "/houses" },
 });

@@ -1,3 +1,4 @@
+import { LEGAL } from "@/lib/legal";
 import { fit } from "@/lib/seo";
 import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans, IBM_Plex_Mono, Mrs_Saint_Delafield } from "next/font/google";
@@ -45,6 +46,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           knowsAbout: ["multigenerational travel", "family reunion travel", "generational residences", "family villas", "exclusive-use safari villas", "family ranch vacations", "travel advisor partnerships", "friends' gathering trips"],
           audience: [{ "@type": "PeopleAudience", audienceType: "Multigenerational families" }, { "@type": "BusinessAudience", audienceType: "Travel advisors" }],
           sameAs: ["https://www.youtube.com/@WildEarthStays1"],
+          ...(LEGAL.reviewed ? {
+            legalName: LEGAL.legalName || undefined,
+            email: LEGAL.email || undefined,
+            telephone: LEGAL.phone ? `+1-${LEGAL.phone}` : undefined,
+            address: { "@type": "PostalAddress", addressLocality: "Miami", addressRegion: "FL", addressCountry: "US" },
+            identifier: [
+              ...(LEGAL.flSellerOfTravelNo ? [{ "@type": "PropertyValue", propertyID: "Florida Seller of Travel Registration", value: LEGAL.flSellerOfTravelNo }] : []),
+              ...(LEGAL.iataNo ? [{ "@type": "PropertyValue", propertyID: "IATA", value: LEGAL.iataNo }] : []),
+            ],
+          } : {}),
         }} />
         <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: "Wild & Co Gatherings", url: SITE, inLanguage: "en-US", publisher: { "@type": "Organization", name: "James Wild & Co" } }} />
         <JourneyProvider>
