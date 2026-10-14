@@ -27,6 +27,9 @@ async function list(table: string): Promise<Rec[]> {
 const stampFor = (status: string, score: number): Stamp =>
   status === "Live" && score === 6 ? "Gathering verified" : "Under observation";
 
+// "Field verified" was renamed "Founder inspected & approved" (Oct 2026); older Airtable rows may still carry the old name.
+const normalizeStamp = (v?: string): Stamp | undefined => (v === "Field verified" ? "Founder inspected & approved" : (v as Stamp) || undefined);
+
 const lines = (v?: string) => (v || "").split(/\n+/).map((s) => s.trim()).filter(Boolean);
 
 // "Label: value" on each line of the "Fees & taxes" field
@@ -111,7 +114,7 @@ async function fromAirtable(): Promise<Residence[]> {
         country: d?.fields["Country"] || "",
         lat: f["Latitude"], lng: f["Longitude"],
         status: f["Status"],
-        stamp: (f["Ledger stamp"] as Stamp) || stampFor(f["Status"], score),
+        stamp: normalizeStamp(f["Ledger stamp"]) || stampFor(f["Status"], score),
         setting: settingFrom(f["Setting"]),
         featured: !!f["Featured on home"],
         partner: f["Partner name"] ? { name: f["Partner name"], logo: f["Partner logo (Cloudinary ID)"] ? { publicId: f["Partner logo (Cloudinary ID)"], alt: `${f["Partner name"]} logo` } : undefined } : undefined,

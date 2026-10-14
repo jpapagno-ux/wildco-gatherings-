@@ -8,7 +8,7 @@ export async function GET() {
   const out = [
     "# Wild & Co Gatherings",
     "",
-    "> Wild & Co Gatherings is the family-and-generations volume of James Wild & Co (journey design since 1982), alongside Stays, Safaris and Voyages. Every house has a permanent James Wild & Co entity ID (JWC-…) and a Gatherings reference (G-###), with evidence showing whether James stayed, visited or met the host. Stays are planned and booked through Wild & Co; partner websites are not linked; prices are quoted, not published.",
+    "> Wild & Co Gatherings is the family-and-generations volume of James Wild & Co (journey design since 1982), alongside Stays, Safaris and Voyages. Every house has a permanent James Wild & Co entity ID (JWC-…) and a Gatherings reference (G-###), with evidence showing whether James stayed, inspected and approved it in person (founder inspected & approved), or met the host. Stays are planned and booked through Wild & Co; partner websites are not linked; prices are quoted, not published.",
     "",
     `Machine-readable ledger: ${L.site}/ledger.json · Full text: ${L.site}/llms-full.txt · Plan a gathering: ${L.howToBook.url}`,
     "",

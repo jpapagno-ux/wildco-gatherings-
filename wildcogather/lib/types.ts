@@ -2,9 +2,9 @@ import type { SettingKey } from "./settings";
 
 export type Status = "Prospect" | "Vetting" | "Approved" | "Live" | "Paused";
 // Under observation = on the list · Host met = J.W. vetted it in conversation with the host
-// Field verified = J.W. visited in person (see Evidence for stays) · Gathering verified = visited and passes all six tests
+// Founder inspected & approved = J.W. inspected the house in person and approved it (see Evidence for stays) · Gathering verified = visited and passes all six tests
 // Founder favorite = visited and returned
-export type Stamp = "Under observation" | "Host met" | "Field verified" | "Gathering verified" | "Founder favorite";
+export type Stamp = "Under observation" | "Host met" | "Founder inspected & approved" | "Gathering verified" | "Founder favorite";
 
 export type Host = { name: string; title: string; headshot?: Img; metOn?: string; how?: string; note: string };
 

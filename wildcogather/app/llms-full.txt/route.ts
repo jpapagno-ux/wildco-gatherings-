@@ -1,4 +1,5 @@
 import { buildLedger } from "@/lib/ledger-registry";
+import { METHOD_LABEL } from "@/lib/entities";
 
 export const revalidate = 3600;
 
@@ -34,7 +35,7 @@ export async function GET() {
     ...list("Field notes", h.fieldNotes),
     ...h.faqs.flatMap((f) => [`Q: ${f.q}`, `A: ${f.a}`]),
     ...line("Itineraries", h.itineraries.map((i) => `${i.templateId || ""} ${i.slug}`.trim()).join(", ")),
-    ...h.evidence.map((e) => `Evidence ${e.id}: ${e.method}${e.date ? ` (${e.date})` : ""} — ${e.scope}`),
+    ...h.evidence.map((e) => `Evidence ${e.id}: ${METHOD_LABEL[e.method as keyof typeof METHOD_LABEL] ?? e.method}${e.date ? ` (${e.date})` : ""} — ${e.scope}`),
     "Rates: request a quote",
     "",
   ].join("\n"));

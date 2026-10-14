@@ -46,7 +46,7 @@ const lionSandsFaqs = (name: string, sleeps: string) => [
 export const moreResidences: SampleResidence[] = [
   {
     slug: "fish-eagle-villa-lion-sands", entryNo: "G-009", name: "Fish Eagle Villa, Lion Sands", place: "Sabi Sand", region: "Mpumalanga", country: "South Africa",
-    lat: -24.98, lng: 31.62, status: "Approved", stamp: "Field verified", firstVisited: "May 2026", setting: "savanna",
+    lat: -24.98, lng: 31.62, status: "Approved", stamp: "Founder inspected & approved", firstVisited: "May 2026", setting: "savanna",
     line: "Three bedrooms on the Sabie River beside Ivory Lodge — your own pool, chef, guide and safari vehicle, with leopard country at the deck rail.",
     verdict: ["The river does the work here. Elephants come down to drink while the coffee is still hot, and the whole family watches from one deck."],
     bestFor: "Three generations who want a private safari house on the Sabie River, with a treehouse night for the bold ones",
@@ -91,7 +91,7 @@ export const moreResidences: SampleResidence[] = [
   },
   {
     slug: "hinkwenu-villa-lion-sands", entryNo: "G-010", name: "Hinkwenu Villa, Lion Sands", place: "Sabi Sand", region: "Mpumalanga", country: "South Africa",
-    lat: -24.98, lng: 31.6, status: "Approved", stamp: "Field verified", firstVisited: "May 2026", setting: "savanna",
+    lat: -24.98, lng: 31.6, status: "Approved", stamp: "Founder inspected & approved", firstVisited: "May 2026", setting: "savanna",
     line: "Two bedrooms beside Tinga Lodge — a private safari house for a young family, its name meaning \"together\" in Shangaan.",
     verdict: ["Hinkwenu is the one I'd give a young family: small enough to feel like home, with its own guide and vehicle so nap time never decides the game drive."],
     bestFor: "Parents with young children, or grandparents with one family — up to six",
@@ -132,7 +132,7 @@ export const moreResidences: SampleResidence[] = [
   },
   {
     slug: "monwana-villa-thornybush", entryNo: "G-011", name: "Monwana Villa", place: "Thornybush", region: "Limpopo", country: "South Africa",
-    lat: -24.42, lng: 31.17, status: "Approved", stamp: "Field verified", firstVisited: "May 2026", setting: "savanna", featured: true,
+    lat: -24.42, lng: 31.17, status: "Approved", stamp: "Founder inspected & approved", firstVisited: "May 2026", setting: "savanna", featured: true,
     line: "An off-grid safari house in leopard country — two suites, three plunge pools and a waterhole you can watch from the kitchen.",
     verdict: ["Miriam and I sat by that waterhole with coffee and watched the morning arrive one animal at a time. It is the quietest luxury I know."],
     bestFor: "A family of up to six who want Thornybush's leopards, a private guide and a house that runs on the sun",

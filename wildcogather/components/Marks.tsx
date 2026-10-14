@@ -78,7 +78,7 @@ export function SettingDot({ setting }: { setting: SettingKey }) {
 const STAMPS: Record<StampT, { top: string; bottom: string; small: string; big: string; sub: string; icon: string }> = {
   "Under observation": { top: "THE GATHERINGS LEDGER", bottom: "★ ON THE LIST ★", small: "UNDER", big: "OBSERVATION", sub: "visit planned", icon: "compass" },
   "Host met": { top: "THE GATHERINGS LEDGER", bottom: "★ IN PERSON ★", small: "THE", big: "HOST MET", sub: "J. W.", icon: "key" },
-  "Field verified": { top: "THE GATHERINGS LEDGER", bottom: "★ TOURED & STAYED ★", small: "PERSONALLY", big: "FIELD VERIFIED", sub: "J. W.", icon: "binoculars" },
+  "Founder inspected & approved": { top: "THE GATHERINGS LEDGER", bottom: "★ & APPROVED ★", small: "FOUNDER", big: "INSPECTED", sub: "J. W.", icon: "binoculars" },
   "Gathering verified": { top: "THREE GENERATIONS", bottom: "★ TESTED BY A FAMILY ★", small: "GATHERING", big: "VERIFIED", sub: "J. W.", icon: "tree" },
   "Founder favorite": { top: "JAMES WILD & CO.", bottom: "★ RETURNED TO ★", small: "THE", big: "FOUNDER FAVORITE", sub: "J. W.", icon: "star" },
 };
