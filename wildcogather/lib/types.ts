@@ -127,10 +127,14 @@ export type Residence = {
   vip?: { collection: string; collectionSlug: string; visit?: string; why: string; fit?: string };
   rooms: RoomCategory[];
   videos: Video[];
+  // "Why here": James's reason for the house, in his words, with a short film shown under the hero.
+  whyHere?: WhyHere;
   seoTitle: string;
   metaDescription: string;
   credit: string;
 };
+
+export type WhyHere = { quote: string; watch?: string; film?: Video };
 
 // A Journal entry. Body is written in Airtable as plain text:
 //   blank line = new paragraph · "## " = heading · "> " = James quote · "- " = bullet · "![Fig. caption](cloudinary-id)" = photo

@@ -603,3 +603,12 @@ a.eco-house:hover { color: var(--on-dark-accent); }
 @media (prefers-reduced-motion: reduce) { .iggi-panel, .eco-vol { transition: none; } }
 button.lnk { background: none; border: 0; border-bottom: 1px solid currentColor; min-height: 44px; padding: 0 0 8px; cursor: pointer; font: inherit; font-family: var(--f-sans), sans-serif; font-weight: 500; font-size: 13px; letter-spacing: .24em; text-transform: uppercase; }
 .hero .lnk { color: var(--on-dark); border-color: var(--on-dark); }
+/* Why here — James's reason + film, under the house hero */
+.why-here { background: var(--paper-2); border-bottom: 1px solid var(--stone); }
+.why-here-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(30px, 5vw, 72px); align-items: center; padding-block: clamp(46px, 7vw, 90px); }
+.why-here-quote { margin: 0; }
+.why-here-quote blockquote { margin: 26px 0 0; padding: 0; }
+.why-here-quote blockquote p { margin: 0; font-family: var(--f-serif), Georgia, serif; font-style: italic; font-size: clamp(22px, 2.3vw, 30px); line-height: 1.38; color: var(--charcoal); }
+.why-here-quote figcaption { margin: 18px 0 0; color: var(--rust); }
+.why-here-watch { margin: 22px 0 0; padding-top: 18px; border-top: 1px solid var(--stone); font-family: var(--f-sans), sans-serif; font-size: 16px; line-height: 1.6; color: var(--clay-text); }
+@media (max-width: 860px) { .why-here-grid { grid-template-columns: 1fr; } }

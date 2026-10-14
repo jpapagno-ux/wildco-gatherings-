@@ -8,6 +8,8 @@ import JsonLd from "@/components/JsonLd";
 import { Stamp, HostMark, VipStamp, LuggageTag, TapedPhoto, Icon } from "@/components/Marks";
 import { SETTINGS } from "@/lib/settings";
 import Film from "@/components/Film";
+import WhyHere from "@/components/WhyHere";
+import { WHY_HERE } from "@/lib/why-here";
 import EpisodeCross from "@/components/EpisodeCross";
 import { getWebinarsForPartner, whenLabel } from "@/lib/webinars";
 import { embedUrl, thumbUrl } from "@/lib/video";
@@ -53,6 +55,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
   const moreStays = relatedStays(await getResidences(), r);
   const coords = dms(r.lat, r.lng);
   const b = r.booking;
+  const why = r.whyHere || WHY_HERE[r.slug];
   const film = r.videos[0];
   const more = r.videos.slice(1);
   const post = await getPostForHouse(r.slug);
@@ -135,6 +138,12 @@ export default async function House({ params }: { params: Promise<{ slug: string
           ...(v.credit ? { creditText: v.credit } : {}),
         }} />
       ))}
+      {why?.film && <JsonLd data={{
+        "@context": "https://schema.org", "@type": "VideoObject", "@id": `${SITE}/houses/${r.slug}#why-here-film`,
+        name: why.film.title, description: why.quote || r.line, thumbnailUrl: thumbUrl(why.film) || undefined, uploadDate: why.film.uploadDate,
+        embedUrl: embedUrl(why.film), contentUrl: `https://www.youtube.com/watch?v=${why.film.id}`,
+        creator: { "@type": "Person", name: "James Wild" },
+      }} />}
       {offer && offer.status === "Live" && offer.confirmed && <JsonLd data={{
         "@context": "https://schema.org", "@type": "Offer", name: offer.name, description: [offer.headline, offer.line].filter(Boolean).join(" "),
         url: `${SITE}/houses/${r.slug}#offer`, validFrom: offer.validFrom, validThrough: offer.validTo, availabilityStarts: offer.validFrom, availabilityEnds: offer.validTo,
@@ -172,6 +181,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
         </div>
       )}
       <div className="hero-tag-mobile"><LuggageTag setting={r.setting} name={r.name} place={`${r.place} · ${r.region}`} entryNo={r.entryNo} status={tagStatus} width={140} /></div>
+      {why && <WhyHere why={why} name={r.name} />}
 
       <section className="wrap" style={{ paddingTop: "clamp(50px, 9vw, 120px)", paddingBottom: 80, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 440px), 1fr))", gap: 72, alignItems: "start" }}>
         <div>
