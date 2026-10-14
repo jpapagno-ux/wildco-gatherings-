@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Postmark } from "@/components/Marks";
 import { useJourney } from "@/components/JourneyProvider";
@@ -66,6 +67,7 @@ export default function PlanForm() {
       </fieldset>
       <label className="lbl">Must-haves<textarea name="musts" rows={3} placeholder="Water, kids' program, accessibility…" style={{ ...field, minHeight: 96 }} /></label>
       <label className="lbl">Houses you're curious about<input name="houses" key={from.house} defaultValue={from.house.replace(/-/g, " ").replace(/ ,/g, ",")} style={field} /></label>
+      <p className="form-consent">By sending, you agree we may use these details to reply and plan your journey. See our <Link href="/privacy">Privacy Policy</Link>.</p>
       <div><button type="submit" className="btn" disabled={state === "sending"}>{state === "sending" ? "Sending…" : from.review ? "Request advisor review" : "Send to James"}</button></div>
       {state === "error" && <p className="cpn ox" role="alert">Your request didn&apos;t send — nothing was saved. Please try again in a moment.</p>}
     </form>
