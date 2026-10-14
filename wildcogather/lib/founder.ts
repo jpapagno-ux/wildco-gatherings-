@@ -49,7 +49,7 @@ export const FOUNDER_TIMELINE: Milestone[] = [
   { year: "1982", title: "The road opens", text: "James Wild's story begins — the year James Wild & Co still carries on its seal." },
   { year: "1983", title: "Eleuthera, with friends", text: "Friends ask him to take them surfing on Eleuthera. Charlton meets them in North Eleuthera. The first trip he designs for others; still his favourite island." },
   { year: "2012", title: "The Kalahari and the Serengeti", text: "Tswalu in the Kalahari, and Singita Faru Faru in the Serengeti — two of the lodges he would go back to tomorrow." },
-  { year: "2018", title: "Back to Faru Faru", text: "He returns. That is what Founder favorite means in the Ledger: not that he liked it, but that he went back." },
+  { year: "2018", title: "Back to Faru Faru", text: "He returns — Faru Faru is one of the places he would go back to again." },
   { year: "2020", title: "The Antarctic Peninsula", text: "At sea off the Antarctic Peninsula, camera in hand, when the world shut down for COVID." },
   { year: "2023", title: "Moab, with the family in mind", text: "April 2023 at ULUM, under Looking Glass Rock. It becomes his favourite family stay.", href: "/houses/ulum-moab" },
   { year: "2024", title: "Raja Ampat, with Anthony", text: "Eleven days sailing Raja Ampat in Indonesia with his son, Anthony." },
@@ -78,7 +78,7 @@ export const AFRICA_QUOTES: Quote[] = [
 export const FOUNDER_FAQS = [
   { q: "Who is James Wild?", a: "James Wild is the founder of James Wild & Co and its family travel house, Wild & Co Gatherings. He has designed journeys since 1982 — forty-four years on the road — and personally vets every family residence in the Gatherings Ledger." },
   { q: "How long has James Wild been designing travel?", a: "Since 1982. His first journey designed for others was a surf trip to Eleuthera in the Bahamas with friends, and he has been guiding family and friends to the places he has vetted ever since." },
-  { q: "How does James Wild vet the houses he recommends?", a: "He stays, or meets the host, before a house is listed, then scores it against the six tests of the Gathering Formula. Each house carries the stamp it has earned — from Host met to Founder favorite, which means he went back." },
+  { q: "How does James Wild vet the houses he recommends?", a: "He visits, stays or speaks with the host before a house is listed, then scores it against the six tests of the Gathering Formula. Every house page shows that evidence — what James did, when, and what it covers. Founder Favorite marks his personal favourites, an opinion shown separately from the evidence." },
   { q: "Has James Wild been on safari in Africa?", a: "Many times. Recent and favourite stays include Tswalu in the Kalahari (2012), Singita Faru Faru in the Serengeti (2012 and 2018), and in May 2026 Monwana, Lion Sands Ivory Lodge, Kirkman's Kamp, DumaTau, Mombo and Qorokwe across South Africa and Botswana, plus Madikwe, the Cape Winelands and Cape Town." },
   { q: "Can James Wild help plan our family's trip?", a: "Yes. Tell us who is coming and the occasion through Plan a gathering. Every trip is advisor-led, with James's notes on each house and a day planned for every age." },
 ];

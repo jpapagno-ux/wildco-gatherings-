@@ -7,15 +7,17 @@ import { getResidences } from "./data";
 import { getItineraries } from "./extras";
 import { getHorizon } from "./horizon";
 import { FOUNDER } from "./founder";
+import { entityForHouse, evidenceForHouse, formatEvidenceDate, templateIdFor } from "./entities";
+import { checkDuration } from "./journeys";
 
 export const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.example.com";
 
 export const STAMP_MEANING: Record<string, string> = {
   "Under observation": "On the list; James has not yet stayed.",
   "Host met": "James has vetted the house in conversation with its host.",
-  "Field verified": "James has toured and stayed; Formula being confirmed.",
+  "Field verified": "James has visited in person; Formula being confirmed. See each house's evidence for whether he stayed.",
   "Gathering verified": "Visited, and passes all six tests of the Gathering Formula.",
-  "Founder favorite": "Visited, and returned.",
+  "Founder favorite": "James's personal favourite — an opinion, not a verification.",
 };
 
 export const FORMULA_TESTS = ["Room to gather", "A day for every age", "Water within reach", "Country at the door", "A resort behind you", "Worth returning to"];
@@ -33,10 +35,22 @@ export async function buildLedger() {
     site: SITE,
     updated: new Date().toISOString().slice(0, 10),
     howToBook: { url: `${SITE}/plan`, note: "Every stay is planned and booked through Wild & Co Gatherings, advisor-led. Partner websites are not linked." },
-    idScheme: { house: "G-### (permanent Ledger entry number)", horizon: "H-## (new places not yet stayed)", key: "'<ID> · <slug>' — the same key is stored in Airtable › Residences › Ledger key" },
+    idScheme: {
+      entity: "JWC-P-#### property · JWC-R-#### residence (child of a property) · JWC-I-#### itinerary template · JWC-V-#### evidence — permanent James Wild & Co identities shared by Stays, Safaris, Gatherings and Voyages",
+      house: "G-### — the Gatherings collection reference for a house (not its identity)",
+      horizon: "H-## (new places not yet stayed)",
+      key: "'<G-###> · <slug>' — stored in Airtable › Residences › Ledger key",
+    },
+    evidenceRules: "Founder Favorite is an opinion, not a verification. Host Met does not verify every fact. A past visit does not verify current rates or policies. Prices are quoted, not published.",
     stamps: STAMP_MEANING,
     formula: FORMULA_TESTS,
-    houses: houses.map((h) => ({
+    houses: houses.map((h) => {
+      const ent = entityForHouse(h.slug);
+      const ev = evidenceForHouse(h.slug);
+      return {
+      entityId: ent?.id,
+      entityType: ent?.type,
+      parent: ev.parent ? { entityId: ev.parent.id, name: ev.parent.name } : undefined,
       id: h.entryNo,
       key: `${h.entryNo} · ${h.slug}`,
       slug: h.slug,
@@ -61,13 +75,17 @@ export async function buildLedger() {
       experiences: h.experiences.map((e) => e.name),
       fieldNotes: h.fieldNotes,
       faqs: h.faqs.map((f) => ({ q: f.question, a: f.answer })),
-      itineraries: tripsFor(h.slug).map((t) => t.slug),
-    })),
+      itineraries: tripsFor(h.slug).map((t) => ({ templateId: templateIdFor(t.slug), slug: t.slug })),
+      evidence: [...ev.own, ...ev.fromParent].map((x) => ({ id: x.id, about: x.subject, method: x.method, date: formatEvidenceDate(x) || undefined, scope: x.scope, wording: x.wording })),
+      rates: "Request a quote",
+    }; }),
     itineraries: live.map((t) => ({
+      templateId: templateIdFor(t.slug),
+      status: "Suggested template — not a booking",
       slug: t.slug,
       title: t.title,
       url: `${SITE}/itineraries/${t.slug}`,
-      days: t.days, nights: t.nights,
+      days: checkDuration(t).days, nights: checkDuration(t).nights,
       houses: [t.house, ...(t.stops || []).flatMap((s) => [s.house, ...(s.or || [])])].filter((v, i, a) => a.indexOf(v) === i).map((slug) => ({ id: idOf(slug), slug })),
       bestFor: t.bestFor, season: t.season, dek: t.dek,
     })),

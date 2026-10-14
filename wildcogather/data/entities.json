@@ -1,0 +1,610 @@
+{
+ "_about": "Permanent James Wild & Co entity registry. IDs are allocated once and never regenerated from names, slugs or positions. Mirrored in Airtable (Residences › Entity ID, Itineraries › Template ID). Next free: JWC-P-0020, JWC-R-0007, JWC-I-0007, JWC-O-0002, JWC-V-(see evidence.json).",
+ "allocated": "2026-10-14",
+ "next": {
+  "property": "JWC-P-0020",
+  "residence": "JWC-R-0007",
+  "itinerary": "JWC-I-0007",
+  "offer": "JWC-O-0002"
+ },
+ "entities": [
+  {
+   "id": "JWC-P-0001",
+   "type": "property",
+   "parentId": null,
+   "name": "Lone Mountain Ranch",
+   "slug": "lone-mountain-ranch",
+   "legacyIds": [
+    "airtable:recoQ6f73nW21Razy"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-001"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0002",
+   "type": "property",
+   "parentId": null,
+   "name": "COMO Shambhala Estate",
+   "slug": "como-shambhala-estate",
+   "legacyIds": [
+    "airtable:recYRFWuhxPsiLeeu"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-002"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0003",
+   "type": "property",
+   "parentId": null,
+   "name": "COMO Uma Canggu",
+   "slug": "como-uma-canggu",
+   "legacyIds": [
+    "airtable:recjflqH8nUkFqVbC"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-003"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0004",
+   "type": "property",
+   "parentId": null,
+   "name": "COMO Parrot Cay",
+   "slug": "como-parrot-cay",
+   "legacyIds": [
+    "airtable:recnnGMwHXtnwCQAI"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-004"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0005",
+   "type": "property",
+   "parentId": null,
+   "name": "Vermejo, a Ted Turner Reserve",
+   "slug": "vermejo-ted-turner-reserve",
+   "legacyIds": [
+    "airtable:recDuwaeKFsbLAl9D"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-005"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0006",
+   "type": "property",
+   "parentId": null,
+   "name": "Ladder, a Ted Turner Reserve",
+   "slug": "ladder-ted-turner-reserve",
+   "legacyIds": [
+    "airtable:recd7wVxWbZVQ2eUZ"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-006"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0007",
+   "type": "property",
+   "parentId": null,
+   "name": "Armendaris, a Ted Turner Reserve",
+   "slug": "armendaris-ted-turner-reserve",
+   "legacyIds": [
+    "airtable:recvo5rEXfTm9y1oX"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-007"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0008",
+   "type": "property",
+   "parentId": null,
+   "name": "Sierra Grande Lodge & Spa",
+   "slug": "sierra-grande-ted-turner-reserve",
+   "legacyIds": [
+    "airtable:reciA2DzctebamoNL"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-008"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-R-0001",
+   "type": "residence",
+   "parentId": "JWC-P-0009",
+   "name": "Fish Eagle Villa, Lion Sands",
+   "slug": "fish-eagle-villa-lion-sands",
+   "legacyIds": [
+    "airtable:rect9ErQCS2S1rOjs"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-009"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-R-0002",
+   "type": "residence",
+   "parentId": "JWC-P-0010",
+   "name": "Hinkwenu Villa, Lion Sands",
+   "slug": "hinkwenu-villa-lion-sands",
+   "legacyIds": [
+    "airtable:recjo4gzwBAhaqynO"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-010"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-R-0003",
+   "type": "residence",
+   "parentId": "JWC-P-0011",
+   "name": "Monwana Villa",
+   "slug": "monwana-villa-thornybush",
+   "legacyIds": [
+    "airtable:recz5pUi0VjL7R26H"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-011"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0012",
+   "type": "property",
+   "parentId": null,
+   "name": "Lekkerwater Beach Lodge, De Hoop",
+   "slug": "lekkerwater-de-hoop",
+   "legacyIds": [
+    "airtable:recM0ueGmxq6FUDzo"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-012"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0013",
+   "type": "property",
+   "parentId": null,
+   "name": "GweGwe Beach Lodge, Wild Coast",
+   "slug": "gwegwe-beach-lodge-wild-coast",
+   "legacyIds": [
+    "airtable:recRddcopNw4jdCst"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-013"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-R-0004",
+   "type": "residence",
+   "parentId": "JWC-P-0014",
+   "name": "Jaci's Madikwe House",
+   "slug": "jacis-madikwe-house",
+   "legacyIds": [
+    "airtable:recOAKGMJtGla55Vt"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-014"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-R-0005",
+   "type": "residence",
+   "parentId": "JWC-P-0015",
+   "name": "Morukuru Farm House, Madikwe",
+   "slug": "morukuru-farm-house-madikwe",
+   "legacyIds": [
+    "airtable:recROp6M3qMUsD1CW"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-015"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-R-0006",
+   "type": "residence",
+   "parentId": "JWC-P-0015",
+   "name": "Morukuru River House & Owner's House",
+   "slug": "morukuru-river-house-madikwe",
+   "legacyIds": [
+    "airtable:rec38NPfeschPfPgZ"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-016"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0016",
+   "type": "property",
+   "parentId": null,
+   "name": "Leeu Estates, Franschhoek",
+   "slug": "leeu-estates-franschhoek",
+   "legacyIds": [
+    "airtable:rectcL7yi6iJ0z5gX"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-017"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0017",
+   "type": "property",
+   "parentId": null,
+   "name": ".Here — Somewhere & Nowhere",
+   "slug": "here-somewhere-nowhere-maldives",
+   "legacyIds": [
+    "airtable:recq4kU25rtnDe2Nh"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-018"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0018",
+   "type": "property",
+   "parentId": null,
+   "name": "Villa Ardore, Chianti",
+   "slug": "villa-ardore-tuscany",
+   "legacyIds": [
+    "airtable:recorDCbgvSYuP7uC"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-019"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0019",
+   "type": "property",
+   "parentId": null,
+   "name": "ULUM Moab",
+   "slug": "ulum-moab",
+   "legacyIds": [
+    "airtable:recgqsCsjMvXoj3JA"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-020"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-P-0009",
+   "type": "property",
+   "parentId": null,
+   "name": "Lion Sands Ivory Lodge",
+   "slug": null,
+   "legacyIds": [],
+   "collectionRefs": [],
+   "collections": [],
+   "status": "reference",
+   "note": "Parent property recorded so its residences resolve to one identity across volumes. Not a Gatherings page."
+  },
+  {
+   "id": "JWC-P-0010",
+   "type": "property",
+   "parentId": null,
+   "name": "Lion Sands Tinga Lodge",
+   "slug": null,
+   "legacyIds": [],
+   "collectionRefs": [],
+   "collections": [],
+   "status": "reference",
+   "note": "Parent property recorded so its residences resolve to one identity across volumes. Not a Gatherings page."
+  },
+  {
+   "id": "JWC-P-0011",
+   "type": "property",
+   "parentId": null,
+   "name": "Monwana Lodge",
+   "slug": null,
+   "legacyIds": [],
+   "collectionRefs": [],
+   "collections": [],
+   "status": "reference",
+   "note": "Parent property recorded so its residences resolve to one identity across volumes. Not a Gatherings page."
+  },
+  {
+   "id": "JWC-P-0014",
+   "type": "property",
+   "parentId": null,
+   "name": "Jaci's Lodges, Madikwe",
+   "slug": null,
+   "legacyIds": [],
+   "collectionRefs": [],
+   "collections": [],
+   "status": "reference",
+   "note": "Parent property recorded so its residences resolve to one identity across volumes. Not a Gatherings page."
+  },
+  {
+   "id": "JWC-P-0015",
+   "type": "property",
+   "parentId": null,
+   "name": "Morukuru Family, Madikwe",
+   "slug": null,
+   "legacyIds": [],
+   "collectionRefs": [],
+   "collections": [],
+   "status": "reference",
+   "note": "Parent property recorded so its residences resolve to one identity across volumes. Not a Gatherings page."
+  },
+  {
+   "id": "JWC-I-0001",
+   "type": "itinerary-template",
+   "parentId": null,
+   "name": null,
+   "slug": "como-shambhala-four-days-ubud-ayung",
+   "legacyIds": [
+    "airtable:recDjUlXuhqOwIEy8"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "como-shambhala-four-days-ubud-ayung"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-I-0002",
+   "type": "itinerary-template",
+   "parentId": null,
+   "name": null,
+   "slug": "lion-sands-night-under-the-stars-four-days",
+   "legacyIds": [
+    "airtable:recyZt1mmqiydcHwM"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "lion-sands-night-under-the-stars-four-days"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-I-0003",
+   "type": "itinerary-template",
+   "parentId": null,
+   "name": null,
+   "slug": "lekkerwater-whale-season-four-days",
+   "legacyIds": [
+    "airtable:recTSs89bRXA7nUG0"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "lekkerwater-whale-season-four-days"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-I-0004",
+   "type": "itinerary-template",
+   "parentId": null,
+   "name": null,
+   "slug": "cape-winelands-malaria-free-safari-nine-days",
+   "legacyIds": [
+    "airtable:recnpTxqwUGWR1wgw"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "cape-winelands-malaria-free-safari-nine-days"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-I-0005",
+   "type": "itinerary-template",
+   "parentId": null,
+   "name": null,
+   "slug": "villa-ardore-tuscan-reunion-seven-days",
+   "legacyIds": [
+    "airtable:recV2LZBFqSPgrciT"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "villa-ardore-tuscan-reunion-seven-days"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-I-0006",
+   "type": "itinerary-template",
+   "parentId": null,
+   "name": null,
+   "slug": "ulum-moab-red-rock-family-adventure-six-days",
+   "legacyIds": [
+    "airtable:recXOG4n1BpLyqBEE"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "ulum-moab-red-rock-family-adventure-six-days"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  },
+  {
+   "id": "JWC-O-0001",
+   "type": "offer",
+   "parentId": "JWC-P-0002",
+   "name": "Time Rewarded — Stay 3, Pay 2",
+   "slug": "como-shambhala-worth-another-night",
+   "legacyIds": [],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "como-shambhala-worth-another-night"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "published"
+  }
+ ]
+}

@@ -62,8 +62,9 @@ export default function Photo({
   return (
     <div className={className} style={{ position: "relative", background: "var(--sand)", overflow: "hidden", ...style }}>
       {hasError ? (
-        <span className="cp" style={{ position: "absolute", left: 12, bottom: 10, fontSize: 11 }}>
-          {altText || "Photo unavailable"}
+        // Deliberate fallback: a quiet sand panel that keeps its aspect; the description stays for screen readers.
+        <span role={altText ? "img" : undefined} aria-label={altText || undefined} className="cp" style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", fontSize: 10, color: "var(--clay-text)" }}>
+          <span aria-hidden="true">Photograph to follow</span>
         </span>
       ) : (
         <Image

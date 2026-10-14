@@ -233,7 +233,7 @@ export function JwcoSeal({ size = 96, tone = "ink", rotate = 0, className }: { s
   return <img className={className} src={src} width={size} height={size} alt="James Wild & Co. seal — Ledgered & Vetted, journey design since 1982" style={{ display: "block", flex: "none", width: size, height: size, transform: rotate ? `rotate(${rotate}deg)` : undefined }} />;
 }
 
-// ── 6. "Worth Another Night" offer stamp (rust) — Time Rewarded: stay N, pay M ──
+// ── 6. "Time Rewarded" offer stamp (rust) — verified offers only: stay N, pay M ──
 const ORD = ["", "1st", "2nd", "3rd", "4th", "5th", "6th", "7th"];
 export function OfferStamp({ stay = 3, pay = 2, size = 170, rotate = -9, tone = "ink" }: { stay?: number; pay?: number; size?: number; rotate?: number; tone?: Tone }) {
   const id = useId().replace(/:/g, "");
@@ -241,7 +241,7 @@ export function OfferStamp({ stay = 3, pay = 2, size = 170, rotate = -9, tone = 
   const free = Math.max(1, stay - pay);
   const big = free === 1 ? `${ORD[stay] || stay + "th"} NIGHT` : `${free} NIGHTS`;
   return (
-    <svg width={size} height={size} viewBox="0 0 200 200" role="img" aria-label={`Worth Another Night — Time Rewarded: stay ${stay} nights, pay for ${pay}`} style={{ transform: `rotate(${rotate}deg)`, flex: "none" }}>
+    <svg width={size} height={size} viewBox="0 0 200 200" role="img" aria-label={`Time Rewarded — a verified offer: stay ${stay} nights, pay for ${pay}`} style={{ transform: `rotate(${rotate}deg)`, flex: "none" }}>
       <defs>
         <path id={`t${id}`} d="M 24,100 A 76,76 0 0 1 176,100" />
         <path id={`b${id}`} d="M 13,100 A 87,87 0 0 0 187,100" />
@@ -250,8 +250,8 @@ export function OfferStamp({ stay = 3, pay = 2, size = 170, rotate = -9, tone = 
       <g filter={`url(#o${id})`} fill={c} stroke={c} opacity={0.94}>
         <circle cx="100" cy="100" r="95" fill="none" strokeWidth="3.4" />
         <circle cx="100" cy="100" r="89" fill="none" strokeWidth="1" strokeDasharray="3 3" />
-        <text stroke="none" fontFamily={SERIF} fontWeight={600} fontSize="15.5"><textPath href={`#t${id}`} startOffset="50%" textAnchor="middle" textLength="204" lengthAdjust="spacing">WORTH ANOTHER NIGHT</textPath></text>
-        <text stroke="none" fontFamily={MONO} fontWeight={500} fontSize="10.5"><textPath href={`#b${id}`} startOffset="50%" textAnchor="middle" textLength="176" lengthAdjust="spacing">★ TIME REWARDED ★</textPath></text>
+        <text stroke="none" fontFamily={SERIF} fontWeight={600} fontSize="15.5"><textPath href={`#t${id}`} startOffset="50%" textAnchor="middle" textLength="204" lengthAdjust="spacing">TIME REWARDED</textPath></text>
+        <text stroke="none" fontFamily={MONO} fontWeight={500} fontSize="10.5"><textPath href={`#b${id}`} startOffset="50%" textAnchor="middle" textLength="176" lengthAdjust="spacing">★ A VERIFIED OFFER ★</textPath></text>
         {iconAt("moon", 100, 68, 30, c)}
         <line x1="44" y1="94" x2="156" y2="94" strokeWidth="1" />
         <line x1="44" y1="142" x2="156" y2="142" strokeWidth="1" />

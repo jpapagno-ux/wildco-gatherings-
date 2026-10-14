@@ -10,6 +10,9 @@ import { getResidences, dms } from "@/lib/data";
 import { getPostForHouse } from "@/lib/journal";
 import { getHorizon } from "@/lib/horizon";
 import HorizonCard from "@/components/HorizonCard";
+import AskIggiButton from "@/components/AskIggiButton";
+import { getItineraries } from "@/lib/extras";
+import { entityForHouse } from "@/lib/entities";
 import { FOUNDER_PHOTOS, FOUNDER_LEDE, AFRICA_QUOTES } from "@/lib/founder";
 import PageSketch from "@/components/PageSketch";
 
@@ -19,16 +22,16 @@ const LEDGER_PREVIEW = 8;
 const FORMULA: [string, string][] = [
   ["Room to gather", "One table for all of you, a door to close for each branch."],
   ["A day for every age", "Programs for children, real adventure for teens, an easy pace for elders."],
-  ["Water within reach", "A river, a lake or a harbour — boat days belong in the plan."],
+  ["Water within reach", "A water setting nearby — a river, coast, lake or pool. Swimming and boat days only where the house's notes say so; a wildlife waterhole is for watching."],
   ["Country at the door", "Land to step straight into, with guides who live there."],
-  ["A resort behind you", "Kitchens, housekeeping and a safety net. Nobody spends the week as host."],
+  ["A resort behind you", "Someone else runs the house — the kitchen, housekeeping or a team, as each house records it."],
   ["Worth returning to", "The start of a family tradition, not a single trip."],
 ];
 
 const FAQS = [
   { q: "What is a resort residence?", a: "A private, multi-bedroom home inside or beside a resort: your own space and kitchen, with the resort's dining, housekeeping, children's programs and activities close at hand." },
   { q: "Is a resort residence better than a villa for a family reunion?", a: "For three generations, usually. You keep a villa's privacy, nobody has to run the house, and every age has something waiting." },
-  { q: "How does James vet each house?", a: "Against the six tests of the Gathering Formula, drawing on forty-four years of travel. He has met the team at every house in the Ledger, and each one carries the stamp it has earned, from Host met to Founder favorite." },
+  { q: "How does James vet each house?", a: "Against the six tests of the Gathering Formula, drawing on forty-four years of travel. Every house in the Ledger shows its evidence — whether James stayed, visited in person or met the host, and when — so you can see exactly what each claim rests on." },
 ];
 
 export default async function Home() {
@@ -42,6 +45,13 @@ export default async function Home() {
   const featuredPost = featured ? await getPostForHouse(featured.slug) : undefined;
   const horizon = (await getHorizon()).slice(0, 3);
   const settings = SETTING_ORDER.map((k) => ({ s: SETTINGS[k], rows: all.filter((r) => r.setting === k) })).filter((g) => g.rows.length);
+  // "Build Your Journey": real links only — a house, the journeys recorded for it, and the other houses those journeys use.
+  const trips = (await getItineraries()).filter((t) => !t.draft);
+  const bySlug = new Map(all.map((h) => [h.slug, h]));
+  const journeys = trips.map((t) => {
+    const stops = [t.house, ...(t.stops || []).map((x) => x.house)].filter((v, i, a) => v && a.indexOf(v) === i).map((x) => bySlug.get(x)).filter(Boolean) as typeof all;
+    return { t, stops };
+  }).filter((j) => j.stops.length).sort((a, b) => b.stops.length - a.stops.length).slice(0, 3);
 
   return (
     <>
@@ -59,11 +69,12 @@ export default async function Home() {
         </div>
         <div className="title">
           <p className="eb" style={{ color: "#F0D9C6" }}>Curated from experience</p>
-          <h1 className="dsp" style={{ margin: "18px 0 0", fontSize: "clamp(48px, 7vw, 96px)", color: "var(--on-dark)" }}>One house.<br />Every generation.</h1>
-          <p className="ser" style={{ margin: "18px 0 26px", fontStyle: "italic", fontSize: "clamp(22px, 2.4vw, 30px)" }}>Resort residences for families travelling across generations.</p>
+          <h1 className="dsp" style={{ margin: "18px 0 0", fontSize: "clamp(48px, 7vw, 96px)", color: "var(--on-dark)" }}>One House.<br />Every Generation.</h1>
+          <p className="ser" style={{ margin: "18px 0 26px", fontStyle: "italic", fontSize: "clamp(20px, 2.2vw, 27px)", maxWidth: 760, lineHeight: 1.35 }}>Resort residences and journeys for families traveling across generations. Find your house, explore what surrounds it, and bring your plans together in My Folios.</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 18, alignItems: "center" }}>
-            <Link href="/houses" className="btn">Explore the houses</Link>
-            <Link href="/plan" className="lnk" style={{ color: "var(--on-dark)", borderColor: "var(--on-dark)" }}>Let James guide you</Link>
+            <Link href="/houses" className="btn">Explore the Houses</Link>
+            <Link href="/plan" className="btn btn-light">Plan Our Gathering</Link>
+            <AskIggiButton className="lnk" label="Ask Iggi" />
           </div>
         </div>
       </section>
@@ -158,10 +169,10 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="band" style={{ padding: "100px 0" }} aria-label="Houses by natural setting">
+      <section className="band" style={{ padding: "100px 0" }} aria-label="Find your setting">
         <div className="wrap" style={{ textAlign: "center" }}>
-          <p className="eb">Recorded from experience</p>
-          <h2 className="dsp" style={{ margin: "16px 0 0", fontSize: "clamp(36px, 4vw, 50px)" }}>Worth another night</h2>
+          <p className="eb">{settings.length} settings · {all.length} houses</p>
+          <h2 className="dsp" style={{ margin: "16px 0 0", fontSize: "clamp(36px, 4vw, 50px)" }}>Find your setting</h2>
           <p className="it" style={{ margin: "14px 0 50px", fontSize: 24 }}>Houses grouped by the land around them.</p>
           <div className="house-grid">
             {settings.map(({ s, rows }) => {
@@ -192,12 +203,40 @@ export default async function Home() {
         </section>
       )}
 
+      {journeys.length > 0 && (
+        <section className="wrap" style={{ paddingTop: 100 }} aria-labelledby="byj-h">
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "end", flexWrap: "wrap", gap: 16, marginBottom: 30 }}>
+            <div>
+              <p className="eb">From house to journey to Folio</p>
+              <h2 id="byj-h" className="dsp" style={{ margin: "14px 0 0", fontSize: "clamp(34px, 4vw, 48px)" }}>Build your journey</h2>
+              <p className="it" style={{ margin: "12px 0 0", fontSize: 22 }}>Start with a house, follow the journeys it anchors, and keep the pieces together in My Folios.</p>
+            </div>
+            <Link href="/itineraries" className="lnk">All family journeys <span>→</span></Link>
+          </div>
+          <div className="byj">
+            {journeys.map(({ t, stops }) => {
+              const first = stops[0];
+              const others = stops.slice(1);
+              return (
+                <article key={t.slug} className="byj-card">
+                  <div className="byj-step"><span className="cp">The house</span><Link href={`/houses/${first.slug}`}>{first.name} <span className="cp muted" style={{ fontSize: 10 }}>· {first.entryNo}</span></Link></div>
+                  <div className="byj-step"><span className="cp">The journey</span><Link href={`/itineraries/${t.slug}`}>{t.title} <span className="cp muted" style={{ fontSize: 10 }}>· {t.days} days</span></Link></div>
+                  {others.length > 0 && <div className="byj-step"><span className="cp">Also</span><span style={{ display: "grid", gap: 4 }}>{others.map((h) => <Link key={h.slug} href={`/houses/${h.slug}`}>{h.name} <span className="cp muted" style={{ fontSize: 10 }}>· {h.entryNo}</span></Link>)}</span></div>}
+                  <div className="byj-step"><span className="cp">Your Folio</span><Link href="/folios">Save the pieces to My Folios</Link></div>
+                  {entityForHouse(first.slug) && <p className="cp muted" style={{ margin: 0, fontSize: 10 }}>{entityForHouse(first.slug)!.id}</p>}
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
       <section className="wrap" style={{ paddingTop: 100, paddingBottom: 100, display: "flex", flexWrap: "wrap", gap: 64 }}>
         <div style={{ flex: "1 1 320px", maxWidth: 400 }}>
           <p className="eb">The Gathering Formula</p>
           <hr className="eb-rule" />
-          <h2 className="dsp" style={{ margin: "28px 0 22px", fontSize: 44 }}>Six tests. Every house passes all of them.</h2>
-          <p className="body" style={{ margin: 0 }}>The James Wild &amp; Co way, written for families. A house that fails one is not entered in the Ledger.</p>
+          <h2 className="dsp" style={{ margin: "28px 0 22px", fontSize: 44 }}>Six tests, written for families</h2>
+          <p className="body" style={{ margin: 0 }}>The James Wild &amp; Co way. Each house page shows its result test by test, with any exceptions and how it was assessed — in person or with the host.</p>
         </div>
         <ol style={{ flex: "2 1 560px", listStyle: "none", margin: 0, padding: 0, borderTop: "1px solid var(--charcoal)" }}>
           {FORMULA.map(([t, n], i) => (
