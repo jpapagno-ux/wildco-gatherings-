@@ -16,7 +16,7 @@ import PageSketch from "@/components/PageSketch";
 import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5";
+const CLOUD = (process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "").trim() || "jhlnq5h5";
 
 export async function generateStaticParams() {
   return (await getPosts()).map((p) => ({ slug: p.slug }));

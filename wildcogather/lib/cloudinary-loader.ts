@@ -1,8 +1,9 @@
 // Next.js image loader: turns a Cloudinary public ID (or full Cloudinary URL) into a resized, auto-format URL.
-const DEFAULT_CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5";
+// Trimmed: a stray space in the Vercel value (" jhlnq5h5") broke every image URL in production.
+const DEFAULT_CLOUD = (process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "").trim() || "jhlnq5h5";
 
 export function getCloudinaryCloud(): string {
-  return process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || DEFAULT_CLOUD;
+  return DEFAULT_CLOUD;
 }
 
 export function isCloudinaryUrl(url: string): boolean {

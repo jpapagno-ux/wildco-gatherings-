@@ -53,7 +53,7 @@ export default async function HorizonPost({ params }: { params: Promise<{ slug: 
   const pairHouse = h.pairsWith && !pair ? await getResidence(h.pairsWith) : undefined;
   const table = await getTable(h.slug);
   const shortName = h.short.split(",")[0];
-  const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5";
+  const CLOUD = (process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "").trim() || "jhlnq5h5";
   const imgUrl = (id: string) => `https://res.cloudinary.com/${CLOUD}/image/upload/f_auto,q_auto,w_1600/${id}`;
   const photos = [h.hero, ...(h.gallery || [])].filter(Boolean) as { publicId: string; alt: string }[];
   // Open questions are kept off the site, so drop any "still to confirm" section from the body.
