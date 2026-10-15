@@ -11,6 +11,8 @@ import Film from "@/components/Film";
 import WhyHere from "@/components/WhyHere";
 import LiveBooking from "@/components/LiveBooking";
 import SafariFeature from "@/components/SafariFeature";
+import FlightCard from "@/components/FlightCard";
+import { FLIGHT_CARDS } from "@/lib/partners";
 import { liveBookingFor, SAFARI_FEATURES } from "@/lib/live-booking";
 import { WHY_HERE } from "@/lib/why-here";
 import EpisodeCross from "@/components/EpisodeCross";
@@ -60,6 +62,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
   const b = r.booking;
   const live = r.liveBookingUrl ? { ...(liveBookingFor(r.slug) || { provider: "James Wild Stays · booking engine by TAG, powered by ALBIE", currency: "USD", taxNote: "Taxes and fees are shown at checkout.", ratePlans: [], termsNote: "Each rate shows its own payment and cancellation terms before you pay.", rooms: [], checked: "" }), engineUrl: r.liveBookingUrl } : liveBookingFor(r.slug);
   const safari = SAFARI_FEATURES[r.slug];
+  const flight = FLIGHT_CARDS[r.slug];
   const why = r.whyHere || WHY_HERE[r.slug];
   const film = r.videos[0];
   const more = r.videos.slice(1);
@@ -363,6 +366,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
       )}
 
       {safari && <SafariFeature f={safari} slug={r.slug} />}
+      {flight && <FlightCard f={flight} slug={r.slug} />}
 
       {r.host?.name && (
         <section className="wrap" style={{ paddingTop: 90 }}>

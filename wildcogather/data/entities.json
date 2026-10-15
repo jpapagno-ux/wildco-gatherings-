@@ -662,12 +662,13 @@
    "id": "JWC-P-0022",
    "type": "property",
    "parentId": null,
-   "name": "Baymahni",
+   "name": "Baymahni · Blu Wakes Villas",
    "slug": "baymahni-exuma",
    "legacyIds": [
     "airtable:recvUvzqrkyppZ0km",
     "name:Kahari Resort",
-    "name:Lumina Point"
+    "name:Lumina Point",
+    "name:Blu Wakes"
    ],
    "collectionRefs": [
     {
@@ -679,7 +680,7 @@
     "gatherings"
    ],
    "status": "draft",
-   "note": "Formerly Kahari Resort (and before that Lumina Point), Stocking Island, Exuma."
+   "note": "Blu Wakes villas (Hoopers Bay, Great Exuma) are part of Baymahni per James, 15 Oct 2026, and lead the offer; Baymahni resort on Stocking Island is the family base. Formerly Kahari Resort (and before that Lumina Point)."
   },
   {
    "id": "JWC-P-0023",
