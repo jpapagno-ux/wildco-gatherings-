@@ -3,6 +3,7 @@ import { JwcoSeal } from "./Marks";
 import AskIggiButton from "./AskIggiButton";
 import { MASTER_HOME_URL, VOLUMES } from "@/lib/ecosystem";
 import { LEGAL, sellerOfTravelLine } from "@/lib/legal";
+import { PARTNERS } from "@/lib/partners";
 
 export default function Footer() {
   const sot = sellerOfTravelLine();
@@ -58,6 +59,10 @@ export default function Footer() {
             <Link href="/advisors">Advisors</Link>
             <Link href="/plan">Contact</Link>
           </nav>
+        </div>
+        <div className="wrap foot-partners" aria-label="Partners">
+          <p className="foot-h" style={{ margin: 0 }}>Partners</p>
+          {PARTNERS.map((p) => <img key={p.key} src={p.logo} alt={p.name} title={`${p.name} — ${p.role}`} width={136} height={26} loading="lazy" />)}
         </div>
         <div className="wrap foot-legal">
           <nav aria-label="Legal">

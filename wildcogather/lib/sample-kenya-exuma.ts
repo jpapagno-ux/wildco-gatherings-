@@ -15,6 +15,7 @@ const C = "gatherings/cottars-bush-villa-maasai-mara/";
 const LW = "gatherings/lewa-house-kenya/";
 const LG = "gatherings/lengishu-borana/";
 const B = "gatherings/baymahni-exuma/";
+const BW = "gatherings/baymahni-exuma/blu-wakes/";
 const lewaBorana = (visit: string, why: string, fit: string) => ({ collection: "Lewa–Borana Landscape", collectionSlug: "lewa-borana-landscape", visit, why, fit });
 
 export const kenyaExumaResidences: SampleResidence[] = [
@@ -215,66 +216,73 @@ export const kenyaExumaResidences: SampleResidence[] = [
     credit: "Images courtesy of Lengishu and Wild Earth Stays",
   },
 
-  // Sources: baymahni.com/rooms (unit types, lofts for ages 7–16, one two-bedroom unit); hospitalitynet.org (2025: former Kahari
-  // site, renovated, new restaurant, bar and pool); bahamas.com (Kahari Resort) — Oct 2026. Unit counts not published.
+  // Sources: bluwakes.com (home, amenities, floor plan: Hoopers Bay, two villas, each four en-suite bedrooms plus a bunk room,
+  // private pool, chef, butler, driver, boat captain); baymahni.com/rooms (bungalows, lofts for 7–16); hospitalitynet.org (2025:
+  // former Kahari site, renovated); bahamas.com (Kahari) — Oct 2026. James (15 Oct 2026): the Blu Wakes villas are part of
+  // Baymahni and lead the offer; the resort is the family's base. Villa capacity and unit counts not published: confirm.
   {
-    slug: "baymahni-exuma", entryNo: "G-023", name: "Baymahni, Stocking Island", place: "Stocking Island, Great Exuma", region: "The Exumas", country: "Bahamas",
+    slug: "baymahni-exuma", entryNo: "G-023", name: "Blu Wakes Villas at Baymahni, Exuma", place: "Hoopers Bay and Stocking Island, Great Exuma", region: "The Exumas", country: "Bahamas",
     status: "Approved", stamp: "Founder inspected & approved", firstVisited: "2023", setting: "coast",
     notes: { bestSeason: "Dec–May, the dry season; hurricane season runs Jun–Nov", power: "120V · type A/B", timeZone: "Eastern Time (ET)" },
-    line: "Beach and lagoon bungalows on a barrier island across the harbour from George Town — each with a loft built for children aged 7 to 16, pairs that connect for eight, and the reefs, sandbars and turtles of the Exumas a boat ride away.",
+    line: "Two beachfront villas on Hoopers Bay — each with four en-suite bedrooms, a bunk room for the children, its own pool, chef, butler and boat captain — with Baymahni's beach, lagoon and bungalows on Stocking Island as the family's base.",
     verdict: [
       "I stayed here in 2023, when it was still Kahari, on a trip with the Reef Ball Foundation — and came home thinking every family should see a reef being rebuilt.",
-      "It has since been renovated as Baymahni, with a new restaurant, bar and pool. The bungalows suit families well: the children sleep up in the loft, and two bungalows connect for a bigger branch.",
+      "For a gathering I now start with the Blu Wakes villas: take both, and three generations each have a house on the sand with its own pool. Baymahni is the base for everything else — the lagoon, the bungalows for an extra branch, and the boat days out to the reefs.",
     ],
-    bestFor: "Families with children of 7 to 16 who want a barefoot island week — loft bungalows on the beach or lagoon, paddling from the door and boat days around the Exumas",
-    notFor: "Not for a family that wants a big-resort kids' club; this is a small island resort, and the boat ride to George Town is part of every outing.",
-    bedrooms: "One-bedroom beach and lagoon bungalows with a children's loft; connecting pairs; one two-bedroom lagoon bungalow", kidsAges: "All ages · lofts designed for 7–16",
-    water: "Beach, private lagoon and dock; kayaks, paddleboards and snorkelling", seasons: ["Year-round"],
-    airport: "Exuma International (GGT), then by road to George Town and a short boat ride across Elizabeth Harbour",
+    bestFor: "Families who want two beach houses side by side for a reunion — bunk rooms for the cousins, a chef and a captain — with a resort to lean on for the water days",
+    notFor: "Not for a family that wants a big-resort kids' club; this is a villa stay with a small island resort behind it, and boats are part of every outing.",
+    bedrooms: "2 villas · each 4 en-suite bedrooms plus a bunk room; Baymahni bungalows for extra family", kidsAges: "All ages · bunk rooms and resort lofts for 7–16",
+    kidsProgram: "Bunk room in each villa; paddleboards, kayaks and boat days with the villa's captain",
+    water: "Each villa on the beach with its own pool; paddleboards and kayaks in Hoopers Bay; Baymahni's lagoon and dock on Stocking Island", seasons: ["Year-round"],
+    airport: "Exuma International (GGT) — private driver and transfers arranged by the villa team; private charters from Florida with our partner Tradewind Aviation",
     formula: formula([
-      ["Bungalows for four with a children's loft; two connect into a pair for up to eight.", true],
-      ["Lofts made for 7–16s; paddling for the young, boat days and reefs for the rest.", true],
-      ["On the beach, with its own lagoon and dock.", true],
-      ["Stocking Island and the Exuma cays: sandbars, reefs and sea turtles.", true],
-      ["A resort team, restaurant, bar and pool behind you.", true],
-      ["James stayed in 2023 and would send his own family back.", true],
+      ["Two villas side by side, each four en-suite bedrooms and a bunk room; resort bungalows for anyone else.", true],
+      ["Bunk rooms for the young; boat days, fishing and reefs for the rest.", true],
+      ["On the beach, each with a private pool, and Baymahni's lagoon across the harbour.", true],
+      ["Hoopers Bay and the Exuma cays: sandbars, reefs and sea turtles.", true],
+      ["Butler, concierge, chef on request, driver and captain — and Baymahni's team behind them.", true],
+      ["James stayed in 2023 (as Kahari); the villas are new since his visit.", true],
     ]),
     fieldNotes: [
-      "Book a Beach and Lagoon Connector: two bungalows joined by outdoor doors, two lofts, up to eight.",
-      "The lofts are designed for ages 7 to 16 — perfect for cousins.",
-      "Plan one boat day to the sandbars and one to snorkel — the concierge arranges captains.",
+      "Book both villas for a reunion: one for the grandparents and one branch, one for the cousins.",
+      "Put the children in the bunk rooms and the couples in the suites — Suite 1 and Suite 2 have their own porches.",
+      "Ask for the grocery pre-stock and the chef for the first night, so no one shops on arrival day.",
+      "Plan one boat day to the sandbars and one to snorkel — the villa's captain runs both.",
       "Go December to May; June to November is hurricane season.",
     ],
     manifest: [],
     experiences: [
-      { name: "Snorkelling the reefs", category: "On the water", ages: ["Confident swimmers"], seasons: ["Year-round"], description: "Coral heads and reef fish a short boat ride from the dock.", image: { publicId: B + "baymahni-underwater", alt: "A snorkeller swimming among sergeant major fish over a reef in the Exumas" } },
-      { name: "Sandbars and sea turtles", category: "On the water", ages: ["All ages"], seasons: ["Year-round"], description: "A captained boat day around the Exuma cays — sandbars at low tide and turtles in the shallows.", image: { publicId: B + "baymahni-sandbar", alt: "A woman standing on a small white sandbar in clear turquoise water in the Exumas" } },
-      { name: "Paddling the lagoon", category: "On the water", ages: ["All ages"], seasons: ["Year-round"], description: "Kayaks and paddleboards from the resort's own beach.", image: { publicId: B + "baymahni-kayak", alt: "A paddleboarder seen from above on glass-clear water off Stocking Island" } },
-      { name: "Shoreline discoveries", category: "For the young ones", ages: ["All ages"], seasons: ["Year-round"], description: "Starfish and shells in the shallows at the end of the day.", image: { publicId: B + "baymahni-marine-discovery", alt: "Starfish in the shallows of a quiet beach at dusk on Stocking Island" } },
+      { name: "Boat days with your captain", category: "On the water", ages: ["All ages"], seasons: ["Year-round"], description: "Sandbars at low tide, turtles in the shallows and the cays of the Exumas, with the villa's dedicated captain.", image: { publicId: B + "baymahni-sandbar", alt: "A woman standing on a small white sandbar in clear turquoise water in the Exumas" } },
+      { name: "Snorkelling the reefs", category: "On the water", ages: ["Confident swimmers"], seasons: ["Year-round"], description: "Coral heads and reef fish a short boat ride away.", image: { publicId: B + "baymahni-underwater", alt: "A snorkeller swimming among sergeant major fish over a reef in the Exumas" } },
+      { name: "Paddling from the beach", category: "On the water", ages: ["All ages"], seasons: ["Year-round"], description: "Paddleboards and kayaks are included at the villas, in the protected water of Hoopers Bay.", image: { publicId: B + "baymahni-kayak", alt: "A paddleboarder seen from above on glass-clear Exuma water" } },
+      { name: "A day at Baymahni", category: "Together", ages: ["All ages"], seasons: ["Year-round"], description: "Across the harbour on Stocking Island: the lagoon, the beach and the resort's restaurant and bar.", image: { publicId: B + "baymahni-aerial-01", alt: "Aerial view of Baymahni on its point of Stocking Island, with the pool, beaches and turquoise water on both sides" } },
     ],
     faqs: [
+      { question: "What are the Blu Wakes villas?", answer: "Two beachfront villas on Hoopers Bay, Great Exuma, that are part of Baymahni. Each has four en-suite bedrooms plus a bunk room, a private pool, direct beach access, a full kitchen, a butler and concierge, a chef on request, a private driver and a boat captain. Paddleboards and kayaks are included." },
+      { question: "Can a big family take both Blu Wakes villas?", answer: "Yes — taking both villas gives a reunion two houses side by side on the beach, each with its own pool. Extra family can stay in Baymahni's bungalows on Stocking Island. Ask us for capacity for your party." },
       { question: "Is Baymahni the same resort as Kahari?", answer: "Yes. Baymahni stands on the former Kahari Resort site on Stocking Island, renovated and expanded with a new restaurant, bar and pool. Kahari was itself once called Lumina Point." },
-      { question: "What are the rooms like at Baymahni for families?", answer: "Most bungalows have one bedroom with a king bed and a loft with a full bed designed for guests aged 7 to 16, sleeping up to four. A Beach and Lagoon Connector joins two bungalows through outdoor doors for up to eight, and there is one two-bedroom Lagoon Bungalow for four adults and two children." },
-      { question: "How do you get to Baymahni on Stocking Island?", answer: "Fly into Exuma International Airport (GGT), drive to George Town, then take the short boat ride across Elizabeth Harbour to Stocking Island." },
+      { question: "How do you fly to Exuma privately?", answer: "Our partner Tradewind Aviation flies private charters in the Pilatus PC-12 straight into Exuma International (GGT): about 1 hour 18 minutes from Miami or Fort Lauderdale and 1 hour 24 minutes from Palm Beach. The villa team arranges the driver from the airport." },
     ],
     images: [
-      { publicId: B + "baymahni-aerial-01", alt: "Aerial view of Baymahni on its point of Stocking Island, with the pool, beaches and turquoise water on both sides", caption: "Baymahni from the air", role: "Hero" },
-      { publicId: B + "baymahni-bungalow-view", alt: "Bungalow sitting room at Baymahni with white armchairs and French doors open to palms and the sea", caption: "A beach bungalow", role: "Card" },
-      { publicId: B + "baymahni-sunset", alt: "A girl on a rope swing hung from a casuarina tree at sunset on the beach at Baymahni", caption: "The beach at sunset", role: "Feature" },
-      { publicId: B + "baymahni-hero", alt: "Turquoise shallows and sand patterns off Stocking Island, Exuma", caption: "Exuma water", role: "Gallery strip" },
-      { publicId: B + "baymahni-bedroom", alt: "White bedroom at Baymahni with a king bed, rattan chair and doors to the veranda", caption: "A bungalow bedroom", role: "Gallery strip" },
-      { publicId: B + "baymahni-resort", alt: "Ribbons of white sandbar in turquoise water around the Exuma cays, from the air", caption: "The sandbars", role: "Gallery strip" },
-      { publicId: B + "baymahni-bungalow-interior", alt: "Bungalow bathroom at Baymahni with a stone double vanity and round mirrors", caption: "The bathroom", role: "Gallery strip" },
+      { publicId: BW + "bw-27", alt: "The Blu Wakes villas behind a white beach on Hoopers Bay, Exuma, with turquoise water and a small pier", caption: "The villas on Hoopers Bay", role: "Hero" },
+      { publicId: BW + "bw-16", alt: "A Blu Wakes villa seen from the beach through palms, with its pool and loungers in front", caption: "From the beach", role: "Card" },
+      { publicId: BW + "bw-04", alt: "Aerial view of Hoopers Bay, Exuma, with the Blu Wakes villas above a long white beach and shallow turquoise water", caption: "Hoopers Bay from the air", role: "Feature" },
+      { publicId: BW + "bw-03", alt: "Living room in a Blu Wakes villa with a white sofa under a vaulted timber ceiling and doors to the terrace", caption: "The living room", role: "Gallery strip" },
+      { publicId: BW + "bw-06", alt: "Open kitchen and dining table in a Blu Wakes villa, with glass doors to the pool and the sea", caption: "Kitchen and dining", role: "Gallery strip" },
+      { publicId: BW + "bw-07", alt: "A suite in a Blu Wakes villa with a king bed, round mirror and vaulted ceiling", caption: "A suite", role: "Gallery strip" },
+      { publicId: BW + "bw-23", alt: "A Blu Wakes villa's private pool among palms, with the beach beyond", caption: "The pool", role: "Gallery strip" },
+      { publicId: BW + "bw-29", alt: "Glass doors open from a Blu Wakes villa onto the pool deck and the sea", caption: "Doors to the sea", role: "Gallery strip" },
+      { publicId: B + "baymahni-bungalow-view", alt: "Bungalow sitting room at Baymahni with white armchairs and French doors open to palms and the sea", caption: "A Baymahni bungalow", role: "Gallery strip" },
     ],
     rooms: [
-      { name: "Beach Bungalow", count: "Ask us", bedrooms: "1 · king, plus a loft with a full bed", sleeps: "Up to 4", inside: "Beach view; 310 sq ft inside, or 370 sq ft with the extended veranda; loft designed for ages 7–16", fit: "A family of four on the sand." },
-      { name: "Lagoon Bungalow", count: "Ask us", bedrooms: "1 · king, plus a loft with a full bed", sleeps: "Up to 4", inside: "Lagoon view; also with an extended veranda; loft designed for ages 7–16", fit: "A family of four on the quiet side." },
-      { name: "Beach and Lagoon Connector", count: "Ask us", bedrooms: "2 · kings, plus two lofts", sleeps: "Up to 8", inside: "A beach and a lagoon bungalow joined by outdoor connecting doors", fit: "Two branches, or grandparents with the grandchildren." },
-      { name: "Two Bedroom Lagoon Bungalow", count: "1", bedrooms: "2 · king and queen", sleeps: "4 adults + 2 children", inside: "877 sq ft with uninterrupted lagoon views — the only full two-bedroom unit", fit: "A family who want two real bedrooms." },
+      { name: "Both Blu Wakes villas", count: "2", bedrooms: "8 en-suite + 2 bunk rooms", inside: "Two beachfront villas side by side, each with a private pool, full kitchen, living and dining room and covered patio", fit: "The whole reunion, a house per branch.", whole: true },
+      { name: "Blu Wakes villa", count: "2", bedrooms: "4 en-suite + a bunk room", inside: "Suite 1 and Suite 2 with their own porches, Bedrooms 3 and 4, bunk room, private pool and beach access", fit: "One family of three generations." },
+      { name: "Baymahni bungalows", count: "Ask us", bedrooms: "1 · king, plus a loft for 7–16", sleeps: "Up to 4", inside: "Beach or lagoon bungalows on Stocking Island; two connect for up to eight", fit: "An extra branch, at the resort." },
+      { name: "Two Bedroom Lagoon Bungalow", count: "1", bedrooms: "2 · king and queen", sleeps: "4 adults + 2 children", inside: "877 sq ft with lagoon views — Baymahni's only full two-bedroom unit", fit: "Grandparents who want the resort." },
     ],
     videos: [],
-    seoTitle: "Baymahni, Exuma: Family Beach Bungalows on Stocking Island | Wild & Co Gatherings",
-    metaDescription: "Baymahni on Stocking Island, Exuma — formerly Kahari: beach and lagoon bungalows with lofts for ages 7–16, connecting pairs for eight, reefs and sandbars nearby. James stayed in 2023.",
-    credit: "Images courtesy of Baymahni",
+    seoTitle: "Blu Wakes Villas at Baymahni, Exuma: Family Beach Villas | Wild & Co Gatherings",
+    metaDescription: "Blu Wakes at Baymahni, Exuma: two beachfront villas on Hoopers Bay, each four en-suite bedrooms plus a bunk room, private pool, chef and captain. James stayed in 2023.",
+    credit: "Images courtesy of Blu Wakes and Baymahni",
   },
 ];

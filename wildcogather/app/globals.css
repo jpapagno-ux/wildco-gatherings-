@@ -701,3 +701,14 @@ button.lnk { background: none; border: 0; border-bottom: 1px solid currentColor;
 .sf-route .ser { font-size: 22px; }
 .sf-route .mono, .sf-route .cp { color: var(--on-dark-accent); }
 @media (max-width: 860px) { .sf { grid-template-columns: 1fr; } }
+
+/* Arrive-by-air partner card */
+.fly { display: flex; flex-wrap: wrap; gap: 40px; padding: 34px 38px; }
+.fly-main { flex: 2 1 420px; min-width: 0; }
+.fly-routes { flex: 1 1 260px; min-width: 0; }
+.fly-logo { display: block; height: 34px; width: auto; margin-top: 16px; }
+.fly-routes .fact { display: flex; justify-content: space-between; gap: 16px; }
+/* Footer partners row */
+.foot-partners { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 34px; padding-top: 22px; padding-bottom: 22px; border-top: 1px solid var(--stone); }
+.foot-partners img { height: 26px; width: auto; display: block; }
+@media (max-width: 760px) { .fly { padding: 24px 20px; } }
