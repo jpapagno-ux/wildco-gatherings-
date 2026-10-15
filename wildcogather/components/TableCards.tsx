@@ -11,7 +11,7 @@ export default function TableCards({ cards, house, ink }: { cards: TableCard[]; 
       {cards.map((c, i) => (
         <article key={c.slug} id={`table-${c.slug}`} className="tbl-card" style={{ ["--ink" as string]: ink }}>
           {c.image ? (
-            <Photo img={c.image} sizes="(max-width: 700px) 100vw, 380px" aspect="4:3" style={{ height: 230 }} />
+            <Photo img={c.image} hint="dinner table" sizes="(max-width: 700px) 100vw, 380px" aspect="4:3" style={{ height: 230 }} />
           ) : (
             <div className="tbl-head" aria-hidden="true">
               <Icon name="table" size={30} color="var(--paper)" stroke={1.4} />

@@ -10,6 +10,8 @@ import { staysInRegion } from "@/lib/browse";
 import PageSketch from "@/components/PageSketch";
 import { REGION_SKETCH } from "@/lib/sketch-borders";
 import { SITE } from "@/lib/site";
+import Photo from "@/components/Photo";
+import { REGION_HERO } from "@/lib/hero-library";
 
 export const revalidate = 3600;
 
@@ -30,6 +32,8 @@ export default async function Destination({ params }: { params: Promise<{ region
   return (
     <>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "CollectionPage", name: `${m.label} — Wild & Co Gatherings`, url: `${SITE}/destinations/${key}`, description: m.description, mainEntity: { "@type": "ItemList", itemListElement: houses.map((h, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE}/houses/${h.slug}`, name: h.name })) } }} />
+      <div className="region-band">
+      <Photo img={REGION_HERO[m.key]} priority sizes="100vw" style={{ position: "absolute", inset: 0 }} />
       <section className="wrap region-page-hero">
         <div>
           <nav aria-label="Breadcrumb" className="cp muted" style={{ fontSize: 11, marginBottom: 22 }}><Link href="/houses" style={{ textDecoration: "none" }}>Stays</Link> / {m.label}</nav>
@@ -41,6 +45,7 @@ export default async function Destination({ params }: { params: Promise<{ region
           <Link href="/plan" className="btn region-enquiry">Plan a gathering in {m.label}</Link>
         </div>
       </section>
+      </div>
       <section className="wrap region-page-content">
         {houses.length ? (
           <DestinationExplorer residences={houses} />

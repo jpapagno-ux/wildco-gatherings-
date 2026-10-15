@@ -6,7 +6,8 @@ import JsonLd from "@/components/JsonLd";
 import PageSketch from "@/components/PageSketch";
 import { getResidences } from "@/lib/data";
 import { REGIONS } from "@/lib/regions";
-import { staysInRegion, cardImage } from "@/lib/browse";
+import { staysInRegion } from "@/lib/browse";
+import { REGION_HERO } from "@/lib/hero-library";
 import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -34,10 +35,10 @@ export default async function Destinations() {
       <section className="wrap" style={{ paddingBottom: 60 }}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 340px), 1fr))", gap: 26 }}>
           {live.map((r) => {
-            const img = cardImage(r.houses[0]);
+            const img = REGION_HERO[r.key];
             return (
               <Link key={r.key} href={`/destinations/${r.key}`} className="card" style={{ display: "grid", textDecoration: "none" }}>
-                <Photo img={img} sizes="(max-width: 700px) 100vw, 400px" aspect="4:3" style={{ height: 240 }} />
+                <Photo img={img} sizes="(max-width: 700px) 100vw, 480px" aspect="4:3" className="dest-card-photo" style={{ height: 260 }} />
                 <div style={{ padding: "22px 24px 26px" }}>
                   <p className="cp muted" style={{ margin: 0 }}>{r.houses.length} {r.houses.length === 1 ? "house" : "houses"}</p>
                   <h2 className="ser" style={{ margin: "8px 0 8px", fontSize: 30, fontWeight: 500 }}>{r.label}</h2>

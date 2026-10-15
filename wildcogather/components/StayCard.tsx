@@ -10,7 +10,7 @@ export default function StayCard({ r, sizes = "(max-width: 700px) 100vw, 380px" 
   const ink = SETTINGS[r.setting].ink;
   return (
     <Link href={`/houses/${r.slug}`} className="house-card">
-      <Photo img={cardImage(r)} sizes={sizes} aspect="5:4" className="house-card-photo" />
+      <Photo img={cardImage(r)} hint={`${r.setting} ${r.name}`} sizes={sizes} aspect="5:4" className="house-card-photo" />
       <p className="cp muted house-card-meta">Entry {r.entryNo} · {[r.place, r.region].filter(Boolean).join(", ")}</p>
       <h3 className="ser house-card-name">{r.name}</h3>
       <hr style={{ width: 30, height: 1, border: 0, background: ink, margin: "12px auto" }} />

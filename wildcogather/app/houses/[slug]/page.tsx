@@ -457,7 +457,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
           <Strip label="Recorded from experience" title="On land & water, for every age">
             {r.experiences.map((e) => (
               <article key={e.name} style={{ width: 330, maxWidth: "80vw", textAlign: "center" }}>
-                <Photo img={e.image} sizes="330px" aspect="11:10" style={{ height: 300 }} />
+                <Photo img={e.image} hint={`${e.name} ${e.category} ${e.description}`} sizes="330px" aspect="11:10" style={{ height: 300 }} />
                 <h3 className="lab" style={{ margin: "20px 0 0", letterSpacing: ".3em" }}>{e.name}</h3>
                 <hr style={{ width: 30, height: 1, border: 0, background: "var(--rust)", margin: "12px auto" }} />
                 <p className="cp muted" style={{ margin: "0 0 8px" }}>{[...e.ages, ...e.seasons].join(" · ")}</p>
