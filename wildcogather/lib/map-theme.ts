@@ -29,8 +29,8 @@ export const MAP_THEMES: Record<MapThemeKey, MapTheme> = {
 };
 
 export function mapConfig() {
-  const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
-  const customStyle = process.env.NEXT_PUBLIC_MAPBOX_STYLE || "";
+  const token = (process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "").trim();
+  const customStyle = (process.env.NEXT_PUBLIC_MAPBOX_STYLE || "").trim();
   const raw = (process.env.NEXT_PUBLIC_MAPBOX_THEME || "paper") as MapThemeKey;
   const themeKey: MapThemeKey = raw in MAP_THEMES ? raw : "paper";
   return {

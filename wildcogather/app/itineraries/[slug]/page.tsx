@@ -18,7 +18,7 @@ import { templateIdFor, entityForHouse } from "@/lib/entities";
 import { SITE } from "@/lib/site";
 
 export const revalidate = 3600;
-const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "jhlnq5h5";
+const CLOUD = (process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "").trim() || "jhlnq5h5";
 
 export async function generateStaticParams() { return (await getItineraries()).map((i) => ({ slug: i.slug })); }
 
