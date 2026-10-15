@@ -174,7 +174,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
         <div className="title">
           <nav aria-label="Breadcrumb" className="cp" style={{ color: "rgba(244,241,236,.78)", marginBottom: 20 }}><Link href="/ledger" style={{ textDecoration: "none" }}>The Ledger</Link> / <Link href={`/houses#${r.setting}`} style={{ textDecoration: "none" }}>{st.name}</Link> / Entry {r.entryNo}</nav>
           <p className="eb" style={{ color: "#F0D9C6" }}>{isResidence && parent?.name ? `A residence at ${parent.name} · ` : ""}{r.region}, {r.country}</p>
-          <h1 className="dsp" style={{ margin: "18px 0 0", fontSize: "clamp(48px, 6.4vw, 92px)", color: "var(--on-dark)" }}>{r.name}</h1>
+          <h1 className="dsp" style={{ margin: "18px 0 0", fontSize: Math.max(...r.name.split(/\s+/).map((w) => w.length)) > 10 ? "clamp(38px, 5.2vw, 84px)" : "clamp(48px, 6.4vw, 92px)", color: "var(--on-dark)", hyphens: "manual" }}>{r.name}</h1>
           {r.bestFor && <p className="ser" style={{ margin: "18px 0 0", fontStyle: "italic", fontSize: "clamp(20px, 2.2vw, 28px)", lineHeight: 1.3, maxWidth: 760 }}>{r.bestFor}</p>}
         </div>
         <div className="tag"><LuggageTag setting={r.setting} name={r.name} place={`${r.place} · ${r.region}`} entryNo={r.entryNo} status={tagStatus} /></div>
