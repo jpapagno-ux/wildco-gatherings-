@@ -1,6 +1,6 @@
 {
  "_about": "Evidence records: how we know what we say. Mirrored in Airtable › Evidence. Only Approved rows show on the site.",
- "next": "JWC-V-0053",
+ "next": "JWC-V-0057",
  "evidence": [
   {
    "id": "JWC-V-0001",
@@ -729,6 +729,62 @@
    "scope": "James has worked with the Cottar family and Cottar's Safaris since 2017. Does not confirm a stay, current rates or policies.",
    "source": "Owner statement to Wild & Co, 14 Oct 2026",
    "wording": "Working with the Cottars since 2017"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0053",
+   "subject": "JWC-P-0024",
+   "ref": "G-025",
+   "method": "House Selected",
+   "date": "2026-10",
+   "precision": "Month",
+   "scope": "James chose The Lindis for the Gatherings Ledger as a family buyout in New Zealand. He has not yet visited. Editorial judgement — not a verification of current facts, rates or policies.",
+   "source": "Gatherings Ledger entry G-025",
+   "wording": "Selected by James Wild for the Gatherings Ledger · not yet visited"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0054",
+   "subject": "JWC-P-0025",
+   "ref": "G-026",
+   "method": "House Selected",
+   "date": "2026-10",
+   "precision": "Month",
+   "scope": "James chose Vahine Private Island for the Gatherings Ledger. Editorial judgement — not a verification of current facts, rates or policies.",
+   "source": "Gatherings Ledger entry G-026",
+   "wording": "Selected by James Wild for the Gatherings Ledger"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0055",
+   "subject": "JWC-P-0025",
+   "ref": "G-026",
+   "method": "Personally Inspected",
+   "date": "2025",
+   "precision": "Year",
+   "scope": "James was at Vahine Private Island in 2025 and vetted it. Does not by itself confirm an overnight in a particular room, current rates or policies.",
+   "source": "Owner statement to Wild & Co, 15 Oct 2026",
+   "wording": "Vetted in person by James Wild, 2025"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0056",
+   "subject": "JWC-P-0025",
+   "ref": "G-026",
+   "method": "Founder Favorite",
+   "date": "2025",
+   "precision": "Year",
+   "scope": "James has surfed, dived and explored Tahiti and her islands since 1996 and calls Taha'a his favourite. An opinion, not a verification.",
+   "source": "Owner statement to Wild & Co, 15 Oct 2026",
+   "wording": "Taha'a is James's favourite — in the islands since 1996"
   }
  ]
 }
