@@ -55,8 +55,8 @@ export default async function Home() {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: FAQS.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
 
       <section className="hero" aria-label="Wild & Co Gatherings">
-        <Photo img={HOME_HERO} priority wash style={{ position: "absolute", inset: 0 }} />
-        <div className="shade" />
+        <Photo img={HOME_HERO} priority style={{ position: "absolute", inset: 0 }} />
+        <div className="shade shade-strong" />
         <div className="ledger-col">
           <div><p className="k">Journey design</p><p className="v">Since 1982</p></div>
           <div><p className="k">Houses</p><p className="v">{String(all.length).padStart(2, "0")}</p></div>
