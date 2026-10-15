@@ -8,41 +8,6 @@ const BASE = process.env.AIRTABLE_BASE_ID || "appnpcCxUZcapAgbo";
 // ——— Sample entry (used until the Airtable "Journal" table has rows). Quotes are drafts for James to approve. ———
 export const samplePosts: Post[] = [
   {
-    // Draft until James adds his photographs and his account of the 2023 trip (marked [To come] below).
-    slug: "reef-ball-foundation-exuma-2023",
-    number: "04",
-    kicker: "Field notes · the Exumas",
-    title: "Rebuilding a Reef in the Exumas with the Reef Ball Foundation",
-    dek: "In 2023 I went to the Exumas with the Reef Ball Foundation and stayed on Stocking Island, at the resort then called Kahari — today it is Baymahni.",
-    house: "baymahni-exuma",
-    author: "James Wild",
-    authorTitle: "Founder, James Wild & Co · 44 years on the road",
-    date: "2026-10-14",
-    readMinutes: 4,
-    draft: true,
-    seoTitle: "Reef Ball Foundation in the Exumas: James Wild's 2023 Trip | Wild & Co Journal",
-    metaDescription: "James Wild on his 2023 trip to the Exumas with the Reef Ball Foundation — what a reef ball is, how artificial reefs help coral return, and where his family would stay.",
-    body: `In 2023 I went to the Exumas with the Reef Ball Foundation. I stayed on Stocking Island, across the harbour from George Town, at the resort then called Kahari. It has since become Baymahni, and it is now in the Ledger.
-
-> Every family should see a reef being rebuilt. It changes how the children swim over the next one.
-
-## What is a reef ball?
-
-A reef ball is a hollow concrete dome full of holes, made to be sunk and to become a reef. The concrete is pH-balanced and left rough, so coral, algae and sponges settle on it; the holes make the small eddies that fish shelter in. The Reef Ball Foundation, a nonprofit based in Athens, Georgia, has helped place hundreds of thousands of them in reef projects in more than fifty countries.
-
-## What did we do in the Exumas?
-
-[To come — James's account of the 2023 trip, with his photographs.]
-
-## Where should a family stay to see it?
-
-On Stocking Island. Baymahni has two-bedroom bungalows on the beach, its own lagoon and dock, and captains who will take you out to the reefs, the sandbars and the turtles. Go between December and May.
-
-## Can children take part in reef restoration?
-
-Ask us before you travel. What a family can join depends on the project and the season, and on the children's ages and swimming.`,
-  },
-  {
     slug: "wild-together-monwana-thornybush",
     number: "03",
     kicker: "Wild Together · the episode",
