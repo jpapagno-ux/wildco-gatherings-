@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import type { Img } from "@/lib/types";
 import { applyCropToSrc } from "@/lib/cloudinary-loader";
+import { atmosphereFor } from "@/lib/hero-library";
 
 export interface PhotoProps {
   img?: Img;
@@ -13,6 +14,11 @@ export interface PhotoProps {
   style?: React.CSSProperties;
   className?: string;
   alt?: string;
+  // Words that describe what the photo should show (an experience name, a setting) — used to choose an
+  // atmosphere image from the James Wild Co Hero library when no photograph is set.
+  hint?: string;
+  // A soft wash over the image (for heroes and atmosphere images).
+  wash?: boolean;
 }
 
 // Cloudinary image that fades in once loaded (250ms), with a Sand placeholder behind it.
@@ -20,7 +26,7 @@ export interface PhotoProps {
 // so a portrait leopard or a wide pool still lands well in a landscape frame.
 // Supports bare public IDs and full Cloudinary URLs, focal points/object positions,
 // and resets fade/error state when the source changes.
-// If no public ID is set, the Sand panel shows with a "photo to come" label.
+// If no public ID is set, an atmosphere image from the hero library shows instead, softly washed and labelled.
 export default function Photo({
   img,
   sizes = "100vw",
@@ -30,17 +36,19 @@ export default function Photo({
   style,
   className,
   alt: altOverride,
+  hint,
+  wash = false,
 }: PhotoProps) {
   const [loadedSrc, setLoadedSrc] = useState<string | null>(null);
   const [errorSrc, setErrorSrc] = useState<string | null>(null);
 
   const rawSrc = img?.publicId?.trim();
   if (!rawSrc) {
+    const atmo = atmosphereFor(hint || altOverride || img?.alt || "");
     return (
-      <div className={className} style={{ position: "relative", background: "var(--sand)", overflow: "hidden", ...style }}>
-        <span className="cp" style={{ position: "absolute", left: 12, bottom: 10, fontSize: 11 }}>
-          Photo to come
-        </span>
+      <div className={className} style={{ position: "relative", overflow: "hidden", ...style }}>
+        <Photo img={atmo} sizes={sizes} aspect={aspect} contain={contain} wash style={{ position: "absolute", inset: 0 }} />
+        <span className="cp atmo-tag">Atmosphere</span>
       </div>
     );
   }
@@ -82,6 +90,7 @@ export default function Photo({
           onError={() => setErrorSrc(effectiveSrc)}
         />
       )}
+      {wash && <span aria-hidden="true" className="photo-wash" />}
     </div>
   );
 }

@@ -712,3 +712,14 @@ button.lnk { background: none; border: 0; border-bottom: 1px solid currentColor;
 .foot-partners { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 34px; padding-top: 22px; padding-bottom: 22px; border-top: 1px solid var(--stone); }
 .foot-partners img { height: 26px; width: auto; display: block; }
 @media (max-width: 760px) { .fly { padding: 24px 20px; } }
+
+/* Hero-library atmosphere images and soft washes */
+.photo-wash { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(244,241,236,.10) 0%, rgba(244,241,236,0) 40%, rgba(30,42,56,.22) 100%); }
+.atmo-tag { position: absolute; left: 12px; bottom: 10px; z-index: 2; font-size: 10px; letter-spacing: .18em; color: rgba(244,241,236,.92); background: rgba(30,42,56,.35); padding: 3px 8px; border-radius: 2px; }
+.region-band { position: relative; overflow: hidden; }
+.region-band .region-photo { position: absolute; inset: 0; }
+.region-band::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, var(--paper, #F4F1EC) 0%, rgba(242,238,231,.94) 34%, rgba(242,238,231,.55) 60%, rgba(242,238,231,.08) 100%); }
+.region-band .region-page-hero { position: relative; z-index: 1; }
+@media (max-width: 760px) { .region-band::after { background: linear-gradient(180deg, rgba(242,238,231,.55) 0%, rgba(242,238,231,.92) 45%, var(--paper, #F4F1EC) 100%); } }
+.dest-card-photo { position: relative; }
+.dest-card-photo::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(30,42,56,0) 55%, rgba(30,42,56,.28) 100%); }

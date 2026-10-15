@@ -16,6 +16,7 @@ import { getItineraries } from "@/lib/extras";
 import { entityForHouse } from "@/lib/entities";
 import { FOUNDER_PHOTOS, FOUNDER_LEDE, AFRICA_QUOTES } from "@/lib/founder";
 import PageSketch from "@/components/PageSketch";
+import { HOME_HERO } from "@/lib/hero-library";
 
 export const revalidate = 3600;
 export const metadata: Metadata = fit({
@@ -37,8 +38,6 @@ const FAQS = HOME_FAQS;
 
 export default async function Home() {
   const all = await getResidences();
-  const lead = all[0];
-  const hero = lead.images.find((i) => i.role === "Hero") || lead.images[0];
   const featured = all.find((r) => r.featured);
   const featuredPost = featured ? await getPostForHouse(featured.slug) : undefined;
   const horizon = (await getHorizon()).slice(0, 3);
@@ -56,7 +55,7 @@ export default async function Home() {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: FAQS.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
 
       <section className="hero" aria-label="Wild & Co Gatherings">
-        <Photo img={hero} priority style={{ position: "absolute", inset: 0 }} />
+        <Photo img={HOME_HERO} priority wash style={{ position: "absolute", inset: 0 }} />
         <div className="shade" />
         <div className="ledger-col">
           <div><p className="k">Journey design</p><p className="v">Since 1982</p></div>
@@ -87,7 +86,7 @@ export default async function Home() {
               const img = rows[0].images.find((i) => i.role === "Hero") || rows[0].images[0];
               return (
                 <Link key={s.key} href={`/houses#${s.key}`} className="house-card">
-                  <Photo img={img} sizes="(max-width: 700px) 100vw, 380px" aspect="6:5" style={{ height: 320 }} />
+                  <Photo img={img} hint={s.name} sizes="(max-width: 700px) 100vw, 380px" aspect="6:5" style={{ height: 320 }} />
                   <h3 className="lab" style={{ margin: "22px 0 0", letterSpacing: ".3em", display: "inline-flex", alignItems: "center", gap: 10 }}><Icon name={s.key} size={22} color={s.ink} />{s.name}</h3>
                   <hr style={{ width: 30, height: 1, border: 0, background: s.ink, margin: "12px auto" }} />
                   <p className="cp muted" style={{ margin: 0 }}>{rows.length} {rows.length === 1 ? "house" : "houses"} · {s.sub}</p>
