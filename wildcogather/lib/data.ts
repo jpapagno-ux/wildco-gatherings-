@@ -166,6 +166,7 @@ async function fromAirtable(): Promise<Residence[]> {
         rooms: (f["Room Categories"] || []).map((id: string) => R[id]).filter(Boolean).map(toRoom).sort((a: any, b: any) => (a.order ?? 99) - (b.order ?? 99)),
         videos: videosFrom(f),
         whyHere: whyHereFrom(f, f["Slug"]),
+        liveBookingUrl: /^https:\/\/book\.wildearthstays\.com\//.test(f["Live booking URL"] || "") ? String(f["Live booking URL"]).split("?")[0] : undefined,
         seoTitle: f["SEO title"] || `${f["Residence"]} | Wild & Co Gatherings`,
         metaDescription: f["Meta description"] || f["The Line"] || "",
         credit: "",

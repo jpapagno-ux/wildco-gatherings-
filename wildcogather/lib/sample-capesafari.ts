@@ -259,7 +259,7 @@ export const capeSafariResidences: SampleResidence[] = [
       children: "All ages; 7 and under free on a sofa bed; 8–12 R2,000 a night sharing; Manor House 13+",
       fees: [],
       included: ["One tutored tasting at the Wine Studio per stay", "Shuttle to the Leeu properties in Franschhoek village", "Parking on the estate"],
-      excluded: ["Dinners and spa treatments", "Cape Town day with a private guide (arranged by us)", "Flights and transfers"],
+      excluded: ["15% VAT and fees, added at checkout when you book online", "Dinners and spa treatments", "Cape Town day with a private guide (arranged by us)", "Flights and transfers"],
       checked: "Oct 2026",
     },
     rooms: [

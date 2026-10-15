@@ -161,6 +161,7 @@ export default function Header({ nav }: { nav: BrowseNav }) {
               <p className="mega-h" id="mega-collections">Collections</p>
               <ul aria-labelledby="mega-collections">
                 {item({ href: "/houses", label: "All houses", count: nav.total })}
+                <li><Link href="/destinations" aria-current={path === "/destinations" ? "page" : undefined}>All destinations</Link></li>
                 {COLLECTIONS.map(([href, label]) => (
                   <li key={href}><Link href={href} aria-current={path === href ? "page" : undefined}>{label}</Link></li>
                 ))}
@@ -173,6 +174,23 @@ export default function Header({ nav }: { nav: BrowseNav }) {
           <Link key={href} href={href} aria-current={path === href ? "page" : isCurrent(href) ? "true" : undefined}>{label}</Link>
         ))}
         <Link href="/plan" className="nav-plan" aria-current={path === "/plan" ? "page" : undefined}>Plan Our Gathering</Link>
+        {/* Phones: the ecosystem bar folds into the menu so the hero starts higher on the screen. */}
+        <div className="nav-eco">
+          <div className="nav-eco-tools">
+            <Link href="/folios">My Folios{saved > 0 ? ` · ${saved}` : ""}</Link>
+            <button type="button" onClick={() => { setMenuOpen(false); openIggi(); }}>Ask Iggi</button>
+          </div>
+          <p className="mega-h">James Wild &amp; Co</p>
+          <div className="nav-eco-vols">
+            {VOLUMES.map((v) => v.current ? (
+              <Link key={v.key} href="/" aria-current="true">{v.label}</Link>
+            ) : v.soon || !v.href ? (
+              <span key={v.key} aria-disabled="true">{v.label} · soon</span>
+            ) : (
+              <a key={v.key} href={v.href}>{v.label}</a>
+            ))}
+          </div>
+        </div>
       </nav>
     </header>
   );

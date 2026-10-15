@@ -605,6 +605,81 @@
     "gatherings"
    ],
    "status": "published"
+  },
+  {
+   "id": "JWC-P-0020",
+   "type": "property",
+   "parentId": null,
+   "name": "Cottar's 1920s Safari Camp",
+   "slug": null,
+   "legacyIds": [],
+   "collectionRefs": [],
+   "collections": [],
+   "status": "reference",
+   "note": "Parent property for Cottar's Bush Villa, Olderkesi Conservancy, Maasai Mara. Not a Gatherings page."
+  },
+  {
+   "id": "JWC-R-0007",
+   "type": "residence",
+   "parentId": "JWC-P-0020",
+   "name": "Cottar's Bush Villa",
+   "slug": "cottars-bush-villa-maasai-mara",
+   "legacyIds": [
+    "airtable:recl7qDuqaT3Q8NT7"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-021"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "draft"
+  },
+  {
+   "id": "JWC-P-0021",
+   "type": "property",
+   "parentId": null,
+   "name": "Lewa House",
+   "slug": "lewa-house-kenya",
+   "legacyIds": [
+    "airtable:recEpmSWCA4AuzFZk"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-022"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "draft"
+  },
+  {
+   "id": "JWC-P-0022",
+   "type": "property",
+   "parentId": null,
+   "name": "Baymahni",
+   "slug": "baymahni-exuma",
+   "legacyIds": [
+    "airtable:recvUvzqrkyppZ0km",
+    "name:Kahari Resort",
+    "name:Lumina Point"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-023"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "draft",
+   "note": "Formerly Kahari Resort (and before that Lumina Point), Stocking Island, Exuma."
   }
  ]
 }

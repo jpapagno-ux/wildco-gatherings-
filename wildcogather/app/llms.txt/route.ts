@@ -1,3 +1,4 @@
+import { BOOKING, LEGAL } from "@/lib/legal";
 import { buildLedger, STAMP_MEANING } from "@/lib/ledger-registry";
 
 export const revalidate = 3600;
@@ -25,6 +26,8 @@ export async function GET() {
     `- [James Wild, founder](${L.founder.url}): forty-four years on the road since 1982; vets every house himself`,
     `- [The Gatherings Ledger](${L.site}/ledger): how the stamps work — ${Object.entries(STAMP_MEANING).map(([k, v]) => `${k}: ${v}`).join(" ")}`,
     `- [For travel advisors](${L.site}/advisors): advisor-led, always`,
+    `- [How it works](${L.site}/how-it-works): conversation first, then a written quote; ${BOOKING.depositPct}% deposit to confirm, balance ${BOOKING.balanceDueDays} days before travel; Florida Seller of Travel ${LEGAL.flSellerOfTravelNo}`,
+    `- [Questions families ask](${L.site}/questions): planning, booking and cancellation, vetting, advisors, and house-by-house answers`,
     "",
   ].join("\n");
   return new Response(out, { headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400" } });

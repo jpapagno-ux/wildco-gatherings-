@@ -41,7 +41,7 @@ export default function Footer() {
             <p className="foot-h">Gatherings</p>
             <Link href="/houses">The Houses</Link>
             <Link href="/destinations">Destinations</Link>
-            <Link href="/itineraries">Family Journeys &amp; Itineraries</Link>
+            <Link href="/itineraries">Family Journeys</Link>
             <Link href="/vip">Gatherings VIP</Link>
             <Link href="/horizon">On the Horizon</Link>
             <Link href="/journal">Journal</Link>
@@ -52,6 +52,8 @@ export default function Footer() {
             <Link href="/ledger">The Ledger</Link>
             <Link href="/folios">My Folios</Link>
             <AskIggiButton label="Iggi" className="foot-btn" />
+            <Link href="/how-it-works">How It Works</Link>
+            <Link href="/questions">Questions</Link>
             <Link href="/founder">Our Story</Link>
             <Link href="/advisors">Advisors</Link>
             <Link href="/plan">Contact</Link>

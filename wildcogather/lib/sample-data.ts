@@ -4,6 +4,7 @@ import { ttrResidences } from "./sample-ttr";
 import { moreResidences } from "./sample-more";
 import { nsResidences } from "./sample-ns";
 import { capeSafariResidences } from "./sample-capesafari";
+import { kenyaExumaResidences } from "./sample-kenya-exuma";
 import { hereResidences } from "./sample-here";
 import { italyResidences } from "./sample-italy";
 import { utahResidences } from "./sample-utah";
@@ -353,6 +354,7 @@ const raw: SampleResidence[] = [
   ...hereResidences,
   ...italyResidences,
   ...utahResidences,
+  ...kenyaExumaResidences,
 ];
 
 // Setting and family notes are added in sample-settings.ts (mirrors the Airtable fields).

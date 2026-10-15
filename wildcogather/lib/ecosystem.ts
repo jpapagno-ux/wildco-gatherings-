@@ -31,11 +31,12 @@ export const VOLUMES: VolumeLink[] = [
 export const volume = (k: VolumeKey) => VOLUMES.find((v) => v.key === k)!;
 
 // The Gatherings volume's own navigation (secondary row).
+// Destinations live inside "The Houses" menu (by region), so the top row stays to one job per link.
 export const GATHERINGS_NAV: [string, string][] = [
-  ["/destinations", "Destinations"],
-  ["/itineraries", "Itineraries"],
+  ["/itineraries", "Family Journeys"],
   ["/vip", "Gatherings VIP"],
   ["/journal", "Journal"],
+  ["/how-it-works", "How It Works"],
   ["/advisors", "Advisors"],
 ];
 

@@ -9,6 +9,9 @@ import { Stamp, HostMark, VipStamp, LuggageTag, TapedPhoto, Icon } from "@/compo
 import { SETTINGS } from "@/lib/settings";
 import Film from "@/components/Film";
 import WhyHere from "@/components/WhyHere";
+import LiveBooking from "@/components/LiveBooking";
+import SafariFeature from "@/components/SafariFeature";
+import { liveBookingFor, SAFARI_FEATURES } from "@/lib/live-booking";
 import { WHY_HERE } from "@/lib/why-here";
 import EpisodeCross from "@/components/EpisodeCross";
 import { getWebinarsForPartner, whenLabel } from "@/lib/webinars";
@@ -55,6 +58,8 @@ export default async function House({ params }: { params: Promise<{ slug: string
   const moreStays = relatedStays(await getResidences(), r);
   const coords = dms(r.lat, r.lng);
   const b = r.booking;
+  const live = r.liveBookingUrl ? { ...(liveBookingFor(r.slug) || { provider: "James Wild Stays · booking engine by TAG, powered by ALBIE", currency: "USD", taxNote: "Taxes and fees are shown at checkout.", ratePlans: [], termsNote: "Each rate shows its own payment and cancellation terms before you pay.", rooms: [], checked: "" }), engineUrl: r.liveBookingUrl } : liveBookingFor(r.slug);
+  const safari = SAFARI_FEATURES[r.slug];
   const why = r.whyHere || WHY_HERE[r.slug];
   const film = r.videos[0];
   const more = r.videos.slice(1);
@@ -104,7 +109,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
     ["Children", r.kidsProgram ? `${r.kidsProgram}${r.kidsAges ? (/^\d/.test(r.kidsAges) ? `, ages ${r.kidsAges}` : `, ${r.kidsAges}`) : ""}` : undefined],
     ["Last leg", r.airport],
     ["Water", r.water],
-    ["Rates", "Request a quote"],
+    ["Rates", live ? "Live online rates — choose your dates below" : "Request a quote"],
   ];
 
   return (
@@ -129,6 +134,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
         ...(toTime(b?.checkIn) ? { checkinTime: toTime(b?.checkIn) } : {}),
         ...(toTime(b?.checkOut) ? { checkoutTime: toTime(b?.checkOut) } : {}),
         ...(film ? { subjectOf: { "@id": `${SITE}/houses/${r.slug}#film` } } : {}),
+        ...(live ? { potentialAction: { "@type": "ReserveAction", target: { "@type": "EntryPoint", urlTemplate: `${live.engineUrl}?checkIn={checkIn}&checkOut={checkOut}&adults={adults}&children={children}&currency=${live.currency}&rooms=1`, actionPlatform: ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"] }, result: { "@type": "LodgingReservation", name: `Stay at ${r.name}` } } } : {}),
       }} />
       {r.videos.map((v, i) => (
         <JsonLd key={v.id} data={{
@@ -318,7 +324,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
                 ))}
               </dl>
             </div>
-            <div className="card" style={{ padding: "34px 40px", display: "flex", flexDirection: "column" }}>
+            {!live && <div className="card" style={{ padding: "34px 40px", display: "flex", flexDirection: "column" }}>
               <p className="cp muted" style={{ margin: 0 }}>Rates</p>
               <p className="ser ox" style={{ margin: "6px 0 0", fontSize: 44, fontWeight: 300, lineHeight: 1.05 }}>Request a quote</p>
               <p className="body" style={{ margin: "10px 0 0", fontSize: 14 }}>We publish a price only with its currency, rate basis, occupancy, dates, exclusions and source. Until then, rates are quoted for your family and dates.</p>
@@ -327,8 +333,22 @@ export default async function House({ params }: { params: Promise<{ slug: string
                 {b.fees.filter((f) => f.value).map((f) => <div key={f.label} className="mf"><dt className="cp muted">{f.label}</dt><dd className="mono" style={{ margin: 0, fontSize: 12 }}>{f.value}</dd></div>)}
               </dl>
               <div style={{ marginTop: "auto", paddingTop: 24 }}><Link href={`/plan?house=${r.slug}`} className="btn" style={{ width: "100%" }}>Request a quote</Link></div>
-            </div>
+            </div>}
           </div>
+          {live && (
+            <div id="book" style={{ marginTop: 28, scrollMarginTop: 140 }}>
+              <LiveBooking live={live} slug={r.slug} name={r.name} />
+              {live.rooms.length > 0 && (
+                <div className="lb-rooms">
+                  <p className="cp muted" style={{ margin: "0 0 10px" }}>Bookable online · {live.rooms.length} room types</p>
+                  <table className="lg-table">
+                    <thead><tr><th scope="col">Room</th><th scope="col">Size</th><th scope="col">Beds</th><th scope="col">Sleeps</th><th scope="col">What it includes</th></tr></thead>
+                    <tbody>{live.rooms.map((x) => <tr key={x.name}><td><strong>{x.name}</strong></td><td>{x.size || "—"}</td><td>{x.beds}</td><td>{x.sleeps}</td><td>{x.features}</td></tr>)}</tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          )}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))", gap: 28, marginTop: 28 }}>
             <div style={{ padding: "30px 0", borderTop: "1px solid var(--charcoal)" }}>
               <h3 className="lbl ox">✓ Included</h3>
@@ -341,6 +361,8 @@ export default async function House({ params }: { params: Promise<{ slug: string
           </div>
         </section>
       )}
+
+      {safari && <SafariFeature f={safari} slug={r.slug} />}
 
       {r.host?.name && (
         <section className="wrap" style={{ paddingTop: 90 }}>

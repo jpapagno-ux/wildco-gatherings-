@@ -12,9 +12,9 @@ export default function PlanForm() {
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
   // Arriving from a house page (/plan?house=lone-mountain-ranch&host=1) pre-fills the house and the host request.
   // Preserves the existing deep links (?house=…&also=…&host=1&offer=…) and adds ?review=1&folio=F-… for an advisor review of a Folio.
-  const [from, setFrom] = useState({ house: "", host: "", offer: "", review: false, folioId: "", trip: "" });
+  const [from, setFrom] = useState({ house: "", host: "", offer: "", review: false, folioId: "", trip: "", dates: "" });
   const { ready, folios } = useJourney();
-  useEffect(() => { const q = new URLSearchParams(window.location.search); setFrom({ house: [q.get("house"), q.get("also")].filter(Boolean).join(", ") || "", host: q.get("host") || "", offer: q.get("offer") || "", review: q.get("review") === "1", folioId: q.get("folio") || "", trip: q.get("trip") || "" }); }, []);
+  useEffect(() => { const q = new URLSearchParams(window.location.search); setFrom({ house: [q.get("house"), q.get("also")].filter(Boolean).join(", ") || "", host: q.get("host") || "", offer: q.get("offer") || "", review: q.get("review") === "1", folioId: q.get("folio") || "", trip: q.get("trip") || "", dates: q.get("dates") || "" }); }, []);
   const folio = from.folioId ? folios.find((f) => f.id === from.folioId) : undefined;
   const [attach, setAttach] = useState(true);
   async function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -56,7 +56,7 @@ export default function PlanForm() {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 18 }}>
         <label className="lbl">Your name<input name="name" required style={field} /></label>
         <label className="lbl">Email<input name="email" type="email" required style={field} /></label>
-        <label className="lbl">Dates (or month)<input name="dates" style={field} /></label>
+        <label className="lbl">Dates (or month)<input name="dates" key={from.dates} defaultValue={from.dates} style={field} /></label>
         <label className="lbl">Occasion<input name="occasion" placeholder="80th birthday, reunion…" style={field} /></label>
       </div>
       <fieldset style={{ border: "1px solid var(--stone)", padding: "18px 20px" }}>
