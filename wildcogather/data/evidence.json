@@ -1,6 +1,6 @@
 {
  "_about": "Evidence records: how we know what we say. Mirrored in Airtable › Evidence. Only Approved rows show on the site.",
- "next": "JWC-V-0045",
+ "next": "JWC-V-0053",
  "evidence": [
   {
    "id": "JWC-V-0001",
@@ -701,6 +701,34 @@
    "scope": "James chose Baymahni for the Gatherings Ledger. Editorial judgement — not a verification of current facts, rates or policies.",
    "source": "Gatherings Ledger entry G-023",
    "wording": "Selected by James Wild for the Gatherings Ledger"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0051",
+   "subject": "JWC-P-0023",
+   "ref": "G-024",
+   "method": "House Selected",
+   "date": "2026-10",
+   "precision": "Month",
+   "scope": "James chose Lengishu for the Gatherings Ledger as the VIP residence for the Lewa–Borana landscape. He has not yet visited. Editorial judgement — not a verification of current facts, rates or policies.",
+   "source": "Gatherings Ledger entry G-024; owner statement to Wild & Co, 14 Oct 2026",
+   "wording": "Selected by James Wild for the Gatherings Ledger · not yet visited"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0052",
+   "subject": "JWC-R-0007",
+   "ref": "G-021",
+   "method": "Working Relationship",
+   "date": "2017",
+   "precision": "Year",
+   "scope": "James has worked with the Cottar family and Cottar's Safaris since 2017. Does not confirm a stay, current rates or policies.",
+   "source": "Owner statement to Wild & Co, 14 Oct 2026",
+   "wording": "Working with the Cottars since 2017"
   }
  ]
 }

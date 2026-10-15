@@ -46,7 +46,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
           <h1 className="dsp" style={{ margin: 0, fontSize: "clamp(48px, 7vw, 100px)" }}>{c.name}</h1>
           <p className="cas dek" style={{ margin: "18px 0 0", maxWidth: 720, fontSize: 22, lineHeight: 1.45, fontStyle: "italic" }}>{c.tagline}</p>
         </div>
-        <div style={{ position: "absolute", right: 48, top: 44, filter: "drop-shadow(0 1px 3px rgba(0,0,0,.4))" }}><VipStamp size={210} note="J.W. · Visit Aug 2027" tone="light" /></div>
+        <div style={{ position: "absolute", right: 48, top: 44, filter: "drop-shadow(0 1px 3px rgba(0,0,0,.4))" }}><VipStamp size={210} note={c.stampNote || "J.W. · Visit Aug 2027"} tone="light" /></div>
       </section>
 
       <section className="wrap" style={{ paddingTop: 70, paddingBottom: 40, display: "flex", flexWrap: "wrap", gap: 56 }}>

@@ -2,8 +2,8 @@
  "_about": "Permanent James Wild & Co entity registry. IDs are allocated once and never regenerated from names, slugs or positions. Mirrored in Airtable (Residences › Entity ID, Itineraries › Template ID). Next free: JWC-P-0020, JWC-R-0007, JWC-I-0007, JWC-O-0002, JWC-V-(see evidence.json).",
  "allocated": "2026-10-14",
  "next": {
-  "property": "JWC-P-0020",
-  "residence": "JWC-R-0007",
+  "property": "JWC-P-0024",
+  "residence": "JWC-R-0008",
   "itinerary": "JWC-I-0007",
   "offer": "JWC-O-0002"
  },
@@ -680,6 +680,27 @@
    ],
    "status": "draft",
    "note": "Formerly Kahari Resort (and before that Lumina Point), Stocking Island, Exuma."
+  },
+  {
+   "id": "JWC-P-0023",
+   "type": "property",
+   "parentId": null,
+   "name": "Lengishu",
+   "slug": "lengishu-borana",
+   "legacyIds": [
+    "name:Lengishu Lewa Residence"
+   ],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-024"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "draft",
+   "note": "Private residence on Borana Conservancy, Laikipia. Gatherings VIP · Lewa–Borana Landscape. Listed by Wild Earth Stays as 'Lengishu Lewa Residence'."
   }
  ]
 }

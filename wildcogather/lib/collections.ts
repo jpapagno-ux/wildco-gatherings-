@@ -12,7 +12,7 @@ export type Collection = {
   facts: [string, string][];
   route?: { when: string; where: string; what: string }[];
   protects: { name: string; text: string; image: { publicId: string; alt: string } }[];
-  journal?: string; routeLabel?: string; credit: string; seoTitle: string; metaDescription: string;
+  journal?: string; routeLabel?: string; stampNote?: string; credit: string; seoTitle: string; metaDescription: string;
 };
 
 export const collections: Collection[] = [
@@ -68,9 +68,37 @@ export const collections: Collection[] = [
       { name: "A community's land", text: "Mkambati belongs to the Mkambati Land Trust; park fees and 1% of GweGwe's turnover fund conservation and the villages, and an all-women ranger team patrols the reserve.", image: { publicId: "gatherings/gwegwe-beach-lodge-wild-coast/gwegwe-team-welcome", alt: "The GweGwe Beach Lodge team welcoming guests" } },
     ],
     routeLabel: "A whale-season route for a family",
+    stampNote: "J.W. · Teams met",
     credit: "Images courtesy of Natural Selection",
     seoTitle: "Natural Selection Coast for Families — Lekkerwater & GweGwe | Wild & Co Gatherings",
     metaDescription: "James Wild's guide to two Natural Selection coast lodges for family gatherings: Lekkerwater in De Hoop for whales, and GweGwe on the Wild Coast for pool suites and children of all ages.",
+  },
+  {
+    slug: "lewa-borana-landscape", name: "Lewa–Borana Landscape", region: "Laikipia, Kenya", status: "VIP · Lengishu on J.W.'s list",
+    tagline: "Two conservancies with no fence between them — 93,000 acres of black rhino country below Mount Kenya. A family home on Lewa, a private residence on Borana.",
+    intro: [
+      "In 2014 the fence between Lewa and Borana came down, and two conservancies became one landscape for black rhino. A year earlier Borana had taken its founding population of 21, eleven of them from Lewa. A family that stays here is staying inside that story.",
+      "Lewa House is a family home and farm in the middle of Lewa; I've inspected it and it's approved in the Ledger. Lengishu, on Borana, is the residence I'd book for a whole family — every stay goes to Borana's rhino and community projects. I haven't stayed there yet, so it is under observation until I have.",
+    ],
+    hero: { publicId: "gatherings/lengishu-borana/lengishu-lion-borana", alt: "A lion on the open plains of Borana Conservancy, with Mount Kenya on the horizon" },
+    facts: [["Land", "93,000 acres · Lewa and Borana, unfenced since 2014"], ["Stays", "Lewa House (Lewa) · Lengishu (Borana)"], ["Children", "All ages at both"], ["Status", "VIP · Lewa House approved · Lengishu under observation"]],
+    route: [
+      { when: "Day 1", where: "Nairobi to Lewa", what: "Light aircraft to the Lewa airstrip · tea on the veranda at Lewa House" },
+      { when: "Days 2–3", where: "Lewa House", what: "Game drives · bush breakfast · a walk with Calum · the farm" },
+      { when: "Day 4", where: "Across the old fence line", what: "By road to Lengishu on Borana" },
+      { when: "Days 5–7", where: "Lengishu", what: "Rhino tracking with the conservancy team · riding · sundowners over the pool" },
+      { when: "Day 8", where: "Fly home", what: "Borana or Lewa Downs airstrip to Nairobi" },
+    ],
+    protects: [
+      { name: "Black rhino", text: "The Lewa–Borana landscape is 93,000 acres of black rhino habitat; Borana's founding population of 21 arrived in 2013, eleven from Lewa and ten from Lake Nakuru.", image: { publicId: "gatherings/lengishu-borana/lengishu-rhino-tracking", alt: "A black rhino in dry grass on Borana, with a tracking team on foot in the distance" } },
+      { name: "Borana's communities", text: "Lengishu's proceeds go to Borana Conservancy's rhino and community projects; the house runs on solar power and is built of local stone.", image: { publicId: "gatherings/lengishu-borana/lengishu-game-drive", alt: "A Lengishu guide at the wheel of an open safari vehicle on Borana" } },
+      { name: "A working farm", text: "Lewa began as a farm and still feeds Lewa House; the staples are bought from neighbouring communities and the weekly market in Meru.", image: { publicId: "gatherings/lewa-house-kenya/lewa-house-17", alt: "A breakfast table laid on the lawn under acacia trees at Lewa House" } },
+    ],
+    routeLabel: "A proposed week for a family",
+    stampNote: "J.W. · Lengishu on the list",
+    credit: "Images courtesy of Lengishu, Wild Earth Stays and Lewa House",
+    seoTitle: "Lewa & Borana for Families: Lewa House and Lengishu | Wild & Co Gatherings",
+    metaDescription: "James Wild's guide to the Lewa–Borana landscape in Kenya for family gatherings: Lewa House on Lewa and the Lengishu residence on Borana — rhino tracking, riding and a week-long route.",
   },
 ];
 export const getCollection = (slug: string) => collections.find((c) => c.slug === slug);
