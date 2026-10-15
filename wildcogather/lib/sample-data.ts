@@ -8,6 +8,7 @@ import { kenyaExumaResidences } from "./sample-kenya-exuma";
 import { hereResidences } from "./sample-here";
 import { italyResidences } from "./sample-italy";
 import { utahResidences } from "./sample-utah";
+import { comoParrotCay } from "./sample-como-pc";
 
 // Used until AIRTABLE_TOKEN is set, and as the template for every Airtable row.
 const P = "gatherings/lone-mountain-ranch/";
@@ -306,47 +307,7 @@ const raw: SampleResidence[] = [
     metaDescription: "Beachfront family residences on Bali's surf coast: a three-bedroom penthouse, pool residences and the Play by COMO Kids Club. Stayed in by James Wild, 2024.",
     credit: "",
   },
-  {
-    slug: "como-parrot-cay",
-    entryNo: "G-004",
-    name: "COMO Parrot Cay",
-    place: "Parrot Cay",
-    region: "Turks & Caicos",
-    country: "Turks & Caicos Islands",
-    status: "Approved",
-    stamp: "Host met",
-    line: "A private island with a mile-long beach and houses of two to eight bedrooms, each with its own butler.",
-    verdict: [],
-    bestFor: "Families who want a whole beach house — and an island — to themselves.",
-    notFor: "No kids' club is listed; best for families who bring their own rhythm.",
-    bedrooms: "Private houses and villas of 2–8 bedrooms (e.g. Lotus Flower 4, Mechayah Beach House 4–5, Serenity 8)",
-    sleeps: 8,
-    kidsProgram: "No kids' club listed; cots and extra beds on request",
-    water: "Mile-long beach; private pools; ocean on every side",
-    seasons: ["Year-round"],
-    airport: "Providenciales (PLS) + [transfer]",
-    officialUrl: "https://www.comohotels.com/turks-and-caicos/como-parrot-cay",
-    formula: [
-      { test: "Room to gather", note: "Houses up to eight bedrooms; Serenity combines two villas.", pass: true },
-      { test: "A day for every age", note: "No children's programme listed.", pass: false },
-      { test: "Water within reach", note: "Beachfront houses on a mile-long beach.", pass: true },
-      { test: "Country at the door", note: "Island excursions.", pass: false },
-      { test: "A resort behind you", note: "Dedicated butler for every residence; resort dining and wellness.", pass: true },
-      { test: "Worth returning to", note: "", pass: false },
-    ],
-    fieldNotes: [],
-    manifest: [],
-    experiences: [],
-    faqs: [
-      { question: "Does COMO Parrot Cay have villas for large families?", answer: "Yes. Beyond the resort's beach houses, COMO offers private houses on request from two to eight bedrooms, each with dedicated butler service." },
-    ],
-    images: [],
-    rooms: [],
-    videos: [],
-    seoTitle: "COMO Parrot Cay Private Beach Houses for Families | Wild & Co Gatherings",
-    metaDescription: "Private-island beach houses of two to eight bedrooms with butler service at COMO Parrot Cay, Turks & Caicos — approved for the Gatherings Ledger.",
-    credit: "",
-  },
+  comoParrotCay,
   ...ttrResidences,
   ...moreResidences,
   ...nsResidences,
