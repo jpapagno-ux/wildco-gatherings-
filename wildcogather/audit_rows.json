@@ -1,0 +1,1498 @@
+[
+ {
+  "u": "/",
+  "st": 200,
+  "tl": 54,
+  "dl": 144,
+  "canon": "https://wildco-gatherings1.vercel.app",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Multigenerational Family Resort Residences | Wild & Co"
+ },
+ {
+  "u": "/houses",
+  "st": 200,
+  "tl": 58,
+  "dl": 154,
+  "canon": "https://wildco-gatherings1.vercel.app/houses",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "CollectionPage"
+  ],
+  "noalt": 0,
+  "t": "Family Houses by Setting: Mountain, Jungle, Coast & Desert"
+ },
+ {
+  "u": "/ledger",
+  "st": 200,
+  "tl": 57,
+  "dl": 108,
+  "canon": "https://wildco-gatherings1.vercel.app/ledger",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "ItemList"
+  ],
+  "noalt": 0,
+  "t": "Gatherings Ledger: Family Residences Vetted by James Wild"
+ },
+ {
+  "u": "/itineraries",
+  "st": 200,
+  "tl": 50,
+  "dl": 145,
+  "canon": "https://wildco-gatherings1.vercel.app/itineraries",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "ItemList"
+  ],
+  "noalt": 0,
+  "t": "Family Journeys & Itineraries for Every Generation"
+ },
+ {
+  "u": "/itineraries/ulum-moab-red-rock-family-adventure-six-days",
+  "st": 200,
+  "tl": 60,
+  "dl": 150,
+  "canon": "https://wildco-gatherings1.vercel.app/itineraries/ulum-moab-red-rock-family-adventure-six-days",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 4,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "TouristTrip",
+   "BreadcrumbList"
+  ],
+  "noalt": 0,
+  "t": "Moab Family Adventure: 6 Days at ULUM with a White Rim Night"
+ },
+ {
+  "u": "/itineraries/villa-ardore-tuscan-reunion-seven-days",
+  "st": 200,
+  "tl": 60,
+  "dl": 157,
+  "canon": "https://wildco-gatherings1.vercel.app/itineraries/villa-ardore-tuscan-reunion-seven-days",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 4,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "TouristTrip",
+   "BreadcrumbList"
+  ],
+  "noalt": 0,
+  "t": "Tuscan Family Reunion: 7-Day Villa Ardore Itinerary, Chianti"
+ },
+ {
+  "u": "/itineraries/cape-winelands-malaria-free-safari-nine-days",
+  "st": 200,
+  "tl": 55,
+  "dl": 152,
+  "canon": "https://wildco-gatherings1.vercel.app/itineraries/cape-winelands-malaria-free-safari-nine-days",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 4,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "TouristTrip",
+   "BreadcrumbList"
+  ],
+  "noalt": 0,
+  "t": "Cape Winelands & Malaria-Free Safari: 9-Day Family Trip"
+ },
+ {
+  "u": "/itineraries/lekkerwater-whale-season-four-days",
+  "st": 200,
+  "tl": 57,
+  "dl": 150,
+  "canon": "https://wildco-gatherings1.vercel.app/itineraries/lekkerwater-whale-season-four-days",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 4,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "TouristTrip",
+   "BreadcrumbList"
+  ],
+  "noalt": 0,
+  "t": "Lekkerwater Whale Season: 4-Day Family Itinerary, De Hoop"
+ },
+ {
+  "u": "/itineraries/lion-sands-night-under-the-stars-four-days",
+  "st": 200,
+  "tl": 62,
+  "dl": 153,
+  "canon": "https://wildco-gatherings1.vercel.app/itineraries/lion-sands-night-under-the-stars-four-days",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 4,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "TouristTrip",
+   "BreadcrumbList"
+  ],
+  "noalt": 0,
+  "t": "Lion Sands Treehouse Safari: 4-Day Family Itinerary, Sabi Sand"
+ },
+ {
+  "u": "/itineraries/como-shambhala-four-days-ubud-ayung",
+  "st": 200,
+  "tl": 60,
+  "dl": 154,
+  "canon": "https://wildco-gatherings1.vercel.app/itineraries/como-shambhala-four-days-ubud-ayung",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 4,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "TouristTrip",
+   "BreadcrumbList"
+  ],
+  "noalt": 0,
+  "t": "Bali Family Itinerary: 4 Days at COMO Shambhala Estate, Ubud"
+ },
+ {
+  "u": "/destinations",
+  "st": 200,
+  "tl": 57,
+  "dl": 154,
+  "canon": "https://wildco-gatherings1.vercel.app/destinations",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "CollectionPage"
+  ],
+  "noalt": 0,
+  "t": "Destinations for Family & Generational Travel | Wild & Co"
+ },
+ {
+  "u": "/destinations/usa-mexico",
+  "st": 200,
+  "tl": 54,
+  "dl": 154,
+  "canon": "https://wildco-gatherings1.vercel.app/destinations/usa-mexico",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "CollectionPage"
+  ],
+  "noalt": 0,
+  "t": "Family Villas & Residences in USA & Mexico | Wild & Co"
+ },
+ {
+  "u": "/destinations/caribbean",
+  "st": 200,
+  "tl": 51,
+  "dl": 154,
+  "canon": "https://wildco-gatherings1.vercel.app/destinations/caribbean",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "CollectionPage"
+  ],
+  "noalt": 0,
+  "t": "Family Villas & Residences in Caribbean | Wild & Co"
+ },
+ {
+  "u": "/destinations/europe",
+  "st": 200,
+  "tl": 59,
+  "dl": 141,
+  "canon": "https://wildco-gatherings1.vercel.app/destinations/europe",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "CollectionPage"
+  ],
+  "noalt": 0,
+  "t": "Family Villas & Residences in Europe | Wild & Co Gatherings"
+ },
+ {
+  "u": "/destinations/africa",
+  "st": 200,
+  "tl": 59,
+  "dl": 153,
+  "canon": "https://wildco-gatherings1.vercel.app/destinations/africa",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "CollectionPage"
+  ],
+  "noalt": 0,
+  "t": "Family Villas & Residences in Africa | Wild & Co Gatherings"
+ },
+ {
+  "u": "/destinations/asia",
+  "st": 200,
+  "tl": 49,
+  "dl": 94,
+  "canon": "https://wildco-gatherings1.vercel.app/destinations/asia",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "CollectionPage"
+  ],
+  "noalt": 0,
+  "t": "Family Villas & Residences in Asia & Indian Ocean"
+ },
+ {
+  "u": "/founder",
+  "st": 200,
+  "tl": 53,
+  "dl": 156,
+  "canon": "https://wildco-gatherings1.vercel.app/founder",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "ProfilePage",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "James Wild, Founder \u2014 44 Years on the Road Since 1982"
+ },
+ {
+  "u": "/how-it-works",
+  "st": 200,
+  "tl": 59,
+  "dl": 158,
+  "canon": "https://wildco-gatherings1.vercel.app/how-it-works",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 4,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "WebPage",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "How Booking a Family Gathering Works | Wild & Co Gatherings"
+ },
+ {
+  "u": "/questions",
+  "st": 200,
+  "tl": 56,
+  "dl": 157,
+  "canon": "https://wildco-gatherings1.vercel.app/questions",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Family Travel Questions, Answered | Wild & Co Gatherings"
+ },
+ {
+  "u": "/privacy",
+  "st": 200,
+  "tl": 37,
+  "dl": 148,
+  "canon": "https://wildco-gatherings1.vercel.app/privacy",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 2,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite"
+  ],
+  "noalt": 0,
+  "t": "Privacy Policy | Wild & Co Gatherings"
+ },
+ {
+  "u": "/terms",
+  "st": 200,
+  "tl": 49,
+  "dl": 152,
+  "canon": "https://wildco-gatherings1.vercel.app/terms",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 2,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite"
+  ],
+  "noalt": 0,
+  "t": "Terms & Booking Conditions | Wild & Co Gatherings"
+ },
+ {
+  "u": "/privacy-choices",
+  "st": 200,
+  "tl": 43,
+  "dl": 156,
+  "canon": "https://wildco-gatherings1.vercel.app/privacy-choices",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 2,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite"
+  ],
+  "noalt": 0,
+  "t": "Your Privacy Choices | Wild & Co Gatherings"
+ },
+ {
+  "u": "/advisors",
+  "st": 200,
+  "tl": 53,
+  "dl": 153,
+  "canon": "https://wildco-gatherings1.vercel.app/advisors",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 4,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "WebPage",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "For Travel Advisors: Family & Generational Residences"
+ },
+ {
+  "u": "/webinars",
+  "st": 200,
+  "tl": 51,
+  "dl": 116,
+  "canon": "https://wildco-gatherings1.vercel.app/webinars",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "ItemList"
+  ],
+  "noalt": 0,
+  "t": "Webinars for Travel Advisors & Families | Wild & Co"
+ },
+ {
+  "u": "/webinars/ted-turner-reserves-family-gatherings",
+  "st": 200,
+  "tl": 54,
+  "dl": 158,
+  "canon": "https://wildco-gatherings1.vercel.app/webinars/ted-turner-reserves-family-gatherings",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 2,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite"
+  ],
+  "noalt": 0,
+  "t": "Ted Turner Reserves: Wild Places for Family Gatherings"
+ },
+ {
+  "u": "/horizon",
+  "st": 200,
+  "tl": 52,
+  "dl": 127,
+  "canon": "https://wildco-gatherings1.vercel.app/horizon",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 4,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "CollectionPage",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "On the Horizon: New Family Resorts & Villas to Watch"
+ },
+ {
+  "u": "/horizon/paradero-todos-santos-villa-suites",
+  "st": 200,
+  "tl": 47,
+  "dl": 158,
+  "canon": "https://wildco-gatherings1.vercel.app/horizon/paradero-todos-santos-villa-suites",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "BlogPosting",
+   "FAQPage",
+   "BreadcrumbList"
+  ],
+  "noalt": 0,
+  "t": "Paradero Todos Santos, Mexico: New for Families"
+ },
+ {
+  "u": "/horizon/el-silencio-lodge-tent-camp",
+  "st": 200,
+  "tl": 56,
+  "dl": 133,
+  "canon": "https://wildco-gatherings1.vercel.app/horizon/el-silencio-lodge-tent-camp",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "BlogPosting",
+   "FAQPage",
+   "BreadcrumbList"
+  ],
+  "noalt": 0,
+  "t": "El Silencio, the tent camp, Costa Rica: New for Families"
+ },
+ {
+  "u": "/horizon/amor-arenal",
+  "st": 200,
+  "tl": 58,
+  "dl": 112,
+  "canon": "https://wildco-gatherings1.vercel.app/horizon/amor-arenal",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "BlogPosting",
+   "FAQPage",
+   "BreadcrumbList"
+  ],
+  "noalt": 0,
+  "t": "Amor Arenal, Costa Rica: New for Families | On the Horizon"
+ },
+ {
+  "u": "/horizon/zest-ibiza",
+  "st": 200,
+  "tl": 53,
+  "dl": 149,
+  "canon": "https://wildco-gatherings1.vercel.app/horizon/zest-ibiza",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "BlogPosting",
+   "FAQPage",
+   "BreadcrumbList"
+  ],
+  "noalt": 0,
+  "t": "Zest, Ibiza, Spain: New for Families | On the Horizon"
+ },
+ {
+  "u": "/plan",
+  "st": 200,
+  "tl": 53,
+  "dl": 143,
+  "canon": "https://wildco-gatherings1.vercel.app/plan",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 2,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite"
+  ],
+  "noalt": 0,
+  "t": "Plan a Multigenerational Family Gathering | Wild & Co"
+ },
+ {
+  "u": "/vip",
+  "st": 200,
+  "tl": 57,
+  "dl": 157,
+  "canon": "https://wildco-gatherings1.vercel.app/vip",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 2,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite"
+  ],
+  "noalt": 0,
+  "t": "Gatherings VIP \u2014 Vetted in Purpose | Wild & Co Gatherings"
+ },
+ {
+  "u": "/vip/ted-turner-reserves",
+  "st": 200,
+  "tl": 56,
+  "dl": 155,
+  "canon": "https://wildco-gatherings1.vercel.app/vip/ted-turner-reserves",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "ItemList"
+  ],
+  "noalt": 0,
+  "t": "Ted Turner Reserves for Families: Vermejo, Ladder & More"
+ },
+ {
+  "u": "/vip/natural-selection-coast",
+  "st": 200,
+  "tl": 59,
+  "dl": 153,
+  "canon": "https://wildco-gatherings1.vercel.app/vip/natural-selection-coast",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "ItemList"
+  ],
+  "noalt": 0,
+  "t": "Natural Selection Coast for Families \u2014 Lekkerwater & GweGwe"
+ },
+ {
+  "u": "/vip/lewa-borana-landscape",
+  "st": 200,
+  "tl": 51,
+  "dl": 153,
+  "canon": "https://wildco-gatherings1.vercel.app/vip/lewa-borana-landscape",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "ItemList"
+  ],
+  "noalt": 0,
+  "t": "Lewa & Borana for Families: Lewa House and Lengishu"
+ },
+ {
+  "u": "/journal",
+  "st": 200,
+  "tl": 57,
+  "dl": 158,
+  "canon": "https://wildco-gatherings1.vercel.app/journal",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "Blog"
+  ],
+  "noalt": 0,
+  "t": "The Journal \u2014 Why James Wild Chose Each House | Wild & Co"
+ },
+ {
+  "u": "/journal/wild-together-monwana-thornybush",
+  "st": 200,
+  "tl": 61,
+  "dl": 151,
+  "canon": "https://wildco-gatherings1.vercel.app/journal/wild-together-monwana-thornybush",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 4,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "BlogPosting",
+   "VideoObject"
+  ],
+  "noalt": 0,
+  "t": "Wild Together at Monwana: A Family Safari Villa in Thornybush"
+ },
+ {
+  "u": "/journal/ted-turner-vision-guide-from-within",
+  "st": 200,
+  "tl": 65,
+  "dl": 150,
+  "canon": "https://wildco-gatherings1.vercel.app/journal/ted-turner-vision-guide-from-within",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "BlogPosting"
+  ],
+  "noalt": 0,
+  "t": "Ted Turner Reserves: Conservation, Sustainability & Family Travel"
+ },
+ {
+  "u": "/journal/why-james-chose-lone-mountain-ranch",
+  "st": 200,
+  "tl": 60,
+  "dl": 157,
+  "canon": "https://wildco-gatherings1.vercel.app/journal/why-james-chose-lone-mountain-ranch",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 3,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "BlogPosting"
+  ],
+  "noalt": 0,
+  "t": "Why James Wild Chose Lone Mountain Ranch for Family Reunions"
+ },
+ {
+  "u": "/houses/lone-mountain-ranch",
+  "st": 200,
+  "tl": 56,
+  "dl": 158,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/lone-mountain-ranch",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 7,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "VideoObject",
+   "VideoObject",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Lone Mountain Ranch Family Reunion Stay, Big Sky Montana"
+ },
+ {
+  "u": "/houses/como-shambhala-estate",
+  "st": 200,
+  "tl": 50,
+  "dl": 146,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/como-shambhala-estate",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 7,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "VideoObject",
+   "Offer",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "COMO Shambhala Estate Family Residences, Ubud Bali"
+ },
+ {
+  "u": "/houses/como-uma-canggu",
+  "st": 200,
+  "tl": 51,
+  "dl": 156,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/como-uma-canggu",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "COMO Uma Canggu Family Penthouse & Residences, Bali"
+ },
+ {
+  "u": "/houses/como-parrot-cay",
+  "st": 200,
+  "tl": 49,
+  "dl": 145,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/como-parrot-cay",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "COMO Parrot Cay Private Beach Houses for Families"
+ },
+ {
+  "u": "/houses/vermejo-ted-turner-reserve",
+  "st": 200,
+  "tl": 58,
+  "dl": 126,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/vermejo-ted-turner-reserve",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Vermejo, a Ted Turner Reserve \u2014 Family Stays in New Mexico"
+ },
+ {
+  "u": "/houses/ladder-ted-turner-reserve",
+  "st": 200,
+  "tl": 56,
+  "dl": 157,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/ladder-ted-turner-reserve",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Ladder Ranch, Ted Turner Reserve: Family Ranch House, NM"
+ },
+ {
+  "u": "/houses/armendaris-ted-turner-reserve",
+  "st": 200,
+  "tl": 63,
+  "dl": 145,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/armendaris-ted-turner-reserve",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Armendaris, a Ted Turner Reserve \u2014 Bat Flight & Family Hacienda"
+ },
+ {
+  "u": "/houses/sierra-grande-ted-turner-reserve",
+  "st": 200,
+  "tl": 59,
+  "dl": 147,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/sierra-grande-ted-turner-reserve",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Sierra Grande Lodge & Spa: Hot Springs, Ted Turner Reserves"
+ },
+ {
+  "u": "/houses/fish-eagle-villa-lion-sands",
+  "st": 200,
+  "tl": 60,
+  "dl": 154,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/fish-eagle-villa-lion-sands",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Fish Eagle Villa, Lion Sands: Family Safari Villa, Sabi Sand"
+ },
+ {
+  "u": "/houses/hinkwenu-villa-lion-sands",
+  "st": 200,
+  "tl": 59,
+  "dl": 156,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/hinkwenu-villa-lion-sands",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Hinkwenu Villa, Lion Sands: Safari Villa for Young Families"
+ },
+ {
+  "u": "/houses/monwana-villa-thornybush",
+  "st": 200,
+  "tl": 55,
+  "dl": 154,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/monwana-villa-thornybush",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 7,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "VideoObject",
+   "VideoObject",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Monwana Villa, Thornybush \u2014 Private Family Safari House"
+ },
+ {
+  "u": "/houses/lekkerwater-de-hoop",
+  "st": 200,
+  "tl": 62,
+  "dl": 137,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/lekkerwater-de-hoop",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Lekkerwater Beach Lodge, De Hoop \u2014 Family Whale-Watching Lodge"
+ },
+ {
+  "u": "/houses/gwegwe-beach-lodge-wild-coast",
+  "st": 200,
+  "tl": 59,
+  "dl": 142,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/gwegwe-beach-lodge-wild-coast",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "GweGwe Beach Lodge, Wild Coast: Family Lodge, Private Pools"
+ },
+ {
+  "u": "/houses/jacis-madikwe-house",
+  "st": 200,
+  "tl": 54,
+  "dl": 152,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/jacis-madikwe-house",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Jaci's Madikwe House: Malaria-Free Family Safari Villa"
+ },
+ {
+  "u": "/houses/morukuru-farm-house-madikwe",
+  "st": 200,
+  "tl": 54,
+  "dl": 158,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/morukuru-farm-house-madikwe",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Morukuru Farm House, Madikwe: Multigenerational Safari"
+ },
+ {
+  "u": "/houses/morukuru-river-house-madikwe",
+  "st": 200,
+  "tl": 55,
+  "dl": 156,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/morukuru-river-house-madikwe",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Morukuru River & Owner's House, Madikwe: Private Safari"
+ },
+ {
+  "u": "/houses/leeu-estates-franschhoek",
+  "st": 200,
+  "tl": 65,
+  "dl": 150,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/leeu-estates-franschhoek",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Leeu Estates, Franschhoek \u2014 Family Cottages in the Cape Winelands"
+ },
+ {
+  "u": "/houses/here-somewhere-nowhere-maldives",
+  "st": 200,
+  "tl": 54,
+  "dl": 153,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/here-somewhere-nowhere-maldives",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": ".Here Maldives: Private Island Residences for Families"
+ },
+ {
+  "u": "/houses/villa-ardore-tuscany",
+  "st": 200,
+  "tl": 64,
+  "dl": 158,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/villa-ardore-tuscany",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Villa Ardore, Chianti \u2014 Private Tuscan Villa for Family Reunions"
+ },
+ {
+  "u": "/houses/ulum-moab",
+  "st": 200,
+  "tl": 55,
+  "dl": 156,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/ulum-moab",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "ULUM Moab \u2014 Family Adventure Basecamp near Arches, Utah"
+ },
+ {
+  "u": "/houses/cottars-bush-villa-maasai-mara",
+  "st": 200,
+  "tl": 53,
+  "dl": 149,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/cottars-bush-villa-maasai-mara",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Cottar's Bush Villa, Maasai Mara: Family Safari House"
+ },
+ {
+  "u": "/houses/lewa-house-kenya",
+  "st": 200,
+  "tl": 52,
+  "dl": 149,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/lewa-house-kenya",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Lewa House, Lewa Conservancy: Family Safari in Kenya"
+ },
+ {
+  "u": "/houses/lengishu-borana",
+  "st": 200,
+  "tl": 59,
+  "dl": 150,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/lengishu-borana",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Lengishu, Borana Conservancy: Private Safari House in Kenya"
+ },
+ {
+  "u": "/houses/baymahni-exuma",
+  "st": 200,
+  "tl": 58,
+  "dl": 154,
+  "canon": "https://wildco-gatherings1.vercel.app/houses/baymahni-exuma",
+  "h1": 1,
+  "og": true,
+  "robots": "",
+  "ld": 5,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite",
+   "LodgingBusiness",
+   "BreadcrumbList",
+   "FAQPage"
+  ],
+  "noalt": 0,
+  "t": "Baymahni, Exuma: Family Beach Bungalows on Stocking Island"
+ },
+ {
+  "u": "/folios",
+  "st": 200,
+  "tl": 32,
+  "dl": 125,
+  "canon": "https://wildco-gatherings1.vercel.app/folios",
+  "h1": 1,
+  "og": true,
+  "robots": "noindex, follow",
+  "ld": 2,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite"
+  ],
+  "noalt": 0,
+  "t": "My Folios | Wild & Co Gatherings"
+ },
+ {
+  "u": "/studio/sketch-borders",
+  "st": 200,
+  "tl": 53,
+  "dl": 0,
+  "canon": "",
+  "h1": 1,
+  "og": true,
+  "robots": "noindex, nofollow, nocache",
+  "ld": 2,
+  "badld": 0,
+  "types": [
+   [
+    "Organization",
+    "TravelAgency"
+   ],
+   "WebSite"
+  ],
+  "noalt": 0,
+  "t": "Sketch borders \u2014 studio review | Wild & Co Gatherings"
+ }
+]
