@@ -31,6 +31,7 @@ import { getOffersForHouse, getItinerariesForHouse } from "@/lib/extras";
 import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
 import PageSketch from "@/components/PageSketch";
 import TravelerActions from "@/components/TravelerActions";
+import MonwanaOpening from "@/components/MonwanaOpening";
 import { evidenceForHouse, evidenceBasis, formatEvidenceDate, formulaSummary, METHOD_MEANING, METHOD_LABEL } from "@/lib/entities";
 import { SITE } from "@/lib/site";
 
@@ -190,6 +191,12 @@ export default async function House({ params }: { params: Promise<{ slug: string
         </div>
       )}
       <div className="hero-tag-mobile"><LuggageTag setting={r.setting} name={r.name} place={`${r.place} · ${r.region}`} entryNo={r.entryNo} status={tagStatus} width={140} /></div>
+      {r.slug === "monwana-villa-thornybush" && (
+        <>
+          <MonwanaOpening contentId="monwana-content" entryNo={r.entryNo} />
+          <span id="monwana-content" style={{ display: "block", scrollMarginTop: 120 }} />
+        </>
+      )}
       {why && <WhyHere why={why} name={r.name} />}
 
       <section className="wrap" style={{ paddingTop: "clamp(50px, 9vw, 120px)", paddingBottom: 80, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 440px), 1fr))", gap: 72, alignItems: "start" }}>
