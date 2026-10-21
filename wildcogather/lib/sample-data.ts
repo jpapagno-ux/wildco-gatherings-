@@ -10,6 +10,7 @@ import { italyResidences } from "./sample-italy";
 import { utahResidences } from "./sample-utah";
 import { comoParrotCay } from "./sample-como-pc";
 import { oceaniaResidences } from "./sample-oceania";
+import { galapagosResidences } from "./sample-galapagos";
 
 // Used until AIRTABLE_TOKEN is set, and as the template for every Airtable row.
 const P = "gatherings/lone-mountain-ranch/";
@@ -310,6 +311,7 @@ const raw: SampleResidence[] = [
   },
   comoParrotCay,
   ...oceaniaResidences,
+  ...galapagosResidences,
   ...ttrResidences,
   ...moreResidences,
   ...nsResidences,

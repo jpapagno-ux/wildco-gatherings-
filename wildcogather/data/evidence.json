@@ -1,6 +1,6 @@
 {
  "_about": "Evidence records: how we know what we say. Mirrored in Airtable › Evidence. Only Approved rows show on the site.",
- "next": "JWC-V-0057",
+ "next": "JWC-V-0058",
  "evidence": [
   {
    "id": "JWC-V-0001",
@@ -785,6 +785,20 @@
    "scope": "James has surfed, dived and explored Tahiti and her islands since 1996 and calls Taha'a his favourite. An opinion, not a verification.",
    "source": "Owner statement to Wild & Co, 15 Oct 2026",
    "wording": "Taha'a is James's favourite — in the islands since 1996"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0057",
+   "subject": "JWC-P-0026",
+   "ref": "G-027",
+   "method": "House Selected",
+   "date": "2026-10",
+   "precision": "Month",
+   "scope": "James chose Galápagos Safari Camp for the Gatherings Ledger as the land-based family stay in the Galápagos. A visit is not yet recorded. Editorial judgement — not a verification of current facts, rates or policies.",
+   "source": "Gatherings Ledger entry G-027",
+   "wording": "Selected by James Wild for the Gatherings Ledger · visit not yet recorded"
   }
  ]
 }

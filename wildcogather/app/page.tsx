@@ -16,7 +16,8 @@ import { getItineraries } from "@/lib/extras";
 import { entityForHouse } from "@/lib/entities";
 import { FOUNDER_PHOTOS, FOUNDER_LEDE, AFRICA_QUOTES } from "@/lib/founder";
 import PageSketch from "@/components/PageSketch";
-import { HOME_HERO } from "@/lib/hero-library";
+import { HOME_HERO, FIELD_STRIP } from "@/lib/hero-library";
+import Strip from "@/components/Strip";
 
 export const revalidate = 3600;
 export const metadata: Metadata = fit({
@@ -99,6 +100,17 @@ export default async function Home() {
             <Link href="/ledger" className="lnk">Or read the Ledger <span>→</span></Link>
           </div>
         </div>
+      </section>
+
+      <section className="band" style={{ padding: "80px 0 60px" }} aria-label="From the field">
+        <Strip label="New in the Ledger · Galápagos, Taha'a, New Zealand" title="From the field" action={<Link href="/destinations" className="lnk">All destinations <span>→</span></Link>}>
+          {FIELD_STRIP.map((f) => (
+            <Link key={f.img.publicId} href={f.href} className="strip-card" style={{ textDecoration: "none", color: "inherit" }}>
+              <Photo img={f.img} sizes="(max-width: 700px) 78vw, 340px" aspect="4:5" wash style={{ height: 420 }} />
+              <p className="cp" style={{ margin: "14px 0 0", color: "var(--charcoal)" }}>{f.caption}</p>
+            </Link>
+          ))}
+        </Strip>
       </section>
 
       {featured && (

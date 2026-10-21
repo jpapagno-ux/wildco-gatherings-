@@ -118,6 +118,8 @@ export type Residence = {
   officialUrl?: string;
   // A Wild & Co presentation for the house (PDF in /public/docs), opened in the browser.
   brochure?: { label: string; url: string; pages?: number };
+  // The house's own published programmes (e.g. a camp's safaris), shown as an at-a-glance card.
+  programs?: { title: string; note?: string; items: { name: string; length: string; shape: string; bestFor: string; from?: string }[] };
   formula: { test: string; note: string; pass: boolean }[];
   fieldNotes: string[];
   manifest: { day: string; morning: string; afternoon: string; evening: string }[];
