@@ -2,7 +2,7 @@
  "_about": "Permanent James Wild & Co entity registry. IDs are allocated once and never regenerated from names, slugs or positions. Mirrored in Airtable (Residences › Entity ID, Itineraries › Template ID). Next free: JWC-P-0020, JWC-R-0007, JWC-I-0007, JWC-O-0002, JWC-V-(see evidence.json).",
  "allocated": "2026-10-14",
  "next": {
-  "property": "JWC-P-0026",
+  "property": "JWC-P-0027",
   "residence": "JWC-R-0008",
   "itinerary": "JWC-I-0007",
   "offer": "JWC-O-0002"
@@ -740,6 +740,25 @@
    ],
    "status": "draft",
    "note": "Private motu off Taha'a, Society Islands, French Polynesia. Nine bungalows and the Ari'i Vahine Royal Villa (14 guests). SLH member."
+  },
+  {
+   "id": "JWC-P-0026",
+   "type": "property",
+   "parentId": null,
+   "name": "Galápagos Safari Camp",
+   "slug": "galapagos-safari-camp-santa-cruz",
+   "legacyIds": [],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-027"
+    }
+   ],
+   "collections": [
+    "gatherings"
+   ],
+   "status": "draft",
+   "note": "Family-owned tented camp, Santa Cruz highlands, Galápagos, Ecuador. Nine safari tents and a Family Suite on 55 ha bordering the national park."
   }
  ]
 }

@@ -724,3 +724,5 @@ button.lnk { background: none; border: 0; border-bottom: 1px solid currentColor;
 .dest-card-photo { position: relative; }
 .dest-card-photo::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(30,42,56,0) 55%, rgba(30,42,56,.28) 100%); }
 .hero .shade-strong { background: linear-gradient(90deg, rgba(22,30,40,.66) 0%, rgba(22,30,40,.42) 42%, rgba(22,30,40,.08) 78%, rgba(22,30,40,0) 100%), linear-gradient(180deg, rgba(22,30,40,.18) 0%, rgba(22,30,40,0) 30%, rgba(22,30,40,.55) 100%); }
+.prog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 20px; }
+.prog-card { padding: 24px 24px 26px; }

@@ -12,7 +12,7 @@ export const HOME_HERO: Img = h("1363882925", "A family gathered on a shaded ope
 export const REGION_HERO: Record<RegionKey, Img> = {
   "usa-mexico": h("1462563623", "Red rock canyon walls glowing at sunset above a green valley"),
   caribbean: h("2200705047", "Palms leaning over a white beach and turquoise water, a small boat moored off the shore"),
-  "latin-america": h("520467166", "Stone terraces of Machu Picchu beneath a mountain peak in soft evening light"),
+  "latin-america": { publicId: "gatherings/galapagos-safari-camp/gsc-tortoise-tents", alt: "A giant tortoise grazing below a raised safari tent at Galápagos Safari Camp, Santa Cruz highlands" },
   europe: h("986448764", "A sunlit yellow house with a flower-filled balcony and a green front door"),
   africa: h("578876890", "A hot-air balloon drifting over acacia-dotted savanna at sunrise"),
   asia: h("1169143934", "Karst islands rising from a turquoise lagoon"),
@@ -46,3 +46,15 @@ export function atmosphereFor(hint = ""): Img {
   for (const [re, list] of THEMES) if (re.test(hint)) return pick(list, hint);
   return pick(DEFAULTS, hint);
 }
+
+// Home page "From the field" rail — spectacular, family-scale moments from the newest houses. Each links to its house.
+export const FIELD_STRIP: { img: Img; caption: string; href: string }[] = [
+  { img: { publicId: "gatherings/galapagos-safari-camp/gsc-frigatebird", alt: "A male frigatebird on a branch with its red throat pouch inflated, Galápagos" }, caption: "Frigatebird on display · Galápagos", href: "/houses/galapagos-safari-camp-santa-cruz" },
+  { img: { publicId: "gatherings/galapagos-safari-camp/gsc-kids-07", alt: "A girl jumping from black lava rocks into the sea beside a cactus, Galápagos" }, caption: "Off the lava · Galápagos", href: "/houses/galapagos-safari-camp-santa-cruz" },
+  { img: { publicId: "gatherings/galapagos-safari-camp/gsc-tortoise-closeup", alt: "A Galápagos giant tortoise in close-up, facing the camera" }, caption: "A giant tortoise · Santa Cruz", href: "/houses/galapagos-safari-camp-santa-cruz" },
+  { img: { publicId: "gatherings/galapagos-safari-camp/gsc-kids-03", alt: "Four children on the bow of a boat heading out across the Galápagos sea" }, caption: "Boat day to an uninhabited island", href: "/houses/galapagos-safari-camp-santa-cruz" },
+  { img: { publicId: "gatherings/galapagos-safari-camp/gsc-penguin", alt: "A Galápagos penguin on black lava rock, Isabela Island" }, caption: "Penguins on Isabela", href: "/houses/galapagos-safari-camp-santa-cruz" },
+  { img: { publicId: "gatherings/galapagos-safari-camp/gsc-camp-aerial", alt: "Safari tents set into green highland forest on Santa Cruz, seen from the air" }, caption: "Galápagos Safari Camp from the air", href: "/houses/galapagos-safari-camp-santa-cruz" },
+  { img: { publicId: "gatherings/vahine-private-island-tahaa/vh-05", alt: "Thatched overwater bungalows on a timber pier over a turquoise lagoon, Taha'a" }, caption: "Over the water · Taha'a", href: "/houses/vahine-private-island-tahaa" },
+  { img: { publicId: "gatherings/the-lindis-ahuriri-valley/li-04", alt: "The braided Ahuriri River at sunset beneath snow-capped peaks, New Zealand" }, caption: "The Ahuriri at dusk · New Zealand", href: "/houses/the-lindis-ahuriri-valley" },
+];

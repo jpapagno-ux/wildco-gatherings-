@@ -34,6 +34,7 @@ import TravelerActions from "@/components/TravelerActions";
 import MonwanaOpening from "@/components/MonwanaOpening";
 import { evidenceForHouse, evidenceBasis, formatEvidenceDate, formulaSummary, METHOD_MEANING, METHOD_LABEL } from "@/lib/entities";
 import { SITE } from "@/lib/site";
+import ProgramsCard from "@/components/ProgramsCard";
 
 export const revalidate = 3600;
 
@@ -459,6 +460,8 @@ export default async function House({ params }: { params: Promise<{ slug: string
           {r.firstVisited && <p className="cp muted" style={{ margin: "14px 0 0" }}>First visit · {r.firstVisited}{b?.checked ? ` · Facts last reviewed · ${b.checked}` : ""}</p>}
         </section>
       )}
+
+      {r.programs && <ProgramsCard p={r.programs} />}
 
       {r.experiences.length > 0 && (
         <section aria-label="Experiences" className="band" style={{ padding: "90px 0 50px" }}>
