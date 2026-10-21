@@ -726,3 +726,12 @@ button.lnk { background: none; border: 0; border-bottom: 1px solid currentColor;
 .hero .shade-strong { background: linear-gradient(90deg, rgba(22,30,40,.66) 0%, rgba(22,30,40,.42) 42%, rgba(22,30,40,.08) 78%, rgba(22,30,40,0) 100%), linear-gradient(180deg, rgba(22,30,40,.18) 0%, rgba(22,30,40,0) 30%, rgba(22,30,40,.55) 100%); }
 .prog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 20px; }
 .prog-card { padding: 24px 24px 26px; }
+.hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s ease; }
+.hero-slide.on { opacity: 1; }
+.hero-slide.on img { animation: hero-drift 9s ease-out both; }
+@keyframes hero-drift { from { transform: scale(1.06); } to { transform: scale(1); } }
+.hero-dots { position: absolute; right: 48px; bottom: 28px; z-index: 3; display: flex; gap: 10px; }
+.hero-dots button { width: 34px; height: 3px; padding: 0; border: 0; background: rgba(244,241,236,.45); cursor: pointer; }
+.hero-dots button.on { background: var(--on-dark, #F4F1EC); }
+@media (prefers-reduced-motion: reduce) { .hero-slide { transition: none; } .hero-slide.on img { animation: none; } }
+@media (max-width: 700px) { .hero-dots { right: 16px; bottom: 16px; } }

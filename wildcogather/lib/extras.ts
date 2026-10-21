@@ -47,6 +47,8 @@ export type Itinerary = {
   priceNote?: string;
   offer?: string; // offer slug it pairs with
   hero?: string; // Cloudinary public ID (falls back to the house hero)
+  // Optional rotating hero: several photographs that crossfade (the first is the main hero).
+  heroes?: { publicId: string; alt: string; objectPosition?: string }[];
   // Multi-stay journeys: each chapter's house, nights and any alternative houses for that chapter.
   // Airtable "Stops": one per line, "house-slug | nights | label | alt-slug, alt-slug".
   stops?: ItineraryStop[];
@@ -318,7 +320,13 @@ const SAMPLE_ITINERARIES: Itinerary[] = [
     included: ["Six nights at Villa Ardore, the whole villa", "Daily breakfast and a private chef for lunch or dinner", "Villa manager, concierge and daily housekeeping", "Private transfers from and to Florence", "The plan, guides and tastings arranged by James Wild & Co"],
     excluded: ["Flights", "Guides and tastings (quoted with your plan)", "Massages and treatments"],
     priceNote: "On request — the whole villa, for your family",
-    hero: "gatherings/villa-ardore-tuscany/villa-ardore-infinity-pool",
+    hero: "gatherings/villa-ardore-tuscany/villa-ardore-balcony-tuscan-landscape",
+    heroes: [
+      { publicId: "gatherings/villa-ardore-tuscany/villa-ardore-balcony-tuscan-landscape", alt: "Two guests on Villa Ardore's stone terrace looking over cypresses, lawns and the Chianti hills", objectPosition: "50% 72%" },
+      { publicId: "gatherings/villa-ardore-tuscany/villa-ardore-piazza-fire", alt: "Guests by a fire pit at dusk in the stone piazza of Villa Ardore, Chianti" },
+      { publicId: "gatherings/villa-ardore-tuscany/villa-ardore-pool-deck-night", alt: "Villa Ardore's infinity pool and parasols lit at dusk beneath the pines" },
+      { publicId: "gatherings/villa-ardore-tuscany/villa-ardore-03", alt: "A family by the fire in Villa Ardore's beamed living room" },
+    ],
     draft: false,
     seoTitle: "Tuscan Family Reunion: 7-Day Villa Ardore Itinerary, Chianti | Wild & Co Gatherings",
     metaDescription: "A 7-day family reunion in Chianti at Villa Ardore: a private chef, pizza masterclass, wine tastings, the spa and infinity pool, with days in Florence, Siena and San Gimignano. Planned by James Wild.",

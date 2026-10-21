@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Photo from "@/components/Photo";
+import HeroSlider from "@/components/HeroSlider";
 import JsonLd from "@/components/JsonLd";
 import OfferCard from "@/components/OfferCard";
 import EpisodeCross from "@/components/EpisodeCross";
@@ -37,7 +38,7 @@ export default async function ItineraryPage({ params }: { params: Promise<{ slug
   const offer = t.offer ? await getOffer(t.offer) : undefined;
   // Multi-stay journeys: resolve each chapter's house (and its alternatives).
   const stops = t.stops ? (await Promise.all(t.stops.map(async (s) => ({ ...s, r: await getResidence(s.house), alts: (await Promise.all((s.or || []).map((h) => getResidence(h)))).filter(Boolean) as NonNullable<Awaited<ReturnType<typeof getResidence>>>[] })))).filter((s) => s.r) : [];
-  const hero = t.hero ? { publicId: t.hero, alt: `${t.title} — ${r.name}` } : r.images.find((i) => i.role === "Hero") || r.images[0];
+  const hero = t.heroes?.[0] || (t.hero ? { publicId: t.hero, alt: `${t.title} — ${r.name}` } : undefined) || r.images.find((i) => i.role === "Hero") || r.images[0];
   const dur = checkDuration(t);
   const templateId = templateIdFor(t.slug);
   const planningQs = t.plan.map((d) => d.note).filter(Boolean) as string[];
@@ -68,7 +69,7 @@ export default async function ItineraryPage({ params }: { params: Promise<{ slug
       {t.draft && <div className="cp" style={{ background: "var(--oxblood)", color: "var(--paper)", textAlign: "center", padding: "10px 20px" }}>Sample itinerary · draft for James&apos;s approval</div>}
 
       <section className="hero" style={{ minHeight: "min(70vh, 640px)" }} aria-label={t.title}>
-        <Photo img={hero} priority style={{ position: "absolute", inset: 0 }} />
+        {t.heroes && t.heroes.length > 1 ? <HeroSlider images={t.heroes} /> : <Photo img={hero} priority style={{ position: "absolute", inset: 0 }} />}
         <div className="shade" />
         <div className="title" style={{ left: 48, right: 48 }}>
           <nav aria-label="Breadcrumb" className="cp" style={{ color: "rgba(244,241,236,.78)", marginBottom: 20 }}><Link href="/itineraries" style={{ textDecoration: "none" }}>Family Journeys</Link> / <Link href={`/houses/${r.slug}`} style={{ textDecoration: "none" }}>{r.name}</Link></nav>
