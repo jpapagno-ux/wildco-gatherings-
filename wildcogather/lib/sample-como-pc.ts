@@ -84,5 +84,6 @@ export const comoParrotCay: SampleResidence = {
   videos: [],
   seoTitle: "COMO Parrot Cay for Families: Private Residences & Villas | Wild & Co Gatherings",
   metaDescription: "COMO Parrot Cay for family gatherings: eleven private residences of 2–8 bedrooms on a 1,000-acre Turks & Caicos island, each with pool and butler, plus Play by COMO.",
+  brochure: { label: "View the residences in detail", url: "/docs/como-parrot-cay-family-gathering.pdf", pages: 18 },
   credit: "Images courtesy of COMO Hotels and Resorts",
 };

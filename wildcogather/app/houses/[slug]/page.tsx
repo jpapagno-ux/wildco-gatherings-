@@ -286,6 +286,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
             </div>
             {isResidence && parent?.name && <p className="cp muted" style={{ margin: "16px 0 0" }}>{r.name} is one residence at {parent.name}. Booking the whole of {parent.name} is a separate arrangement — ask us. Bathrooms, bed types and occupancy limits are confirmed with your quote.</p>}
             {!isResidence && <p className="cp muted" style={{ margin: "16px 0 0" }}>Bathrooms, bed types and permitted adult/child occupancy are confirmed with your quote.</p>}
+            {r.brochure && <p style={{ margin: "26px 0 0" }}><a href={r.brochure.url} target="_blank" rel="noopener" className="btn btn-light" style={{ color: "var(--charcoal)", borderColor: "var(--charcoal)" }}>{r.brochure.label}{r.brochure.pages ? ` · ${r.brochure.pages} pages (PDF)` : " (PDF)"}</a></p>}
           </div>
         </section>
       )}

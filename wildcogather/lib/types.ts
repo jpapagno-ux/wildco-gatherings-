@@ -116,6 +116,8 @@ export type Residence = {
   airport?: string;
   address?: string;
   officialUrl?: string;
+  // A Wild & Co presentation for the house (PDF in /public/docs), opened in the browser.
+  brochure?: { label: string; url: string; pages?: number };
   formula: { test: string; note: string; pass: boolean }[];
   fieldNotes: string[];
   manifest: { day: string; morning: string; afternoon: string; evening: string }[];
