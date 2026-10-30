@@ -26,7 +26,7 @@ A house of James Wild & Co. Next.js site, deployed on Vercel from GitHub. Conten
 - `/sitemap.xml`, `/robots.txt` — generated
 
 ## Stamps (status ladder)
-Under observation → Host met → Founder inspected & approved → Gathering verified → Founder favorite
+Under observation → Vetted partner → Host met → Founder inspected & approved → Gathering verified → Founder favorite
 
 Destination maps use OpenStreetMap tiles and the latitude / longitude values in the residence data. No map API key is required; an internet connection is needed to load map tiles. Map locations are approximate.
 
@@ -60,7 +60,7 @@ Everything on the page — the luggage tag, the stamp, the VIP mark, its place o
 1. **Residences › new row.** Name, Slug (lowercase-with-dashes), Destination, Status (`Vetting` to show it).
 2. **Entry No.** — the next free number (G-009, G-010…). Set once, never reuse.
 3. **Setting** — Mountain, Jungle, Coast & Island, Desert, Savanna or Polar & Ice. This picks the ink of its tag and VIP stamp and its group on /houses.
-4. **Ledger stamp** — its one current status (Under observation → Host met → Founder inspected & approved → Gathering verified → Founder favorite).
+4. **Ledger stamp** — its one current status (Under observation → Vetted partner → Host met → Founder inspected & approved → Gathering verified → Founder favorite).
 5. **Notes for the family** — Best season, Power & plugs, Time zone (plus Kids' program, Water access). Blank fields are simply hidden.
 6. **Facts, booking and film** — The Line, Best for (shown under the name in the hero), Not for, Sleeps, booking fields, Included / Not included, YouTube ID.
 7. **Images** — drop photos in the Images table (Role: Hero, Card = James's own photo for the taped frame, Gallery strip, Feature), then say "move the parked photos" to send them to Cloudinary.

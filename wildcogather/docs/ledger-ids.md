@@ -32,5 +32,8 @@ Snapshot taken 13 Oct 2026 from Airtable base `appnpcCxUZcapAgbo`, table Residen
 | G-018 | JWC-P-0017 | here-somewhere-nowhere-maldives | .Here — Somewhere & Nowhere | recq4kU25rtnDe2Nh | Coast & Island | Host met |
 | G-019 | JWC-P-0018 | villa-ardore-tuscany | Villa Ardore, Chianti | recorDCbgvSYuP7uC | Mountain | Host met |
 | G-020 | JWC-P-0019 | ulum-moab | ULUM Moab | recgqsCsjMvXoj3JA | Desert | Founder inspected & approved |
+| G-028 | JWC-R-0008 (in JWC-P-0027) | fort-house-kwandwe | Fort House, Kwandwe (also Safaris WCS-ZA-ECP-06) | — (site data) | Savanna | Vetted partner |
+| G-029 | JWC-R-0009 (in JWC-P-0027) | melton-manor-kwandwe | Melton Manor, Kwandwe (also Safaris WCS-ZA-ECP-07) | — (site data) | Savanna | Vetted partner |
+| G-030 | JWC-R-0010 (in JWC-P-0027) | uplands-homestead-kwandwe | Uplands Homestead, Kwandwe (also Safaris WCS-ZA-ECP-08) | — (site data) | Savanna | Vetted partner |
 
-Next free IDs: **G-021** (Gatherings reference) · **JWC-P-0020 / JWC-R-0007** (entity). The G-number is a collection reference; the JWC entity ID is the permanent identity shared across volumes. See docs/ecosystem.md.
+Next free IDs: **G-031** (Gatherings reference) · **JWC-P-0028 / JWC-R-0011** (entity). G-021 to G-027 are the drafts added 14–21 Oct (see data/entities.json); G-028 to G-030 are the Kwandwe villas, cross-listed with the Safaris volume (30 Oct 2026). The G-number is a collection reference; the JWC entity ID is the permanent identity shared across volumes. See docs/ecosystem.md.

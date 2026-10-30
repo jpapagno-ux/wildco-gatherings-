@@ -4,7 +4,8 @@
 // (no code change): NEXT_PUBLIC_JWCO_HOME_URL, NEXT_PUBLIC_STAYS_URL, NEXT_PUBLIC_SAFARIS_URL, NEXT_PUBLIC_VOYAGES_URL.
 //
 // Verified 14 Oct 2026:
-//  • Safaris — wildandcosafarisfinal.vercel.app is the live production alias of the "wildandcosafarisfinal" project.
+//  • Safaris — wildcosafaris.vercel.app is the production alias of the "wildcosafaris" project (30 Oct 2026; the old
+//    "wildandcosafarisfinal" project is being deleted).
 //  • Gatherings — wildco-gatherings1.vercel.app is the production alias of this project ("wildcogather").
 //  • Stays — www.wildearthstays.com is the legacy Stays site named in the ecosystem brief (James's own site).
 //  • Master homepage — not yet verified (a "james-wild-and-company" deployment exists but is access-protected),
@@ -20,7 +21,7 @@ export const MASTER_HOME_URL = env(process.env.NEXT_PUBLIC_JWCO_HOME_URL);
 
 export const VOLUMES: VolumeLink[] = [
   { key: "stays", label: "Stays", href: env(process.env.NEXT_PUBLIC_STAYS_URL) || "https://www.wildearthstays.com/", external: true, current: false, soon: false, note: "Stays — the legacy Wild Earth Stays site" },
-  { key: "safaris", label: "Safaris", href: env(process.env.NEXT_PUBLIC_SAFARIS_URL) || "https://wildandcosafarisfinal.vercel.app/", external: true, current: false, soon: false },
+  { key: "safaris", label: "Safaris", href: env(process.env.NEXT_PUBLIC_SAFARIS_URL) || "https://wildcosafaris.vercel.app/", external: true, current: false, soon: false },
   { key: "gatherings", label: "Gatherings", href: "/", external: false, current: true, soon: false },
   (() => {
     const href = env(process.env.NEXT_PUBLIC_VOYAGES_URL);

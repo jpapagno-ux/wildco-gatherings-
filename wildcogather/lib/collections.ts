@@ -100,5 +100,35 @@ export const collections: Collection[] = [
     seoTitle: "Lewa & Borana for Families: Lewa House and Lengishu | Wild & Co Gatherings",
     metaDescription: "James Wild's guide to the Lewa–Borana landscape in Kenya for family gatherings: Lewa House on Lewa and the Lengishu residence on Borana — rhino tracking, riding and a week-long route.",
   },
+  {
+    // James, 30 Oct 2026: yes to Gatherings VIP; "Kwandwe is vetted partner". He has not visited, so no visit route.
+    // Facts only from kwandwe.com (our purpose, giving back) and Classic Portfolio (The Long Run), as used in lib/sample-kwandwe.ts.
+    // The second intro paragraph is new James-voice copy and carries the draft marker until he approves it.
+    slug: "kwandwe", name: "Kwandwe Private Game Reserve", region: "Eastern Cape, South Africa", status: "VIP · vetted partner",
+    tagline: "30,000 hectares of Eastern Cape farmland returned to wildlife, and three villas booked by one family at a time. Every night helps keep it wild.",
+    intro: [
+      "Kwandwe was farmland. Its 30,000 hectares in the Great Fish River valley have been returned to wildlife, and more than 7,000 animals brought back — elephant, black and white rhino, hippo, lion, leopard, brown hyena, and cheetah for the first time since 1888.",
+      "I've vetted Kwandwe as a partner but haven't stayed yet, so its three villas carry the Vetted partner stamp until I have. [Draft — J.W. to approve]",
+    ],
+    hero: { publicId: "wildco/south-africa/eastern-cape/kwandwe/kwandwe-elephants-drinking", alt: "Elephants drinking at Kwandwe Private Game Reserve in the Eastern Cape" },
+    facts: [
+      ["Land", "30,000 ha of farmland returned to wildlife"],
+      ["Stays", "Fort House · Melton Manor · Uplands Homestead"],
+      ["Children", "All ages in the villas · malaria free"],
+      ["Community", "Ubunye Foundation in 9 communities · 350+ people employed"],
+      ["Member", "The Long Run"],
+      ["Status", "VIP · Vetted in Purpose · vetted partner, not yet visited"],
+    ],
+    protects: [
+      { name: "Black and white rhino", text: "Both species are among the more than 7,000 animals reintroduced to Kwandwe, with elephant, hippo, lion, leopard and brown hyena.", image: { publicId: "wildco/south-africa/eastern-cape/kwandwe/kwandwe-rhino-mother-calf", alt: "A rhino mother and calf grazing at Kwandwe" } },
+      { name: "Cheetah and the small cats", text: "Cheetah are back on this land for the first time since 1888, and serval, African wildcat and the small spotted cat have been reintroduced.", image: { publicId: "wildco/south-africa/eastern-cape/kwandwe/kwandwe-cheetah", alt: "A cheetah at Kwandwe Private Game Reserve" } },
+      { name: "Thicket", text: "More than 13,000 hectares of thicket on the reserve store about 520,000 tonnes of carbon.", image: { publicId: "wildco/south-africa/eastern-cape/kwandwe/kwandwe-great-fish-river", alt: "The Great Fish River winding through the valley at Kwandwe" } },
+      { name: "Kwandwe Rhino Conservation Trust", text: "Every guest night carries a levy shared between the Trust, the Ubunye Foundation and the care of the reserve.", image: { publicId: "wildco/south-africa/eastern-cape/kwandwe/kwandwe-rhino-conservation", alt: "Guests helping researchers and guides with a sedated rhino at Kwandwe" } },
+    ],
+    stampNote: "J.W. · Vetted partner",
+    credit: "Images courtesy of Kwandwe Private Game Reserve",
+    seoTitle: "Kwandwe for Families: Fort House, Melton Manor & Uplands | Wild & Co Gatherings",
+    metaDescription: "James Wild's guide to Kwandwe Private Game Reserve for family gatherings: three malaria-free, exclusive-use villas in South Africa's Eastern Cape, and the wildlife each stay helps protect.",
+  },
 ];
 export const getCollection = (slug: string) => collections.find((c) => c.slug === slug);

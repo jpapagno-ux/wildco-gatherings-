@@ -116,6 +116,9 @@ export const FORMULA_EXCEPTIONS: Record<string, Record<string, string>> = {
   "jacis-madikwe-house": { "Water within reach": "Waterholes on the reserve are for watching wildlife — no swimming or boating." },
   "morukuru-farm-house-madikwe": { "Water within reach": "Water on the reserve is for watching wildlife — no swimming or boating." },
   "morukuru-river-house-madikwe": { "Water within reach": "The Marico River is for watching wildlife — no swimming or boating in it." },
+  "fort-house-kwandwe": { "Water within reach": "The private waterhole is for watching wildlife. Swimming is in the villa's heated pool; fishing on the reserve is catch and release." },
+  "melton-manor-kwandwe": { "Water within reach": "Swimming is in the courtyard pool; fishing on the reserve is catch and release." },
+  "uplands-homestead-kwandwe": { "Water within reach": "Swimming is in the homestead's pool; fishing on the reserve is catch and release." },
 };
 
 /** Formula display: counts only criteria with a recorded note, and says how they were assessed. */
