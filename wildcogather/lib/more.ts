@@ -10,7 +10,7 @@
 // Each villa keeps its Safaris ledger ID (WCS-ZA-…) in data/entities.json for matching only; it is never rendered as a link.
 //
 // Facts: MORE's own villa, FAQ, location and story pages, checked 30 Oct 2026. No rates, no availability, no coordinates
-// beyond those already in the Ledger, and no link to MORE's website. James's own lines carry [Draft — J.W. to approve].
+// beyond those already in the Ledger, and no link to MORE's website. James approved his own lines for the MORE villas and /vip/more on 30 Oct 2026.
 
 export const MORE_CREDIT = "Photograph courtesy of MORE";
 export const MORE_COLLECTION_SLUG = "more";

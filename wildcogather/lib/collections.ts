@@ -206,7 +206,7 @@ export const propertyCollections: PropertyCollection[] = [
     tagline: "Five exclusive-use villas from one family-run South African collection — four in the bush, one below Table Mountain — each booked whole, with its own team.",
     intro: [
       "MORE began in 1933, when Guy Aubrey Chalkley bought Kingston Farm on the Sabie River. The family now runs Lion Sands, Marataba, Monwana and Cape Cadogan, and keeps one villa at each for families who want the house to themselves.",
-      "Miriam and I stayed at Lion Sands Ivory Lodge and at Monwana in May 2026, and I stayed at Cape Cadogan. MORE is my favourite partner in South Africa, and these villas are how I would put a family into its country. [Draft — J.W. to approve]",
+      "Miriam and I stayed at Lion Sands Ivory Lodge and at Monwana in May 2026, and I stayed at Cape Cadogan. MORE is my favourite partner in South Africa, and these villas are how I would put a family into its country.",
     ],
     hero: { publicId: "gatherings/monwana-villa-thornybush/monwana-villa-pool-elephants", alt: "Monwana Villa's pool overlooking the bush in Thornybush, with elephants at the waterhole" },
     facts: [
