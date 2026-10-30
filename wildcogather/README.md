@@ -130,7 +130,7 @@ In Airtable › Journal, paste the 11-character **YouTube ID** (the part after `
 - Houses: G-009 Fish Eagle Villa (Lion Sands, sleeps 8), G-010 Hinkwenu Villa (Lion Sands, sleeps 6), G-011 Monwana Villa (Thornybush, sleeps 6, featured).
 - Package: "A Night Under the Stars: Four Days at Lion Sands" (Itineraries) — three villa nights, one in the Kingston treehouse; Chalkley for couples.
 - Story: "Wild Together at Monwana…" (Journal No. 03) with the episode slot.
-- All three are **Vetting** with drafted verdicts marked "[Draft — J.W. to approve]". Items marked [confirm] (check-in times, deposit, cancellation, treehouse price) need MORE's answer before Live.
+- James approved the verdicts and his other lines for the MORE villas on 30 Oct 2026 (they were marked as drafts until then). Items marked [confirm] (check-in times, deposit, cancellation, treehouse price) need MORE's answer before Live.
 
 ## Image crops (Oct 2026)
 - Every framed photo asks Cloudinary for a **subject-aware crop** (`ar_…,c_fill,g_auto`) in the shape of its frame, so a portrait leopard or a wide pool lands on the subject rather than the centre. Shapes: house cards 5:4 · home cards 6:5 · experiences 11:10 · itinerary cards 4:3 · journal hero 16:9 · journal figures 5:3 · taped photos 5:4 · host headshot 1:1.

@@ -23,7 +23,7 @@ describe("The MORE villas are Gatherings VIP", async () => {
       assert.ok(vip, v.slug);
       assert.equal(vip.collectionSlug, "more");
       assert.equal(vip.collection, "The MORE Villas");
-      assert.match(vip.why, /\[Draft — J\.W\. to approve\]$/, `${v.slug}: James's voice carries the draft marker`);
+      assert.doesNotMatch(vip.why, /\[Draft/, `${v.slug}: James approved his line (30 Oct 2026), so it carries no draft marker`);
       assert.doesNotMatch(JSON.stringify(vip), /https?:\/\/|more\.co\.za|\$\s?\d|ZAR\s?\d/);
       assert.deepEqual(moreResidences.find((r) => r.slug === v.slug)?.vip, vip);
     }
