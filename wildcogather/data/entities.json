@@ -1,9 +1,9 @@
 {
- "_about": "Permanent James Wild & Co entity registry. IDs are allocated once and never regenerated from names, slugs or positions. Mirrored in Airtable (Residences › Entity ID, Itineraries › Template ID). Next free: JWC-P-0020, JWC-R-0007, JWC-I-0007, JWC-O-0002, JWC-V-(see evidence.json).",
- "allocated": "2026-10-14",
+ "_about": "Permanent James Wild & Co entity registry. IDs are allocated once and never regenerated from names, slugs or positions. Mirrored in Airtable (Residences › Entity ID, Itineraries › Template ID). Next free: JWC-P-0028, JWC-R-0011, JWC-I-0007, JWC-O-0002, JWC-V-(see evidence.json).",
+ "allocated": "2026-10-30",
  "next": {
-  "property": "JWC-P-0027",
-  "residence": "JWC-R-0008",
+  "property": "JWC-P-0028",
+  "residence": "JWC-R-0011",
   "itinerary": "JWC-I-0007",
   "offer": "JWC-O-0002"
  },
@@ -759,6 +759,87 @@
    ],
    "status": "draft",
    "note": "Family-owned tented camp, Santa Cruz highlands, Galápagos, Ecuador. Nine safari tents and a Family Suite on 55 ha bordering the national park."
+  },
+  {
+   "id": "JWC-P-0027",
+   "type": "property",
+   "parentId": null,
+   "name": "Kwandwe Private Game Reserve",
+   "slug": null,
+   "legacyIds": [],
+   "collectionRefs": [],
+   "collections": [],
+   "status": "reference",
+   "note": "Parent of the three Kwandwe villas; the reserve's lodges live in the Safaris volume (WCS-ZA-ECP-*)."
+  },
+  {
+   "id": "JWC-R-0008",
+   "type": "residence",
+   "parentId": "JWC-P-0027",
+   "name": "Fort House, Kwandwe",
+   "slug": "fort-house-kwandwe",
+   "legacyIds": [],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-028"
+    },
+    {
+     "collection": "safaris",
+     "ref": "WCS-ZA-ECP-06"
+    }
+   ],
+   "collections": [
+    "gatherings",
+    "safaris"
+   ],
+   "status": "draft"
+  },
+  {
+   "id": "JWC-R-0009",
+   "type": "residence",
+   "parentId": "JWC-P-0027",
+   "name": "Melton Manor, Kwandwe",
+   "slug": "melton-manor-kwandwe",
+   "legacyIds": [],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-029"
+    },
+    {
+     "collection": "safaris",
+     "ref": "WCS-ZA-ECP-07"
+    }
+   ],
+   "collections": [
+    "gatherings",
+    "safaris"
+   ],
+   "status": "draft"
+  },
+  {
+   "id": "JWC-R-0010",
+   "type": "residence",
+   "parentId": "JWC-P-0027",
+   "name": "Uplands Homestead, Kwandwe",
+   "slug": "uplands-homestead-kwandwe",
+   "legacyIds": [],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-030"
+    },
+    {
+     "collection": "safaris",
+     "ref": "WCS-ZA-ECP-08"
+    }
+   ],
+   "collections": [
+    "gatherings",
+    "safaris"
+   ],
+   "status": "draft"
   }
  ]
 }

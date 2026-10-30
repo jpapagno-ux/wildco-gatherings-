@@ -2,6 +2,7 @@ import type { Residence } from "./types";
 import { withSetting, type SampleResidence } from "./sample-settings";
 import { ttrResidences } from "./sample-ttr";
 import { moreResidences } from "./sample-more";
+import { kwandweResidences } from "./sample-kwandwe";
 import { nsResidences } from "./sample-ns";
 import { capeSafariResidences } from "./sample-capesafari";
 import { kenyaExumaResidences } from "./sample-kenya-exuma";
@@ -314,6 +315,7 @@ const raw: SampleResidence[] = [
   ...galapagosResidences,
   ...ttrResidences,
   ...moreResidences,
+  ...kwandweResidences,
   ...nsResidences,
   ...capeSafariResidences,
   ...hereResidences,

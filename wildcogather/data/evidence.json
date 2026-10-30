@@ -1,6 +1,6 @@
 {
  "_about": "Evidence records: how we know what we say. Mirrored in Airtable › Evidence. Only Approved rows show on the site.",
- "next": "JWC-V-0058",
+ "next": "JWC-V-0061",
  "evidence": [
   {
    "id": "JWC-V-0001",
@@ -799,6 +799,48 @@
    "scope": "James chose Galápagos Safari Camp for the Gatherings Ledger as the land-based family stay in the Galápagos. A visit is not yet recorded. Editorial judgement — not a verification of current facts, rates or policies.",
    "source": "Gatherings Ledger entry G-027",
    "wording": "Selected by James Wild for the Gatherings Ledger · visit not yet recorded"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0058",
+   "subject": "JWC-R-0008",
+   "ref": "G-028",
+   "method": "House Selected",
+   "date": "2026-10",
+   "precision": "Month",
+   "scope": "James chose Fort House at Kwandwe Private Game Reserve for the Gatherings Ledger and cross-listed it from the Safaris volume. A visit is not yet recorded. Editorial judgement — not a verification of current facts, rates or policies.",
+   "source": "James Wild, 30 Oct 2026 (Kwandwe villas for Gatherings)",
+   "wording": "Selected by James Wild for the Gatherings Ledger"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0059",
+   "subject": "JWC-R-0009",
+   "ref": "G-029",
+   "method": "House Selected",
+   "date": "2026-10",
+   "precision": "Month",
+   "scope": "James chose Melton Manor at Kwandwe Private Game Reserve for the Gatherings Ledger and cross-listed it from the Safaris volume. A visit is not yet recorded. Editorial judgement — not a verification of current facts, rates or policies.",
+   "source": "James Wild, 30 Oct 2026 (Kwandwe villas for Gatherings)",
+   "wording": "Selected by James Wild for the Gatherings Ledger"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0060",
+   "subject": "JWC-R-0010",
+   "ref": "G-030",
+   "method": "House Selected",
+   "date": "2026-10",
+   "precision": "Month",
+   "scope": "James chose Uplands Homestead at Kwandwe Private Game Reserve for the Gatherings Ledger and cross-listed it from the Safaris volume. A visit is not yet recorded. Editorial judgement — not a verification of current facts, rates or policies.",
+   "source": "James Wild, 30 Oct 2026 (Kwandwe villas for Gatherings)",
+   "wording": "Selected by James Wild for the Gatherings Ledger"
   }
  ]
 }
