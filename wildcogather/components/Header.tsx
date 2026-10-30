@@ -82,6 +82,8 @@ export default function Header({ nav }: { nav: BrowseNav }) {
           <nav aria-label="James Wild & Co volumes" className="eco-vols">
             {VOLUMES.map((v) => v.current ? (
               <Link key={v.key} href="/" aria-current="true" className="eco-vol on">{v.label}</Link>
+            ) : !v.soon && !v.href ? (
+              <span key={v.key} className="eco-vol" aria-disabled="true">{v.label}</span>
             ) : v.soon || !v.href ? (
               <span key={v.key} className="eco-vol soon" aria-disabled="true" title={`${v.label} — coming soon`}>{v.label}<span className="eco-soon">Coming soon</span></span>
             ) : (
@@ -185,6 +187,8 @@ export default function Header({ nav }: { nav: BrowseNav }) {
           <div className="nav-eco-vols">
             {VOLUMES.map((v) => v.current ? (
               <Link key={v.key} href="/" aria-current="true">{v.label}</Link>
+            ) : !v.soon && !v.href ? (
+              <span key={v.key} className="eco-vol" aria-disabled="true">{v.label}</span>
             ) : v.soon || !v.href ? (
               <span key={v.key} aria-disabled="true">{v.label} · soon</span>
             ) : (

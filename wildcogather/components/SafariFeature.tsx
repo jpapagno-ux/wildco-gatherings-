@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { SAFARIS_PUBLIC, SAFARIS_URL, type SafariFeature as SF } from "@/lib/live-booking";
+import { type SafariFeature as SF } from "@/lib/live-booking";
 
 // "Pair it with a longer safari": a Wild & Co Safaris journey that includes this house.
-// One door (James, 30 Oct 2026): the link goes to the House hand-over page only, never to a page on the Safaris site.
+// No links to the Safaris site or the House site (James, 30 Oct 2026): the journey is asked for through our own plan form.
 export default function SafariFeature({ f, slug }: { f: SF; slug: string }) {
-  const href = SAFARIS_URL;
   return (
     <section className="navy" aria-labelledby="sf-h">
       <div className="wrap sf">
@@ -15,9 +14,7 @@ export default function SafariFeature({ f, slug }: { f: SF; slug: string }) {
           <p className="body" style={{ margin: "16px 0 0", color: "rgba(244,241,236,.82)", maxWidth: 560 }}>{f.summary}</p>
           <p className="body" style={{ margin: "12px 0 0", color: "rgba(244,241,236,.82)", maxWidth: 560 }}>{f.houseNote}</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 18, alignItems: "center", marginTop: 26 }}>
-            {SAFARIS_PUBLIC
-              ? <a href={href} className="btn btn-light" target="_blank" rel="noopener">Wild &amp; Co Safaris</a>
-              : <Link href={`/plan?house=${slug}&trip=${encodeURIComponent(`${f.route} — ${f.title}`)}`} className="btn btn-light">Ask us for this journey</Link>}
+            <Link href={`/plan?house=${slug}&trip=${encodeURIComponent(`${f.route} — ${f.title}`)}`} className="btn btn-light">Ask us for this journey</Link>
           </div>
         </div>
         <ol className="sf-route" aria-label="The route">

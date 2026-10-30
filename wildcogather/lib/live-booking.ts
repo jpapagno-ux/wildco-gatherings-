@@ -61,6 +61,6 @@ export const SAFARI_FEATURES: Record<string, SafariFeature> = {
   },
 };
 
-// One door to Wild & Co Safaris (lib/ecosystem.ts › SAFARIS_URL): the House hand-over page, never a Safaris-site page.
+// No links to Wild & Co Safaris or the House site (James, 30 Oct 2026): SAFARIS_URL is undefined; SafariFeature asks via /plan.
 export { SAFARIS_URL } from "./ecosystem";
 export const SAFARIS_PUBLIC = process.env.NEXT_PUBLIC_SAFARIS_PUBLIC === "1";

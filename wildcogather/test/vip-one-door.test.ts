@@ -39,23 +39,19 @@ describe("The MORE villas are Gatherings VIP", async () => {
   });
 });
 
-describe("One door to Wild & Co Safaris", () => {
-  const DOOR = "https://www.jameswildco.com/safaris/wild-co-safaris";
-  // A fresh copy of the module for each env (it reads the env when loaded).
+describe("No links to the House site or to Wild & Co Safaris", () => {
+  // James, 30 Oct 2026: no links to or from the House of James Wild & Co site; Safaris has one door, on the House site.
   const fresh = (tag: string): string => new URL(`../lib/ecosystem.ts?${tag}`, import.meta.url).href;
 
-  it("links the Safaris volume to the House hand-over page", async () => {
+  it("names Safaris without linking it, and leaves the House seal unlinked, even with env overrides", async () => {
+    process.env.NEXT_PUBLIC_SAFARIS_URL = "https://www.jameswildco.com/safaris/wild-co-safaris";
+    process.env.NEXT_PUBLIC_JWCO_HOME_URL = "https://www.jameswildco.com/";
+    const eco = await import(fresh("nolinks"));
+    assert.equal(eco.volume("safaris").href, undefined);
+    assert.equal(eco.SAFARIS_URL, undefined);
+    assert.equal(eco.MASTER_HOME_URL, undefined);
+    assert.ok(eco.VOLUMES.every((v: { href?: string }) => !/jameswildco|house-of-james-wild|wild(?:and)?cosafaris/i.test(v.href || "")));
     delete process.env.NEXT_PUBLIC_SAFARIS_URL;
-    const eco = await import(fresh("default"));
-    assert.equal(eco.SAFARIS_DOOR, DOOR);
-    assert.equal(eco.volume("safaris").href, DOOR);
-  });
-
-  it("ignores an override that points at the Safaris site itself", async () => {
-    process.env.NEXT_PUBLIC_SAFARIS_URL = "https://wildcosafaris.vercel.app/";
-    const eco = await import(fresh("override"));
-    assert.equal(eco.volume("safaris").href, DOOR);
-    assert.ok(eco.VOLUMES.every((v: { href?: string }) => !/wild(?:and)?cosafaris/i.test(v.href || "")));
-    delete process.env.NEXT_PUBLIC_SAFARIS_URL;
+    delete process.env.NEXT_PUBLIC_JWCO_HOME_URL;
   });
 });
