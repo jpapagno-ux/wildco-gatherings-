@@ -9,6 +9,7 @@ A house of James Wild & Co. Next.js site, deployed on Vercel from GitHub. Conten
 - `/ledger` The Gatherings Ledger — every house, entry number, stamp, first visited
 - `/houses/[slug]` Ledger Entry — full-photo hero with ledger column and luggage tag, Why it earned its place (+ James's taped photo and status stamp), The Manifest, Notes for the family (season, last leg, power, time, children, water), Facts, Field Notes, The Film (YouTube first, then any others), Booking Facts & Pricing, Included / Not included, Room Categories ("Where everyone sleeps"), Host, Formula, Experiences, Manifest, From the Journal, FAQ
 - `/vip` Gatherings VIP — what V-I-P (Vetted in Purpose) means, and the VIP collections
+- `/collections/[collection]` a partner's houses grouped on one page without the VIP stamp, e.g. `/collections/more` (the five MORE villas, with pairings and family FAQs; lib/collections.ts › propertyCollections, lib/more.ts)
 - `/vip/[collection]` a VIP collection hub, e.g. `/vip/ted-turner-reserves` — every stay, why it's on James's list, the wildlife it protects, his visit route
 - `/journal` and `/journal/[slug]` The Journal — James's "Why it's in the Ledger" entries, with his quotes
 - `/plan` Plan a Gathering — form that saves to the Airtable `Inquiries` table

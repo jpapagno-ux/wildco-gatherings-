@@ -11,6 +11,7 @@ import { getHorizon } from "./horizon";
 import { FOUNDER } from "./founder";
 import { entityForHouse, evidenceForHouse, formatEvidenceDate, templateIdFor } from "./entities";
 import { checkDuration } from "./journeys";
+import { propertyCollections } from "./collections";
 
 export { SITE } from "./site";
 import { SITE } from "./site";
@@ -54,6 +55,10 @@ export async function buildLedger() {
       return {
       entityId: ent?.id,
       entityType: ent?.type,
+      // The same house's reference in other James Wild & Co volumes (e.g. Safaris WCS-ZA-…), for matching only.
+      // Published as an ID, never as a link (James, 30 Oct 2026).
+      otherVolumes: ent?.collectionRefs.filter((c) => c.collection !== "gatherings").map((c) => ({ volume: c.collection, ref: c.ref })),
+      collection: propertyCollections.find((c) => c.houses.includes(h.slug)) ? { slug: propertyCollections.find((c) => c.houses.includes(h.slug))!.slug, url: `${SITE}/collections/${propertyCollections.find((c) => c.houses.includes(h.slug))!.slug}` } : undefined,
       parent: ev.parent ? { entityId: ev.parent.id, name: ev.parent.name } : undefined,
       id: h.entryNo,
       key: `${h.entryNo} · ${h.slug}`,
@@ -95,6 +100,7 @@ export async function buildLedger() {
       houses: [t.house, ...(t.stops || []).flatMap((s) => [s.house, ...(s.or || [])])].filter((v, i, a) => a.indexOf(v) === i).map((slug) => ({ id: idOf(slug), slug })),
       bestFor: t.bestFor, season: t.season, dek: t.dek,
     })),
+    collections: propertyCollections.map((c) => ({ slug: c.slug, name: c.name, partner: c.partner, url: `${SITE}/collections/${c.slug}`, houses: c.houses.map((s) => ({ id: idOf(s), slug: s })).filter((x) => x.id) })),
     horizon: horizon.filter((x) => !x.draft).map((x) => ({ id: x.no, slug: x.slug, name: x.name, url: `${SITE}/horizon/${x.slug}`, place: x.place, country: x.country, setting: x.setting, opens: x.opens, familyFit: x.familyFit })),
   };
 }

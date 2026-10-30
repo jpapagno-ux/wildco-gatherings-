@@ -106,8 +106,11 @@ async function fromAirtable(): Promise<Residence[]> {
     };
   };
 
+  // Production shows Approved, Live and Vetting rows (and VIP rows). Vercel preview deployments also show Prospect rows,
+  // so a new house can be reviewed on a branch preview while production keeps it hidden until it is set to Approved.
+  const visible = process.env.VERCEL_ENV === "preview" ? ["Approved", "Live", "Vetting", "Prospect"] : ["Approved", "Live", "Vetting"];
   return res
-    .filter((r) => ["Approved", "Live", "Vetting"].includes(r.fields["Status"]) || !!r.fields["VIP (Vetted in Purpose)"])
+    .filter((r) => !!r.fields["Slug"] && (visible.includes(r.fields["Status"]) || !!r.fields["VIP (Vetted in Purpose)"]))
     .map((r, i) => {
       const f = r.fields;
       const d = (f["Destination"] || []).map((id: string) => D[id]).filter(Boolean)[0];

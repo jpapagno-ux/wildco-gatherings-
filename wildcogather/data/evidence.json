@@ -1,6 +1,6 @@
 {
  "_about": "Evidence records: how we know what we say. Mirrored in Airtable › Evidence. Only Approved rows show on the site.",
- "next": "JWC-V-0067",
+ "next": "JWC-V-0070",
  "evidence": [
   {
    "id": "JWC-V-0001",
@@ -925,6 +925,48 @@
    "scope": "James chose the Private Granite Suites at Londolozi Game Reserve for the Gatherings Ledger, booked whole, and cross-listed it from the Safaris volume. Editorial judgement — not a verification of current facts, rates or policies.",
    "source": "James Wild, 30 Oct 2026 (Pioneer and the Granite Suites for Gatherings)",
    "wording": "Selected by James Wild for the Gatherings Ledger"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0067",
+   "subject": "JWC-R-0013",
+   "ref": "G-033",
+   "method": "House Selected",
+   "date": "2026-10",
+   "precision": "Month",
+   "scope": "James chose Marataba Villa for the Gatherings Ledger, from MORE, a vetted partner that approved Wild & Co Gatherings. A visit is not yet recorded. Editorial judgement — not a verification of current facts, rates or policies.",
+   "source": "James Wild, 30 Oct 2026 (the MORE villas for Gatherings)",
+   "wording": "Selected by James Wild for the Gatherings Ledger"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0068",
+   "subject": "JWC-R-0014",
+   "ref": "G-034",
+   "method": "House Selected",
+   "date": "2026-10",
+   "precision": "Month",
+   "scope": "James chose Cape Cadogan Villa for the Gatherings Ledger, from MORE, a vetted partner that approved Wild & Co Gatherings. A visit is not yet recorded. Editorial judgement — not a verification of current facts, rates or policies.",
+   "source": "James Wild, 30 Oct 2026 (the MORE villas for Gatherings)",
+   "wording": "Selected by James Wild for the Gatherings Ledger"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0069",
+   "subject": "JWC-P-0009",
+   "ref": "G-009",
+   "method": "Host Met",
+   "date": "",
+   "precision": "Unknown",
+   "scope": "James works with Matt Smith of MORE Collection, Wild & Co's partner and the host for Lion Sands Ivory Lodge. It does not verify every fact about the villa.",
+   "source": "James Wild, 30 Oct 2026 (the MORE villas for Gatherings)",
+   "wording": "Host met — James works with the host"
   }
  ]
 }

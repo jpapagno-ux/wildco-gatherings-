@@ -35,6 +35,8 @@ import MonwanaOpening from "@/components/MonwanaOpening";
 import { evidenceForHouse, evidenceBasis, formatEvidenceDate, formulaSummary, METHOD_MEANING, METHOD_LABEL } from "@/lib/entities";
 import { SITE } from "@/lib/site";
 import ProgramsCard from "@/components/ProgramsCard";
+import MoreCrossSell from "@/components/MoreCrossSell";
+import { MORE_CREDIT, isMoreVilla, moreVilla } from "@/lib/more";
 
 export const revalidate = 3600;
 
@@ -59,7 +61,12 @@ export default async function House({ params }: { params: Promise<{ slug: string
   if (!r) notFound();
   const hero = r.images.find((i) => i.role === "Hero") || r.images[0];
   const region = regionMeta(regionFor(r))!;
-  const moreStays = relatedStays(await getResidences(), r);
+  const allStays = await getResidences();
+  // A MORE villa shows the other MORE villas in their own rail (MoreCrossSell), so they are not repeated in "More stays".
+  const isMore = isMoreVilla(r.slug);
+  const mv = moreVilla(r.slug);
+  const moreStays = relatedStays(allStays, r).filter((h) => !isMore || !isMoreVilla(h.slug));
+  const credit = r.credit || (isMore ? MORE_CREDIT : "");
   const coords = dms(r.lat, r.lng);
   const b = r.booking;
   const live = r.liveBookingUrl ? { ...(liveBookingFor(r.slug) || { provider: "James Wild Stays · booking engine by TAG, powered by ALBIE", currency: "USD", taxNote: "Taxes and fees are shown at checkout.", ratePlans: [], termsNote: "Each rate shows its own payment and cancellation terms before you pay.", rooms: [], checked: "" }), engineUrl: r.liveBookingUrl } : liveBookingFor(r.slug);
@@ -120,20 +127,21 @@ export default async function House({ params }: { params: Promise<{ slug: string
   return (
     <>
       <JsonLd data={{
-        "@context": "https://schema.org", "@type": "LodgingBusiness", "@id": `${SITE}/houses/${r.slug}#stay`, url: `${SITE}/houses/${r.slug}`, identifier: { "@type": "PropertyValue", propertyID: "JW&Co Gatherings Ledger", value: r.entryNo }, name: r.name, description: r.line,
+        "@context": "https://schema.org", "@type": isMore ? ["LodgingBusiness", "VacationRental"] : "LodgingBusiness", "@id": `${SITE}/houses/${r.slug}#stay`, url: `${SITE}/houses/${r.slug}`, identifier: { "@type": "PropertyValue", propertyID: "JW&Co Gatherings Ledger", value: r.entryNo }, name: r.name, description: r.line,
         address: r.address ? { "@type": "PostalAddress", streetAddress: r.address } : { "@type": "PostalAddress", addressLocality: r.place, addressRegion: r.region, addressCountry: r.country },
         ...(r.lat ? { geo: { "@type": "GeoCoordinates", latitude: r.lat, longitude: r.lng }, hasMap: `https://www.google.com/maps/search/?api=1&query=${r.lat},${r.lng}` } : {}),
         ...(r.sleeps ? { occupancy: { "@type": "QuantitativeValue", maxValue: r.sleeps } } : {}),
         amenityFeature: [r.kidsProgram, r.water, ...table.map((t) => `${t.name} (${t.kind.toLowerCase()})`)].filter(Boolean).map((v) => ({ "@type": "LocationFeatureSpecification", name: v, value: true })),
         ...(table.some((t) => t.kind === "Restaurant" || t.kind === "Bar & lounge") ? { containsPlace: table.filter((t) => t.kind === "Restaurant" || t.kind === "Bar & lounge").map((t) => ({ "@type": t.kind === "Restaurant" ? "Restaurant" : "BarOrPub", name: t.name, description: t.gathering })) } : {}),
+        // MORE villas are booked whole: the villa is one Accommodation with its bedrooms and adult/child occupancy (MORE's figures).
+        ...(mv ? { containsPlace: { "@type": "Accommodation", name: `${r.name}, exclusive use`, numberOfBedrooms: mv.bedrooms, occupancy: { "@type": "QuantitativeValue", maxValue: mv.adults + mv.children }, additionalProperty: [{ "@type": "PropertyValue", name: "Adults", value: mv.adults }, { "@type": "PropertyValue", name: "Children", value: mv.children }] } } : {}),
         image: r.images.map((i) => ({
           "@type": "ImageObject",
           contentUrl: buildCloudinaryUrl({ src: i.publicId, width: 1600, quality: "auto", format: "auto" }),
           caption: i.caption || i.alt,
           description: i.alt,
-          creditText: i.credit || r.credit || undefined,
+          creditText: isMore ? MORE_CREDIT : i.credit || r.credit || undefined,
         })),
-        sameAs: r.officialUrl,
         ...(ent ? { additionalProperty: [{ "@type": "PropertyValue", propertyID: "JWC entity", value: ent.id }, ...(parent ? [{ "@type": "PropertyValue", propertyID: "Parent property", value: `${parent.id} · ${parent.name}` }] : [])] } : {}),
         ...(parent ? { containedInPlace: { "@type": "LodgingBusiness", name: parent.name } } : {}),
         ...(toTime(b?.checkIn) ? { checkinTime: toTime(b?.checkIn) } : {}),
@@ -540,6 +548,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
           </div>
         </section>
       )}
+      <MoreCrossSell r={r} all={allStays} />
       {moreStays.length > 0 && (
         <section aria-label="More stays" className="band" style={{ padding: "90px 0 50px", marginBottom: 40 }}>
           <Strip label={`More stays · ${region.label}`} title="Keep exploring" action={<Link href={`/destinations/${region.key}`} className="lnk">All of {region.label} <span>→</span></Link>}>
@@ -566,7 +575,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
         </section>
       )}
       <div className="wrap" style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12, paddingBottom: 30 }}>
-        {r.credit && <p className="cp muted" style={{ margin: 0 }}>{r.credit}</p>}
+        {credit && <p className="cp muted" style={{ margin: 0 }}>{credit}</p>}
         <p className="cp muted" style={{ margin: 0 }}>JW&amp;Co. Ledger · Entry {r.entryNo} · {st.name}</p>
       </div>
       <PageSketch k={r.setting} label={`${r.place} · Entry ${r.entryNo}`} />

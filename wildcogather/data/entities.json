@@ -1,9 +1,9 @@
 {
- "_about": "Permanent James Wild & Co entity registry. IDs are allocated once and never regenerated from names, slugs or positions. Mirrored in Airtable (Residences › Entity ID, Itineraries › Template ID). Next free: JWC-P-0029, JWC-R-0013, JWC-I-0007, JWC-O-0002, JWC-V-(see evidence.json).",
+ "_about": "Permanent James Wild & Co entity registry. IDs are allocated once and never regenerated from names, slugs or positions. Mirrored in Airtable (Residences › Entity ID, Itineraries › Template ID). Next free: JWC-P-0031, JWC-R-0015, JWC-I-0007, JWC-O-0002, JWC-V-(see evidence.json).",
  "allocated": "2026-10-30",
  "next": {
-  "property": "JWC-P-0029",
-  "residence": "JWC-R-0013",
+  "property": "JWC-P-0031",
+  "residence": "JWC-R-0015",
   "itinerary": "JWC-I-0007",
   "offer": "JWC-O-0002"
  },
@@ -181,10 +181,15 @@
     {
      "collection": "gatherings",
      "ref": "G-009"
+    },
+    {
+     "collection": "safaris",
+     "ref": "WCS-ZA-SAB-25"
     }
    ],
    "collections": [
-    "gatherings"
+    "gatherings",
+    "safaris"
    ],
    "status": "published"
   },
@@ -201,10 +206,15 @@
     {
      "collection": "gatherings",
      "ref": "G-010"
+    },
+    {
+     "collection": "safaris",
+     "ref": "WCS-ZA-SAB-24"
     }
    ],
    "collections": [
-    "gatherings"
+    "gatherings",
+    "safaris"
    ],
    "status": "published"
   },
@@ -221,10 +231,15 @@
     {
      "collection": "gatherings",
      "ref": "G-011"
+    },
+    {
+     "collection": "safaris",
+     "ref": "WCS-ZA-THB-07"
     }
    ],
    "collections": [
-    "gatherings"
+    "gatherings",
+    "safaris"
    ],
    "status": "published"
   },
@@ -415,10 +430,17 @@
    "name": "Lion Sands Ivory Lodge",
    "slug": null,
    "legacyIds": [],
-   "collectionRefs": [],
-   "collections": [],
+   "collectionRefs": [
+    {
+     "collection": "safaris",
+     "ref": "WCS-ZA-SAB-06"
+    }
+   ],
+   "collections": [
+    "safaris"
+   ],
    "status": "reference",
-   "note": "Parent property recorded so its residences resolve to one identity across volumes. Not a Gatherings page."
+   "note": "Parent property recorded so its residences resolve to one identity across volumes. Not a Gatherings page; one of the MORE villas' parent lodges (/collections/more)."
   },
   {
    "id": "JWC-P-0010",
@@ -427,10 +449,17 @@
    "name": "Lion Sands Tinga Lodge",
    "slug": null,
    "legacyIds": [],
-   "collectionRefs": [],
-   "collections": [],
+   "collectionRefs": [
+    {
+     "collection": "safaris",
+     "ref": "WCS-ZA-SAB-22"
+    }
+   ],
+   "collections": [
+    "safaris"
+   ],
    "status": "reference",
-   "note": "Parent property recorded so its residences resolve to one identity across volumes. Not a Gatherings page."
+   "note": "Parent property recorded so its residences resolve to one identity across volumes. Not a Gatherings page; one of the MORE villas' parent lodges (/collections/more)."
   },
   {
    "id": "JWC-P-0011",
@@ -439,10 +468,17 @@
    "name": "Monwana Lodge",
    "slug": null,
    "legacyIds": [],
-   "collectionRefs": [],
-   "collections": [],
+   "collectionRefs": [
+    {
+     "collection": "safaris",
+     "ref": "WCS-ZA-THB-03"
+    }
+   ],
+   "collections": [
+    "safaris"
+   ],
    "status": "reference",
-   "note": "Parent property recorded so its residences resolve to one identity across volumes. Not a Gatherings page."
+   "note": "Parent property recorded so its residences resolve to one identity across volumes. Not a Gatherings page; one of the MORE villas' parent lodges (/collections/more)."
   },
   {
    "id": "JWC-P-0014",
@@ -891,6 +927,83 @@
     {
      "collection": "safaris",
      "ref": "WCS-ZA-SAB-29"
+    }
+   ],
+   "collections": [
+    "gatherings",
+    "safaris"
+   ],
+   "status": "draft"
+  },
+  {
+   "id": "JWC-P-0029",
+   "type": "property",
+   "parentId": null,
+   "name": "Marataba, Marakele National Park",
+   "slug": null,
+   "legacyIds": [],
+   "collectionRefs": [],
+   "collections": [],
+   "status": "reference",
+   "note": "Parent of Marataba Villa. A privately managed section of Marakele National Park in the malaria-free Waterberg, South Africa (MORE). Its lodges live in the Safaris volume (WCS-ZA-MRT-*)."
+  },
+  {
+   "id": "JWC-P-0030",
+   "type": "property",
+   "parentId": null,
+   "name": "Cape Cadogan Boutique Hotel",
+   "slug": null,
+   "legacyIds": [],
+   "collectionRefs": [
+    {
+     "collection": "safaris",
+     "ref": "WCS-ZA-CPT-04"
+    }
+   ],
+   "collections": [
+    "safaris"
+   ],
+   "status": "reference",
+   "note": "Parent of Cape Cadogan Villa. Upper Union Street, Gardens, Cape Town (MORE)."
+  },
+  {
+   "id": "JWC-R-0013",
+   "type": "residence",
+   "parentId": "JWC-P-0029",
+   "name": "Marataba Villa",
+   "slug": "marataba-villa-marakele",
+   "legacyIds": [],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-033"
+    },
+    {
+     "collection": "safaris",
+     "ref": "WCS-ZA-MRT-03"
+    }
+   ],
+   "collections": [
+    "gatherings",
+    "safaris"
+   ],
+   "status": "draft"
+  },
+  {
+   "id": "JWC-R-0014",
+   "type": "residence",
+   "parentId": "JWC-P-0030",
+   "name": "Cape Cadogan Villa",
+   "slug": "cape-cadogan-villa-cape-town",
+   "legacyIds": [],
+   "collectionRefs": [
+    {
+     "collection": "gatherings",
+     "ref": "G-034"
+    },
+    {
+     "collection": "safaris",
+     "ref": "WCS-ZA-CPT-05"
     }
    ],
    "collections": [

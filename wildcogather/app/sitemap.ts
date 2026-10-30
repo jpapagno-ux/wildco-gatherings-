@@ -8,6 +8,7 @@ import { getWebinars } from "@/lib/webinars";
 import { REGIONS } from "@/lib/regions";
 import { staysInRegion } from "@/lib/browse";
 import { SITE } from "@/lib/site";
+import { propertyCollections } from "@/lib/collections";
 
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -36,6 +37,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/plan`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE}/vip`, changeFrequency: "monthly", priority: 0.8 },
     ...[...new Set(houses.filter((h) => h.vip).map((h) => h.vip!.collectionSlug))].map((c) => ({ url: `${SITE}/vip/${c}`, changeFrequency: "monthly" as const, priority: 0.8 })),
+    ...propertyCollections.map((c) => ({ url: `${SITE}/collections/${c.slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
     { url: `${SITE}/journal`, changeFrequency: "weekly", priority: 0.7 },
     ...posts.map((p) => ({ url: `${SITE}/journal/${p.slug}`, lastModified: p.date, changeFrequency: "monthly" as const, priority: 0.7 })),
     ...houses.map((h) => ({ url: `${SITE}/houses/${h.slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
