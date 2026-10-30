@@ -1,10 +1,10 @@
 import type { SettingKey } from "./settings";
 
 export type Status = "Prospect" | "Vetting" | "Approved" | "Live" | "Paused";
-// Under observation = on the list · Host met = J.W. vetted it in conversation with the host
+// Under observation = on the list · Vetted partner = J.W. vetted the property as a partner; not yet stayed · Host met = J.W. vetted it in conversation with the host
 // Founder inspected & approved = J.W. inspected the house in person and approved it (see Evidence for stays) · Gathering verified = visited and passes all six tests
 // Founder favorite = visited and returned
-export type Stamp = "Under observation" | "Host met" | "Founder inspected & approved" | "Gathering verified" | "Founder favorite";
+export type Stamp = "Under observation" | "Vetted partner" | "Host met" | "Founder inspected & approved" | "Gathering verified" | "Founder favorite";
 
 export type Host = { name: string; title: string; headshot?: Img; metOn?: string; how?: string; note: string };
 

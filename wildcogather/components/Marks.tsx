@@ -77,6 +77,7 @@ export function SettingDot({ setting }: { setting: SettingKey }) {
 // ── 1. Ledger stamp (oxblood) — the house's one current status ─────────────────
 const STAMPS: Record<StampT, { top: string; bottom: string; small: string; big: string; sub: string; icon: string }> = {
   "Under observation": { top: "THE GATHERINGS LEDGER", bottom: "★ ON THE LIST ★", small: "UNDER", big: "OBSERVATION", sub: "not yet stayed", icon: "compass" },
+  "Vetted partner": { top: "THE GATHERINGS LEDGER", bottom: "★ VETTED PARTNER ★", small: "VETTED", big: "PARTNER", sub: "not yet stayed", icon: "compass" },
   "Host met": { top: "THE GATHERINGS LEDGER", bottom: "★ IN PERSON ★", small: "THE", big: "HOST MET", sub: "J. W.", icon: "key" },
   "Founder inspected & approved": { top: "THE GATHERINGS LEDGER", bottom: "★ & APPROVED ★", small: "FOUNDER", big: "INSPECTED", sub: "J. W.", icon: "binoculars" },
   "Gathering verified": { top: "THREE GENERATIONS", bottom: "★ TESTED BY A FAMILY ★", small: "GATHERING", big: "VERIFIED", sub: "J. W.", icon: "tree" },

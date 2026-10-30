@@ -6,9 +6,14 @@ import type { SampleResidence } from "./sample-settings";
 // WCS-ZA-ECP-06/07/08 as their safaris collection references.
 // Facts from Kwandwe's fact sheet (as already used on wildcosafaris), Classic Portfolio's Kwandwe page and kwandwe.com
 // (families, safari activities, specialist safaris, giving back, our purpose), checked 30 Oct 2026. No rates on the page.
-// Evidence: House Selected only. James has not yet stayed at Kwandwe, so every villa is Under observation.
+// Evidence: House Selected only. James vetted Kwandwe as a partner (30 Oct 2026: "Kwandwe is vetted partner") but has not yet
+// stayed, so every villa carries the Vetted partner stamp. Verdicts approved by James, 30 Oct 2026.
+// Gatherings VIP (James, 30 Oct 2026: yes) — collection "kwandwe" in lib/collections.ts. No visible link to the Safaris pages yet.
 // Map pins: the reserve's arrival point (Heatherton Towers reception), not the villas themselves — pins are approximate.
 // Photographs courtesy of Kwandwe Private Game Reserve, supplied by Classic Portfolio (same Cloudinary images as the safari site).
+// Gatherings VIP: the "why" lines are the first sentence of each villa's verdict (approved by James, 30 Oct 2026).
+const vip = (why: string, fit: string) => ({ collection: "Kwandwe Private Game Reserve", collectionSlug: "kwandwe", visit: "Vetted partner · not yet visited", why, fit });
+const partner = { name: "Kwandwe Private Game Reserve" };
 const FH = "wildco/south-africa/eastern-cape/kwandwe-fort-house/";
 const MM = "wildco/south-africa/eastern-cape/kwandwe-melton-manor/";
 const UH = "wildco/south-africa/eastern-cape/kwandwe-uplands-homestead/";
@@ -77,7 +82,8 @@ const seo = (name: string, sleeps: string) => ({
 export const kwandweResidences: SampleResidence[] = [
   {
     slug: "fort-house-kwandwe", entryNo: "G-028", name: "Fort House, Kwandwe", place: "Kwandwe Private Game Reserve", region: "Eastern Cape", country: "South Africa",
-    lat: LAT, lng: LNG, status: "Approved", stamp: "Under observation", setting: "savanna", notes,
+    lat: LAT, lng: LNG, status: "Approved", stamp: "Vetted partner", setting: "savanna", notes,
+    partner, vip: vip("Two families, or three generations, under one roof on a malaria-free Big Five reserve: that is what Fort House does.", "Two families or three generations."),
     line: "Four bedrooms high above the Great Fish River valley, booked by one group at a time — its own guide, tracker, vehicle, chef and host, a heated pool and a boma facing a private waterhole.",
     verdict: [
       "Two families, or three generations, under one roof on a malaria-free Big Five reserve: that is what Fort House does. The house is yours, the vehicle is yours, and the waterhole in front of the boma does the evening entertainment.",
@@ -131,7 +137,8 @@ export const kwandweResidences: SampleResidence[] = [
   },
   {
     slug: "melton-manor-kwandwe", entryNo: "G-029", name: "Melton Manor, Kwandwe", place: "Kwandwe Private Game Reserve", region: "Eastern Cape", country: "South Africa",
-    lat: LAT, lng: LNG, status: "Approved", stamp: "Under observation", setting: "savanna", notes,
+    lat: LAT, lng: LNG, status: "Approved", stamp: "Vetted partner", setting: "savanna", notes,
+    partner, vip: vip("Four suites of the same size: no one draws the short straw, which is exactly what a group of friends or a family with teenagers needs.", "Friends, or a family with teenagers."),
     line: "Four equal suites in a U around a courtyard pool, booked by one group at a time — its own guide, vehicle, chef and host, a children's lounge and a boma for dinner under the stars.",
     verdict: [
       "Four suites of the same size: no one draws the short straw, which is exactly what a group of friends or a family with teenagers needs. The courtyard pool sits in the middle of it all.",
@@ -184,7 +191,8 @@ export const kwandweResidences: SampleResidence[] = [
   },
   {
     slug: "uplands-homestead-kwandwe", entryNo: "G-030", name: "Uplands Homestead, Kwandwe", place: "Kwandwe Private Game Reserve", region: "Eastern Cape", country: "South Africa",
-    lat: LAT, lng: LNG, status: "Approved", stamp: "Under observation", setting: "savanna", notes,
+    lat: LAT, lng: LNG, status: "Approved", stamp: "Vetted partner", setting: "savanna", notes,
+    partner, vip: vip("A farmhouse, not a lodge: a country kitchen at the heart of it, a garden for small children to run in, and wildlife passing the boma at dusk.", "A young family on a first safari."),
     line: "A restored 1905 farmhouse for up to six, the most remote of the Kwandwe villas, in a valley of aloes — its own guide, vehicle, chef and host, a pool, gardens and a country kitchen.",
     verdict: [
       "A farmhouse, not a lodge: a country kitchen at the heart of it, a garden for small children to run in, and wildlife passing the boma at dusk. For a young family on a first safari, that is the right scale.",
