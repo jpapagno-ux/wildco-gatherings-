@@ -14,6 +14,7 @@ import { embedUrl, thumbUrl } from "@/lib/video";
 import { getOgImageUrl } from "@/lib/cloudinary-loader";
 import PageSketch from "@/components/PageSketch";
 import { SITE } from "@/lib/site";
+import { filmMakers } from "@/lib/wild-together";
 
 export const revalidate = 3600;
 const CLOUD = (process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD || "").trim() || "jhlnq5h5";
@@ -58,7 +59,7 @@ export default async function Entry({ params }: { params: Promise<{ slug: string
         hasPart: quotesOf(p.body).map((q) => ({ "@type": "Quotation", text: q, creator: { "@type": "Person", name: p.author } })),
         speakable: { "@type": "SpeakableSpecification", cssSelector: [".dek", "blockquote"] },
       }} />
-      {p.video && <JsonLd data={{ "@context": "https://schema.org", "@type": "VideoObject", "@id": `${url}#film`, name: p.video.title, description: p.dek, thumbnailUrl: thumbUrl(p.video) || undefined, uploadDate: p.video.uploadDate || p.date, embedUrl: embedUrl(p.video), contentUrl: `https://www.youtube.com/watch?v=${p.video.id}`, ...(p.video.credit ? { creditText: p.video.credit } : {}) }} />}
+      {p.video && <JsonLd data={{ "@context": "https://schema.org", "@type": "VideoObject", "@id": `${url}#film`, name: p.video.title, description: p.video.description || p.dek, thumbnailUrl: thumbUrl(p.video) || undefined, uploadDate: p.video.uploadDate || p.date, embedUrl: embedUrl(p.video), contentUrl: `https://www.youtube.com/watch?v=${p.video.id}`, ...(p.video.credit ? { creditText: p.video.credit } : {}), ...filmMakers(p.video) }} />}
       {p.draft && <div className="cp" style={{ background: "var(--oxblood)", color: "var(--paper)", textAlign: "center", padding: "10px 20px" }}>Sample entry · quotes drafted in James&apos;s voice for his approval</div>}
 
       <header className="wrap" style={{ maxWidth: 900, paddingTop: 70, paddingBottom: 40, textAlign: "center" }}>

@@ -1,6 +1,7 @@
 import { youtubeId } from "./video";
 import type { Post } from "./types";
 import { scrub } from "./scrub";
+import { knownFilm, wildTogetherMonwana } from "./wild-together";
 
 const TOKEN = process.env.AIRTABLE_TOKEN;
 const BASE = process.env.AIRTABLE_BASE_ID || "appnpcCxUZcapAgbo";
@@ -19,7 +20,7 @@ export const samplePosts: Post[] = [
     date: "2026-10-11",
     readMinutes: 6,
     hero: { publicId: "gatherings/monwana-villa-thornybush/monwana-villa-pool-elephants", alt: "Monwana Villa pool overlooking the bush in Thornybush, with elephants nearby", caption: "Fig. 1 — The Villa, elephants at the waterhole. Courtesy of MORE Family Collection." },
-    video: { provider: "youtube", id: "YR_8uiBObZ4", title: "Wild Together: My Wife's First Safari — Monwana Lodge, Thornybush, South Africa", description: "James and Miriam Wild at Monwana Villa in the Thornybush Nature Reserve, Greater Kruger — Miriam's first safari: leopards, the waterhole and the house we'd book again.", credit: "Wild Together · James & Miriam · Wild Earth Stays on YouTube" },
+    video: wildTogetherMonwana,
     draft: false,
     seoTitle: "Wild Together at Monwana: A Family Safari Villa in Thornybush | Wild & Co Gatherings",
     metaDescription: "James and Miriam Wild film Wild Together at Monwana in Thornybush: leopard country, a waterhole in view of the villa, and why it suits a family of six. Watch the episode.",
@@ -213,6 +214,19 @@ export const quotesOf = (body: string) => blocks(body).filter((b): b is { kind: 
 export const questionsOf = (body: string) => blocks(body).filter((b) => b.kind === "h2" && b.text.endsWith("?")).map((b) => (b as { text: string }).text);
 
 // ——— Airtable "Journal" table ———
+// The post's film from "YouTube ID", "YouTube title" and "YouTube credit". A known film (lib/wild-together.ts) fills
+// an empty credit and gives the description; otherwise the credit falls back to the Wild Together line.
+function journalFilm(f: Record<string, any>): Post["video"] {
+  const id = youtubeId(f["YouTube ID"]);
+  if (!id) return undefined;
+  const known = knownFilm(id);
+  return {
+    provider: "youtube", id, title: f["YouTube title"] || known?.title || f["Title"],
+    ...(known?.description ? { description: known.description } : {}),
+    credit: f["YouTube credit"] || known?.credit || "Wild Together · James & Miriam Wild",
+  };
+}
+
 async function fromAirtable(): Promise<Post[]> {
   const url = `https://api.airtable.com/v0/${BASE}/Journal?pageSize=100`;
   const res = await fetch(url, { headers: { Authorization: `Bearer ${TOKEN}` }, next: { revalidate: 3600, tags: ["airtable"] } });
@@ -228,7 +242,7 @@ async function fromAirtable(): Promise<Post[]> {
       date: f["Date"] || new Date().toISOString().slice(0, 10), readMinutes: Number(f["Read minutes"] || 5),
       hero: f["Hero (Cloudinary ID)"] ? { publicId: f["Hero (Cloudinary ID)"], alt: f["Hero alt text"] || f["Title"], caption: f["Hero caption"] } : undefined,
       body: f["Body"] || "", draft: f["Status"] !== "Published",
-      video: youtubeId(f["YouTube ID"]) ? { provider: "youtube", id: youtubeId(f["YouTube ID"])!, title: f["YouTube title"] || f["Title"], credit: f["YouTube credit"] || "Wild Together · James & Miriam Wild" } : undefined,
+      video: journalFilm(f),
       videoPlanned: f["Film planned"] || undefined,
       seoTitle: f["SEO title"] || `${f["Title"]} | Wild & Co Journal`, metaDescription: f["Meta description"] || f["Dek"] || "",
     }));

@@ -14,6 +14,7 @@ import PageSketch from "@/components/PageSketch";
 import Film from "@/components/Film";
 import { embedUrl, thumbUrl, watchUrl } from "@/lib/video";
 import { SITE } from "@/lib/site";
+import { filmMakers } from "@/lib/wild-together";
 import { scrub } from "@/lib/scrub";
 
 export const revalidate = 3600;
@@ -61,7 +62,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
         itemListElement: houses.map((h, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "LodgingBusiness", name: h.name, url: `${SITE}/houses/${h.slug}`, address: { "@type": "PostalAddress", addressLocality: h.place, addressRegion: h.region, addressCountry: h.country }, image: h.images[0] ? buildCloudinaryUrl({ src: h.images[0].publicId, width: 1200, quality: "auto" }) : undefined } })) }} />
 
       {(c.films || []).map((v) => (
-        <JsonLd key={v.id} data={{ "@context": "https://schema.org", "@type": "VideoObject", name: v.title, description: `${v.title} — ${c.name}`, thumbnailUrl: thumbUrl(v) || undefined, embedUrl: embedUrl(v), contentUrl: watchUrl(v), ...(v.credit ? { creditText: v.credit } : {}) }} />
+        <JsonLd key={v.id} data={{ "@context": "https://schema.org", "@type": "VideoObject", name: v.title, description: `${v.title} — ${c.name}`, thumbnailUrl: thumbUrl(v) || undefined, embedUrl: embedUrl(v), contentUrl: watchUrl(v), ...(v.credit ? { creditText: v.credit } : {}), ...filmMakers(v) }} />
       ))}
 
       <section style={{ position: "relative" }}>

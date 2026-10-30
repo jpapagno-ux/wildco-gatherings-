@@ -11,6 +11,7 @@ import { getResidences } from "@/lib/data";
 import { buildCloudinaryUrl } from "@/lib/cloudinary-loader";
 import { embedUrl, thumbUrl, watchUrl } from "@/lib/video";
 import { SITE } from "@/lib/site";
+import { filmMakers } from "@/lib/wild-together";
 import { scrub } from "@/lib/scrub";
 import { entityForHouse } from "@/lib/entities";
 
@@ -44,7 +45,7 @@ export default async function PropertyCollectionView({ collection }: { collectio
         } })) }} />
       {faqs.length > 0 && <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })) }} />}
       {(c.films || []).map((v) => (
-        <JsonLd key={v.id} data={{ "@context": "https://schema.org", "@type": "VideoObject", name: v.title, description: v.description || `${v.title} — ${c.name}`, thumbnailUrl: thumbUrl(v) || undefined, embedUrl: embedUrl(v), contentUrl: watchUrl(v), ...(v.credit ? { creditText: v.credit } : {}) }} />
+        <JsonLd key={v.id} data={{ "@context": "https://schema.org", "@type": "VideoObject", name: v.title, description: v.description || `${v.title} — ${c.name}`, thumbnailUrl: thumbUrl(v) || undefined, embedUrl: embedUrl(v), contentUrl: watchUrl(v), ...(v.credit ? { creditText: v.credit } : {}), ...filmMakers(v) }} />
       ))}
       <JsonLd data={{ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [
         { "@type": "ListItem", position: 1, name: "Wild & Co Gatherings", item: `${SITE}/` },

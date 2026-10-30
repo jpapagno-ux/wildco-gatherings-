@@ -2,6 +2,7 @@ import type { SampleResidence } from "./sample-settings";
 import type { Residence } from "./types";
 
 import { MORE_CREDIT } from "./more";
+import { wildTogetherMonwana } from "./wild-together";
 
 // ——— The MORE villas · Lion Sands (Sabi Sand & Kruger), Marataba (Marakele), Monwana (Thornybush), Cape Cadogan (Cape Town) ———
 // The five exclusive-use villas MORE lists for families. J.W. and Miriam stayed at Lion Sands Ivory Lodge and at Monwana
@@ -215,7 +216,7 @@ export const moreResidences: SampleResidence[] = [
       { name: "The whole lodge", count: "6 suites + villa", bedrooms: "—", sleeps: "Up to 24", inside: "Four suites, two family suites (children 10+) and the villa", fit: "For the full reunion.", whole: true },
     ],
     partner: { name: "MORE Family Collection" },
-    videos: [{ provider: "youtube", id: "YR_8uiBObZ4", title: "Wild Together: My Wife's First Safari — Monwana Lodge, Thornybush, South Africa", description: "James and Miriam Wild at Monwana Villa in the Thornybush Nature Reserve, Greater Kruger — Miriam's first safari: leopards, the waterhole and the house we'd book again.", credit: "Wild Together · James & Miriam · Wild Earth Stays on YouTube" }],
+    videos: [wildTogetherMonwana],
     seoTitle: "Monwana Villa, Thornybush — Private Family Safari House | Wild & Co Gatherings",
     metaDescription: "An off-grid, exclusive-use safari villa in Thornybush: two suites with plunge pools, a waterhole in view, private guide and vehicle, children of all ages. Vetted by James Wild and filmed for Wild Together.",
     credit,

@@ -1,6 +1,7 @@
 // Gatherings VIP collections — groups of houses that carry the VIP stamp (Vetted in Purpose).
 import type { Video } from "./types";
 import { londoloziFilms, LZ } from "./sample-londolozi";
+import { wildTogetherMonwana } from "./wild-together";
 
 export const VIP_MEANING = [
   { letter: "V", word: "Vetted", text: "James has walked it, questioned it and written down what he found — no brochure, no algorithm. A place is seen before it is sold." },
@@ -109,12 +110,12 @@ export const collections: Collection[] = [
   {
     // James, 30 Oct 2026: yes to Gatherings VIP; "Kwandwe is vetted partner". He has not visited, so no visit route.
     // Facts only from kwandwe.com (our purpose, giving back) and Classic Portfolio (The Long Run), as used in lib/sample-kwandwe.ts.
-    // The second intro paragraph is new James-voice copy and carries the draft marker until he approves it.
+    // The second intro paragraph is James's voice; he approved it on 30 Oct 2026.
     slug: "kwandwe", name: "Kwandwe Private Game Reserve", region: "Eastern Cape, South Africa", status: "VIP · vetted partner",
     tagline: "30,000 hectares of Eastern Cape farmland returned to wildlife, and three villas booked by one family at a time. Every night helps keep it wild.",
     intro: [
       "Kwandwe was farmland. Its 30,000 hectares in the Great Fish River valley have been returned to wildlife, and more than 7,000 animals brought back — elephant, black and white rhino, hippo, lion, leopard, brown hyena, and cheetah for the first time since 1888.",
-      "I've vetted Kwandwe as a partner but haven't stayed yet, so its three villas carry the Vetted partner stamp until I have. [Draft — J.W. to approve]",
+      "I've vetted Kwandwe as a partner but haven't stayed yet, so its three villas carry the Vetted partner stamp until I have.",
     ],
     hero: { publicId: "wildco/south-africa/eastern-cape/kwandwe/kwandwe-elephants-drinking", alt: "Elephants drinking at Kwandwe Private Game Reserve in the Eastern Cape" },
     facts: [
@@ -140,12 +141,12 @@ export const collections: Collection[] = [
     // James, 30 Oct 2026: "add Pioneer and the Granite Suites (both bookable whole) to Gatherings, as we did with Kwandwe's villas.
     // Yes in detail and with videos embedded." The property page for the two camps, mirroring /vip/kwandwe.
     // Facts only from Londolozi's own pages, fact sheets (2023) and blog (2025). No route: no schedule was briefed.
-    // The second intro paragraph is new James-voice copy and carries the draft marker until he approves it.
+    // The second intro paragraph is James's voice; he approved it on 30 Oct 2026.
     slug: "londolozi", name: "Londolozi Game Reserve", region: "Sabi Sand, South Africa", status: "VIP · founder stayed 2018",
     tagline: "The Varty family's reserve on the Sand River, unfenced to Kruger — and two camps a family can book whole.",
     intro: [
       "Londolozi is owned and run by the Varty family, and its story begins in 1926 with a hunting camp called Sparta. It lies on the Sand River in the western Sabi Sand, unfenced to Kruger National Park, and in 1993 it became the first safari camp in Africa to join Relais & Châteaux.",
-      "I stayed at Londolozi in 2018 with my daughter and toured every room. Two of its camps can be booked whole by one family: Pioneer, for up to 12, and the Private Granite Suites, for six. [Draft — J.W. to approve]",
+      "I stayed at Londolozi in 2018 with my daughter and toured every room. Two of its camps can be booked whole by one family: Pioneer, for up to 12, and the Private Granite Suites, for six.",
     ],
     hero: { publicId: LZ + "leopard-cubs-in-tree", alt: "Leopard cubs in a tree at Londolozi Game Reserve, Sabi Sand" },
     facts: [
@@ -219,7 +220,8 @@ export const propertyCollections: PropertyCollection[] = [
       ["Status", "VIP · Vetted in Purpose · Lion Sands, Monwana and Cape Cadogan founder inspected & approved, May 2026 · Marataba vetted partner"],
     ],
     houses: ["fish-eagle-villa-lion-sands", "hinkwenu-villa-lion-sands", "marataba-villa-marakele", "monwana-villa-thornybush", "cape-cadogan-villa-cape-town"],
-    films: [{ provider: "youtube", id: "YR_8uiBObZ4", title: "Wild Together: My Wife's First Safari — Monwana Lodge, Thornybush, South Africa", description: "James and Miriam Wild at Monwana Villa in the Thornybush Nature Reserve, Greater Kruger.", credit: "Wild Together · James & Miriam" }],
+    // Wild Together is James and Miriam's own series (not a MORE film): Film by Felix Studios and Monwana.
+    films: [wildTogetherMonwana],
     credit: "Photographs courtesy of MORE",
     seoTitle: "MORE Villas for Families: Lion Sands, Marataba, Monwana & Cape Town | Wild & Co Gatherings",
     metaDescription: "Five exclusive-use MORE villas in South Africa for multigenerational families: Fish Eagle and Hinkwenu at Lion Sands, Marataba, Monwana and Cape Cadogan in Cape Town.",
