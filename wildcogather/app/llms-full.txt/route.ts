@@ -13,6 +13,8 @@ export async function GET() {
     `## ${h.id} · ${h.name}`,
     ...line("Entity ID", [h.entityId, h.entityType, h.parent ? `residence of ${h.parent.name} (${h.parent.entityId})` : ""].filter(Boolean).join(" · ")),
     ...line("Ledger key", h.key),
+    ...line("Same house in other volumes", h.otherVolumes?.map((v) => `${v.volume} ${v.ref}`).join(", ")),
+    ...line("Collection", h.collection?.url),
     ...line("URL", h.url),
     ...line("Stamp", h.stamp + (h.firstVisited ? ` · first visited ${h.firstVisited}` : "")),
     ...line("Why here (James Wild)", h.whyHere ? `“${h.whyHere.quote}”${h.whyHere.film ? ` Film: ${h.whyHere.film}` : ""}` : undefined),
