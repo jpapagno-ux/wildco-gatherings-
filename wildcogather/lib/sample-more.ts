@@ -212,7 +212,7 @@ moreResidences.push(
     verdict: ["I haven't stayed at Marataba yet. Four tents on one river, a kids' tent and no malaria is the villa I'd show a family with small children first. [Draft — J.W. to approve]"],
     bestFor: "Up to ten — eight adults and two children — who want a malaria-free safari with room to spread out and come together",
     notFor: "Not for more than ten guests; the villa is booked whole only.",
-    bedrooms: "4 luxury tents, and a kids' tent with two single beds", sleeps: 10,
+    bedrooms: "4 luxury tents, one of them a kids' tent with two single beds", sleeps: 10,
     kidsProgram: "Mack & Madi kids' activities and childminding", kidsAges: "young children welcome",
     water: "A private pool overlooking the wilderness; a water safari on the Matlabas River", seasons: [],
     airport: "Thabazimbi airstrip · about 40 min to the Villa · or about 3.5 h by road from Johannesburg",
@@ -281,7 +281,7 @@ moreResidences.push(
     },
     rooms: [
       { name: "Luxury tents", count: "4", inside: "Along the river's edge, each with a private deck and an outdoor shower; bathrooms with a view from the bathtub" },
-      { name: "Kids' tent", inside: "Two single beds and a kids' bathroom; one kids' room has deck views over the river" },
+      { name: "Kids' tent", inside: "One of the four tents: two single beds and a kids' bathroom; one kids' room has deck views over the river" },
       { name: "The villa, whole", count: "1", bedrooms: "4 tents", sleeps: "10 (8 adults, 2 children)", inside: "Central lodge with open-plan dining and lounge, private pool, pool deck, fire deck and boma; concierge, private chef, private vehicle and field guide", fit: "Grandparents in one tent, the children in their own. [Draft — J.W. to approve]", whole: true },
     ],
     partner: { name: "MORE Family Collection" },
