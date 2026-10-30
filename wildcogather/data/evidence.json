@@ -1,6 +1,6 @@
 {
  "_about": "Evidence records: how we know what we say. Mirrored in Airtable › Evidence. Only Approved rows show on the site.",
- "next": "JWC-V-0061",
+ "next": "JWC-V-0067",
  "evidence": [
   {
    "id": "JWC-V-0001",
@@ -840,6 +840,90 @@
    "precision": "Month",
    "scope": "James chose Uplands Homestead at Kwandwe Private Game Reserve for the Gatherings Ledger and cross-listed it from the Safaris volume. A visit is not yet recorded. Editorial judgement — not a verification of current facts, rates or policies.",
    "source": "James Wild, 30 Oct 2026 (Kwandwe villas for Gatherings)",
+   "wording": "Selected by James Wild for the Gatherings Ledger"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0061",
+   "subject": "JWC-P-0028",
+   "ref": "G-031",
+   "method": "Personally Stayed",
+   "date": "2018",
+   "precision": "Year",
+   "scope": "James stayed at Londolozi in 2018 with his daughter and toured every room. Which camp he slept in is not recorded here. A past stay does not verify current rates or policies.",
+   "source": "James Wild, 30 Oct 2026 (Pioneer and the Granite Suites for Gatherings)",
+   "wording": "Founder stayed · 2018"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0062",
+   "subject": "JWC-R-0011",
+   "ref": "G-031",
+   "method": "Personally Inspected",
+   "date": "2018",
+   "precision": "Year",
+   "scope": "James stayed at Londolozi in 2018 with his daughter and toured every room, including Pioneer Camp, and approved it for the Gatherings Ledger on 30 Oct 2026. Does not by itself confirm an overnight at Pioneer, current rates or policies.",
+   "source": "James Wild, 30 Oct 2026 (Pioneer and the Granite Suites for Gatherings)",
+   "wording": "Founder inspected & approved · 2018"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0063",
+   "subject": "JWC-R-0012",
+   "ref": "G-032",
+   "method": "Personally Inspected",
+   "date": "2018",
+   "precision": "Year",
+   "scope": "James stayed at Londolozi in 2018 with his daughter and toured every room, including the Private Granite Suites, and approved them for the Gatherings Ledger on 30 Oct 2026. Does not by itself confirm an overnight at the Granite Suites, current rates or policies.",
+   "source": "James Wild, 30 Oct 2026 (Pioneer and the Granite Suites for Gatherings)",
+   "wording": "Founder inspected & approved · 2018"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0064",
+   "subject": "JWC-P-0028",
+   "ref": "G-031",
+   "method": "Founder Favorite",
+   "date": "2018",
+   "precision": "Year",
+   "scope": "Londolozi is a Founder Favorite. An opinion, not a verification.",
+   "source": "James Wild, 30 Oct 2026 (Pioneer and the Granite Suites for Gatherings)",
+   "wording": "A Founder Favorite — James's opinion"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0065",
+   "subject": "JWC-R-0011",
+   "ref": "G-031",
+   "method": "House Selected",
+   "date": "2026-10",
+   "precision": "Month",
+   "scope": "James chose Pioneer Camp at Londolozi Game Reserve for the Gatherings Ledger, booked whole, and cross-listed it from the Safaris volume. Editorial judgement — not a verification of current facts, rates or policies.",
+   "source": "James Wild, 30 Oct 2026 (Pioneer and the Granite Suites for Gatherings)",
+   "wording": "Selected by James Wild for the Gatherings Ledger"
+  },
+  {
+   "reviewer": "James Wild",
+   "role": "Founder, James Wild & Co",
+   "status": "Approved",
+   "id": "JWC-V-0066",
+   "subject": "JWC-R-0012",
+   "ref": "G-032",
+   "method": "House Selected",
+   "date": "2026-10",
+   "precision": "Month",
+   "scope": "James chose the Private Granite Suites at Londolozi Game Reserve for the Gatherings Ledger, booked whole, and cross-listed it from the Safaris volume. Editorial judgement — not a verification of current facts, rates or policies.",
+   "source": "James Wild, 30 Oct 2026 (Pioneer and the Granite Suites for Gatherings)",
    "wording": "Selected by James Wild for the Gatherings Ledger"
   }
  ]
