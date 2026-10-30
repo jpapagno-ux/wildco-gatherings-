@@ -71,7 +71,7 @@ const formula = (room: string, water: string) => [
   { test: "Water within reach", note: water, pass: true },
   { test: "Country at the door", note: "30,000 hectares of private Big Five reserve on the Great Fish River, where seven of South Africa's eight biomes meet.", pass: true },
   { test: "A resort behind you", note: "Fully inclusive, with the villa's own guide, vehicle, chef and host — and the reserve's two lodges, spa and conservation team close by.", pass: true },
-  { test: "Worth returning to", note: "James has not yet stayed at Kwandwe — under observation.", pass: false },
+  { test: "Worth returning to", note: "James has vetted Kwandwe as a partner; he has not stayed yet.", pass: false },
 ];
 
 const seo = (name: string, sleeps: string) => ({
@@ -87,7 +87,7 @@ export const kwandweResidences: SampleResidence[] = [
     line: "Four bedrooms high above the Great Fish River valley, booked by one group at a time — its own guide, tracker, vehicle, chef and host, a heated pool and a boma facing a private waterhole.",
     verdict: [
       "Two families, or three generations, under one roof on a malaria-free Big Five reserve: that is what Fort House does. The house is yours, the vehicle is yours, and the waterhole in front of the boma does the evening entertainment.",
-      "I haven't stayed at Kwandwe yet, so it sits under observation until I have.",
+      "Kwandwe is a partner I've vetted. I haven't stayed yet; my own notes come after my first night.",
     ],
     bestFor: "Two families or a multi-generation group of up to eight who want a private safari house, a heated pool and their own team",
     notFor: "Not for more than eight adults (plus an infant): for a larger gathering, take two Kwandwe villas together.",
@@ -142,7 +142,7 @@ export const kwandweResidences: SampleResidence[] = [
     line: "Four equal suites in a U around a courtyard pool, booked by one group at a time — its own guide, vehicle, chef and host, a children's lounge and a boma for dinner under the stars.",
     verdict: [
       "Four suites of the same size: no one draws the short straw, which is exactly what a group of friends or a family with teenagers needs. The courtyard pool sits in the middle of it all.",
-      "I haven't stayed at Kwandwe yet, so it sits under observation until I have.",
+      "Kwandwe is a partner I've vetted. I haven't stayed yet; my own notes come after my first night.",
     ],
     bestFor: "A group of friends or a family with teenagers who want four equal rooms, a pool at the centre and their own safari team",
     notFor: "Not for more than eight adults (plus an infant): for a larger gathering, take two Kwandwe villas together.",
@@ -196,7 +196,7 @@ export const kwandweResidences: SampleResidence[] = [
     line: "A restored 1905 farmhouse for up to six, the most remote of the Kwandwe villas, in a valley of aloes — its own guide, vehicle, chef and host, a pool, gardens and a country kitchen.",
     verdict: [
       "A farmhouse, not a lodge: a country kitchen at the heart of it, a garden for small children to run in, and wildlife passing the boma at dusk. For a young family on a first safari, that is the right scale.",
-      "I haven't stayed at Kwandwe yet, so it sits under observation until I have.",
+      "Kwandwe is a partner I've vetted. I haven't stayed yet; my own notes come after my first night.",
     ],
     bestFor: "A family with young children — or grandparents with one family — who want a country house on a malaria-free safari",
     notFor: "Not for more than six adults (plus an infant): Fort House or Melton Manor take eight.",
