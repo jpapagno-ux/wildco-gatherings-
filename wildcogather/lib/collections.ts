@@ -1,4 +1,6 @@
 // Gatherings VIP collections — groups of houses that carry the VIP stamp (Vetted in Purpose).
+import type { Video } from "./types";
+import { londoloziFilms, LZ } from "./sample-londolozi";
 
 export const VIP_MEANING = [
   { letter: "V", word: "Vetted", text: "James has walked it, questioned it and written down what he found — no brochure, no algorithm. A place is seen before it is sold." },
@@ -13,6 +15,10 @@ export type Collection = {
   route?: { when: string; where: string; what: string }[];
   protects: { name: string; text: string; image: { publicId: string; alt: string } }[];
   journal?: string; routeLabel?: string; stampNote?: string; credit: string; seoTitle: string; metaDescription: string;
+  // Heading over the "protects" cards; defaults to "What your stay protects" / "Living laboratories".
+  protectsEyebrow?: string; protectsTitle?: string;
+  // The property's own films, shown as click-to-load stills (components/Film).
+  films?: Video[];
 };
 
 export const collections: Collection[] = [
@@ -129,6 +135,43 @@ export const collections: Collection[] = [
     credit: "Images courtesy of Kwandwe Private Game Reserve",
     seoTitle: "Kwandwe for Families: Fort House, Melton Manor & Uplands | Wild & Co Gatherings",
     metaDescription: "James Wild's guide to Kwandwe Private Game Reserve for family gatherings: three malaria-free, exclusive-use villas in South Africa's Eastern Cape, and the wildlife each stay helps protect.",
+  },
+  {
+    // James, 30 Oct 2026: "add Pioneer and the Granite Suites (both bookable whole) to Gatherings, as we did with Kwandwe's villas.
+    // Yes in detail and with videos embedded." The property page for the two camps, mirroring /vip/kwandwe.
+    // Facts only from Londolozi's own pages, fact sheets (2023) and blog (2025). No route: no schedule was briefed.
+    // The second intro paragraph is new James-voice copy and carries the draft marker until he approves it.
+    slug: "londolozi", name: "Londolozi Game Reserve", region: "Sabi Sand, South Africa", status: "VIP · founder stayed 2018",
+    tagline: "The Varty family's reserve on the Sand River, unfenced to Kruger — and two camps a family can book whole.",
+    intro: [
+      "Londolozi is owned and run by the Varty family, and its story begins in 1926 with a hunting camp called Sparta. It lies on the Sand River in the western Sabi Sand, unfenced to Kruger National Park, and in 1993 it became the first safari camp in Africa to join Relais & Châteaux.",
+      "I stayed at Londolozi in 2018 with my daughter and toured every room. Two of its camps can be booked whole by one family: Pioneer, for up to 12, and the Private Granite Suites, for six. [Draft — J.W. to approve]",
+    ],
+    hero: { publicId: LZ + "leopard-cubs-in-tree", alt: "Leopard cubs in a tree at Londolozi Game Reserve, Sabi Sand" },
+    facts: [
+      ["Family", "Owned and run by the Varty family · the story begins in 1926 (Sparta hunting camp)"],
+      ["Land", "On the Sand River, western Sabi Sand · unfenced to Kruger National Park"],
+      ["Stays", "Pioneer Camp (up to 12) · Private Granite Suites (six)"],
+      ["Leopards", "75–100 sightings a month, Londolozi reports"],
+      ["Children", "From 6 at Varty, Founders and Pioneer · Cubs Den programme"],
+      ["Malaria", "Low-risk area"],
+      ["Access", "Light aircraft to Londolozi's own airstrip"],
+      ["Member", "Relais & Châteaux since 1993 — the first safari camp in Africa to join"],
+      ["Status", "Founder stayed 2018 · Founder Favorite"],
+    ],
+    protectsEyebrow: "The reserve",
+    protectsTitle: "Londolozi for a family",
+    protects: [
+      { name: "Leopards", text: "Londolozi reports 75–100 leopard sightings a month; guests usually see two or three leopards in three nights.", image: { publicId: LZ + "leopard-cubs-in-tree", alt: "Leopard cubs in a tree at Londolozi" } },
+      { name: "Your own Land Rover", text: "Families book a private Land Rover for their drives.", image: { publicId: LZ + "children-tracking", alt: "Children tracking at Londolozi" } },
+      { name: "Cubs Den", text: "Londolozi's children's programme, with a full-time facilitator. Children are welcome from six at Varty, Founders and Pioneer.", image: { publicId: LZ + "cubs-den", alt: "The Cubs Den children's programme at Londolozi" } },
+      { name: "The Healing House", text: "Massage, reiki and sound therapy at Varty Camp, and daily yoga on a deck in a 500-year-old ebony tree.", image: { publicId: LZ + "healing-house-river", alt: "The Healing House above the river at Londolozi" } },
+    ],
+    films: [londoloziFilms.reserve, londoloziFilms.healing, londoloziFilms.power],
+    stampNote: "J.W. · Founder stayed 2018",
+    credit: "Photographs courtesy of Londolozi · films by Londolozi",
+    seoTitle: "Londolozi for Families: Pioneer Camp & Private Granite Suites | Wild & Co Gatherings",
+    metaDescription: "James Wild's guide to Londolozi Game Reserve in the Sabi Sand for family gatherings: Pioneer Camp for up to 12 and the Private Granite Suites for six, each booked whole.",
   },
 ];
 export const getCollection = (slug: string) => collections.find((c) => c.slug === slug);

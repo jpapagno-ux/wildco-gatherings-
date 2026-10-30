@@ -362,14 +362,15 @@ export default async function House({ params }: { params: Promise<{ slug: string
             </div>
           )}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 380px), 1fr))", gap: 28, marginTop: 28 }}>
-            <div style={{ padding: "30px 0", borderTop: "1px solid var(--charcoal)" }}>
+            {b.included.some(Boolean) && <div style={{ padding: "30px 0", borderTop: "1px solid var(--charcoal)" }}>
               <h3 className="lbl ox">✓ Included</h3>
               <ul className="body" style={{ margin: 0, paddingLeft: 18, fontSize: 16 }}>{b.included.filter(Boolean).map((x) => <li key={x}>{x}</li>)}</ul>
-            </div>
-            <div style={{ padding: "30px 0", borderTop: "1px solid var(--charcoal)" }}>
+            </div>}
+            {/* Hidden when no exclusions are recorded (e.g. the Londolozi camps), rather than an empty list. */}
+            {b.excluded.some(Boolean) && <div style={{ padding: "30px 0", borderTop: "1px solid var(--charcoal)" }}>
               <h3 className="lbl">✕ Not included</h3>
               <ul className="body" style={{ margin: 0, paddingLeft: 18, fontSize: 16 }}>{b.excluded.filter(Boolean).map((x) => <li key={x}>{x}</li>)}</ul>
-            </div>
+            </div>}
           </div>
         </section>
       )}

@@ -4,7 +4,12 @@ export function embedUrl(v: Video, autoplay = false) {
   const a = autoplay ? 1 : 0;
   return v.provider === "youtube"
     ? `https://www.youtube-nocookie.com/embed/${v.id}?autoplay=${a}&rel=0&modestbranding=1`
-    : `https://player.vimeo.com/video/${v.id}?autoplay=${a}&dnt=1&title=0&byline=0`;
+    : `https://player.vimeo.com/video/${v.id}?autoplay=${a}&dnt=1${v.hash ? `&h=${v.hash}` : ""}&title=0&byline=0`;
+}
+
+/** The film's own page, for the "Watch on …" link under the player. */
+export function watchUrl(v: Video) {
+  return v.provider === "youtube" ? `https://www.youtube.com/watch?v=${v.id}` : `https://vimeo.com/${v.id}`;
 }
 
 export function thumbUrl(v: Video) {

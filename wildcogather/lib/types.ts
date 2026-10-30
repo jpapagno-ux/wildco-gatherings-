@@ -48,6 +48,8 @@ export type Video = {
   uploadDate?: string; // YYYY-MM-DD
   thumbnail?: string;
   credit?: string;
+  // Vimeo privacy hash for an unlisted film (the h=… in its share link). Added to the player URL only.
+  hash?: string;
 };
 
 // One row in "Where everyone sleeps". `whole` marks the buyout / whole-house row.

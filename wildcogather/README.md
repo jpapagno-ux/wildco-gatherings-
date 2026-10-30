@@ -52,7 +52,7 @@ Images: drop originals into **Photo (drop file here)** in the Images table (Stat
 - Booking: Booking plan, Book via, Whole-house booking, Minimum stay, Check-in, Check-out, Deposit terms, Cancellation terms, Children policy, Rate basis, Booking facts checked.
 - Fees & taxes: one per line as `Label: value` (e.g. `Resort fee: 15%`).
 - Included / Not included: one item per line.
-- Film: paste the whole YouTube link into **YouTube link** (any form works — youtu.be/…, youtube.com/watch?v=…, /shorts/…). Extra films go in **More YouTube links**, one per line (`Title | link`). Use **Vimeo ID** when the house only publishes on Vimeo. Add Video title, description, duration (`PT2M4S`), upload date and credit so Google can show the film in results.
+- Film: paste the whole YouTube link into **YouTube link** (any form works — youtu.be/…, youtube.com/watch?v=…, /shorts/…). Extra films go in **More YouTube links**, one per line (`Title | link`). Use **Vimeo ID** when the house only publishes on Vimeo. Put a still in **Video thumbnail URL** (a Cloudinary URL works): Vimeo films show that still with a play button and load nothing from Vimeo until it is pressed, with the caption "title · credit · Watch on Vimeo". Add Video title, description, duration (`PT2M4S`), upload date and credit so Google can show the film in results.
 - Anything written as `[confirm …]` shows on the page as still to check — replace before launch.
 
 ## Adding the next stay (about 20 minutes in Airtable — no code)

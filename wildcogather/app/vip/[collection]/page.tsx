@@ -10,7 +10,10 @@ import { getResidences } from "@/lib/data";
 import { getPost } from "@/lib/journal";
 import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
 import PageSketch from "@/components/PageSketch";
+import Film from "@/components/Film";
+import { embedUrl, thumbUrl, watchUrl } from "@/lib/video";
 import { SITE } from "@/lib/site";
+import { scrub } from "@/lib/scrub";
 
 export const revalidate = 3600;
 
@@ -28,7 +31,9 @@ export async function generateMetadata({ params }: { params: Promise<{ collectio
 }
 
 export default async function CollectionPage({ params }: { params: Promise<{ collection: string }> }) {
-  const c = getCollection((await params).collection);
+  // scrub() hides review notes such as [Draft — J.W. to approve] from the page, as it does for houses.
+  const found = getCollection((await params).collection);
+  const c = found ? scrub(found) : undefined;
   if (!c) notFound();
   const houses = (await getResidences()).filter((r) => r.vip?.collectionSlug === c.slug);
   const post = c.journal ? await getPost(c.journal) : undefined;
@@ -37,6 +42,10 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
     <>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: `${c.name} — Gatherings VIP`, url: `${SITE}/vip/${c.slug}`,
         itemListElement: houses.map((h, i) => ({ "@type": "ListItem", position: i + 1, item: { "@type": "LodgingBusiness", name: h.name, url: `${SITE}/houses/${h.slug}`, address: { "@type": "PostalAddress", addressLocality: h.place, addressRegion: h.region, addressCountry: h.country }, image: h.images[0] ? buildCloudinaryUrl({ src: h.images[0].publicId, width: 1200, quality: "auto" }) : undefined } })) }} />
+
+      {(c.films || []).map((v) => (
+        <JsonLd key={v.id} data={{ "@context": "https://schema.org", "@type": "VideoObject", name: v.title, description: `${v.title} — ${c.name}`, thumbnailUrl: thumbUrl(v) || undefined, embedUrl: embedUrl(v), contentUrl: watchUrl(v), ...(v.credit ? { creditText: v.credit } : {}) }} />
+      ))}
 
       <section style={{ position: "relative" }}>
         <Photo img={c.hero} priority style={{ height: "min(78vh, 720px)" }} />
@@ -94,14 +103,26 @@ export default async function CollectionPage({ params }: { params: Promise<{ col
 
       <section aria-label="What your stay protects" className="band" style={{ padding: "90px 0", marginTop: 80 }}>
         <div className="wrap">
-          <p className="eb" style={{ margin: "0 0 10px" }}>What your stay protects</p>
-          <h2 className="dsp" style={{ margin: "14px 0 30px", fontSize: 44 }}>Living laboratories</h2>
+          <p className="eb" style={{ margin: "0 0 10px" }}>{c.protectsEyebrow || "What your stay protects"}</p>
+          <h2 className="dsp" style={{ margin: "14px 0 30px", fontSize: 44 }}>{c.protectsTitle || "Living laboratories"}</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 24 }}>
             {c.protects.map((x) => <article key={x.name} className="box"><Photo img={x.image} sizes="300px" style={{ height: 200 }} /><div style={{ padding: 18 }}><h3 className="cas" style={{ margin: "0 0 8px", fontSize: 20 }}>{x.name}</h3><p className="body" style={{ margin: 0, fontSize: 14 }}>{x.text}</p></div></article>)}
           </div>
           {post && <Link href={`/journal/${post.slug}`} className="btn" style={{ marginTop: 36 }}>Read: {post.title}</Link>}
         </div>
       </section>
+
+      {c.films && c.films.length > 0 && (
+        <section className="navy" style={{ padding: "90px 0" }} aria-label="The films">
+          <div className="wrap">
+            <p className="eb">The films</p>
+            <h2 className="dsp" style={{ margin: "16px 0 34px", fontSize: 46, color: "var(--on-dark)" }}>See {c.name} before you go</h2>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))", gap: 28 }}>
+              {c.films.map((v) => <Film key={v.id} video={v} dark />)}
+            </div>
+          </div>
+        </section>
+      )}
 
       {c.route && (
         <section className="wrap" style={{ paddingTop: 80, paddingBottom: 80 }}>
