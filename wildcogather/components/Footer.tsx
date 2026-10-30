@@ -32,6 +32,8 @@ export default function Footer() {
             <p className="foot-h">The four volumes</p>
             {VOLUMES.map((v) => v.current ? (
               <Link key={v.key} href="/" aria-current="true">{v.label} · you are here</Link>
+            ) : !v.soon && !v.href ? (
+              <span key={v.key} className="eco-vol" aria-disabled="true">{v.label}</span>
             ) : v.soon || !v.href ? (
               <span key={v.key} className="muted" aria-disabled="true">{v.label} · coming soon</span>
             ) : (
