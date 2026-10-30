@@ -14,7 +14,7 @@ const NAV = GATHERINGS_NAV;
 const COLLECTIONS: [string, string][] = [
   ["/ledger", "The Gatherings Ledger"],
   ["/vip", "Gatherings VIP"],
-  ["/collections/more", "The MORE Villas"],
+  ["/vip/more", "The MORE Villas"],
   ["/horizon", "On the Horizon"],
 ];
 

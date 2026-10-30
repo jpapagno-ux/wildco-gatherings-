@@ -11,6 +11,7 @@ import JsonLd from "@/components/JsonLd";
 import { getResidences } from "@/lib/data";
 import { browseNav } from "@/lib/browse";
 import { SITE } from "@/lib/site";
+import { SAFARIS_URL } from "@/lib/ecosystem";
 
 // Self-hosted at build time by next/font: no layout shift, no request to Google from the visitor's browser.
 const serif = Cormorant_Garamond({ weight: ["300", "400", "500", "600"], style: ["normal", "italic"], subsets: ["latin"], variable: "--f-serif", display: "swap" });
@@ -40,7 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           url: SITE,
           description: "Resort residences and family journeys on land and water, across generations, chosen by James Wild.",
           logo: `${SITE}/brand/jwco-hare-600.png`,
-          parentOrganization: { "@type": "Organization", name: "James Wild & Co", foundingDate: "1982", ...(process.env.NEXT_PUBLIC_JWCO_HOME_URL ? { url: process.env.NEXT_PUBLIC_JWCO_HOME_URL } : {}), subOrganization: [{ "@type": "Organization", name: "Wild & Co Safaris", url: process.env.NEXT_PUBLIC_SAFARIS_URL || "https://wildandcosafarisfinal.vercel.app/" }], slogan: "Ledgered & Vetted · Journey design since 1982", logo: `${SITE}/brand/jwco-hare-600.png` },
+          parentOrganization: { "@type": "Organization", name: "James Wild & Co", foundingDate: "1982", ...(process.env.NEXT_PUBLIC_JWCO_HOME_URL ? { url: process.env.NEXT_PUBLIC_JWCO_HOME_URL } : {}), subOrganization: [{ "@type": "Organization", name: "Wild & Co Safaris", url: SAFARIS_URL }], slogan: "Ledgered & Vetted · Journey design since 1982", logo: `${SITE}/brand/jwco-hare-600.png` },
           founder: { "@type": "Person", "@id": `${SITE}/founder#james-wild`, name: "James Wild", url: `${SITE}/founder`, jobTitle: "Founder, James Wild & Co" },
           slogan: "Family and generational residences, vetted by James Wild — advisor-led since 1982",
           knowsAbout: ["multigenerational travel", "family reunion travel", "generational residences", "family villas", "exclusive-use safari villas", "family ranch vacations", "travel advisor partnerships", "friends' gathering trips"],

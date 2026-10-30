@@ -4,6 +4,28 @@ import { WHY_HERE } from "./why-here";
 import { sampleResidences } from "./sample-data";
 import { settingFrom } from "./settings";
 import { scrub } from "./scrub";
+import { publicNotes } from "./public-notes";
+import { MORE_ON_MERGE, type PendingRow } from "./sample-more";
+
+// Row values approved in code but not yet written to Airtable: they are applied to the live rows when the PR merges
+// (e.g. the MORE villas' Gatherings VIP blocks and Cape Cadogan's stamp, 30 Oct 2026). Vercel previews apply them here
+// so a branch shows the end state; production reads Airtable only, so no stamp links to a page that does not exist yet.
+const PENDING: Record<string, PendingRow> = process.env.VERCEL_ENV === "preview" ? { ...MORE_ON_MERGE } : {};
+const vipFrom = (f: Record<string, any>): Residence["vip"] =>
+  f["VIP (Vetted in Purpose)"]
+    ? { collection: f["Collection"] || "", collectionSlug: f["Collection slug"] || "", visit: f["Visit planned"] || undefined, why: f["Why on J.W.'s list"] || "", fit: f["Family fit"] || undefined }
+    : PENDING[f["Slug"]]?.vip;
+const withPending = (r: Residence): Residence => {
+  const p = PENDING[r.slug];
+  if (!p) return r;
+  return {
+    ...r,
+    ...(p.stamp ? { stamp: p.stamp } : {}),
+    ...(p.firstVisited ? { firstVisited: p.firstVisited } : {}),
+    ...(p.verdict ? { verdict: p.verdict } : {}),
+    ...(p.worthReturning ? { formula: r.formula.map((t) => (t.test === "Worth returning to" ? { ...t, pass: true } : t)) } : {}),
+  };
+};
 
 // Pages refresh from Airtable at most once an hour (set per page with `export const revalidate`).
 const TOKEN = process.env.AIRTABLE_TOKEN;
@@ -155,7 +177,8 @@ async function fromAirtable(): Promise<Residence[]> {
         airport: d?.fields["Airport code"],
         address: f["Address"], officialUrl: f["Official URL"],
         formula: tests.map(([t, k]) => ({ test: t, note: "", pass: !!f[k] })),
-        fieldNotes: lines(f["Notes"]),
+        // Public field notes only. "Internal notes" is never read; publicNotes() also drops any line that looks internal.
+        fieldNotes: publicNotes(f["Notes"]),
         manifest: [],
         experiences: (f["Experiences"] || []).map((id: string) => E[id]).filter(Boolean).map((e: Rec) => ({
           name: e.fields["Experience"], category: e.fields["Category"] || "", ages: e.fields["Ages"] || [],
@@ -165,7 +188,7 @@ async function fromAirtable(): Promise<Residence[]> {
         faqs: (f["FAQs"] || []).map((id: string) => F[id]).filter(Boolean).map((q: Rec) => ({ question: q.fields["Question"], answer: q.fields["Answer (40–60 words)"] })),
         images: myImgs,
         booking: bookingFrom(f),
-        vip: f["VIP (Vetted in Purpose)"] ? { collection: f["Collection"] || "", collectionSlug: f["Collection slug"] || "", visit: f["Visit planned"] || undefined, why: f["Why on J.W.'s list"] || "", fit: f["Family fit"] || undefined } : undefined,
+        vip: vipFrom(f),
         rooms: (f["Room Categories"] || []).map((id: string) => R[id]).filter(Boolean).map(toRoom).sort((a: any, b: any) => (a.order ?? 99) - (b.order ?? 99)),
         videos: videosFrom(f),
         whyHere: whyHereFrom(f, f["Slug"]),
@@ -175,6 +198,7 @@ async function fromAirtable(): Promise<Residence[]> {
         credit: "",
       } as Residence;
     })
+    .map(withPending)
     .sort((a, b) => a.entryNo.localeCompare(b.entryNo, undefined, { numeric: true }));
 }
 

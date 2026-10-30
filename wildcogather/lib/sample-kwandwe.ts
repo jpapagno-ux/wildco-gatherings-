@@ -4,7 +4,7 @@ import type { SampleResidence } from "./sample-settings";
 // Cross-listed with the Safaris volume (James, 30 Oct 2026: "villas for gatherings … it's ok to cross sell between volumes").
 // One permanent identity per villa: JWC-R-0008/9/10 in JWC-P-0027 (data/entities.json), with the Safaris ledger IDs
 // WCS-ZA-ECP-06/07/08 as their safaris collection references.
-// Facts from Kwandwe's fact sheet (as already used on wildcosafaris), Classic Portfolio's Kwandwe page and kwandwe.com
+// Facts from Kwandwe's fact sheet (as already used on Wild & Co Safaris), Classic Portfolio's Kwandwe page and kwandwe.com
 // (families, safari activities, specialist safaris, giving back, our purpose), checked 30 Oct 2026. No rates on the page.
 // Evidence: House Selected only. James vetted Kwandwe as a partner (30 Oct 2026: "Kwandwe is vetted partner") but has not yet
 // stayed, so every villa carries the Vetted partner stamp. Verdicts approved by James, 30 Oct 2026.

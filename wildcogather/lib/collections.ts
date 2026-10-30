@@ -176,10 +176,12 @@ export const collections: Collection[] = [
 ];
 export const getCollection = (slug: string) => collections.find((c) => c.slug === slug);
 
-// ——— Property collections: a partner's houses grouped on one page, without the VIP stamp ———
-// /collections/[slug]. Used where James has approved a partner for Gatherings but not for Gatherings VIP
-// (VIP is approved for Kwandwe and Londolozi only, 30 Oct 2026). Houses are listed by slug, so the page shows
-// only those whose Airtable rows are visible (Approved, Live or Vetting).
+// ——— Property collections: a partner's houses grouped on one page, with their pairings, films and family FAQs ———
+// A property collection with `vip: true` is a Gatherings VIP collection: its canonical page is /vip/[slug], with the VIP
+// stamp, the Vetted in Purpose meaning and VIP styling, and /collections/[slug] redirects there permanently.
+// One without `vip` stays a plain page at /collections/[slug], with no VIP stamp.
+// James, 30 Oct 2026: "list all as vip" — Gatherings VIP approved for all five MORE villas (alongside Kwandwe and Londolozi).
+// Houses are listed by slug, so the page shows only those whose Airtable rows are visible (Approved, Live or Vetting).
 export type PropertyCollection = {
   slug: string; name: string; partner: string; region: string; tagline: string; intro: string[];
   hero: { publicId: string; alt: string };
@@ -187,17 +189,24 @@ export type PropertyCollection = {
   houses: string[]; // house slugs, in display order
   films?: Video[];
   credit: string; seoTitle: string; metaDescription: string;
+  // Gatherings VIP (Vetted in Purpose). Approved by James only; never set on a guess.
+  vip?: true;
+  status?: string; // the line on the /vip index card, e.g. "VIP · founder stayed 2018"
+  stampNote?: string; // the note on the hero VIP stamp
 };
 
 export const propertyCollections: PropertyCollection[] = [
   {
     // James, 30 Oct 2026: "Villas by brand … for families and gatherings, build also with connections and cross sell."
+    // James approved Gatherings VIP for all five villas on 30 Oct 2026 ("list all as vip"): canonical page /vip/more.
+    // He stayed at Lion Sands Ivory Lodge, Monwana and Cape Cadogan in May 2026; Marataba is a vetted partner, not yet visited.
     // Facts from MORE's villas, FAQ, location and story pages (30 Oct 2026). The second intro paragraph is James's voice.
     slug: "more", name: "The MORE Villas", partner: "MORE Family Collection", region: "South Africa",
+    vip: true, status: "VIP · Lion Sands, Monwana & Cape Cadogan inspected May 2026", stampNote: "J.W. · Stayed May 2026",
     tagline: "Five exclusive-use villas from one family-run South African collection — four in the bush, one below Table Mountain — each booked whole, with its own team.",
     intro: [
       "MORE began in 1933, when Guy Aubrey Chalkley bought Kingston Farm on the Sabie River. The family now runs Lion Sands, Marataba, Monwana and Cape Cadogan, and keeps one villa at each for families who want the house to themselves.",
-      "Miriam and I stayed at Lion Sands Ivory Lodge and at Monwana in May 2026. MORE is my favourite partner in South Africa, and these villas are how I would put a family into its country. [Draft — J.W. to approve]",
+      "Miriam and I stayed at Lion Sands Ivory Lodge and at Monwana in May 2026, and I stayed at Cape Cadogan. MORE is my favourite partner in South Africa, and these villas are how I would put a family into its country. [Draft — J.W. to approve]",
     ],
     hero: { publicId: "gatherings/monwana-villa-thornybush/monwana-villa-pool-elephants", alt: "Monwana Villa's pool overlooking the bush in Thornybush, with elephants at the waterhole" },
     facts: [
@@ -207,7 +216,7 @@ export const propertyCollections: PropertyCollection[] = [
       ["Kids", "Mack & Madi (Lion Sands, Marataba, Cape Cadogan) · Mosaba Rangers (Monwana)"],
       ["Malaria", "Marataba malaria-free · Thornybush low-risk · Lion Sands moderate-risk"],
       ["Partner", "MORE Family Collection · Matt Smith, host for Lion Sands Ivory Lodge"],
-      ["Status", "Lion Sands and Monwana founder inspected & approved, May 2026 · Marataba and Cape Cadogan vetted partner"],
+      ["Status", "VIP · Vetted in Purpose · Lion Sands, Monwana and Cape Cadogan founder inspected & approved, May 2026 · Marataba vetted partner"],
     ],
     houses: ["fish-eagle-villa-lion-sands", "hinkwenu-villa-lion-sands", "marataba-villa-marakele", "monwana-villa-thornybush", "cape-cadogan-villa-cape-town"],
     films: [{ provider: "youtube", id: "YR_8uiBObZ4", title: "Wild Together: My Wife's First Safari — Monwana Lodge, Thornybush, South Africa", description: "James and Miriam Wild at Monwana Villa in the Thornybush Nature Reserve, Greater Kruger.", credit: "Wild Together · James & Miriam" }],
@@ -217,3 +226,6 @@ export const propertyCollections: PropertyCollection[] = [
   },
 ];
 export const getPropertyCollection = (slug: string) => propertyCollections.find((c) => c.slug === slug);
+export const vipPropertyCollections = propertyCollections.filter((c) => c.vip);
+/** The canonical path of a property collection: /vip/[slug] for a Gatherings VIP collection, else /collections/[slug]. */
+export const collectionPath = (c: Pick<PropertyCollection, "slug" | "vip">) => (c.vip ? `/vip/${c.slug}` : `/collections/${c.slug}`);

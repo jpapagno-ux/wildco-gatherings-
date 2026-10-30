@@ -17,7 +17,7 @@ export async function GET() {
     ...L.houses.map((h) => `- [${h.id} ${h.name}](${h.url}): ${h.entityId || ""}${h.parent ? ` (residence at ${h.parent.name})` : ""}${h.otherVolumes?.length ? ` · also ${h.otherVolumes.map((v) => `${v.volume} ${v.ref}`).join(", ")}` : ""} · ${h.place}, ${h.country} · ${h.evidence.find((e) => e.method !== "House Selected" && e.method !== "Founder Favorite")?.wording || "Selected by James Wild"} · ${h.line}`),
     "",
     "## Collections",
-    ...L.collections.map((c) => `- [${c.name}](${c.url}): ${c.partner} · houses ${c.houses.map((x) => x.id).join(", ")}`),
+    ...L.collections.map((c) => `- [${c.name}](${c.url}): ${c.vip ? "Gatherings VIP · " : ""}${c.partner} · houses ${c.houses.map((x) => x.id).join(", ")}`),
     "",
     "## Itineraries",
     ...L.itineraries.map((t) => `- [${t.title}](${t.url}): ${t.days} days · houses ${t.houses.map((x) => x.id || x.slug).join(", ")}`),

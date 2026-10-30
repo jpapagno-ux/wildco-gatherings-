@@ -17,7 +17,7 @@ export default function MoreCrossSell({ r, all }: { r: Residence; all: Residence
   return (
     <section aria-label="The other MORE villas" className="band" style={{ padding: "90px 0 50px", marginTop: 90 }}>
       {others.length > 0 && (
-        <Strip label="The MORE villas · one family collection" title="The other MORE villas" action={<Link href={`/collections/${MORE_COLLECTION_SLUG}`} className="lnk">All five MORE villas <span>→</span></Link>}>
+        <Strip label="The MORE villas · one family collection" title="The other MORE villas" action={<Link href={`/vip/${MORE_COLLECTION_SLUG}`} className="lnk">All five MORE villas <span>→</span></Link>}>
           {others.map((h) => (
             <div key={h.slug} className="strip-card">
               <StayCard r={h} sizes="340px" />
