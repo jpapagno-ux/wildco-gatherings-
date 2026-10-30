@@ -37,6 +37,7 @@ import { SITE } from "@/lib/site";
 import ProgramsCard from "@/components/ProgramsCard";
 import MoreCrossSell from "@/components/MoreCrossSell";
 import { MORE_CREDIT, isMoreVilla, moreVilla } from "@/lib/more";
+import { filmMakers } from "@/lib/wild-together";
 
 export const revalidate = 3600;
 
@@ -155,6 +156,7 @@ export default async function House({ params }: { params: Promise<{ slug: string
           name: v.title, description: v.description || r.line, thumbnailUrl: thumbUrl(v) || undefined, uploadDate: v.uploadDate,
           duration: v.duration, embedUrl: embedUrl(v), contentUrl: v.provider === "youtube" ? `https://www.youtube.com/watch?v=${v.id}` : `https://vimeo.com/${v.id}`,
           ...(v.credit ? { creditText: v.credit } : {}),
+          ...filmMakers(v),
         }} />
       ))}
       {why?.film && <JsonLd data={{

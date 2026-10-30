@@ -1,7 +1,7 @@
 # On the Horizon — "Undiscovered · Be the First" email series
 
 Six emails over five weeks. Every email links to its first-look page at `/horizon/[slug]`, where readers join the "Be the first" list. Sign-ups are saved to Airtable › Inquiries with Occasion = "Be the first · On the Horizon".
-James's lines are drafts — **[Draft — J.W. to approve]** — until he signs them off.
+James approved his opening lines on 30 Oct 2026.
 
 **Before sending**
 - The HTML launch email is `emails/be-the-first-launch.html`. Paste it into Klaviyo as an HTML template. It uses `{{ organization.url }}`, so set the site URL in Klaviyo › Settings › Organization first.
@@ -22,7 +22,7 @@ James's lines are drafts — **[Draft — J.W. to approve]** — until he signs 
 - **Subject A:** The Maldives, finally, for the whole family
 - **Subject B:** One island. One house. Three generations.
 - **Preview:** Seven three- and four-bedroom residences beside Finolhu — and an island of your own.
-- **Opening:** For years I've told families the Maldives means splitting into separate villas. .Here, on two tiny islands in Baa Atoll, fixes that. Somewhere has seven three- and four-bedroom beach residences, and Nowhere is a five-bedroom island you book whole. The kids' clubs are next door at Finolhu. [Draft — J.W. to approve]
+- **Opening:** For years I've told families the Maldives means splitting into separate villas. .Here, on two tiny islands in Baa Atoll, fixes that. Somewhere has seven three- and four-bedroom beach residences, and Nowhere is a five-bedroom island you book whole. The kids' clubs are next door at Finolhu.
 - **What we're asking:** children's policy, how the Finolhu clubs are booked, Nowhere's buyout terms.
 - **CTA:** First look at .Here → `/horizon/here-somewhere-nowhere-maldives`
 - **Send to:** the Coast & Island segment first, then everyone 48 hours later.
@@ -31,21 +31,21 @@ James's lines are drafts — **[Draft — J.W. to approve]** — until he signs 
 - **Subject A:** Baja, with a pool of your own
 - **Subject B:** Will Paradero open its doors to children?
 - **Preview:** New one- to three-bedroom Villa Suites in the farm fields above the Pacific.
-- **Opening:** Paradero has always been a grown-ups' place. Its new Villa Suites (private pools, rooftop jacuzzis, a lava-rock oven in the kitchen) could make it a family one. We're asking them directly. [Draft — J.W. to approve]
+- **Opening:** Paradero has always been a grown-ups' place. Its new Villa Suites (private pools, rooftop jacuzzis, a lava-rock oven in the kitchen) could make it a family one. We're asking them directly.
 - **CTA:** First look at Paradero → `/horizon/paradero-todos-santos-villa-suites`
 
 ## Email 3 — Costa Rica pair: El Silencio + Amor Arenal (Week 4)
 - **Subject A:** Tents for the teenagers, hot springs for the grandparents
 - **Subject B:** Costa Rica in two chapters
 - **Preview:** A cloud-forest lodge with three private waterfalls, then canyon casitas under Arenal.
-- **Opening:** The whole family starts at El Silencio, in two- and three-bedroom villas with waterfalls you can walk to. A new camp of elevated tents is on the way for the adventurous ones. Then the grown-ups and teenagers take the second chapter at Amor Arenal, where every casita has its own hot spring. [Draft — J.W. to approve]
+- **Opening:** The whole family starts at El Silencio, in two- and three-bedroom villas with waterfalls you can walk to. A new camp of elevated tents is on the way for the adventurous ones. Then the grown-ups and teenagers take the second chapter at Amor Arenal, where every casita has its own hot spring.
 - **CTAs:** El Silencio → `/horizon/el-silencio-lodge-tent-camp` · Amor Arenal → `/horizon/amor-arenal`
 
 ## Email 4 — Zest Ibiza (Week 5)
 - **Subject A:** First in line for Ibiza's next sunset address
 - **Subject B:** Opening April 2027: seven villas on Cap Negret
 - **Preview:** A new five-star on the west coast, with private hilltop villas and a Tomorrowland collaboration.
-- **Opening:** Zest opens in April 2027 on Ibiza's sunset coast. It's built for music and grown-up evenings, but its seven private villas could be the family base of the summer. We'll ask the hard questions before you do. [Draft — J.W. to approve]
+- **Opening:** Zest opens in April 2027 on Ibiza's sunset coast. It's built for music and grown-up evenings, but its seven private villas could be the family base of the summer. We'll ask the hard questions before you do.
 - **CTA:** First look at Zest → `/horizon/zest-ibiza`
 
 ## Email 5 — "First dates" alert (triggered, not scheduled)

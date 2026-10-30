@@ -125,6 +125,7 @@ Tick **Featured on home** in Airtable › Residences. The first ticked house fil
 
 ## Journal films (Wild Together episodes)
 In Airtable › Journal, paste the 11-character **YouTube ID** (the part after `v=` or after `youtu.be/`), plus optional **YouTube title** and **YouTube credit**. The story then shows the film in a navy band and tells Google it is a video (VideoObject). Until then, tick **Film planned** and type the episode name — readers see a tidy "Film to come" slot and nothing is claimed to Google.
+Wild Together is James and Miriam's own film series, not a partner's film. The Monwana episode (YR_8uiBObZ4) is credited "Film by Felix Studios and Monwana"; lib/wild-together.ts holds its title, description and credit, and gives its VideoObject Felix Studios as creator and production company and Monwana as contributor.
 
 ## The MORE / Lion Sands collection (added Oct 2026)
 - Houses: G-009 Fish Eagle Villa (Lion Sands, sleeps 8), G-010 Hinkwenu Villa (Lion Sands, sleeps 6), G-011 Monwana Villa (Thornybush, sleeps 6, featured).
@@ -151,7 +152,7 @@ The featured house's film (Residences › YouTube ID, or its journal story's) al
 
 ## House films — YouTube in every property (plays inside the site)
 1. On YouTube, open the film → **Share** → **Copy link**.
-2. Airtable › Residences › the house › paste into **YouTube link**. Add **YouTube title** and **YouTube credit** (e.g. "Wild Together · James & Miriam").
+2. Airtable › Residences › the house › paste into **YouTube link**. Add **YouTube title** and **YouTube credit**, worded "Film by …" (e.g. "Film by Nancy D. Brown, travel writer"; the Wild Together episode at Monwana, James and Miriam's own series, is "Film by Felix Studios and Monwana").
 3. More than one film? Put the others in **More YouTube links**, one per line: `Treehouse night | https://youtu.be/XXXXXXXXXXX`.
 4. Within the hour the house page shows "The Film" band: a still with a play button. Visitors press play and it plays right there (YouTube's privacy-enhanced player loads only on press, so the page stays fast). Google gets a VideoObject for each film.
 Journal stories use **YouTube ID** in the Journal table the same way (a full link works there too).

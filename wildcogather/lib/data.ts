@@ -5,6 +5,7 @@ import { sampleResidences } from "./sample-data";
 import { settingFrom } from "./settings";
 import { scrub } from "./scrub";
 import { publicNotes } from "./public-notes";
+import { knownFilm } from "./wild-together";
 import { MORE_ON_MERGE, type PendingRow } from "./sample-more";
 
 // Row values approved in code but not yet written to Airtable: they are applied to the live rows when the PR merges
@@ -75,7 +76,8 @@ function videosFrom(f: Record<string, any>): Video[] {
   const base = { title: f["Video title"] || `${f["Residence"]} — film`, description: f["Video description"], duration: f["Video duration (ISO)"], uploadDate: f["Video upload date"], credit: f["Video credit"] };
   const out: Video[] = [];
   const yt = youtubeId(f["YouTube link"] || f["YouTube ID"]);
-  if (yt) out.push({ provider: "youtube", id: yt, ...base, title: f["YouTube title"] || base.title, credit: f["YouTube credit"] || base.credit });
+  // A known film (lib/wild-together.ts) fills an empty description or credit.
+  if (yt) out.push({ provider: "youtube", id: yt, ...base, title: f["YouTube title"] || base.title, description: base.description || knownFilm(yt)?.description, credit: f["YouTube credit"] || base.credit || knownFilm(yt)?.credit });
   // "More YouTube links": one per line, optionally "Title | link"
   for (const line of String(f["More YouTube links"] || "").split("\n")) {
     const [a, b] = line.includes("|") ? line.split("|") : ["", line];

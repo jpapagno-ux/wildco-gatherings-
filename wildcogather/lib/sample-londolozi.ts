@@ -10,7 +10,7 @@ import type { Video } from "./types";
 // no link to Londolozi's website. No map pin: no coordinates were supplied, so none are given.
 // Evidence: James stayed at Londolozi in 2018 with his daughter and toured every room — Personally Stayed on the property,
 // Personally Inspected on each camp, plus Founder Favorite (opinion). Stamp: Founder inspected & approved (as Lion Sands / Monwana).
-// Lines in James's voice that are not one of the briefed facts carry "[Draft — J.W. to approve]" (scrubbed from the page).
+// James approved his own lines (those that are not one of the briefed facts) on 30 Oct 2026; they were marked as drafts until then.
 // Gatherings VIP collection "londolozi" in lib/collections.ts is the property page, with the three reserve films.
 // Photographs courtesy of Londolozi (Cloudinary, wildco/south-africa/sabi-sand/…). Films by Londolozi on Vimeo,
 // shown as a click-to-load still: nothing loads from Vimeo until someone presses play.
@@ -63,10 +63,10 @@ export const londoloziResidences: SampleResidence[] = [
   {
     slug: "pioneer-camp-londolozi", entryNo: "G-031", name: "Pioneer Camp, Londolozi", place: "Londolozi Game Reserve", region: "Sabi Sand", country: "South Africa",
     status: "Approved", stamp: "Founder inspected & approved", firstVisited: "2018", setting: "savanna",
-    vip: vip("Pioneer is the camp I'd give a family that wants the whole place to itself. [Draft — J.W. to approve]", "A family of up to 12 that wants the whole camp."),
+    vip: vip("Pioneer is the camp I'd give a family that wants the whole place to itself.", "A family of up to 12 that wants the whole camp."),
     line: "Three suites in the original Varty homestead among 500-year-old ebony trees — book all three and it is a private bush homestead for up to 12, with a lap pool, a boma and the only interactive kitchen at Londolozi.",
     verdict: [
-      "I stayed at Londolozi in 2018 with my daughter and toured every room. Pioneer is the camp I'd give a family that wants the whole place to itself. [Draft — J.W. to approve]",
+      "I stayed at Londolozi in 2018 with my daughter and toured every room. Pioneer is the camp I'd give a family that wants the whole place to itself.",
     ],
     bestFor: "A family of up to 12 — six adults and six children aged six and over — who want a private bush homestead on the Sand River",
     notFor: "Not for children under six, or for more than 12 guests.",
@@ -124,8 +124,8 @@ export const londoloziResidences: SampleResidence[] = [
       checked: "Oct 2026",
     },
     rooms: [
-      { name: "Suites", count: "3", bedrooms: "1 each", inside: "138 m² in the original Varty homestead, each with a lounge, plunge pool and river view; one stands alone, two are linked with lockable doors between them", fit: "The linked pair for parents with children; the one that stands alone for the grandparents. [Draft — J.W. to approve]" },
-      { name: "The whole camp", count: "1", bedrooms: "3 suites", sleeps: "12 (6 adults, 6 children)", inside: "Full-length lap pool with a sunken seat, explorer lounge, interactive kitchen, bar, boma, lookout deck and breakfast balcony; the lounge turns into a private children's cinema", fit: "A family that wants the whole place to itself. [Draft — J.W. to approve]", whole: true },
+      { name: "Suites", count: "3", bedrooms: "1 each", inside: "138 m² in the original Varty homestead, each with a lounge, plunge pool and river view; one stands alone, two are linked with lockable doors between them", fit: "The linked pair for parents with children; the one that stands alone for the grandparents." },
+      { name: "The whole camp", count: "1", bedrooms: "3 suites", sleeps: "12 (6 adults, 6 children)", inside: "Full-length lap pool with a sunken seat, explorer lounge, interactive kitchen, bar, boma, lookout deck and breakfast balcony; the lounge turns into a private children's cinema", fit: "A family that wants the whole place to itself.", whole: true },
     ],
     videos: [londoloziFilms.pioneer],
     seoTitle: "Pioneer Camp, Londolozi: Private Family Safari Homestead, Sabi Sand | Wild & Co Gatherings",
@@ -135,10 +135,10 @@ export const londoloziResidences: SampleResidence[] = [
   {
     slug: "private-granite-suites-londolozi", entryNo: "G-032", name: "Private Granite Suites, Londolozi", place: "Londolozi Game Reserve", region: "Sabi Sand", country: "South Africa",
     status: "Approved", stamp: "Founder inspected & approved", firstVisited: "2018", setting: "savanna",
-    vip: vip("The Granite Suites are the camp I'd give six people who want the river to themselves. [Draft — J.W. to approve]", "Six guests who want the whole camp."),
+    vip: vip("The Granite Suites are the camp I'd give six people who want the river to themselves.", "Six guests who want the whole camp."),
     line: "Three suites built low against granite boulders where the Sand and Manyelethi rivers meet — book all three and it is a private camp for six, with heated plunge pools, stone baths and a sunset river bar.",
     verdict: [
-      "I stayed at Londolozi in 2018 with my daughter and toured every room. The Granite Suites are the camp I'd give six people who want the river to themselves. [Draft — J.W. to approve]",
+      "I stayed at Londolozi in 2018 with my daughter and toured every room. The Granite Suites are the camp I'd give six people who want the river to themselves.",
     ],
     bestFor: "Six guests who book all three suites for a private camp where the Sand and Manyelethi rivers meet",
     notFor: "Not for more than six guests, or for children under 16 unless all three suites are booked.",
@@ -193,8 +193,8 @@ export const londoloziResidences: SampleResidence[] = [
       checked: "Oct 2026",
     },
     rooms: [
-      { name: "Suites", count: "3", bedrooms: "1 each", sleeps: "2 each", inside: "85 m², built low against granite boulders in silver, charcoal and elephant grey; glass walls slide open to the river; a heated plunge pool and an outdoor river-view stone bath; twin beds convert to king", fit: "Three couples, or parents with grown children. [Draft — J.W. to approve]" },
-      { name: "The whole camp", count: "1", bedrooms: "3 suites", sleeps: "6", inside: "Sunset river bar, sunken cocktail lounge with fire pit, and Galaxy Boma dinners under the Milky Way", fit: "Six people who want the river to themselves. [Draft — J.W. to approve]", whole: true },
+      { name: "Suites", count: "3", bedrooms: "1 each", sleeps: "2 each", inside: "85 m², built low against granite boulders in silver, charcoal and elephant grey; glass walls slide open to the river; a heated plunge pool and an outdoor river-view stone bath; twin beds convert to king", fit: "Three couples, or parents with grown children." },
+      { name: "The whole camp", count: "1", bedrooms: "3 suites", sleeps: "6", inside: "Sunset river bar, sunken cocktail lounge with fire pit, and Galaxy Boma dinners under the Milky Way", fit: "Six people who want the river to themselves.", whole: true },
     ],
     videos: [londoloziFilms.granite],
     seoTitle: "Private Granite Suites, Londolozi: Exclusive-Use Safari Camp for Six | Wild & Co Gatherings",
