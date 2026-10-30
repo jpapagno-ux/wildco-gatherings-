@@ -13,7 +13,7 @@ One config drives the ecosystem bar, the footer and "Build Your Journey". Overri
 |---|---|---|
 | `NEXT_PUBLIC_JWCO_HOME_URL` | — | Master homepage not yet verified, so the House seal does not link out |
 | `NEXT_PUBLIC_STAYS_URL` | https://www.wildearthstays.com/ | Legacy Stays site |
-| `NEXT_PUBLIC_SAFARIS_URL` | https://wildandcosafarisfinal.vercel.app/ | Verified: production alias of the `wildandcosafarisfinal` project |
+| `NEXT_PUBLIC_SAFARIS_URL` | https://www.jameswildco.com/safaris/wild-co-safaris | One door (James, 30 Oct 2026): Wild & Co Safaris is reached only through the House of James Wild & Co hand-over page. An address on the Safaris site's own hosts is ignored. Safaris IDs (WCS-ZA-…) stay plain IDs. |
 | `NEXT_PUBLIC_VOYAGES_URL` | — | Shown as "Coming soon" until set |
 
 ## Shared record structure (lib/entities.ts, data/*.json)

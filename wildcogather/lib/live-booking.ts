@@ -61,5 +61,6 @@ export const SAFARI_FEATURES: Record<string, SafariFeature> = {
   },
 };
 
-export const SAFARIS_URL = (process.env.NEXT_PUBLIC_SAFARIS_URL || "https://wildandcosafarisfinal.vercel.app").replace(/\/$/, "");
+// One door to Wild & Co Safaris (lib/ecosystem.ts › SAFARIS_URL): the House hand-over page, never a Safaris-site page.
+export { SAFARIS_URL } from "./ecosystem";
 export const SAFARIS_PUBLIC = process.env.NEXT_PUBLIC_SAFARIS_PUBLIC === "1";

@@ -1,9 +1,10 @@
-// ——— The MORE villas: one brand grouping across Gatherings (not a Gatherings VIP collection) ———
+// ——— The MORE villas: one brand grouping across Gatherings, and a Gatherings VIP collection ———
 // James, 30 Oct 2026: "Villas by brand (more.co.za/villas/). Villas across site for families and gatherings, build also
 // with connections and cross sell." MORE is his favourite partner in South Africa; MORE Family Collection approved
 // Wild & Co Gatherings as a partner, and its site content and images may be used with MORE's credit.
-// Gatherings VIP is approved for Kwandwe and Londolozi only, so this is the plain property-collection page
-// /collections/more, with no VIP stamp. Ask James before any MORE villa is marked VIP.
+// James approved Gatherings VIP for all five MORE villas on 30 Oct 2026 ("list all as vip"). The canonical page is
+// /vip/more, with the VIP stamp and the Vetted in Purpose meaning; /collections/more redirects there permanently.
+// Each villa's VIP block (collection, why, family fit) is in lib/sample-more.ts › MORE_VIP and in Airtable.
 //
 // Cross-sell stays inside Gatherings (James, 30 Oct 2026: no visible links, cards or URLs to the Wild & Co Safaris site).
 // Each villa keeps its Safaris ledger ID (WCS-ZA-…) in data/entities.json for matching only; it is never rendered as a link.
@@ -71,7 +72,7 @@ export const MORE_PAIRINGS: MorePairing[] = [
 
 export const pairingsFor = (slug: string) => MORE_PAIRINGS.filter((p) => p.houses.includes(slug));
 
-// Answer-style questions for families and multigenerational groups, shown on /collections/more with FAQPage markup.
+// Answer-style questions for families and multigenerational groups, shown on /vip/more with FAQPage markup.
 export const MORE_FAQS = [
   { question: "Which MORE villa is best for a multigenerational family?", answer: "Marataba Villa is the largest: four tents for up to ten guests (eight adults and two children), with a kids' tent, a private pool and its own chef, guide and vehicle, in the malaria-free Waterberg. For up to eight, Fish Eagle Villa at Lion Sands has three en-suite bedrooms on the Sabie River." },
   { question: "Can children of any age stay in the MORE villas?", answer: "Yes at the Lion Sands villas (Fish Eagle and Hinkwenu) and Monwana Villa, which MORE says welcome children of all ages, and at Cape Cadogan Villa, which MORE says suits families of any age. Young children are welcome at Marataba Villa. Bush walks at Lion Sands and Monwana are for guests aged 16 and over." },

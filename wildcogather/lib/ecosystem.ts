@@ -3,9 +3,13 @@
 // Addresses are only linked once verified. Override any of them with environment variables in Vercel
 // (no code change): NEXT_PUBLIC_JWCO_HOME_URL, NEXT_PUBLIC_STAYS_URL, NEXT_PUBLIC_SAFARIS_URL, NEXT_PUBLIC_VOYAGES_URL.
 //
+// Safaris — one door only (James's rule, 30 Oct 2026): Wild & Co Safaris is reached only through the House of
+//    James Wild & Co hand-over page, https://www.jameswildco.com/safaris/wild-co-safaris. Nothing on this site links
+//    to the Safaris site itself or to any of its pages. NEXT_PUBLIC_SAFARIS_URL can still move the door, but an address
+//    on the Safaris site's own hosts (wildcosafaris…, wildandcosafaris…) is ignored and the House page is used instead.
+//    Shared Safaris ledger IDs (WCS-ZA-…) stay in the data and the Ledger as plain IDs, never as links.
+//
 // Verified 14 Oct 2026:
-//  • Safaris — wildcosafaris.vercel.app is the production alias of the "wildcosafaris" project (30 Oct 2026; the old
-//    "wildandcosafarisfinal" project is being deleted).
 //  • Gatherings — wildco-gatherings1.vercel.app is the production alias of this project ("wildcogather").
 //  • Stays — www.wildearthstays.com is the legacy Stays site named in the ecosystem brief (James's own site).
 //  • Master homepage — not yet verified (a "james-wild-and-company" deployment exists but is access-protected),
@@ -17,11 +21,17 @@ export type VolumeLink = { key: VolumeKey; label: string; href?: string; externa
 
 const env = (v?: string) => (v && /^https?:\/\//.test(v) ? v : undefined);
 
+/** The one door to Wild & Co Safaris: the House of James Wild & Co hand-over page. */
+export const SAFARIS_DOOR = "https://www.jameswildco.com/safaris/wild-co-safaris";
+const SAFARIS_SITE_HOST = /^https?:\/\/[^/]*wild(?:and)?cosafaris/i;
+/** The Safaris link used everywhere on this site: the env override if it is not the Safaris site itself, else the door. */
+export const SAFARIS_URL = ((v) => (v && !SAFARIS_SITE_HOST.test(v) ? v : SAFARIS_DOOR))(env(process.env.NEXT_PUBLIC_SAFARIS_URL));
+
 export const MASTER_HOME_URL = env(process.env.NEXT_PUBLIC_JWCO_HOME_URL);
 
 export const VOLUMES: VolumeLink[] = [
   { key: "stays", label: "Stays", href: env(process.env.NEXT_PUBLIC_STAYS_URL) || "https://www.wildearthstays.com/", external: true, current: false, soon: false, note: "Stays — the legacy Wild Earth Stays site" },
-  { key: "safaris", label: "Safaris", href: env(process.env.NEXT_PUBLIC_SAFARIS_URL) || "https://wildcosafaris.vercel.app/", external: true, current: false, soon: false },
+  { key: "safaris", label: "Safaris", href: SAFARIS_URL, external: true, current: false, soon: false, note: "Safaris — through the House of James Wild & Co" },
   { key: "gatherings", label: "Gatherings", href: "/", external: false, current: true, soon: false },
   (() => {
     const href = env(process.env.NEXT_PUBLIC_VOYAGES_URL);

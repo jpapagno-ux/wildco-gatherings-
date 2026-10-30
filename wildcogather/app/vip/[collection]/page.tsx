@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 import Photo from "@/components/Photo";
 import JsonLd from "@/components/JsonLd";
 import { VipStamp } from "@/components/Marks";
-import { collections, getCollection, VIP_MEANING } from "@/lib/collections";
+import { collections, getCollection, getPropertyCollection, vipPropertyCollections, collectionPath, VIP_MEANING } from "@/lib/collections";
+import PropertyCollectionView from "@/components/PropertyCollectionView";
 import { getResidences } from "@/lib/data";
 import { getPost } from "@/lib/journal";
 import { buildCloudinaryUrl, getOgImageUrl } from "@/lib/cloudinary-loader";
@@ -17,10 +18,23 @@ import { scrub } from "@/lib/scrub";
 
 export const revalidate = 3600;
 
-export async function generateStaticParams() { return collections.map((c) => ({ collection: c.slug })); }
+// Two kinds of VIP collection share this route: the classic VIP collections (lib/collections.ts › collections) and the
+// partner property collections James has approved for Gatherings VIP (propertyCollections with vip: true, e.g. /vip/more),
+// which keep their villas, pairings, film and family FAQs and gain the VIP stamp (components/PropertyCollectionView).
+const vipProperty = (slug: string) => { const p = getPropertyCollection(slug); return p?.vip ? p : undefined; };
+
+export async function generateStaticParams() { return [...collections, ...vipPropertyCollections].map((c) => ({ collection: c.slug })); }
 
 export async function generateMetadata({ params }: { params: Promise<{ collection: string }> }): Promise<Metadata> {
-  const c = getCollection((await params).collection);
+  const slug = (await params).collection;
+  const p = vipProperty(slug);
+  if (p) return fit({
+    title: p.seoTitle,
+    description: p.metaDescription,
+    alternates: { canonical: collectionPath(p) },
+    openGraph: { title: p.seoTitle, description: p.metaDescription, images: [getOgImageUrl(p.hero)] },
+  });
+  const c = getCollection(slug);
   if (!c) return fit({});
   return fit({
     title: c.seoTitle,
@@ -31,8 +45,11 @@ export async function generateMetadata({ params }: { params: Promise<{ collectio
 }
 
 export default async function CollectionPage({ params }: { params: Promise<{ collection: string }> }) {
+  const slug = (await params).collection;
+  const p = vipProperty(slug);
+  if (p) return <PropertyCollectionView collection={p} />;
   // scrub() hides review notes such as [Draft — J.W. to approve] from the page, as it does for houses.
-  const found = getCollection((await params).collection);
+  const found = getCollection(slug);
   const c = found ? scrub(found) : undefined;
   if (!c) notFound();
   const houses = (await getResidences()).filter((r) => r.vip?.collectionSlug === c.slug);

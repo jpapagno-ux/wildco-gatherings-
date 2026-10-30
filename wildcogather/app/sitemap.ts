@@ -8,7 +8,7 @@ import { getWebinars } from "@/lib/webinars";
 import { REGIONS } from "@/lib/regions";
 import { staysInRegion } from "@/lib/browse";
 import { SITE } from "@/lib/site";
-import { propertyCollections } from "@/lib/collections";
+import { propertyCollections, vipPropertyCollections, collectionPath } from "@/lib/collections";
 
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -36,8 +36,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...horizon.map((h) => ({ url: `${SITE}/horizon/${h.slug}`, lastModified: h.updated, changeFrequency: "weekly" as const, priority: 0.7 })),
     { url: `${SITE}/plan`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE}/vip`, changeFrequency: "monthly", priority: 0.8 },
-    ...[...new Set(houses.filter((h) => h.vip).map((h) => h.vip!.collectionSlug))].map((c) => ({ url: `${SITE}/vip/${c}`, changeFrequency: "monthly" as const, priority: 0.8 })),
-    ...propertyCollections.map((c) => ({ url: `${SITE}/collections/${c.slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
+    ...[...new Set([...houses.filter((h) => h.vip).map((h) => h.vip!.collectionSlug), ...vipPropertyCollections.map((c) => c.slug)])].map((c) => ({ url: `${SITE}/vip/${c}`, changeFrequency: "monthly" as const, priority: 0.8 })),
+    // Plain (non-VIP) property collections only; a VIP one's /collections/ address redirects to /vip/.
+    ...propertyCollections.filter((c) => !c.vip).map((c) => ({ url: `${SITE}${collectionPath(c)}`, changeFrequency: "monthly" as const, priority: 0.8 })),
     { url: `${SITE}/journal`, changeFrequency: "weekly", priority: 0.7 },
     ...posts.map((p) => ({ url: `${SITE}/journal/${p.slug}`, lastModified: p.date, changeFrequency: "monthly" as const, priority: 0.7 })),
     ...houses.map((h) => ({ url: `${SITE}/houses/${h.slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),

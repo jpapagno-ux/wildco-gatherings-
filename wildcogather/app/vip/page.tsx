@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Photo from "@/components/Photo";
 import { VipStamp } from "@/components/Marks";
-import { collections, VIP_MEANING } from "@/lib/collections";
+import { collections, vipPropertyCollections, collectionPath, VIP_MEANING } from "@/lib/collections";
 import { getResidences } from "@/lib/data";
 import { SETTINGS, SETTING_ORDER } from "@/lib/settings";
 import PageSketch from "@/components/PageSketch";
@@ -53,8 +53,8 @@ export default async function Vip() {
       </section>
       <section className="wrap" style={{ paddingBottom: 100 }}>
         <p className="eb" style={{ margin: "0 0 20px" }}>VIP collections</p>
-        {collections.map((c) => (
-          <Link key={c.slug} href={`/vip/${c.slug}`} className="box" style={{ display: "flex", flexWrap: "wrap", textDecoration: "none" }}>
+        {[...collections.map((c) => ({ ...c, href: `/vip/${c.slug}` })), ...vipPropertyCollections.map((c) => ({ ...c, status: c.status || "VIP", href: collectionPath(c) }))].map((c) => (
+          <Link key={c.slug} href={c.href} className="box" style={{ display: "flex", flexWrap: "wrap", textDecoration: "none" }}>
             <div style={{ flex: "1 1 420px", minHeight: 300 }}><Photo img={c.hero} sizes="(max-width: 800px) 100vw, 50vw" style={{ height: "100%", minHeight: 300 }} /></div>
             <div style={{ flex: "1 1 420px", padding: 40 }}>
               <p className="eb" style={{ margin: "0 0 12px" }}>{c.region} · {c.status}</p>

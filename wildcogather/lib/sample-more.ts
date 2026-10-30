@@ -1,13 +1,15 @@
 import type { SampleResidence } from "./sample-settings";
+import type { Residence } from "./types";
 
 import { MORE_CREDIT } from "./more";
 
 // ——— The MORE villas · Lion Sands (Sabi Sand & Kruger), Marataba (Marakele), Monwana (Thornybush), Cape Cadogan (Cape Town) ———
 // The five exclusive-use villas MORE lists for families. J.W. and Miriam stayed at Lion Sands Ivory Lodge and at Monwana
-// in May 2026 and inspected the Lion Sands villas; Marataba and Cape Cadogan carry the Vetted partner stamp (no stay recorded).
+// in May 2026 and inspected the Lion Sands villas; J.W. also stayed at Cape Cadogan in May 2026 (a founder favourite) and
+// approved its villa. Marataba carries the Vetted partner stamp (no stay recorded).
 // Facts only from MORE's villa, FAQ, location and story pages, re-checked 30 Oct 2026. No rates, no link to MORE's site.
 // Where MORE's own figures disagree (floor areas on the Fish Eagle, Hinkwenu, Marataba and Cape Cadogan pages), the figure is left out.
-// Grouped on /collections/more (lib/collections.ts › propertyCollections) with pairings and cross-sell from lib/more.ts.
+// Grouped on /vip/more (lib/collections.ts › propertyCollections, vip) with pairings and cross-sell from lib/more.ts.
 // Each villa's Safaris ledger ID is in data/entities.json for matching only; nothing on the page links to the Safaris site.
 // Photographs courtesy of MORE (Cloudinary, gatherings/<house>/… and wildco/south-africa/<region>/<villa>/…).
 const credit = MORE_CREDIT;
@@ -43,6 +45,29 @@ const lionSandsExcluded = [
   "Park fees, guest conservation contribution and Impact Levy (R160 per person per night)",
   "Flights and transfers not listed above",
 ];
+// ——— Gatherings VIP for the five MORE villas (James, 30 Oct 2026: "list all as vip") ———
+// The same values go into Airtable › Residences (VIP (Vetted in Purpose), Collection, Collection slug, Visit planned,
+// Why on J.W.'s list, Family fit) when the PR merges. Until then a Vercel preview reads them from here (lib/data.ts),
+// so the preview shows what production will show once the Airtable rows are updated. Facts only from the villa pages.
+const moreVip = (visit: string, why: string, fit: string): NonNullable<Residence["vip"]> => ({ collection: "The MORE Villas", collectionSlug: "more", visit, why, fit });
+export const MORE_VIP: Record<string, NonNullable<Residence["vip"]>> = {
+  "fish-eagle-villa-lion-sands": moreVip("Founder inspected · May 2026",
+    "Three bedrooms on the Sabie River, with its own chef, guide and vehicle: the Lion Sands villa I'd give three generations who want a safari house of their own. [Draft — J.W. to approve]",
+    "Three generations, up to eight (six adults and two children)."),
+  "hinkwenu-villa-lion-sands": moreVip("Founder inspected · May 2026",
+    "Two bedrooms beside Tinga Lodge, with its own guide and vehicle: the villa I'd give a young family, so nap time never decides the game drive. [Draft — J.W. to approve]",
+    "A young family, up to six (four adults and two children)."),
+  "monwana-villa-thornybush": moreVip("Founder stayed · May 2026",
+    "Two suites, three plunge pools and a waterhole in view of the kitchen. Miriam and I stayed here in May 2026, and it is the house we'd book again. [Draft — J.W. to approve]",
+    "A family of up to six (four adults and two children)."),
+  "marataba-villa-marakele": moreVip("Vetted partner · not yet visited",
+    "Four tents on the Matlabas River, a kids' tent and no malaria: the MORE villa I'd show a family with small children first. [Draft — J.W. to approve]",
+    "Up to ten (eight adults and two children), young children welcome."),
+  "cape-cadogan-villa-cape-town": moreVip("Founder inspected · May 2026",
+    "A restored National Monument below Table Mountain, with a chauffeur for the city: the villa I'd put at the start or end of a MORE safari. [Draft — J.W. to approve]",
+    "A family of up to six (four adults and two children), any age."),
+};
+
 const lionSandsFaqs = (name: string, sleeps: string) => [
   { question: `Is ${name} good for a multigenerational safari?`, answer: `Yes. It is booked whole, sleeps ${sleeps}, welcomes children of all ages, and comes with its own chef, private safari vehicle, field guide and tracker — so game drives run at the family's pace, and the Mack & Madi programme keeps the youngest busy between drives.` },
   { question: "Can children go on game drives at Lion Sands?", answer: "In the private villas, yes — children of all ages ride in the villa's own vehicle. Lodge suites set age limits (Tinga 6+, River and Ivory 10+, Narina 16+). Bush walks are for guests aged 16 and over." },
@@ -199,7 +224,9 @@ export const moreResidences: SampleResidence[] = [
 
 // ——— Marataba Villa (G-033 · JWC-R-0013 in JWC-P-0029 · Safaris WCS-ZA-MRT-03) and
 // ——— Cape Cadogan Villa (G-034 · JWC-R-0014 in JWC-P-0030 · Safaris WCS-ZA-CPT-05), added 30 Oct 2026.
-// Vetted partner: MORE approved Wild & Co Gatherings as a partner; James has not stayed at either, so no stay is claimed.
+// Marataba: vetted partner (MORE approved Wild & Co Gatherings as a partner); James has not stayed, so no stay is claimed.
+// Cape Cadogan: James stayed at Cape Cadogan in May 2026 and calls it a founder favourite (correction, 30 Oct 2026);
+// founder inspected & approved, as the Lion Sands villas. No overnight in the Villa itself is claimed.
 const MV = "wildco/south-africa/marataba/marataba-villa/marataba-villa-";
 const MR = "wildco/south-africa/marataba/marataba/marataba-";
 const CC = "wildco/south-africa/cape-town/cape-cadogan-villa/cape-cadogan-villa-";
@@ -292,9 +319,9 @@ moreResidences.push(
   },
   {
     slug: "cape-cadogan-villa-cape-town", entryNo: "G-034", name: "Cape Cadogan Villa", place: "Gardens", region: "Cape Town", country: "South Africa",
-    status: "Approved", stamp: "Vetted partner", setting: "mountain",
+    status: "Approved", stamp: "Founder inspected & approved", firstVisited: "May 2026", setting: "mountain",
     line: "Three en-suite bedrooms in a restored National Monument below Table Mountain — a private pool, a breakfast chef and a chauffeur, with Kloof Street on foot.",
-    verdict: ["I haven't stayed at Cape Cadogan yet. It is the villa I'd put at the start or end of a MORE safari, so Cape Town is a chapter of the trip, not a night between flights. [Draft — J.W. to approve]"],
+    verdict: ["I stayed at Cape Cadogan in May 2026. Its villa is the one I'd put at the start or end of a MORE safari, so Cape Town is a chapter of the trip, not a night between flights. [Draft — J.W. to approve]"],
     bestFor: "A family of up to six — four adults and two children — who want Cape Town from a house of their own, with a driver",
     notFor: "Not for more than six in the villa; lunches and dinners are not included.",
     bedrooms: "3 en-suite bedrooms", sleeps: 6,
@@ -307,7 +334,7 @@ moreResidences.push(
       ["A private pool and deck, and the two temperature-controlled pools at Cape Cadogan Boutique Hotel.", true],
       ["Below Table Mountain in the Kloof Street neighbourhood: cafés, galleries, boutiques and Upper Union within walking distance.", true],
       ["Concierge, butler, housekeeper, breakfast chef and a private chauffeur; wellness treatments and the hotel's fitness centre.", true],
-      ["To be recorded on James's first stay.", false],
+      ["J.W. stayed at Cape Cadogan in May 2026 — a founder favourite.", true],
     ]),
     fieldNotes: [
       "The house is part of a restored early-1800s National Monument on Upper Union Street, Gardens.",
@@ -371,3 +398,17 @@ moreResidences.push(
     credit,
   },
 );
+
+// Every MORE villa carries its Gatherings VIP block.
+for (const r of moreResidences) r.vip = MORE_VIP[r.slug];
+
+// ——— Airtable updates waiting for the merge (30 Oct 2026) ———
+// The live Residences rows get these values when the PR merges (scratchpad more_vip_airtable.json is generated from here).
+// Until then lib/data.ts applies them on Vercel previews only, so a preview shows exactly what production will show.
+// Cape Cadogan: James stayed at Cape Cadogan in May 2026 (correction, 30 Oct 2026) — founder inspected & approved.
+export type PendingRow = { vip: NonNullable<Residence["vip"]>; stamp?: Residence["stamp"]; firstVisited?: string; verdict?: string[]; worthReturning?: true };
+const cc = moreResidences.find((r) => r.slug === "cape-cadogan-villa-cape-town")!;
+export const MORE_ON_MERGE: Record<string, PendingRow> = {
+  ...Object.fromEntries(Object.entries(MORE_VIP).map(([slug, vip]) => [slug, { vip }])),
+  [cc.slug]: { vip: MORE_VIP[cc.slug], stamp: cc.stamp, firstVisited: cc.firstVisited, verdict: cc.verdict, worthReturning: true },
+};
